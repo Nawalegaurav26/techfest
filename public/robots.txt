@@ -1,0 +1,42 @@
+# Robots.txt for Techfest 2026 // IIT Bombay
+# Optimized for Search Engine SEO & Artificial Intelligence LLM SEO
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# AI Search Assistants and Crawlers
+# We explicitly allow them so they can parse Techfest 2026 scheduling and content
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /llms.txt
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: Claude-Web
+Allow: /
+Allow: /llms.txt
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: Google-Extended
+Allow: /
+Allow: /llms.txt
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Sitemap Location
+Sitemap: https://techfest.gauravnawale.in/sitemap.xml
