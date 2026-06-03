@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { soundEffects } from '../utils/soundEffects';
 
 /* ── COUNTDOWN ─────────────────────────────────────── */
 const TARGET = new Date('2026-12-22T09:00:00').getTime();
@@ -39,8 +40,8 @@ const CATEGORIES = [
   { icon: '⚔',  title: 'COMPETITIONS',  desc: 'Evolution trials. Survival of the most advanced.',   to: '/competitions' },
   { icon: '⬣',  title: 'WORKSHOPS',     desc: 'Knowledge uploads. Direct neural data transfer.',     to: '/workshops'    },
   { icon: '◈',  title: 'LECTURES',      desc: 'Mind sync. Industry pioneers. Future thinkers.',      to: '/lectures'     },
-  { icon: '◉',  title: 'EXHIBITIONS',   desc: 'Tech lab. 500+ projects from across the globe.',      to: '/events'       },
-  { icon: '⊗',  title: 'ROBOWARS',      desc: 'Cybernetic combat. Steel meets AI. 0 survivors.',     to: '/events'       },
+  { icon: '◉',  title: 'EXHIBITIONS',   desc: 'Tech lab. 500+ projects from across the globe.',      to: '/exhibitions'  },
+  { icon: '⊗',  title: 'ROBOWARS',      desc: 'Cybernetic combat. Steel meets AI. 0 survivors.',     to: '/robowars'     },
   { icon: '⬡',  title: 'STORE',         desc: 'Exclusive Techfest 2026 merchandise & collectibles.',  to: '/store'        },
 ];
 
@@ -92,12 +93,19 @@ function CategoryCard({ icon, title, desc, to, index, navigate }) {
   const [hovered, setHovered] = useState(false);
   return (
     <motion.button
+      className="stat-card"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.08, duration: 0.5 }}
-      onClick={() => navigate(to)}
-      onMouseEnter={() => setHovered(true)}
+      onClick={() => {
+        soundEffects.playClick?.();
+        navigate(to);
+      }}
+      onMouseEnter={() => {
+        setHovered(true);
+        soundEffects.playHover?.();
+      }}
       onMouseLeave={() => setHovered(false)}
       style={{
         position: 'relative',
@@ -181,8 +189,7 @@ export default function Home() {
       <section style={{
         minHeight: 'calc(100vh - var(--footer-h))',
         display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
+        alignItems: 'center',
         padding: '60px 80px 60px',
         position: 'relative',
       }}>
@@ -197,165 +204,224 @@ export default function Home() {
           opacity: 0.4,
         }} />
 
-        <div style={{ maxWidth: '900px' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1.2fr 1fr',
+          gap: '40px',
+          alignItems: 'center',
+          width: '100%',
+          zIndex: 5,
+        }} className="hero-grid">
 
-          {/* Overline */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              marginBottom: '28px',
-            }}
-          >
-            <span style={{
-              width: '6px',
-              height: '6px',
-              borderRadius: '50%',
-              background: 'var(--plasma)',
-              boxShadow: '0 0 8px rgba(255,45,85,0.8)',
-              animation: 'pulseDot 2s ease-in-out infinite',
-            }} />
-            <span style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '10px',
-              fontWeight: 700,
-              letterSpacing: '0.25em',
-              color: 'rgba(189,200,209,0.6)',
-              textTransform: 'uppercase',
-            }}>
-              IIT BOMBAY // ASIA'S LARGEST S&T FESTIVAL
-            </span>
-            <div style={{
-              flex: 1,
-              height: '1px',
-              background: 'linear-gradient(to right, rgba(189,200,209,0.2), transparent)',
-              maxWidth: '120px',
-            }} />
-          </motion.div>
-
-          {/* MAIN HEADING */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <h1
+          {/* Left Column: Text Content */}
+          <div style={{ maxWidth: '650px' }}>
+            {/* Overline */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
               style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(60px, 9vw, 120px)',
-                fontWeight: 800,
-                letterSpacing: '-0.04em',
-                lineHeight: 0.9,
-                margin: 0,
-                color: '#fff',
-                textShadow: '0 0 40px rgba(255,255,255,0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                marginBottom: '28px',
               }}
             >
-              TECHFEST{' '}
-              <span
-                className="glow-sky"
-                style={{ color: 'var(--sky)' }}
-              >
-                2026
-              </span>
-            </h1>
-          </motion.div>
-
-          {/* Plasma subtitle with typing */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            style={{ margin: '20px 0 40px', overflow: 'hidden' }}
-          >
-            <div
-              className="typing-text glow-plasma"
-              style={{
+              <span style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                background: 'var(--plasma)',
+                boxShadow: '0 0 8px rgba(255,45,85,0.8)',
+                animation: 'pulseDot 2s ease-in-out infinite',
+              }} />
+              <span style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: 'clamp(12px, 2vw, 18px)',
+                fontSize: '10px',
+                fontWeight: 700,
+                letterSpacing: '0.25em',
+                color: 'rgba(189,200,209,0.6)',
+                textTransform: 'uppercase',
+              }}>
+                IIT BOMBAY // ASIA'S LARGEST S&T FESTIVAL
+              </span>
+              <div style={{
+                flex: 1,
+                height: '1px',
+                background: 'linear-gradient(to right, rgba(189,200,209,0.2), transparent)',
+                maxWidth: '120px',
+              }} />
+            </motion.div>
+
+            {/* MAIN HEADING */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <h1
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'clamp(50px, 7vw, 100px)',
+                  fontWeight: 800,
+                  letterSpacing: '-0.04em',
+                  lineHeight: 0.9,
+                  margin: 0,
+                  color: '#fff',
+                  textShadow: '0 0 40px rgba(255,255,255,0.1)',
+                }}
+              >
+                TECHFEST{' '}
+                <span
+                  className="glow-sky"
+                  style={{ color: 'var(--sky)' }}
+                >
+                  2026
+                </span>
+              </h1>
+            </motion.div>
+
+            {/* Plasma subtitle with typing */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              style={{ margin: '20px 0 40px', overflow: 'hidden' }}
+            >
+              <div
+                className="typing-text glow-plasma"
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'clamp(12px, 1.8vw, 16px)',
+                  fontWeight: 700,
+                  letterSpacing: '0.3em',
+                  color: 'var(--plasma)',
+                  textTransform: 'uppercase',
+                }}
+              >
+                THE CYBERNETIC EVOLUTION
+              </div>
+            </motion.div>
+
+            {/* COUNTDOWN */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.8 }}
+            >
+              <div style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '9px',
                 fontWeight: 700,
                 letterSpacing: '0.3em',
-                color: 'var(--plasma)',
-                textTransform: 'uppercase',
+                color: 'rgba(189,200,209,0.4)',
+                marginBottom: '16px',
+              }}>
+                ── COUNTDOWN TO EVOLUTION: DEC 22, 2026 ──
+              </div>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <CountdownCard value={countdown.days}    label="DAYS" />
+                <CountdownCard value={countdown.hours}   label="HOURS" />
+                <CountdownCard value={countdown.minutes} label="MINUTES" />
+                <CountdownCard value={countdown.seconds} label="SECONDS" />
+              </div>
+            </motion.div>
+
+            {/* CTA BUTTONS */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.1 }}
+              style={{ display: 'flex', gap: '16px', marginTop: '40px', flexWrap: 'wrap' }}
+            >
+              <button
+                className="btn-primary"
+                onClick={() => {
+                  soundEffects.playClick?.();
+                  navigate('/events');
+                }}
+                onMouseEnter={() => soundEffects.playHover?.()}
+              >
+                <span className="btn-tl" />
+                <span className="btn-br" />
+                REGISTER NOW
+              </button>
+              <button
+                className="btn-ghost"
+                onClick={() => {
+                  soundEffects.playClick?.();
+                  navigate('/events');
+                }}
+                onMouseEnter={() => soundEffects.playHover?.()}
+              >
+                EXPLORE EVENTS &nbsp;→
+              </button>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Giant Interactive Logo */}
+          <div className="hero-logo-container" style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative',
+            width: '100%',
+          }}>
+            {/* Glowing backdrop shadow */}
+            <div style={{
+              position: 'absolute',
+              width: '80%',
+              height: '80%',
+              background: 'radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 70%)',
+              filter: 'blur(40px)',
+              pointerEvents: 'none',
+              zIndex: 1,
+            }} />
+
+            {/* Rotating background HUD */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+              style={{
+                position: 'absolute',
+                width: '320px',
+                height: '320px',
+                opacity: 0.15,
+                pointerEvents: 'none',
+                zIndex: 1,
               }}
             >
-              THE CYBERNETIC EVOLUTION
-            </div>
-          </motion.div>
+              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="90" stroke="#38BDF8" strokeWidth="1" strokeDasharray="4 4" />
+                <circle cx="100" cy="100" r="60" stroke="#38BDF8" strokeWidth="1" />
+                <line x1="0" y1="100" x2="200" y2="100" stroke="#38BDF8" strokeWidth="0.5" />
+                <line x1="100" y1="0" x2="100" y2="200" stroke="#38BDF8" strokeWidth="0.5" />
+              </svg>
+            </motion.div>
 
-          {/* COUNTDOWN */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.8 }}
-          >
-            <div style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '9px',
-              fontWeight: 700,
-              letterSpacing: '0.3em',
-              color: 'rgba(189,200,209,0.4)',
-              marginBottom: '16px',
-            }}>
-              ── COUNTDOWN TO EVOLUTION: DEC 22, 2026 ──
-            </div>
-            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-              <CountdownCard value={countdown.days}    label="DAYS" />
-              <CountdownCard value={countdown.hours}   label="HOURS" />
-              <CountdownCard value={countdown.minutes} label="MINUTES" />
-              <CountdownCard value={countdown.seconds} label="SECONDS" />
-            </div>
-          </motion.div>
+            {/* Floating and Hoverable Logo Image */}
+            <motion.img
+              src="/central_logo_home-screen_big_logo_transparent.png"
+              alt="Techfest 2026 Central Logo"
+              initial={{ opacity: 0, scale: 0.92, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              whileHover={{
+                scale: 1.05,
+                filter: 'drop-shadow(0 0 25px rgba(56,189,248,0.55))',
+              }}
+              style={{
+                width: '100%',
+                maxWidth: '460px',
+                height: 'auto',
+                objectFit: 'contain',
+                filter: 'drop-shadow(0 0 15px rgba(56,189,248,0.25))',
+                zIndex: 2,
+                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+              }}
+            />
+          </div>
 
-          {/* CTA BUTTONS */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.1 }}
-            style={{ display: 'flex', gap: '16px', marginTop: '40px', flexWrap: 'wrap' }}
-          >
-            <button
-              className="btn-primary"
-              onClick={() => navigate('/events')}
-            >
-              <span className="btn-tl" />
-              <span className="btn-br" />
-              REGISTER NOW
-            </button>
-            <button
-              className="btn-ghost"
-              onClick={() => navigate('/events')}
-            >
-              EXPLORE EVENTS &nbsp;→
-            </button>
-          </motion.div>
-
-        </div>
-
-        {/* Decorative crosshair element */}
-        <div style={{
-          position: 'absolute',
-          right: '120px',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          width: '200px',
-          height: '200px',
-          opacity: 0.06,
-          pointerEvents: 'none',
-        }}>
-          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="100" cy="100" r="90" stroke="#38BDF8" strokeWidth="1" strokeDasharray="4 4" />
-            <circle cx="100" cy="100" r="60" stroke="#38BDF8" strokeWidth="1" />
-            <circle cx="100" cy="100" r="10" stroke="#38BDF8" strokeWidth="2" />
-            <line x1="0" y1="100" x2="80" y2="100" stroke="#38BDF8" strokeWidth="1" />
-            <line x1="120" y1="100" x2="200" y2="100" stroke="#38BDF8" strokeWidth="1" />
-            <line x1="100" y1="0" x2="100" y2="80" stroke="#38BDF8" strokeWidth="1" />
-            <line x1="100" y1="120" x2="100" y2="200" stroke="#38BDF8" strokeWidth="1" />
-          </svg>
         </div>
       </section>
 
