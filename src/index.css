@@ -1042,3 +1042,375 @@ img { display: block; max-width: 100%; }
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
+
+/* ══════════════════════════════════════════════════════
+   GLOBAL MOBILE OVERRIDES
+   These override all inline styles set by page components
+   Priority: applies on all touch / mobile screens
+══════════════════════════════════════════════════════ */
+
+/* ── 1. CURSOR FIX — remove cursor:none on touch ────── */
+@media (pointer: coarse) {
+  * { cursor: auto !important; }
+  button, a, [role="button"] { cursor: pointer !important; }
+}
+
+/* ── 2. UNIVERSAL TOUCH TARGET FLOOR ────────────────── */
+/* Any button or anchor that is smaller than 44px gets padded */
+@media (max-width: 1023px) {
+  button, a[href], [role="button"] {
+    min-height: 44px;
+    /* Don't force min-height on decorative/layout elements */
+  }
+
+  /* But NOT for decorative spans or indicators */
+  span[class*="bracket"],
+  span[class*="pulse-dot"],
+  .pulse-dot {
+    min-height: unset !important;
+  }
+}
+
+/* ── 3. GRID LAYOUT FIXES — auto-fill minmax collapse ─ */
+@media (max-width: 640px) {
+  /* Events grid: minmax(320px,1fr) → single column */
+  div[style*="minmax(320px"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Competitions grid: minmax(340px,1fr) → single column */
+  div[style*="minmax(340px"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Workshops/Lectures minmax grids */
+  div[style*="minmax(300px"] {
+    grid-template-columns: 1fr !important;
+  }
+  div[style*="minmax(360px"] {
+    grid-template-columns: 1fr !important;
+  }
+  div[style*="minmax(280px"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Stats strip: repeat(4,1fr) → 2x2 */
+  div[style*="repeat(4, 1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  /* Generic 3-column grids */
+  div[style*="repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* 2-col grids that need stacking */
+  div[style*="1fr 1.3fr"], div[style*="1fr 1fr"], div[style*="1fr 2fr"], div[style*="2fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  /* On mid-size, allow 2-col for minmax(320px...) */
+  div[style*="minmax(320px"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  div[style*="minmax(340px"] {
+    grid-template-columns: 1fr !important;
+  }
+  div[style*="minmax(300px"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ── 4. PAGE SECTION PADDING ─────────────────────────── */
+@media (max-width: 640px) {
+  .page-section {
+    padding: 20px 16px calc(var(--mobile-nav-h) + 24px) !important;
+  }
+  /* Inner sections within page */
+  .page-section > section,
+  .page-section section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* ── 5. FILTER PILLS — bigger touch targets ──────────── */
+@media (max-width: 1023px) {
+  /* Target filter pill buttons (small mono text buttons in rows) */
+  .page-section button[style*="letterSpacing"],
+  .page-section button[style*="letter-spacing"] {
+    min-height: 44px !important;
+    padding: 10px 16px !important;
+    font-size: 10px !important;
+  }
+}
+
+/* ── 6. CARD GRIDS — padding adjustments ─────────────── */
+@media (max-width: 640px) {
+  .glass-panel[style*="padding: 24px"],
+  .glass-panel[style*="padding: '24px'"] {
+    padding: 16px !important;
+  }
+  .event-card {
+    padding: 16px !important;
+  }
+}
+
+/* ── 7. HORIZONTAL SCROLL STRIPS ─────────────────────── */
+/* Stats strips like "repeat(4, 1fr)" in Competitions page */
+@media (max-width: 480px) {
+  div[style*="repeat(4, 1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+}
+
+/* ── 8. SECTION HORIZONTAL PADDING ──────────────────── */
+/* Sections that hardcode 80px padding */
+@media (max-width: 640px) {
+  section[style*="padding: '0 80px"] {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  section[style*="80px"] {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
+/* ── 9. HERO ACCENT LINE — hide on narrow screens ────── */
+@media (max-width: 480px) {
+  /* The decorative left line in hero overlaps content */
+  .hero-section > div[style*="position: 'absolute'"],
+  .hero-section > div[style*="position:absolute"] {
+    display: none !important;
+  }
+}
+
+/* ── 10. MODAL / OVERLAY PANELS ─────────────────────── */
+@media (max-width: 640px) {
+  /* Full-screen modals on mobile */
+  div[style*="position: 'fixed'"][style*="zIndex: 9"],
+  div[style*="position: fixed"][style*="z-index: 9"] {
+    padding: 0 !important;
+  }
+}
+
+/* ── 11. TYPOGRAPHY FLOOR — never below 12px visible ─── */
+@media (max-width: 480px) {
+  /* Ensure body text is legible */
+  p, li, td {
+    font-size: max(13px, 1em) !important;
+    line-height: 1.65 !important;
+  }
+  /* Prevent tags/badges from being too tiny */
+  span[style*="fontSize: '8px'"],
+  span[style*="font-size: 8px"],
+  div[style*="fontSize: '8px'"],
+  div[style*="font-size: 8px"] {
+    font-size: 9px !important;
+  }
+}
+
+/* ── 12. BUTTON ROW WRAPPING ─────────────────────────── */
+@media (max-width: 480px) {
+  /* Button groups that need to stack */
+  div[style*="display: 'flex'"][style*="gap: '16px'"],
+  div[style*="display:flex"][style*="gap:16px"] {
+    flex-wrap: wrap !important;
+  }
+  /* Make inline register/CTA buttons full-width */
+  .page-section button[style*="width: '100%'"] {
+    min-height: 48px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* ── 13. HEADER NAV PADDING ──────────────────────────── */
+@media (max-width: 480px) {
+  header[style] {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
+/* ── 14. CARD MIN-HEIGHT OVERRIDE ───────────────────── */
+@media (max-width: 640px) {
+  /* Cards with large fixed min-heights */
+  div[style*="minHeight: '260px'"],
+  div[style*="minHeight: '280px'"],
+  div[style*="minHeight: '300px'"] {
+    min-height: unset !important;
+  }
+}
+
+/* ── 15. CONTACT/FORM RESPONSIVENESS ────────────────── */
+@media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── 16. SCROLLABLE PILL ROWS ───────────────────────── */
+/* Filter pills scroll horizontally on mobile */
+@media (max-width: 640px) {
+  div[style*="flexWrap: 'wrap'"][style*="margin: '32px 0"] {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    padding-bottom: 8px !important;
+    gap: 8px !important;
+  }
+  div[style*="flexWrap: 'wrap'"][style*="margin: '32px 0"]::-webkit-scrollbar {
+    display: none !important;
+  }
+  /* Prevent pill buttons from shrinking */
+  div[style*="flexWrap: 'wrap'"][style*="margin: '32px 0"] > button {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* ── 17. BOTTOM PADDING FOR MOBILE NAV ──────────────── */
+/* Ensure all pages clear the 60px bottom nav */
+@media (max-width: 1023px) {
+  .main-content {
+    padding-bottom: calc(var(--mobile-nav-h) + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  /* Extra explicit rule for page sections */
+  .page-section {
+    padding-bottom: calc(var(--mobile-nav-h) + 24px) !important;
+  }
+}
+
+/* ── 18. HERO SECTION TIGHTENING ON MOBILE ───────────── */
+@media (max-width: 480px) {
+  .hero-section {
+    padding-top: 16px !important;
+    padding-bottom: 40px !important;
+  }
+  /* CTA row full width on tiny screens */
+  .cta-row {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  .cta-row .btn-primary,
+  .cta-row .btn-ghost {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* ── 19. ABOUT / TEAM GRID ───────────────────────────── */
+@media (max-width: 640px) {
+  div[style*="repeat(3, 1fr)"],
+  div[style*="repeat(2, 1fr)"][style*="maxWidth"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+}
+
+/* ── 20. EXHIBITIONS GRID ─────────────────────────────── */
+@media (max-width: 640px) {
+  div[style*="minmax(260px"],
+  div[style*="minmax(250px"],
+  div[style*="minmax(240px"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ── 21. ROBOWARS / LECTURES FIXES ───────────────────── */
+@media (max-width: 640px) {
+  div[style*="minmax(380px"],
+  div[style*="minmax(400px"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── 22. SPONSORS GRID ────────────────────────────────── */
+@media (max-width: 480px) {
+  div[style*="repeat(auto-fill"][style*="minmax(160px"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  div[style*="repeat(auto-fill"][style*="minmax(180px"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ── 23. STORE PRODUCT GRID ──────────────────────────── */
+@media (max-width: 640px) {
+  div[style*="minmax(200px"],
+  div[style*="minmax(220px"],
+  div[style*="minmax(230px"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ── 24. TEXT OVERFLOW PROTECTION ────────────────────── */
+/* Prevent any element from causing horizontal overflow */
+@media (max-width: 768px) {
+  .page-section *,
+  main * {
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  /* Except for fixed-width decorative elements */
+  .bracket-tl, .bracket-tr, .bracket-bl, .bracket-br,
+  .cursor-outer, .cursor-inner, .pulse-dot {
+    max-width: unset;
+  }
+}
+
+/* ── 25. INPUT FORM STACK ────────────────────────────── */
+@media (max-width: 768px) {
+  /* Forms with side-by-side inputs should stack */
+  form div[style*="display: 'grid'"][style*="2fr"],
+  form div[style*="display: 'grid'"][style*="1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── 26. CARD HOVER → ACTIVE STATES ─────────────────── */
+/* On touch: simulate hover with focus/active */
+@media (pointer: coarse) {
+  .glass-panel:active,
+  .event-card:active,
+  .stat-card:active {
+    border-color: rgba(56, 189, 248, 0.4) !important;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.1) !important;
+    transform: scale(0.98) !important;
+  }
+}
+
+/* ── 27. NAV LINK TOUCH AREA EXPANSION ───────────────── */
+@media (max-width: 1023px) {
+  .nav-link {
+    padding: 12px 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+}
+
+/* ── 28. MOBILE SCROLL MOMENTUM ─────────────────────── */
+main, .page-section, [style*="overflowY: 'auto'"] {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── 29. ANIMATED ELEMENTS — GPU OPTIMIZE ────────────── */
+@media (max-width: 768px) {
+  /* Reduce backdrop-filter on low-power mobile */
+  @supports (backdrop-filter: blur(10px)) {
+    .glass-panel,
+    .glass-sky {
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+    }
+  }
+}
+
+/* ── 30. FOOTER STATUS BAR — hide completely on mobile── */
+@media (max-width: 1023px) {
+  footer.status-bar,
+  footer[style*="var(--footer-h)"] {
+    display: none !important;
+  }
+}

@@ -94,16 +94,16 @@ export default function Competitions() {
         </p>
       </motion.div>
 
-      {/* Stats strip */}
+      {/* Stats strip — 2-col on mobile, 4-col on desktop */}
       <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
         className="glass-panel"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '16px',
-          margin: '32px 0',
-          padding: '20px 24px',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+          gap: '12px',
+          margin: '24px 0',
+          padding: 'clamp(16px, 3vw, 20px) clamp(16px, 3vw, 24px)',
           border: '1px solid rgba(56, 189, 248, 0.15)',
           boxShadow: '0 0 15px rgba(56, 189, 248, 0.05)'
         }}
@@ -112,21 +112,21 @@ export default function Competitions() {
           { v: '₹16L+', l: 'TOTAL PRIZES' },
           { v: '10,000+', l: 'REGISTRATIONS' },
           { v: '6',     l: 'CORE ARENAS' },
-          { v: '50+',   l: 'NATIONS REPRESENTED' },
+          { v: '50+',   l: 'NATIONS' },
         ].map(s => (
           <div key={s.l} style={{ textAlign: 'center' }}>
             <div style={{
               fontFamily: 'var(--font-display)',
-              fontSize: '22px',
+              fontSize: 'clamp(18px, 4vw, 22px)',
               fontWeight: 800,
               color: 'var(--sky)',
               textShadow: 'var(--glow-sky-sm)'
             }}>{s.v}</div>
             <div style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '8px',
+              fontSize: 'clamp(7px, 1.5vw, 9px)',
               fontWeight: 700,
-              letterSpacing: '0.2em',
+              letterSpacing: '0.15em',
               color: 'rgba(189,200,209,0.4)',
               marginTop: '4px'
             }}>{s.l}</div>
@@ -135,7 +135,7 @@ export default function Competitions() {
       </motion.div>
 
       {/* Competitions grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '20px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 340px), 1fr))', gap: '16px' }}>
         {COMPETITIONS.map((comp, i) => {
           const isSelected = selected === comp.id;
           const isReg = registered[comp.id];
@@ -152,16 +152,14 @@ export default function Competitions() {
               }}
               className="glass-panel"
               style={{
-                padding: '24px',
+                padding: 'clamp(16px, 3vw, 24px)',
                 border: isSelected ? `1px solid ${DIFF_COLORS[comp.difficulty]}` : '1px solid rgba(56, 189, 248, 0.15)',
                 boxShadow: isSelected ? `0 0 25px ${DIFF_GLOWS[comp.difficulty]}` : 'none',
                 transition: 'all 0.3s',
-                cursor: 'none',
                 position: 'relative',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                minHeight: '280px'
               }}
             >
               <div className="bracket-tl" style={{ borderColor: isSelected ? DIFF_COLORS[comp.difficulty] : 'var(--sky)' }} />
@@ -256,7 +254,7 @@ export default function Competitions() {
                       soundEffects.playClick?.();
                       setSelected(isSelected ? null : comp.id);
                     }}
-                    style={{ flex: 1, padding: '10px 0', fontSize: '9px' }}
+                    style={{ flex: 1, padding: '12px 0', fontSize: '10px', minHeight: '48px' }}
                   >
                     {isSelected ? 'CLOSE SPECS' : 'VIEW SPECS'}
                   </button>
@@ -268,16 +266,16 @@ export default function Competitions() {
                     }}
                     style={{
                       flex: 1.2,
-                      padding: '10px 0',
+                      padding: '12px 0',
+                      minHeight: '48px',
                       background: isReg ? 'rgba(34,197,94,0.08)' : 'rgba(255,45,85,0.05)',
                       border: `1px solid ${isReg ? 'rgba(34,197,94,0.4)' : 'rgba(255,45,85,0.4)'}`,
                       color: isReg ? 'var(--green)' : 'var(--plasma)',
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '9px',
+                      fontSize: '10px',
                       fontWeight: 700,
-                      letterSpacing: '0.12em',
-                      cursor: 'none',
-                      transition: 'all 0.3s ease',
+                      letterSpacing: '0.1em',
+                      transition: 'all 0.25s ease',
                       boxShadow: isReg ? '0 0 15px rgba(34,197,94,0.1)' : 'none'
                     }}
                     onMouseEnter={e => {

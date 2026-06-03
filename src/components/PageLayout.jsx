@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import HolographicNav from './HolographicNav';
 import BackgroundLayers from './BackgroundLayers';
 import { SocialIcons } from '../utils/socialIcons';
+import { soundEffects } from '../utils/soundEffects';
 
 // Left sidebar nav items (desktop only)
 const LEFT_NAV = [
@@ -58,10 +59,24 @@ const pageVariants = {
 };
 
 export default function PageLayout() {
-  const [soundEnabled, setSoundEnabled] = useState(false);
+  // Read initial audio state from BootLoader's choice (window.__soundEnabled)
+  const [soundEnabled, setSoundEnabled] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.__soundEnabled === true;
+    }
+    return false;
+  });
   const [drawerOpen, setDrawerOpen]     = useState(false);
   const location  = useLocation();
   const navigate  = useNavigate();
+
+  // Sync state if window.__soundEnabled changes outside React (e.g. BootLoader)
+  useEffect(() => {
+    const synced = window.__soundEnabled === true;
+    if (synced !== soundEnabled) {
+      setSoundEnabled(synced);
+    }
+  }, []); // run once on mount
 
   // Close drawer on route change
   useEffect(() => {
@@ -508,44 +523,105 @@ export default function PageLayout() {
                 })}
               </div>
 
-              {/* Social icons at bottom */}
+              {/* Audio toggle row + Social icons */}
               <div style={{
                 padding: '16px 20px',
                 borderTop: '1px solid rgba(255,255,255,0.06)',
-                display: 'flex',
-                gap: '12px',
-                flexWrap: 'wrap',
                 paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
               }}>
-                {SOCIALS.map(({ Icon, href, label }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={label}
-                    style={{
-                      color: 'rgba(189,200,209,0.4)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '44px',
-                      height: '44px',
-                      border: '1px solid rgba(255,255,255,0.06)',
-                      transition: 'all 0.2s',
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.color = 'var(--sky)';
-                      e.currentTarget.style.borderColor = 'rgba(56,189,248,0.3)';
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.color = 'rgba(189,200,209,0.4)';
-                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)';
-                    }}
-                  >
-                    <Icon />
-                  </a>
-                ))}
+                {/* Sound Toggle Row */}
+                <button
+                  onClick={() => {
+                    const next = !soundEnabled;
+                    window.__soundEnabled = next;
+                    setSoundEnabled(next);
+                    if (next) {
+                      soundEffects.startBackgroundMusic?.();
+                      setTimeout(() => soundEffects.playSuccess?.(), 60);
+                    } else {
+                      soundEffects.stopBackgroundMusic?.();
+                    }
+                  }}
+                  style={{
+                    width: '100%',
+                    minHeight: '48px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '0 16px',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '10px',
+                    fontWeight: 700,
+                    letterSpacing: '0.15em',
+                    color: soundEnabled ? 'var(--sky)' : 'rgba(189,200,209,0.5)',
+                    border: soundEnabled ? '1px solid rgba(56,189,248,0.3)' : '1px solid rgba(255,255,255,0.07)',
+                    background: soundEnabled ? 'rgba(56,189,248,0.06)' : 'transparent',
+                    transition: 'all 0.25s',
+                  }}
+                  aria-label={soundEnabled ? 'Mute audio' : 'Enable audio'}
+                >
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <span style={{ fontSize: '18px' }}>{soundEnabled ? '🔊' : '🔇'}</span>
+                    <span>{soundEnabled ? 'AUDIO ON' : 'AUDIO OFF'}</span>
+                  </span>
+                  <span style={{
+                    width: '36px',
+                    height: '20px',
+                    borderRadius: '10px',
+                    background: soundEnabled ? 'var(--sky)' : 'rgba(255,255,255,0.1)',
+                    position: 'relative',
+                    transition: 'background 0.25s',
+                    flexShrink: 0,
+                  }}>
+                    <span style={{
+                      position: 'absolute',
+                      top: '3px',
+                      left: soundEnabled ? '18px' : '3px',
+                      width: '14px',
+                      height: '14px',
+                      borderRadius: '50%',
+                      background: '#fff',
+                      transition: 'left 0.25s',
+                      boxShadow: soundEnabled ? '0 0 6px rgba(56,189,248,0.6)' : 'none',
+                    }} />
+                  </span>
+                </button>
+
+                {/* Social Icons */}
+                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                  {SOCIALS.map(({ Icon, href, label }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={label}
+                      style={{
+                        color: 'rgba(189,200,209,0.4)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '44px',
+                        height: '44px',
+                        border: '1px solid rgba(255,255,255,0.06)',
+                        transition: 'all 0.2s',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.color = 'var(--sky)';
+                        e.currentTarget.style.borderColor = 'rgba(56,189,248,0.3)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.color = 'rgba(189,200,209,0.4)';
+                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)';
+                      }}
+                    >
+                      <Icon />
+                    </a>
+                  ))}
+                </div>
               </div>
             </motion.div>
           </>

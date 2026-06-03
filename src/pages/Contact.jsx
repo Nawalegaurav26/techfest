@@ -73,11 +73,11 @@ export default function Contact() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '14px',
-                  padding: '16px 18px',
+                  padding: '14px 16px',
+                  minHeight: '56px',
                   border: '1px solid rgba(56,189,248,0.15)',
                   backdropFilter: 'var(--glass-blur)',
                   transition: 'all 0.3s',
-                  cursor: 'none',
                   position: 'relative'
                 }}
                 onClick={() => soundEffects.playClick?.()}

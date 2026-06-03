@@ -128,14 +128,16 @@ export default function Lectures() {
         </p>
       </motion.div>
 
-      {/* Domain Filters */}
+      {/* Domain Filters — scrollable on mobile */}
       <div style={{
         display: 'flex',
-        flexWrap: 'wrap',
+        overflowX: 'auto',
+        WebkitOverflowScrolling: 'touch',
+        scrollbarWidth: 'none',
         gap: '8px',
-        margin: '32px 0 24px',
+        margin: '24px 0 20px',
+        paddingBottom: '12px',
         borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-        paddingBottom: '16px'
       }}>
         {DOMAINS.map(domain => {
           const isActive = domain === activeDomain;
@@ -148,16 +150,18 @@ export default function Lectures() {
               }}
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '9px',
+                fontSize: '10px',
                 fontWeight: 700,
-                letterSpacing: '0.12em',
-                padding: '8px 16px',
-                color: isActive ? '#fff' : 'rgba(189,200,209,0.4)',
+                letterSpacing: '0.1em',
+                padding: '10px 16px',
+                minHeight: '44px',
+                flexShrink: 0,
+                whiteSpace: 'nowrap',
+                color: isActive ? '#fff' : 'rgba(189,200,209,0.55)',
                 background: isActive ? 'rgba(56,189,248,0.1)' : 'transparent',
-                border: isActive ? '1px solid var(--sky)' : '1px solid rgba(255,255,255,0.06)',
+                border: isActive ? '1px solid var(--sky)' : '1px solid rgba(255,255,255,0.08)',
                 boxShadow: isActive ? '0 0 15px rgba(56,189,248,0.2)' : 'none',
-                transition: 'all 0.3s ease',
-                cursor: 'none'
+                transition: 'all 0.25s ease',
               }}
               onMouseEnter={e => {
                 if (!isActive) {
@@ -168,8 +172,8 @@ export default function Lectures() {
               }}
               onMouseLeave={e => {
                 if (!isActive) {
-                  e.currentTarget.style.color = 'rgba(189,200,209,0.4)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)';
+                  e.currentTarget.style.color = 'rgba(189,200,209,0.55)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
                 }
               }}
             >
@@ -182,8 +186,8 @@ export default function Lectures() {
       {/* Speakers Grid */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
-        gap: '20px'
+        gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))',
+        gap: '16px'
       }}>
         {filteredSpeakers.map((speaker, i) => {
           const isSelected = selectedSpeaker === speaker.id;
@@ -198,14 +202,13 @@ export default function Lectures() {
               className="glass-panel"
               style={{
                 position: 'relative',
-                padding: '24px',
+                padding: 'clamp(16px, 3vw, 24px)',
                 border: isSelected ? '1px solid rgba(255, 45, 85, 0.4)' : '1px solid rgba(56,189,248,0.15)',
                 boxShadow: isSelected ? '0 0 30px rgba(255,45,85,0.15)' : 'none',
                 transition: 'all 0.3s ease',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                minHeight: '280px'
               }}
             >
               {/* Decorative brackets */}

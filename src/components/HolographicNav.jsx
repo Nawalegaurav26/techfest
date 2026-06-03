@@ -32,14 +32,28 @@ export default function HolographicNav({ soundEnabled, setSoundEnabled }) {
     setMobileOpen(false);
   }, []);
 
+  // Sync nav icon with actual audio state on mount (BootLoader may have set it)
+  useEffect(() => {
+    // This runs after PageLayout passes down the correct initial soundEnabled,
+    // but also double-checks the global window flag to stay in sync.
+    const globalEnabled = window.__soundEnabled === true;
+    // No setState here since soundEnabled comes from parent via props
+    // Parent (PageLayout) already reads window.__soundEnabled on init.
+  }, []);
+
   const toggleSound = () => {
     const next = !soundEnabled;
-    setSoundEnabled(next);
+    // Update global FIRST so soundEffects.checkEnabled() sees it immediately
     window.__soundEnabled = next;
+    // Then update React state so UI re-renders
+    setSoundEnabled(next);
     if (next) {
+      // Resume/start background music
       soundEffects.startBackgroundMusic?.();
-      setTimeout(() => soundEffects.playSuccess?.(), 50);
+      // Play success tone slightly after so AudioContext is unlocked
+      setTimeout(() => soundEffects.playSuccess?.(), 60);
     } else {
+      // Stop background music
       soundEffects.stopBackgroundMusic?.();
     }
   };

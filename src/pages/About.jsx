@@ -133,7 +133,7 @@ export default function About() {
       {/* Core Team */}
       <div>
         <div className="section-overline" style={{ marginBottom: '24px' }}>CORE TEAM</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 160px), 1fr))', gap: '14px' }}>
           {TEAM.map((member, i) => (
             <motion.div
               key={member.name}

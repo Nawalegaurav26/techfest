@@ -139,7 +139,7 @@ export default function Workshops() {
       </motion.div>
 
       {/* Workshop cards — lab layout */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '20px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))', gap: '16px' }}>
         {WORKSHOPS.map((ws, i) => {
           const isReg = registered[ws.id];
           return (
@@ -150,7 +150,7 @@ export default function Workshops() {
               transition={{ delay: i * 0.08 + 0.3 }}
               className="glass-panel"
               style={{
-                padding: '24px',
+                padding: 'clamp(16px, 3vw, 24px)',
                 border: '1px solid rgba(56, 189, 248, 0.15)',
                 backdropFilter: 'var(--glass-blur)',
                 position: 'relative',
@@ -158,7 +158,6 @@ export default function Workshops() {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                minHeight: '270px'
               }}
               onMouseEnter={e => {
                 e.currentTarget.style.borderColor = 'rgba(56, 189, 248, 0.4)';

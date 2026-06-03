@@ -93,17 +93,20 @@ export default function Events() {
         </p>
       </motion.div>
 
-      {/* Filter pills */}
+      {/* Filter pills — horizontally scrollable on mobile */}
       <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
         style={{
           display: 'flex',
           gap: '8px',
-          flexWrap: 'wrap',
-          margin: '32px 0 24px',
+          overflowX: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          scrollbarWidth: 'none',
+          margin: '24px 0 20px',
+          paddingBottom: '12px',
           borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-          paddingBottom: '16px'
         }}
+        className="pills-row"
       >
         {CATEGORIES.map(cat => {
           const isActive = active === cat;
@@ -116,16 +119,18 @@ export default function Events() {
               }}
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '9px',
+                fontSize: '10px',
                 fontWeight: 700,
-                letterSpacing: '0.12em',
-                padding: '8px 16px',
-                color: isActive ? '#fff' : 'rgba(189,200,209,0.4)',
+                letterSpacing: '0.1em',
+                padding: '10px 18px',
+                minHeight: '44px',
+                flexShrink: 0,
+                whiteSpace: 'nowrap',
+                color: isActive ? '#fff' : 'rgba(189,200,209,0.55)',
                 background: isActive ? 'rgba(56,189,248,0.1)' : 'transparent',
-                border: isActive ? '1px solid var(--sky)' : '1px solid rgba(255,255,255,0.06)',
+                border: isActive ? '1px solid var(--sky)' : '1px solid rgba(255,255,255,0.08)',
                 boxShadow: isActive ? '0 0 15px rgba(56,189,248,0.2)' : 'none',
-                transition: 'all 0.3s ease',
-                cursor: 'none'
+                transition: 'all 0.25s ease',
               }}
               onMouseEnter={e => {
                 if (!isActive) {
@@ -136,8 +141,8 @@ export default function Events() {
               }}
               onMouseLeave={e => {
                 if (!isActive) {
-                  e.currentTarget.style.color = 'rgba(189,200,209,0.4)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)';
+                  e.currentTarget.style.color = 'rgba(189,200,209,0.55)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
                 }
               }}
             >
@@ -148,7 +153,7 @@ export default function Events() {
       </motion.div>
 
       {/* Event cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '20px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))', gap: '16px' }}>
         {filtered.map((ev, i) => {
           const isHovered = hovered === ev.id;
           const isReg = registered[ev.id];
@@ -167,15 +172,13 @@ export default function Events() {
               className="glass-panel"
               style={{
                 position: 'relative',
-                padding: '24px',
+                padding: 'clamp(16px, 3vw, 24px)',
                 border: `1px solid ${isHovered ? TIER_COLORS[ev.tier] : 'rgba(56, 189, 248, 0.15)'}`,
                 boxShadow: isHovered ? `0 0 25px ${TIER_GLOWS[ev.tier]}` : 'none',
                 transition: 'all 0.3s',
-                cursor: 'none',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                minHeight: '260px'
               }}
             >
               {/* Corner brackets */}
@@ -279,16 +282,16 @@ export default function Events() {
                   }}
                   style={{
                     width: '100%',
-                    padding: '10px 0',
+                    padding: '12px 0',
+                    minHeight: '48px',
                     background: isReg ? 'rgba(34,197,94,0.08)' : 'rgba(255,45,85,0.05)',
                     border: `1px solid ${isReg ? 'rgba(34,197,94,0.4)' : 'rgba(255,45,85,0.4)'}`,
                     color: isReg ? 'var(--green)' : 'var(--plasma)',
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '9px',
+                    fontSize: '11px',
                     fontWeight: 700,
-                    letterSpacing: '0.12em',
-                    cursor: 'none',
-                    transition: 'all 0.3s ease',
+                    letterSpacing: '0.1em',
+                    transition: 'all 0.25s ease',
                     boxShadow: isReg ? '0 0 15px rgba(34,197,94,0.1)' : 'none'
                   }}
                   onMouseEnter={e => {
