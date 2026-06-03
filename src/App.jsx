@@ -21,54 +21,46 @@ import Robowars from './pages/Robowars';
 export default function App() {
   const [booted, setBooted] = useState(() => {
     if (typeof window !== 'undefined') {
-      return sessionStorage.getItem('tf_booted') === 'true';
+      try {
+        return sessionStorage.getItem('tf_booted') === 'true';
+      } catch (e) {
+        return false;
+      }
     }
     return false;
   });
 
   const handleBootComplete = () => {
-    sessionStorage.setItem('tf_booted', 'true');
+    try {
+      sessionStorage.setItem('tf_booted', 'true');
+    } catch (e) {}
     setBooted(true);
   };
 
   return (
     <>
-      <AnimatePresence mode="wait">
-        {!booted && (
-          <motion.div
-            key="bootloader"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
-            transition={{ duration: 0.8, ease: 'easeInOut' }}
-            style={{ position: 'fixed', inset: 0, zIndex: 99999 }}
-          >
-            <BootLoader onComplete={handleBootComplete} />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {booted && (
-        <>
-          <GlobalCursor />
-          <Routes>
-            <Route path="/" element={<PageLayout />}>
-              <Route index element={<Home />} />
-              <Route path="events"       element={<Events />} />
-              <Route path="competitions" element={<Competitions />} />
-              <Route path="workshops"    element={<Workshops />} />
-              <Route path="accommodation" element={<Accommodation />} />
-              <Route path="store"        element={<Store />} />
-              <Route path="about"        element={<About />} />
-              <Route path="sponsors"     element={<Sponsors />} />
-              <Route path="contact"      element={<Contact />} />
-              <Route path="terminal"     element={<TerminalPage />} />
-              {/* New navbar routes */}
-              <Route path="lectures"     element={<Lectures />} />
-              <Route path="exhibitions"  element={<Exhibitions />} />
-              <Route path="robowars"     element={<Robowars />} />
-            </Route>
-          </Routes>
-        </>
+      <GlobalCursor />
+      {!booted ? (
+        <BootLoader onComplete={handleBootComplete} />
+      ) : (
+        <Routes>
+          <Route path="/" element={<PageLayout />}>
+            <Route index element={<Home />} />
+            <Route path="events"       element={<Events />} />
+            <Route path="competitions" element={<Competitions />} />
+            <Route path="workshops"    element={<Workshops />} />
+            <Route path="accommodation" element={<Accommodation />} />
+            <Route path="store"        element={<Store />} />
+            <Route path="about"        element={<About />} />
+            <Route path="sponsors"     element={<Sponsors />} />
+            <Route path="contact"      element={<Contact />} />
+            <Route path="terminal"     element={<TerminalPage />} />
+            {/* New navbar routes */}
+            <Route path="lectures"     element={<Lectures />} />
+            <Route path="exhibitions"  element={<Exhibitions />} />
+            <Route path="robowars"     element={<Robowars />} />
+          </Route>
+        </Routes>
       )}
     </>
   );
