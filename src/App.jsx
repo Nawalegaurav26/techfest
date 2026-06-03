@@ -47,25 +47,29 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      <GlobalCursor />
-      <Routes>
-        <Route path="/" element={<PageLayout />}>
-          <Route index element={<Home />} />
-          <Route path="events"       element={<Events />} />
-          <Route path="competitions" element={<Competitions />} />
-          <Route path="workshops"    element={<Workshops />} />
-          <Route path="accommodation" element={<Accommodation />} />
-          <Route path="store"        element={<Store />} />
-          <Route path="about"        element={<About />} />
-          <Route path="sponsors"     element={<Sponsors />} />
-          <Route path="contact"      element={<Contact />} />
-          <Route path="terminal"     element={<TerminalPage />} />
-          {/* New navbar routes */}
-          <Route path="lectures"     element={<Lectures />} />
-          <Route path="exhibitions"  element={<Exhibitions />} />
-          <Route path="robowars"     element={<Robowars />} />
-        </Route>
-      </Routes>
+      {booted && (
+        <>
+          <GlobalCursor />
+          <Routes>
+            <Route path="/" element={<PageLayout />}>
+              <Route index element={<Home />} />
+              <Route path="events"       element={<Events />} />
+              <Route path="competitions" element={<Competitions />} />
+              <Route path="workshops"    element={<Workshops />} />
+              <Route path="accommodation" element={<Accommodation />} />
+              <Route path="store"        element={<Store />} />
+              <Route path="about"        element={<About />} />
+              <Route path="sponsors"     element={<Sponsors />} />
+              <Route path="contact"      element={<Contact />} />
+              <Route path="terminal"     element={<TerminalPage />} />
+              {/* New navbar routes */}
+              <Route path="lectures"     element={<Lectures />} />
+              <Route path="exhibitions"  element={<Exhibitions />} />
+              <Route path="robowars"     element={<Robowars />} />
+            </Route>
+          </Routes>
+        </>
+      )}
     </>
   );
 }
