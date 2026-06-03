@@ -23,7 +23,7 @@ const SOCIALS = [
   { Icon: SocialIcons.Twitter,   href: 'https://x.com/Techfest_IITB', label: 'X / Twitter' },
   { Icon: SocialIcons.Facebook,  href: 'https://www.facebook.com/iitbombaytechfest/', label: 'Facebook' },
   { Icon: SocialIcons.Discord,   href: 'https://discord.gg/E2q9rbtp', label: 'Discord' },
-  { Icon: SocialIcons.Whatsapp,  href: 'https://whatsapp.com/channel/0029VaqxA9IAjPXM1339Pv41', label: 'WhatsApp' },
+  { Icon: SocialIcons.Whatsapp,  href: `https://wa.me/919860543634?text=${encodeURIComponent("Hello Techfest IIT Bombay Team, I am interested in participating in Techfest 2026. Initiating contact telemetry to request access credentials for competitions, workshops, and exhibitions. System online.")}`, label: 'WhatsApp' },
 ];
 
 const pageVariants = {
