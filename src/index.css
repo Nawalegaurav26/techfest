@@ -615,3 +615,29 @@ img { display: block; }
 @media (max-width: 768px) {
   .hidden-mobile-telemetry { display: none !important; }
 }
+
+/* ── RESPONSIVE HERO GRID & LOGO ─────────────────── */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .hero-grid > div {
+    max-width: 100% !important;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-logo-container {
+    order: -1; /* logo goes on top of headings */
+    max-width: 320px !important;
+    margin: 0 auto 10px !important;
+  }
+  /* Center buttons on mobile */
+  .hero-grid button {
+    justify-content: center;
+  }
+}
+
