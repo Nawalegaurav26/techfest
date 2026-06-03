@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import HolographicNav from './HolographicNav';
@@ -292,12 +292,14 @@ export default function PageLayout() {
           fontSize: '9px',
           letterSpacing: '0.12em',
           color: 'rgba(189,200,209,0.65)',
-        }}>
-          <span>LATENCY: <span id="footer-latency">42MS</span></span>
+        }} className="hidden-mobile-telemetry">
+          <span>LATENCY: <span id="footer-latency" style={{ color: 'var(--green)', textShadow: '0 0 6px rgba(34,197,94,0.4)' }}>36MS</span></span>
           <span style={{ color: 'rgba(189,200,209,0.15)' }}>|</span>
           <span>UPTIME: 99.9%</span>
           <span style={{ color: 'rgba(189,200,209,0.15)' }}>|</span>
           <span>ENC: ACTIVE</span>
+          <span style={{ color: 'rgba(189,200,209,0.15)' }}>|</span>
+          <span>LAST UPDATED: 2026-06-03 21:26:17</span>
         </div>
 
         {/* Right: status */}
@@ -322,14 +324,15 @@ export default function PageLayout() {
 }
 
 function LatencyUpdater() {
-  if (typeof window !== 'undefined') {
-    setInterval(() => {
+  useEffect(() => {
+    const interval = setInterval(() => {
       const el = document.getElementById('footer-latency');
       if (el) {
-        const val = Math.floor(Math.random() * (48 - 36 + 1)) + 36;
+        const val = Math.floor(Math.random() * (45 - 32 + 1)) + 32;
         el.textContent = `${val}MS`;
       }
-    }, 2500);
-  }
+    }, 450);
+    return () => clearInterval(interval);
+  }, []);
   return null;
 }
