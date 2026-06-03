@@ -632,7 +632,7 @@ img { display: block; max-width: 100%; }
 }
 
 /* ────────────────────────────────────────────────────
-   BOTTOM MOBILE NAVIGATION BAR
+   BOTTOM MOBILE NAVIGATION BAR — Premium Redesign
 ────────────────────────────────────────────────────── */
 .mobile-bottom-nav {
   position: fixed;
@@ -640,67 +640,185 @@ img { display: block; max-width: 100%; }
   left: 0;
   right: 0;
   height: var(--mobile-nav-h);
-  background: rgba(5, 5, 8, 0.96);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-top: 1px solid rgba(56, 189, 248, 0.15);
-  display: flex;
-  align-items: stretch;
   z-index: 200;
-  /* Only show on mobile */
-  display: none;
-  /* Safe area for iPhones with notch */
+  display: none; /* hidden on desktop */
+  align-items: stretch;
+  /* Layered glass background */
+  background: rgba(5, 5, 8, 0.94);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  /* Glowing top border */
+  border-top: 1px solid rgba(56, 189, 248, 0.15);
+  box-shadow:
+    0 -1px 0 rgba(56, 189, 248, 0.2),
+    0 -8px 32px rgba(5, 5, 8, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  /* Safe area for iPhone Dynamic Island / notch */
   padding-bottom: env(safe-area-inset-bottom, 0px);
+  overflow: hidden; /* contain the tech matrix bg */
+}
+
+/* Neon laser divider */
+.mobile-nav-laser-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    rgba(255, 45, 85, 0.4) 0%, 
+    rgba(56, 189, 248, 0.8) 50%, 
+    rgba(255, 45, 85, 0.4) 100%
+  );
+  box-shadow: 0 1px 6px rgba(56, 189, 248, 0.6);
+  z-index: 10;
+}
+
+/* Cyber matrix grid bg */
+.mobile-nav-tech-bg {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Sliding active backplate */
+.mobile-nav-active-glow {
+  position: absolute;
+  inset: 6px 8px;
+  background: rgba(56, 189, 248, 0.06);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 8px;
+  box-shadow: 
+    0 0 12px rgba(56, 189, 248, 0.12),
+    inset 0 0 6px rgba(56, 189, 248, 0.05);
+  pointer-events: none;
+  z-index: 1;
 }
 
 @media (max-width: 1023px) {
-  .mobile-bottom-nav {
-    display: flex;
-  }
+  .mobile-bottom-nav { display: flex; }
 }
 
+/* Each nav button */
 .mobile-bottom-nav-item {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
-  padding: 8px 4px;
-  color: rgba(189, 200, 209, 0.45);
-  transition: color 0.25s ease, background 0.25s ease;
+  gap: 4px;
+  padding: 6px 2px 8px;
+  min-width: 44px;
+  min-height: 44px;
+  position: relative;
   border: none;
   background: transparent;
   font-family: var(--font-mono);
-  /* Min touch target: 44px height (achieved by flex layout) */
-  min-width: 44px;
-  position: relative;
+  color: rgba(189, 200, 209, 0.38);
+  transition: color 0.2s ease;
+  overflow: hidden; /* for ripple */
+  -webkit-tap-highlight-color: transparent;
 }
-.mobile-bottom-nav-item.active {
-  color: var(--sky);
+
+/* Ripple on press */
+.mobile-bottom-nav-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0.3);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
 }
+.mobile-bottom-nav-item:active::after {
+  opacity: 1;
+  transform: scale(1.5);
+  transition: none;
+}
+
+/* Active top-glow pill */
 .mobile-bottom-nav-item.active::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 20%;
-  right: 20%;
-  height: 2px;
-  background: var(--sky);
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 3px;
+  border-radius: 0 0 4px 4px;
+  background: linear-gradient(90deg, transparent, var(--sky), transparent);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.9), 0 0 24px rgba(56, 189, 248, 0.4);
+  animation: navPillIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
-.mobile-bottom-nav-item:active {
-  background: rgba(56, 189, 248, 0.06);
+
+@keyframes navPillIn {
+  from { width: 0; opacity: 0; }
+  to   { width: 36px; opacity: 1; }
 }
+
+/* Active icon glow bubble */
+.mobile-bottom-nav-item.active .nav-icon-wrap {
+  background: transparent;
+  box-shadow: none;
+}
+
+.mobile-bottom-nav-item.active {
+  color: var(--sky);
+}
+
+/* Icon container for glow bubble */
+.nav-icon-wrap {
+  width: 36px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+}
+.mobile-bottom-nav-item:active .nav-icon-wrap {
+  transform: scale(0.88);
+}
+.mobile-bottom-nav-item.active .nav-icon-wrap {
+  transform: scale(1.08);
+}
+
+/* Icon itself */
 .mobile-bottom-nav-item .nav-icon {
-  font-size: 20px;
+  font-size: 22px;
   line-height: 1;
+  transition: font-variation-settings 0.2s ease;
 }
+
+/* Label */
 .mobile-bottom-nav-item .nav-label {
-  font-size: 8px;
+  font-size: 8.5px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+.mobile-bottom-nav-item.active .nav-label {
+  color: var(--sky);
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+}
+
+/* Tablet: slightly bigger nav */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .mobile-bottom-nav {
+    height: 68px;
+  }
+  .mobile-bottom-nav-item .nav-icon { font-size: 24px; }
+  .mobile-bottom-nav-item .nav-label { font-size: 9px; }
+  .nav-icon-wrap { width: 42px; height: 32px; }
 }
 
 /* ── CYBER BUTTON & CAPSULE FALLBACKS ──────────────── */
@@ -979,30 +1097,56 @@ img { display: block; max-width: 100%; }
   .hidden-mobile-nav { display: none !important; }
 }
 
-/* ── MOBILE DRAWER NAV ──────────────────────────────── */
+/* ── MOBILE DRAWER NAV — Premium ───────────────────── */
 .mobile-drawer-link {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 16px 20px;
+  padding: 14px 20px;
   font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
   letter-spacing: 0.12em;
-  color: var(--on-muted);
+  color: rgba(189, 200, 209, 0.65);
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  min-height: 56px; /* Generous touch target */
-  transition: all 0.2s ease;
+  min-height: 54px;
+  transition: color 0.18s ease, background 0.18s ease, padding-left 0.18s ease;
   text-transform: uppercase;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: hidden;
 }
+/* Slide-in highlight on press */
+.mobile-drawer-link:active {
+  background: rgba(56, 189, 248, 0.07);
+  color: var(--sky);
+}
+/* Active state */
 .mobile-drawer-link.active {
   color: var(--sky);
-  background: rgba(56, 189, 248, 0.05);
-  border-left: 3px solid var(--sky);
-  padding-left: 17px;
+  background: rgba(56, 189, 248, 0.06);
+  border-left: 2px solid var(--sky);
+  padding-left: 18px;
 }
-.mobile-drawer-link:active {
-  background: rgba(56, 189, 248, 0.08);
+/* Active left glow bar */
+.mobile-drawer-link.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--sky), transparent);
+  box-shadow: 0 0 8px var(--sky);
+}
+/* Icon in drawer */
+.mobile-drawer-link .material-symbols-outlined {
+  transition: color 0.18s ease, font-variation-settings 0.25s ease;
+  font-size: 20px;
+}
+.mobile-drawer-link.active .material-symbols-outlined {
+  color: var(--sky);
+  text-shadow: 0 0 8px rgba(56,189,248,0.5);
 }
 
 /* ── MODAL OVERLAY ──────────────────────────────────── */

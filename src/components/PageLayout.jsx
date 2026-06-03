@@ -5,6 +5,7 @@ import HolographicNav from './HolographicNav';
 import BackgroundLayers from './BackgroundLayers';
 import { SocialIcons } from '../utils/socialIcons';
 import { soundEffects } from '../utils/soundEffects';
+import { loginWithGoogle, logoutUser } from '../utils/firebaseAuth';
 
 // Left sidebar nav items (desktop only)
 const LEFT_NAV = [
@@ -67,6 +68,8 @@ export default function PageLayout() {
     return false;
   });
   const [drawerOpen, setDrawerOpen]     = useState(false);
+  const [user, setUser]                 = useState(null);
+  const [authLoading, setAuthLoading]   = useState(false);
   const location  = useLocation();
   const navigate  = useNavigate();
 
@@ -78,9 +81,10 @@ export default function PageLayout() {
     }
   }, []); // run once on mount
 
-  // Close drawer on route change
+  // Close drawer and scroll to top on route change
   useEffect(() => {
     setDrawerOpen(false);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [location.pathname]);
 
   // Prevent body scroll when drawer is open
@@ -93,7 +97,28 @@ export default function PageLayout() {
     return () => { document.body.style.overflow = ''; };
   }, [drawerOpen]);
 
+  const handleSignIn = async () => {
+    soundEffects.playClick?.();
+    setAuthLoading(true);
+    try {
+      const u = await loginWithGoogle();
+      setUser(u);
+      soundEffects.playSuccess?.();
+    } catch {
+      soundEffects.playError?.();
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const handleSignOut = async () => {
+    soundEffects.playClick?.();
+    await logoutUser().catch(() => {});
+    setUser(null);
+  };
+
   const handleMobileNavItem = (item) => {
+    soundEffects.playClick?.();
     if (item.to === null) {
       setDrawerOpen(true);
     } else {
@@ -118,6 +143,12 @@ export default function PageLayout() {
       <HolographicNav
         soundEnabled={soundEnabled}
         setSoundEnabled={setSoundEnabled}
+        user={user}
+        authLoading={authLoading}
+        onSignIn={handleSignIn}
+        onSignOut={handleSignOut}
+        onMenuClick={() => setDrawerOpen(!drawerOpen)}
+        drawerOpen={drawerOpen}
       />
 
       {/* ── LEFT SIDEBAR (desktop 1024px+) ─────────── */}
@@ -391,29 +422,48 @@ export default function PageLayout() {
         </div>
       </footer>
 
-      {/* ── MOBILE BOTTOM NAV (< 1024px) ──────────── */}
+      {/* ── MOBILE BOTTOM NAV (< 1024px) ────────────── */}
       <nav
         className="mobile-bottom-nav"
-        style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
         aria-label="Mobile navigation"
       >
-        {MOBILE_NAV.map((item) => {
+        <div className="mobile-nav-laser-line" />
+        <div className="mobile-nav-tech-bg" />
+
+        {MOBILE_NAV.map((item, idx) => {
           const active = item.to ? isActive(item.to) : drawerOpen;
           return (
-            <button
+            <motion.button
               key={item.label}
               onClick={() => handleMobileNavItem(item)}
               className={`mobile-bottom-nav-item${active ? ' active' : ''}`}
               aria-label={item.label}
               aria-current={active ? 'page' : undefined}
+              whileTap={{ scale: 0.92 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             >
-              <span className="material-symbols-outlined nav-icon"
-                style={{ fontVariationSettings: active ? "'FILL' 1" : "'FILL' 0" }}
-              >
-                {item.icon}
-              </span>
-              <span className="nav-label">{item.label}</span>
-            </button>
+              {/* Sliding active backplate capsule */}
+              {active && (
+                <motion.div
+                  layoutId="activeMobileGlow"
+                  className="mobile-nav-active-glow"
+                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                />
+              )}
+
+              {/* Glow-bubble icon wrapper */}
+              <div className="nav-icon-wrap" style={{ position: 'relative', zIndex: 2 }}>
+                <span
+                  className="material-symbols-outlined nav-icon"
+                  style={{
+                    fontVariationSettings: active ? "'FILL' 1, 'wght' 600" : "'FILL' 0, 'wght' 400",
+                  }}
+                >
+                  {item.icon}
+                </span>
+              </div>
+              <span className="nav-label" style={{ position: 'relative', zIndex: 2 }}>{item.label}</span>
+            </motion.button>
           );
         })}
       </nav>
@@ -437,21 +487,23 @@ export default function PageLayout() {
                 zIndex: 190,
               }}
             />
-            {/* Drawer panel */}
+            {/* Drawer panel — spring bounce slide-in */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ type: 'spring', stiffness: 320, damping: 32, mass: 0.9 }}
               style={{
                 position: 'fixed',
                 top: 0,
                 right: 0,
                 bottom: 0,
                 width: 'min(320px, 85vw)',
-                background: 'rgba(10, 10, 14, 0.98)',
-                backdropFilter: 'blur(32px)',
-                borderLeft: '1px solid rgba(56, 189, 248, 0.15)',
+                background: 'rgba(8, 8, 12, 0.99)',
+                backdropFilter: 'blur(40px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+                borderLeft: '1px solid rgba(56, 189, 248, 0.12)',
+                boxShadow: '-8px 0 48px rgba(0,0,0,0.6), -1px 0 0 rgba(56,189,248,0.08)',
                 zIndex: 195,
                 display: 'flex',
                 flexDirection: 'column',
@@ -461,23 +513,26 @@ export default function PageLayout() {
             >
               {/* Drawer header */}
               <div style={{
-                padding: '20px 20px 12px',
+                padding: '20px 20px 14px',
                 borderBottom: '1px solid rgba(56,189,248,0.1)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 flexShrink: 0,
+                background: 'rgba(56,189,248,0.03)',
               }}>
                 <div>
-                  <div style={{ fontFamily: 'var(--font-display)', fontSize: '16px', fontWeight: 800, color: '#fff' }}>
-                    TECHFEST <span style={{ color: 'var(--sky)' }}>2026</span>
+                  <div style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 800, color: '#fff', letterSpacing: '-0.01em' }}>
+                    TECHFEST <span style={{ color: 'var(--sky)', textShadow: '0 0 12px rgba(56,189,248,0.4)' }}>2026</span>
                   </div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(189,200,209,0.5)', letterSpacing: '0.2em', marginTop: '3px' }}>
-                    IIT BOMBAY // NAVIGATE
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(56,189,248,0.5)', letterSpacing: '0.25em', marginTop: '3px', fontWeight: 700 }}>
+                    IIT BOMBAY // ASIA'S LARGEST S&T FESTIVAL
                   </div>
                 </div>
-                <button
+                <motion.button
                   onClick={() => setDrawerOpen(false)}
+                  whileTap={{ scale: 0.88, rotate: 90 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                   style={{
                     width: '44px',
                     height: '44px',
@@ -485,45 +540,77 @@ export default function PageLayout() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     border: '1px solid rgba(56,189,248,0.2)',
-                    color: 'var(--sky)',
+                    color: 'rgba(189,200,209,0.7)',
                     background: 'transparent',
-                    fontSize: '20px',
+                    fontSize: '18px',
+                    borderRadius: '4px',
                   }}
                   aria-label="Close menu"
                 >
                   ✕
-                </button>
+                </motion.button>
               </div>
 
-              {/* Drawer nav links */}
+              {/* Drawer nav links — staggered entry */}
               <div style={{ flex: 1, overflowY: 'auto' }}>
-                {DRAWER_NAV.map((item) => {
+                {DRAWER_NAV.map((item, i) => {
                   const active = isActive(item.to);
                   return (
-                    <button
+                    <motion.button
                       key={item.to}
-                      onClick={() => navigate(item.to)}
+                      onClick={() => {
+                        soundEffects.playClick?.();
+                        navigate(item.to);
+                      }}
                       className={`mobile-drawer-link${active ? ' active' : ''}`}
-                      style={{ width: '100%', textAlign: 'left', border: 'none', background: 'transparent' }}
+                      style={{
+                        width: '100%',
+                        textAlign: 'left',
+                        border: 'none',
+                        background: 'transparent',
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.03, duration: 0.22, ease: 'easeOut' }}
+                      whileTap={{ backgroundColor: 'rgba(56,189,248,0.07)' }}
                     >
                       <span
                         className="material-symbols-outlined"
                         style={{
                           fontSize: '20px',
                           color: active ? 'var(--sky)' : 'rgba(189,200,209,0.5)',
-                          fontVariationSettings: active ? "'FILL' 1" : "'FILL' 0",
+                          fontVariationSettings: active ? "'FILL' 1, 'wght' 600" : "'FILL' 0, 'wght' 400",
                           flexShrink: 0,
                         }}
                       >
                         {item.icon}
                       </span>
-                      {item.label}
-                    </button>
+                      <span style={{ marginLeft: '14px' }}>{item.label}</span>
+                      {active && (
+                        <span style={{
+                          marginLeft: 'auto',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '8px',
+                          color: 'var(--sky)',
+                          letterSpacing: '0.1em',
+                          textShadow: '0 0 6px rgba(56,189,248,0.5)',
+                          border: '1px solid rgba(56,189,248,0.3)',
+                          padding: '2px 6px',
+                          background: 'rgba(56,189,248,0.08)',
+                          borderRadius: '2px',
+                          lineHeight: '1',
+                        }}>
+                          ACTIVE
+                        </span>
+                      )}
+                    </motion.button>
                   );
                 })}
               </div>
 
-              {/* Audio toggle row + Social icons */}
+              {/* Audio toggle row + Social icons + Auth */}
               <div style={{
                 padding: '16px 20px',
                 borderTop: '1px solid rgba(255,255,255,0.06)',
@@ -531,10 +618,12 @@ export default function PageLayout() {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '12px',
+                background: 'rgba(5, 5, 8, 0.4)',
               }}>
                 {/* Sound Toggle Row */}
                 <button
                   onClick={() => {
+                    soundEffects.playClick?.();
                     const next = !soundEnabled;
                     window.__soundEnabled = next;
                     setSoundEnabled(next);
@@ -590,8 +679,74 @@ export default function PageLayout() {
                   </span>
                 </button>
 
+                {/* Mobile Auth Panel */}
+                <div style={{
+                  borderTop: '1px solid rgba(255,255,255,0.04)',
+                  paddingTop: '12px',
+                  marginTop: '4px',
+                }}>
+                  {user ? (
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <img
+                          src={user.photoURL}
+                          alt="avatar"
+                          style={{
+                            width: '28px',
+                            height: '28px',
+                            borderRadius: '50%',
+                            border: '1px solid rgba(56,189,248,0.5)',
+                          }}
+                        />
+                        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'rgba(189,200,209,0.8)', fontWeight: 600 }}>
+                          {user.displayName?.split(' ')[0] || 'GUEST'}
+                        </span>
+                      </div>
+                      <button
+                        onClick={handleSignOut}
+                        className="btn-ghost"
+                        style={{ padding: '6px 12px', fontSize: '9px', minHeight: '32px', width: 'auto' }}
+                      >
+                        SIGN OUT
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={handleSignIn}
+                      disabled={authLoading}
+                      style={{
+                        width: '100%',
+                        minHeight: '44px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '10px',
+                        fontWeight: 700,
+                        letterSpacing: '0.12em',
+                        color: '#fff',
+                        border: '1px solid rgba(255, 45, 85, 0.5)',
+                        background: 'rgba(255, 45, 85, 0.15)',
+                        boxShadow: '0 0 12px rgba(255,45,85,0.2)',
+                        transition: 'all 0.3s',
+                      }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.background = 'rgba(255,45,85,0.25)';
+                        e.currentTarget.style.boxShadow = '0 0 25px rgba(255,45,85,0.5)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.background = 'rgba(255,45,85,0.15)';
+                        e.currentTarget.style.boxShadow = '0 0 12px rgba(255,45,85,0.2)';
+                      }}
+                    >
+                      {authLoading ? 'CONNECTING...' : 'SIGN IN WITH GOOGLE'}
+                    </button>
+                  )}
+                </div>
+
                 {/* Social Icons */}
-                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '4px' }}>
                   {SOCIALS.map(({ Icon, href, label }) => (
                     <a
                       key={label}
@@ -604,10 +759,11 @@ export default function PageLayout() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        width: '44px',
-                        height: '44px',
+                        width: '40px',
+                        height: '40px',
                         border: '1px solid rgba(255,255,255,0.06)',
                         transition: 'all 0.2s',
+                        borderRadius: '0px',
                       }}
                       onMouseEnter={e => {
                         e.currentTarget.style.color = 'var(--sky)';

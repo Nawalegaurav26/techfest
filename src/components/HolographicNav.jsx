@@ -14,11 +14,17 @@ const NAV_LINKS = [
   { label: 'ABOUT',        to: '/about' },
 ];
 
-export default function HolographicNav({ soundEnabled, setSoundEnabled }) {
-  const [user, setUser]             = useState(null);
-  const [authLoading, setAuthLoading] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled]     = useState(false);
+export default function HolographicNav({
+  soundEnabled,
+  setSoundEnabled,
+  user,
+  authLoading,
+  onSignIn,
+  onSignOut,
+  onMenuClick,
+  drawerOpen,
+}) {
+  const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,55 +33,16 @@ export default function HolographicNav({ soundEnabled, setSoundEnabled }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileOpen(false);
-  }, []);
-
-  // Sync nav icon with actual audio state on mount (BootLoader may have set it)
-  useEffect(() => {
-    // This runs after PageLayout passes down the correct initial soundEnabled,
-    // but also double-checks the global window flag to stay in sync.
-    const globalEnabled = window.__soundEnabled === true;
-    // No setState here since soundEnabled comes from parent via props
-    // Parent (PageLayout) already reads window.__soundEnabled on init.
-  }, []);
-
   const toggleSound = () => {
     const next = !soundEnabled;
-    // Update global FIRST so soundEffects.checkEnabled() sees it immediately
     window.__soundEnabled = next;
-    // Then update React state so UI re-renders
     setSoundEnabled(next);
     if (next) {
-      // Resume/start background music
       soundEffects.startBackgroundMusic?.();
-      // Play success tone slightly after so AudioContext is unlocked
       setTimeout(() => soundEffects.playSuccess?.(), 60);
     } else {
-      // Stop background music
       soundEffects.stopBackgroundMusic?.();
     }
-  };
-
-  const handleSignIn = async () => {
-    soundEffects.playClick?.();
-    setAuthLoading(true);
-    try {
-      const u = await loginWithGoogle();
-      setUser(u);
-      soundEffects.playSuccess?.();
-    } catch {
-      soundEffects.playError?.();
-    } finally {
-      setAuthLoading(false);
-    }
-  };
-
-  const handleSignOut = async () => {
-    soundEffects.playClick?.();
-    await logoutUser().catch(() => {});
-    setUser(null);
   };
 
   return (
@@ -196,7 +163,7 @@ export default function HolographicNav({ soundEnabled, setSoundEnabled }) {
                 }}
               />
               <button
-                onClick={handleSignOut}
+                onClick={onSignOut}
                 className="btn-ghost"
                 style={{ padding: '8px 16px', fontSize: '10px', width: 'auto' }}
               >
@@ -205,7 +172,7 @@ export default function HolographicNav({ soundEnabled, setSoundEnabled }) {
             </div>
           ) : (
             <button
-              onClick={handleSignIn}
+              onClick={onSignIn}
               disabled={authLoading}
               style={{
                 padding: '10px 20px',
@@ -234,100 +201,27 @@ export default function HolographicNav({ soundEnabled, setSoundEnabled }) {
           )}
         </div>
 
-        {/* Mobile hamburger — only on < 1024px (handled by CSS) */}
+        {/* Mobile hamburger — only on < 1024px (opens unified sidebar drawer) */}
         <button
-          onClick={() => setMobileOpen(!mobileOpen)}
+          onClick={() => {
+            soundEffects.playClick?.();
+            onMenuClick?.();
+          }}
           className="mobile-menu-btn"
-          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={mobileOpen}
+          aria-label={drawerOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={drawerOpen}
           style={{
             width: '44px', height: '44px',
             border: '1px solid rgba(56,189,248,0.2)',
             color: 'var(--sky)',
-            background: mobileOpen ? 'rgba(56,189,248,0.08)' : 'transparent',
+            background: drawerOpen ? 'rgba(56,189,248,0.08)' : 'transparent',
             transition: 'all 0.2s',
             flexShrink: 0,
           }}
         >
-          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          {drawerOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
-
-      {/* ── MOBILE DROPDOWN ────────────────────────── */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            style={{
-              position: 'absolute',
-              top: '100%',
-              left: 0,
-              right: 0,
-              background: 'rgba(5,5,8,0.98)',
-              backdropFilter: 'blur(24px)',
-              borderBottom: '1px solid rgba(56,189,248,0.15)',
-              overflow: 'hidden',
-              zIndex: 99,
-            }}
-          >
-            <div style={{ padding: '8px 0', display: 'flex', flexDirection: 'column' }}>
-              {NAV_LINKS.map((link) => (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  onClick={() => {
-                    soundEffects.playClick?.();
-                    setMobileOpen(false);
-                  }}
-                  style={({ isActive }) => ({
-                    display: 'flex',
-                    alignItems: 'center',
-                    padding: '16px 24px',
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '12px',
-                    fontWeight: 700,
-                    letterSpacing: '0.15em',
-                    textTransform: 'uppercase',
-                    color: isActive ? 'var(--sky)' : 'var(--on-muted)',
-                    borderLeft: isActive ? '3px solid var(--sky)' : '3px solid transparent',
-                    borderBottom: '1px solid rgba(255,255,255,0.04)',
-                    background: isActive ? 'rgba(56,189,248,0.05)' : 'transparent',
-                    minHeight: '56px',
-                    transition: 'all 0.2s',
-                  })}
-                >
-                  {link.label}
-                </NavLink>
-              ))}
-              {/* Sign In inside mobile drawer */}
-              <div style={{ padding: '12px 24px' }}>
-                {user ? (
-                  <button
-                    onClick={() => { handleSignOut(); setMobileOpen(false); }}
-                    className="btn-ghost"
-                    style={{ width: '100%' }}
-                  >
-                    SIGN OUT
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => { handleSignIn(); setMobileOpen(false); }}
-                    disabled={authLoading}
-                    className="btn-primary"
-                  >
-                    <span className="btn-tl" />
-                    <span className="btn-br" />
-                    {authLoading ? 'CONNECTING...' : 'SIGN IN WITH GOOGLE'}
-                  </button>
-                )}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </header>
   );
 }
