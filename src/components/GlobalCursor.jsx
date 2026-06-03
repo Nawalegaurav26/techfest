@@ -74,7 +74,7 @@ export default function GlobalCursor() {
       border-radius: 50%;
       background: radial-gradient(circle, rgba(56,189,248,0.8), transparent);
       pointer-events: none;
-      z-index: 9998;
+      z-index: 999998;
       transition: all 0.5s ease;
     `;
     document.body.appendChild(trail);
