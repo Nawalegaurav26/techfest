@@ -29,12 +29,12 @@ const COMMAND_RESPONSES = {
   └─────────────────────────────────────────┘`,
 
   events: `TECHFEST 2026 EVENTS [250+]:
-  ◆ ROBOTICS OLYMPIAD     → DEC 18 // ₹2,00,000
-  ◆ QUANTUM HACKATHON     → DEC 18 // ₹1,50,000
-  ◆ NEON GENESIS SHOWCASE → DEC 19 // ₹80,000
-  ◆ NEURAL NETWORK WARS   → DEC 17 // ₹50,000
-  ◆ CYBERZONE ESPORTS     → DEC 20 // ₹3,00,000
-  ◆ SPACE TECH CHALLENGE  → DEC 19 // ₹1,00,000
+  ◆ ROBOTICS OLYMPIAD     → DEC 22 // ₹2,00,000
+  ◆ QUANTUM HACKATHON     → DEC 22 // ₹1,50,000
+  ◆ NEON GENESIS SHOWCASE → DEC 23 // ₹80,000
+  ◆ NEURAL NETWORK WARS   → DEC 21 // ₹50,000
+  ◆ CYBERZONE ESPORTS     → DEC 24 // ₹3,00,000
+  ◆ SPACE TECH CHALLENGE  → DEC 23 // ₹1,00,000
   [Navigate to /events for full listing]`,
 
   competitions: `WAR ROOM — ACTIVE COMPETITIONS:
@@ -47,31 +47,31 @@ const COMMAND_RESPONSES = {
   TOTAL PRIZE POOL: ₹16,00,000+`,
 
   workshops: `RESEARCH LABORATORY — WORKSHOPS:
-  ⬣ NEURAL ARCHITECTURE  → DEC 18 // FREE  // 40 SEATS
-  ⬣ QUANTUM COMPUTING    → DEC 19 // ₹500  // 30 SEATS
-  ⬣ AUTONOMOUS SYSTEMS   → DEC 18 // ₹800  // 24 SEATS
-  ⬣ BLOCKCHAIN & WEB3    → DEC 20 // ₹300  // 60 SEATS
-  ⬣ BIOINFORMATICS + AI  → DEC 19 // FREE  // 35 SEATS
-  ⬣ COMPUTER VISION      → DEC 20 // ₹400  // 45 SEATS`,
+  ⬣ NEURAL ARCHITECTURE  → DEC 22 // FREE  // 40 SEATS
+  ⬣ QUANTUM COMPUTING    → DEC 23 // ₹500  // 30 SEATS
+  ⬣ AUTONOMOUS SYSTEMS   → DEC 22 // ₹800  // 24 SEATS
+  ⬣ BLOCKCHAIN & WEB3    → DEC 24 // ₹300  // 60 SEATS
+  ⬣ BIOINFORMATICS + AI  → DEC 23 // FREE  // 35 SEATS
+  ⬣ COMPUTER VISION      → DEC 24 // ₹400  // 45 SEATS`,
 
   schedule: `TECHFEST 2026 SCHEDULE:
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  DEC 17 [ARRIVAL DAY]
+  DEC 21 [ARRIVAL DAY]
     14:00 → Check-in opens
     18:00 → Opening ceremony
     20:00 → Welcome keynote
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  DEC 18 [DAY 1]
+  DEC 22 [DAY 1]
     09:00 → Competitions begin
     10:00 → Workshops — Batch A
     18:00 → Tech talks
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  DEC 19 [DAY 2]
+  DEC 23 [DAY 2]
     09:00 → Day 2 competitions
     18:00 → Cultural showcase
     22:00 → Hackathon night
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  DEC 20 [DAY 3 — FINALE]
+  DEC 24 [DAY 3 — FINALE]
     12:00 → Finals + prize distribution
     18:00 → Closing ceremony`,
 
@@ -104,7 +104,7 @@ const COMMAND_RESPONSES = {
   STEP 2 → Select your events/competitions
   STEP 3 → Complete payment (if applicable)
   STEP 4 → Receive confirmation + QR code
-  STEP 5 → Report to venue on DEC 17 14:00
+  STEP 5 → Report to venue on DEC 21 14:00
   ──────────────────────────────────────────
   REGISTRATION FEE: ₹200 (covers all 3 days)
   EARLY BIRD (before DEC 01): FREE`,
