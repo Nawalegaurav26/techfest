@@ -18,9 +18,8 @@ export default function BootLoader({ onComplete }) {
   const [lines, setLines] = useState([]);
   const [progress, setProgress] = useState(0);
   const [bootPhase, setBootPhase] = useState('diagnostics'); // 'diagnostics', 'ready', 'booting'
-  const [soundChoice, setSoundChoice] = useState(null);
 
-  // Print diagnostic lines one by one
+  // Print diagnostic lines one by one (slowed down to 450ms per line)
   useEffect(() => {
     let lineIdx = 0;
     const interval = setInterval(() => {
@@ -31,32 +30,27 @@ export default function BootLoader({ onComplete }) {
       } else {
         clearInterval(interval);
       }
-    }, 280);
+    }, 450);
 
     return () => clearInterval(interval);
   }, []);
 
-  // Run progress bar up to 100%
+  // Sync progress bar exactly to the printed lines
   useEffect(() => {
     if (lines.length === 0) return;
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setBootPhase('ready');
-          try { soundEffects.playSuccess?.(); } catch {}
-          return 100;
-        }
-        const step = Math.floor(Math.random() * 8) + 2;
-        return Math.min(prev + step, 100);
-      });
-    }, 120);
+    const targetProgress = Math.min(Math.floor((lines.length / DIAGNOSTICS.length) * 100), 100);
+    setProgress(targetProgress);
 
-    return () => clearInterval(interval);
+    if (lines.length === DIAGNOSTICS.length) {
+      const timeout = setTimeout(() => {
+        setBootPhase('ready');
+        try { soundEffects.playSuccess?.(); } catch {}
+      }, 600);
+      return () => clearTimeout(timeout);
+    }
   }, [lines]);
 
   const handleStartBoot = (enableSound) => {
-    // Save sound choice to window state
     window.__soundEnabled = enableSound;
     try {
       if (enableSound) {
