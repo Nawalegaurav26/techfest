@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { soundEffects } from '../utils/soundEffects';
@@ -52,12 +52,13 @@ function CountdownCard({ value, label }) {
       className="glass-panel stat-card"
       style={{
         position: 'relative',
-        padding: '20px 28px',
+        padding: 'clamp(12px, 3vw, 20px) clamp(14px, 4vw, 28px)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: '6px',
-        minWidth: '90px',
+        gap: '4px',
+        minWidth: '64px',
+        flex: '1 1 auto',
       }}
     >
       <div className="bracket-tl" />
@@ -66,7 +67,7 @@ function CountdownCard({ value, label }) {
         className="glitch-pulse"
         style={{
           fontFamily: 'var(--font-mono)',
-          fontSize: 'clamp(28px, 4vw, 48px)',
+          fontSize: 'clamp(22px, 5vw, 48px)',
           fontWeight: 700,
           color: 'var(--on-surface)',
           lineHeight: 1,
@@ -77,7 +78,7 @@ function CountdownCard({ value, label }) {
       </span>
       <span style={{
         fontFamily: 'var(--font-mono)',
-        fontSize: '9px',
+        fontSize: 'clamp(7px, 1.5vw, 9px)',
         fontWeight: 700,
         letterSpacing: '0.2em',
         color: 'rgba(189,200,209,0.5)',
@@ -107,9 +108,10 @@ function CategoryCard({ icon, title, desc, to, index, navigate }) {
         soundEffects.playHover?.();
       }}
       onMouseLeave={() => setHovered(false)}
+      whileTap={{ scale: 0.97 }}
       style={{
         position: 'relative',
-        padding: '28px 24px',
+        padding: 'clamp(18px, 3vw, 28px) clamp(16px, 2.5vw, 24px)',
         textAlign: 'left',
         background: hovered ? 'rgba(56,189,248,0.04)' : 'rgba(255,255,255,0.03)',
         backdropFilter: 'blur(16px)',
@@ -117,59 +119,75 @@ function CategoryCard({ icon, title, desc, to, index, navigate }) {
         boxShadow: hovered ? '0 0 25px rgba(56,189,248,0.1)' : 'none',
         transition: 'all 0.3s ease',
         transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
-        cursor: 'none',
+        width: '100%',
+        display: 'block',
+        border: 'none',
+        background: 'none',
       }}
     >
-      <div className="bracket-tl" style={{ borderColor: hovered ? 'var(--sky)' : 'rgba(56,189,248,0.3)' }} />
-      <div className="bracket-br" style={{ borderColor: hovered ? 'var(--sky)' : 'rgba(56,189,248,0.3)' }} />
+      <div style={{
+        position: 'relative',
+        padding: 'clamp(18px, 3vw, 28px) clamp(16px, 2.5vw, 24px)',
+        background: hovered ? 'rgba(56,189,248,0.04)' : 'rgba(255,255,255,0.03)',
+        backdropFilter: 'blur(16px)',
+        border: hovered ? '1px solid rgba(56,189,248,0.35)' : '1px solid rgba(255,255,255,0.07)',
+        boxShadow: hovered ? '0 0 25px rgba(56,189,248,0.1)' : 'none',
+        transition: 'all 0.3s ease',
+        transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
+        textAlign: 'left',
+        height: '100%',
+      }}>
+        <div className="bracket-tl" style={{ borderColor: hovered ? 'var(--sky)' : 'rgba(56,189,248,0.3)' }} />
+        <div className="bracket-br" style={{ borderColor: hovered ? 'var(--sky)' : 'rgba(56,189,248,0.3)' }} />
 
-      {/* Top tag */}
-      <div style={{
-        position: 'absolute',
-        top: '12px',
-        right: '14px',
-        fontFamily: 'var(--font-mono)',
-        fontSize: '8px',
-        color: hovered ? 'rgba(56,189,248,0.6)' : 'rgba(56,189,248,0.25)',
-        letterSpacing: '0.15em',
-        transition: 'color 0.3s',
-      }}>
-        TX-2026
-      </div>
+        {/* Top tag */}
+        <div style={{
+          position: 'absolute',
+          top: '10px',
+          right: '12px',
+          fontFamily: 'var(--font-mono)',
+          fontSize: '8px',
+          color: hovered ? 'rgba(56,189,248,0.6)' : 'rgba(56,189,248,0.25)',
+          letterSpacing: '0.15em',
+          transition: 'color 0.3s',
+        }}>
+          TX-2026
+        </div>
 
-      <div style={{ fontSize: '24px', marginBottom: '14px' }}>{icon}</div>
-      <div style={{
-        fontFamily: 'var(--font-mono)',
-        fontSize: '11px',
-        fontWeight: 700,
-        letterSpacing: '0.18em',
-        color: hovered ? '#fff' : 'var(--on-surface)',
-        marginBottom: '8px',
-        transition: 'color 0.3s',
-      }}>
-        {title}
-      </div>
-      <div style={{
-        fontFamily: 'var(--font-body)',
-        fontSize: '12px',
-        color: 'rgba(189,200,209,0.5)',
-        lineHeight: 1.6,
-      }}>
-        {desc}
-      </div>
-      <div style={{
-        marginTop: '16px',
-        fontFamily: 'var(--font-mono)',
-        fontSize: '10px',
-        color: hovered ? 'var(--sky)' : 'rgba(56,189,248,0.3)',
-        letterSpacing: '0.1em',
-        transition: 'color 0.3s',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '6px',
-      }}>
-        ENTER MODULE
-        <span style={{ transform: hovered ? 'translateX(4px)' : 'translateX(0)', transition: 'transform 0.3s' }}>→</span>
+        <div style={{ fontSize: 'clamp(20px, 3vw, 24px)', marginBottom: '12px' }}>{icon}</div>
+        <div style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'clamp(10px, 1.5vw, 11px)',
+          fontWeight: 700,
+          letterSpacing: '0.18em',
+          color: hovered ? '#fff' : 'var(--on-surface)',
+          marginBottom: '8px',
+          transition: 'color 0.3s',
+        }}>
+          {title}
+        </div>
+        <div style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: 'clamp(11px, 1.5vw, 12px)',
+          color: 'rgba(189,200,209,0.5)',
+          lineHeight: 1.6,
+        }}>
+          {desc}
+        </div>
+        <div style={{
+          marginTop: '14px',
+          fontFamily: 'var(--font-mono)',
+          fontSize: '10px',
+          color: hovered ? 'var(--sky)' : 'rgba(56,189,248,0.3)',
+          letterSpacing: '0.1em',
+          transition: 'color 0.3s',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px',
+        }}>
+          ENTER MODULE
+          <span style={{ transform: hovered ? 'translateX(4px)' : 'translateX(0)', transition: 'transform 0.3s' }}>→</span>
+        </div>
       </div>
     </motion.button>
   );
@@ -184,19 +202,13 @@ export default function Home() {
     <div>
 
       {/* ═══════════════════════════════════════════
-          HERO SECTION
+          HERO SECTION — mobile-first
       ═══════════════════════════════════════════ */}
-      <section style={{
-        minHeight: 'calc(100vh - var(--footer-h))',
-        display: 'flex',
-        alignItems: 'center',
-        padding: '60px 80px 60px',
-        position: 'relative',
-      }}>
-        {/* Left accent line */}
+      <section className="hero-section" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+        {/* Left accent line — hide on narrow mobile */}
         <div style={{
           position: 'absolute',
-          left: '40px',
+          left: '8px',
           top: '15%',
           bottom: '15%',
           width: '2px',
@@ -204,18 +216,11 @@ export default function Home() {
           opacity: 0.4,
         }} />
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1.2fr 1fr',
-          gap: '40px',
-          alignItems: 'center',
-          width: '100%',
-          zIndex: 5,
-        }} className="hero-grid">
+        <div className="hero-grid" style={{ width: '100%', zIndex: 5 }}>
 
-          {/* Left Column: Text Content */}
-          <div style={{ maxWidth: '650px' }}>
-            {/* Overline */}
+          {/* ── LEFT COLUMN: Text Content ───────── */}
+          <div className="hero-text-col">
+            {/* Overline label */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -223,34 +228,31 @@ export default function Home() {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '12px',
-                marginBottom: '28px',
+                gap: '10px',
+                marginBottom: '20px',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
               }}
             >
               <span style={{
-                width: '6px',
-                height: '6px',
+                width: '6px', height: '6px',
                 borderRadius: '50%',
                 background: 'var(--plasma)',
                 boxShadow: '0 0 8px rgba(255,45,85,0.8)',
                 animation: 'pulseDot 2s ease-in-out infinite',
+                flexShrink: 0,
               }} />
               <span style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '10px',
+                fontSize: 'clamp(8px, 2vw, 10px)',
                 fontWeight: 700,
-                letterSpacing: '0.25em',
+                letterSpacing: '0.2em',
                 color: 'rgba(189,200,209,0.6)',
                 textTransform: 'uppercase',
+                textAlign: 'center',
               }}>
                 IIT BOMBAY // ASIA'S LARGEST S&T FESTIVAL
               </span>
-              <div style={{
-                flex: 1,
-                height: '1px',
-                background: 'linear-gradient(to right, rgba(189,200,209,0.2), transparent)',
-                maxWidth: '120px',
-              }} />
             </motion.div>
 
             {/* MAIN HEADING */}
@@ -262,7 +264,7 @@ export default function Home() {
               <h1
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(50px, 7vw, 100px)',
+                  fontSize: 'clamp(42px, 10vw, 100px)',
                   fontWeight: 800,
                   letterSpacing: '-0.04em',
                   lineHeight: 0.9,
@@ -272,27 +274,24 @@ export default function Home() {
                 }}
               >
                 TECHFEST{' '}
-                <span
-                  className="glow-sky"
-                  style={{ color: 'var(--sky)' }}
-                >
+                <span className="glow-sky" style={{ color: 'var(--sky)' }}>
                   2026
                 </span>
               </h1>
             </motion.div>
 
-            {/* Plasma subtitle with typing */}
+            {/* Plasma subtitle */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              style={{ margin: '20px 0 40px', overflow: 'hidden' }}
+              style={{ margin: '16px 0 28px', overflow: 'hidden', maxWidth: '100%' }}
             >
               <div
                 className="typing-text glow-plasma"
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: 'clamp(12px, 1.8vw, 16px)',
+                  fontSize: 'clamp(10px, 2.5vw, 16px)',
                   fontWeight: 700,
                   letterSpacing: '0.3em',
                   color: 'var(--plasma)',
@@ -308,22 +307,23 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.8 }}
+              style={{ width: '100%' }}
             >
               <div style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '9px',
+                fontSize: '8px',
                 fontWeight: 700,
-                letterSpacing: '0.3em',
+                letterSpacing: '0.25em',
                 color: 'rgba(189,200,209,0.4)',
-                marginBottom: '16px',
+                marginBottom: '12px',
               }}>
                 ── COUNTDOWN TO EVOLUTION: DEC 22, 2026 ──
               </div>
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <div className="countdown-row">
                 <CountdownCard value={countdown.days}    label="DAYS" />
                 <CountdownCard value={countdown.hours}   label="HOURS" />
-                <CountdownCard value={countdown.minutes} label="MINUTES" />
-                <CountdownCard value={countdown.seconds} label="SECONDS" />
+                <CountdownCard value={countdown.minutes} label="MINS" />
+                <CountdownCard value={countdown.seconds} label="SECS" />
               </div>
             </motion.div>
 
@@ -332,7 +332,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 1.1 }}
-              style={{ display: 'flex', gap: '16px', marginTop: '40px', flexWrap: 'wrap' }}
+              className="cta-row"
             >
               <button
                 className="btn-primary"
@@ -359,7 +359,7 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Right Column: Giant Interactive Logo */}
+          {/* ── RIGHT COLUMN: Giant Logo ─────────── */}
           <div className="hero-logo-container" style={{
             display: 'flex',
             alignItems: 'center',
@@ -367,7 +367,7 @@ export default function Home() {
             position: 'relative',
             width: '100%',
           }}>
-            {/* Glowing backdrop shadow */}
+            {/* Glowing backdrop */}
             <div style={{
               position: 'absolute',
               width: '80%',
@@ -378,14 +378,14 @@ export default function Home() {
               zIndex: 1,
             }} />
 
-            {/* Rotating background HUD */}
+            {/* Rotating HUD ring */}
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
               style={{
                 position: 'absolute',
-                width: '320px',
-                height: '320px',
+                width: 'clamp(200px, 40vw, 320px)',
+                height: 'clamp(200px, 40vw, 320px)',
                 opacity: 0.15,
                 pointerEvents: 'none',
                 zIndex: 1,
@@ -399,7 +399,7 @@ export default function Home() {
               </svg>
             </motion.div>
 
-            {/* Floating and Hoverable Logo Image */}
+            {/* Central Logo Image */}
             <motion.img
               src="/central_logo_home-screen_big_logo_transparent.png"
               alt="Techfest 2026 Central Logo"
@@ -410,9 +410,10 @@ export default function Home() {
                 scale: 1.05,
                 filter: 'drop-shadow(0 0 25px rgba(56,189,248,0.55))',
               }}
+              whileTap={{ scale: 0.97 }}
               style={{
                 width: '100%',
-                maxWidth: '460px',
+                maxWidth: 'clamp(200px, 40vw, 460px)',
                 height: 'auto',
                 objectFit: 'contain',
                 filter: 'drop-shadow(0 0 15px rgba(56,189,248,0.25))',
@@ -426,14 +427,10 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════
-          STATS ROW
+          STATS ROW — 2-col mobile, 4-col desktop
       ═══════════════════════════════════════════ */}
-      <section style={{ padding: '0 80px 80px' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '16px',
-        }}>
+      <section style={{ padding: '0 clamp(16px, 4vw, 80px) clamp(40px, 6vw, 80px)' }}>
+        <div className="stats-grid">
           {STATS.map((s, i) => (
             <motion.div
               key={s.label}
@@ -444,7 +441,7 @@ export default function Home() {
               className="glass-panel stat-card"
               style={{
                 position: 'relative',
-                padding: '28px 24px',
+                padding: 'clamp(16px, 3vw, 28px) clamp(14px, 2.5vw, 24px)',
                 overflow: 'hidden',
                 cursor: 'default',
               }}
@@ -457,8 +454,8 @@ export default function Home() {
               {/* Tag */}
               <div style={{
                 position: 'absolute',
-                top: '12px',
-                right: '14px',
+                top: '10px',
+                right: '12px',
                 fontFamily: 'var(--font-mono)',
                 fontSize: '8px',
                 color: 'rgba(56,189,248,0.35)',
@@ -472,11 +469,11 @@ export default function Home() {
                 className="glow-sky"
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(28px, 3.5vw, 44px)',
+                  fontSize: 'clamp(22px, 4vw, 44px)',
                   fontWeight: 800,
                   color: 'var(--sky)',
                   lineHeight: 1,
-                  marginBottom: '8px',
+                  marginBottom: '6px',
                 }}
               >
                 {s.value}
@@ -485,7 +482,7 @@ export default function Home() {
               {/* Label */}
               <div style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '10px',
+                fontSize: 'clamp(8px, 1.5vw, 10px)',
                 fontWeight: 700,
                 letterSpacing: '0.2em',
                 color: 'rgba(189,200,209,0.5)',
@@ -496,9 +493,7 @@ export default function Home() {
               {/* Bottom divider */}
               <div style={{
                 position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
+                bottom: 0, left: 0, right: 0,
                 height: '2px',
                 background: 'rgba(255,255,255,0.04)',
               }} />
@@ -510,21 +505,21 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
           CATEGORY QUICK ACCESS
       ═══════════════════════════════════════════ */}
-      <section style={{ padding: '0 80px 100px' }}>
+      <section style={{ padding: '0 clamp(16px, 4vw, 80px) clamp(60px, 8vw, 120px)' }}>
 
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          style={{ marginBottom: '48px' }}
+          style={{ marginBottom: 'clamp(24px, 4vw, 48px)' }}
         >
-          <div className="section-overline" style={{ marginBottom: '16px' }}>
+          <div className="section-overline" style={{ marginBottom: '14px' }}>
             NAVIGATE THE ECOSYSTEM
           </div>
           <h2 style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(28px, 4vw, 48px)',
+            fontSize: 'clamp(24px, 4vw, 48px)',
             fontWeight: 800,
             color: '#fff',
             letterSpacing: '-0.02em',
@@ -534,23 +529,19 @@ export default function Home() {
           </h2>
           <p style={{
             fontFamily: 'var(--font-body)',
-            fontSize: '15px',
+            fontSize: 'clamp(13px, 1.8vw, 15px)',
             color: 'rgba(189,200,209,0.5)',
             marginTop: '12px',
             maxWidth: '480px',
             lineHeight: 1.7,
           }}>
-            From cutting-edge robotics battles to world-class workshops — 
+            From cutting-edge robotics battles to world-class workshops —
             every module designed to push the boundaries of human potential.
           </p>
         </motion.div>
 
-        {/* Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '16px',
-        }}>
+        {/* Category grid — responsive */}
+        <div className="category-grid">
           {CATEGORIES.map((cat, i) => (
             <CategoryCard
               key={cat.title}

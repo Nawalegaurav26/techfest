@@ -23,8 +23,13 @@ export default function HolographicNav({ soundEnabled, setSoundEnabled }) {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileOpen(false);
   }, []);
 
   const toggleSound = () => {
@@ -71,10 +76,10 @@ export default function HolographicNav({ soundEnabled, setSoundEnabled }) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 40px',
+        padding: '0 clamp(16px, 4vw, 40px)',
         background: scrolled
-          ? 'rgba(5, 5, 8, 0.95)'
-          : 'rgba(5, 5, 8, 0.75)',
+          ? 'rgba(5, 5, 8, 0.97)'
+          : 'rgba(5, 5, 8, 0.85)',
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
         borderBottom: `1px solid ${scrolled ? 'rgba(56,189,248,0.2)' : 'rgba(255,255,255,0.08)'}`,
@@ -88,39 +93,38 @@ export default function HolographicNav({ soundEnabled, setSoundEnabled }) {
         style={{
           display: 'flex',
           alignItems: 'center',
-          cursor: 'none',
           flexShrink: 0,
+          minWidth: '44px',
+          minHeight: '44px',
         }}
       >
-        {/* Real Techfest Logo — white inverted on dark bg */}
         <img
           src="/techfest-logo-white.png"
           alt="Techfest IIT Bombay"
           style={{
-            height: '42px',
+            height: 'clamp(32px, 5vw, 42px)',
             width: 'auto',
             objectFit: 'contain',
             filter: 'drop-shadow(0 0 8px rgba(56,189,248,0.35))',
             transition: 'filter 0.3s',
           }}
           onError={e => {
-            // fallback: show text logo if image fails
             e.target.style.display = 'none';
             e.target.nextSibling.style.display = 'flex';
           }}
         />
-        {/* Fallback text logo (hidden by default) */}
+        {/* Fallback text logo */}
         <div style={{ display: 'none', flexDirection: 'column' }}>
-          <div style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 800, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1 }}>TECHFEST</div>
+          <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(14px, 3vw, 18px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1 }}>TECHFEST</div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(189,200,209,0.6)', letterSpacing: '0.25em', marginTop: '2px' }}>IIT BOMBAY</div>
         </div>
       </div>
 
-      {/* ── CENTER: NAV LINKS ──────────────────────── */}
+      {/* ── CENTER: NAV LINKS (desktop) ──────────── */}
       <nav style={{
         display: 'flex',
         alignItems: 'center',
-        gap: '32px',
+        gap: 'clamp(16px, 2.5vw, 32px)',
         position: 'absolute',
         left: '50%',
         transform: 'translateX(-50%)',
@@ -131,6 +135,7 @@ export default function HolographicNav({ soundEnabled, setSoundEnabled }) {
             to={link.to}
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
             onClick={() => soundEffects.playClick?.()}
+            style={{ padding: '8px 4px', minHeight: '44px', display: 'flex', alignItems: 'center' }}
           >
             {link.label}
           </NavLink>
@@ -138,14 +143,14 @@ export default function HolographicNav({ soundEnabled, setSoundEnabled }) {
       </nav>
 
       {/* ── RIGHT: CONTROLS ────────────────────────── */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
 
-        {/* Audio toggle */}
+        {/* Audio toggle — 44x44px touch target */}
         <button
           onClick={toggleSound}
           style={{
-            width: '34px',
-            height: '34px',
+            width: '44px',
+            height: '44px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -153,76 +158,82 @@ export default function HolographicNav({ soundEnabled, setSoundEnabled }) {
             color: soundEnabled ? 'var(--sky)' : 'rgba(189,200,209,0.4)',
             background: soundEnabled ? 'rgba(56,189,248,0.08)' : 'transparent',
             transition: 'all 0.3s',
-            cursor: 'none',
+            flexShrink: 0,
           }}
           title="Toggle Audio"
+          aria-label={soundEnabled ? 'Disable audio' : 'Enable audio'}
         >
           {soundEnabled
-            ? <Volume2 size={14} />
-            : <VolumeX size={14} />}
+            ? <Volume2 size={16} />
+            : <VolumeX size={16} />}
         </button>
 
-        {/* Auth */}
-        {user ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <img
-              src={user.photoURL}
-              alt="avatar"
-              style={{
-                width: '28px',
-                height: '28px',
-                borderRadius: '50%',
-                border: '1px solid rgba(56,189,248,0.5)',
-              }}
-            />
+        {/* Auth — only show on desktop when space permits */}
+        <div className="hidden-mobile-nav">
+          {user ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <img
+                src={user.photoURL}
+                alt="avatar"
+                style={{
+                  width: '32px', height: '32px',
+                  borderRadius: '50%',
+                  border: '1px solid rgba(56,189,248,0.5)',
+                }}
+              />
+              <button
+                onClick={handleSignOut}
+                className="btn-ghost"
+                style={{ padding: '8px 16px', fontSize: '10px', width: 'auto' }}
+              >
+                SIGN OUT
+              </button>
+            </div>
+          ) : (
             <button
-              onClick={handleSignOut}
-              className="btn-ghost"
-              style={{ padding: '6px 16px', fontSize: '10px' }}
+              onClick={handleSignIn}
+              disabled={authLoading}
+              style={{
+                padding: '10px 20px',
+                minHeight: '44px',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '10px',
+                fontWeight: 700,
+                letterSpacing: '0.12em',
+                color: 'var(--plasma-dim)',
+                border: '1px solid rgba(255, 45, 85, 0.5)',
+                background: 'rgba(255, 45, 85, 0.05)',
+                boxShadow: '0 0 12px rgba(255,45,85,0.15)',
+                transition: 'all 0.3s',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = 'rgba(255,45,85,0.15)';
+                e.currentTarget.style.boxShadow = '0 0 25px rgba(255,45,85,0.4)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = 'rgba(255,45,85,0.05)';
+                e.currentTarget.style.boxShadow = '0 0 12px rgba(255,45,85,0.15)';
+              }}
             >
-              SIGN OUT
+              {authLoading ? 'CONNECTING...' : 'SIGN IN'}
             </button>
-          </div>
-        ) : (
-          <button
-            onClick={handleSignIn}
-            disabled={authLoading}
-            style={{
-              padding: '8px 20px',
-              fontFamily: 'var(--font-mono)',
-              fontSize: '10px',
-              fontWeight: 700,
-              letterSpacing: '0.12em',
-              color: 'var(--plasma-dim)',
-              border: '1px solid rgba(255, 45, 85, 0.5)',
-              background: 'rgba(255, 45, 85, 0.05)',
-              boxShadow: '0 0 12px rgba(255,45,85,0.15)',
-              transition: 'all 0.3s',
-              cursor: 'none',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.background = 'rgba(255,45,85,0.15)';
-              e.currentTarget.style.boxShadow = '0 0 25px rgba(255,45,85,0.4)';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.background = 'rgba(255,45,85,0.05)';
-              e.currentTarget.style.boxShadow = '0 0 12px rgba(255,45,85,0.15)';
-            }}
-          >
-            {authLoading ? 'CONNECTING...' : 'SIGN IN'}
-          </button>
-        )}
+          )}
+        </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile hamburger — only on < 1024px (handled by CSS) */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          style={{
-            display: 'none',
-            color: 'var(--sky)',
-            cursor: 'none',
-            padding: '4px',
-          }}
           className="mobile-menu-btn"
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileOpen}
+          style={{
+            width: '44px', height: '44px',
+            border: '1px solid rgba(56,189,248,0.2)',
+            color: 'var(--sky)',
+            background: mobileOpen ? 'rgba(56,189,248,0.08)' : 'transparent',
+            transition: 'all 0.2s',
+            flexShrink: 0,
+          }}
         >
           {mobileOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
@@ -235,41 +246,74 @@ export default function HolographicNav({ soundEnabled, setSoundEnabled }) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
             style={{
               position: 'absolute',
               top: '100%',
               left: 0,
               right: 0,
-              background: 'rgba(5,5,8,0.97)',
+              background: 'rgba(5,5,8,0.98)',
               backdropFilter: 'blur(24px)',
               borderBottom: '1px solid rgba(56,189,248,0.15)',
               overflow: 'hidden',
               zIndex: 99,
             }}
           >
-            <div style={{ padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <div style={{ padding: '8px 0', display: 'flex', flexDirection: 'column' }}>
               {NAV_LINKS.map((link) => (
                 <NavLink
                   key={link.to}
                   to={link.to}
-                  className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-                  onClick={() => { soundEffects.playClick?.(); setMobileOpen(false); }}
-                  style={{ padding: '12px 8px', display: 'block', fontSize: '12px' }}
+                  onClick={() => {
+                    soundEffects.playClick?.();
+                    setMobileOpen(false);
+                  }}
+                  style={({ isActive }) => ({
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '16px 24px',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    letterSpacing: '0.15em',
+                    textTransform: 'uppercase',
+                    color: isActive ? 'var(--sky)' : 'var(--on-muted)',
+                    borderLeft: isActive ? '3px solid var(--sky)' : '3px solid transparent',
+                    borderBottom: '1px solid rgba(255,255,255,0.04)',
+                    background: isActive ? 'rgba(56,189,248,0.05)' : 'transparent',
+                    minHeight: '56px',
+                    transition: 'all 0.2s',
+                  })}
                 >
                   {link.label}
                 </NavLink>
               ))}
+              {/* Sign In inside mobile drawer */}
+              <div style={{ padding: '12px 24px' }}>
+                {user ? (
+                  <button
+                    onClick={() => { handleSignOut(); setMobileOpen(false); }}
+                    className="btn-ghost"
+                    style={{ width: '100%' }}
+                  >
+                    SIGN OUT
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => { handleSignIn(); setMobileOpen(false); }}
+                    disabled={authLoading}
+                    className="btn-primary"
+                  >
+                    <span className="btn-tl" />
+                    <span className="btn-br" />
+                    {authLoading ? 'CONNECTING...' : 'SIGN IN WITH GOOGLE'}
+                  </button>
+                )}
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style>{`
-        @media (max-width: 900px) {
-          .hidden-mobile-nav { display: none !important; }
-          .mobile-menu-btn { display: flex !important; }
-        }
-      `}</style>
     </header>
   );
 }

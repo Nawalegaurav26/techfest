@@ -5,7 +5,7 @@ import HolographicNav from './HolographicNav';
 import BackgroundLayers from './BackgroundLayers';
 import { SocialIcons } from '../utils/socialIcons';
 
-// Left sidebar nav items
+// Left sidebar nav items (desktop only)
 const LEFT_NAV = [
   { icon: 'home',            label: 'HOME',     to: '/' },
   { icon: 'event',           label: 'EVENTS',   to: '/events' },
@@ -13,6 +13,15 @@ const LEFT_NAV = [
   { icon: 'info',            label: 'ABOUT',    to: '/about' },
   { icon: 'handshake',       label: 'SPONSORS', to: '/sponsors' },
   { icon: 'shopping_bag',    label: 'STORE',    to: '/store' },
+];
+
+// Mobile bottom navigation (5 key items — most visited)
+const MOBILE_NAV = [
+  { icon: 'home',        label: 'HOME',         to: '/'            },
+  { icon: 'event',       label: 'EVENTS',       to: '/events'      },
+  { icon: 'sports_esports', label: 'COMPETE',   to: '/competitions'},
+  { icon: 'school',      label: 'LEARN',        to: '/workshops'   },
+  { icon: 'menu',        label: 'MORE',         to: null           }, // triggers full drawer
 ];
 
 // Right sidebar social links
@@ -26,6 +35,22 @@ const SOCIALS = [
   { Icon: SocialIcons.Whatsapp,  href: `https://wa.me/919860543634?text=${encodeURIComponent("Hello Techfest IIT Bombay Team, I am interested in participating in Techfest 2026. Initiating contact telemetry to request access credentials for competitions, workshops, and exhibitions. System online.")}`, label: 'WhatsApp' },
 ];
 
+// All drawer links for "MORE" panel
+const DRAWER_NAV = [
+  { icon: 'home',             label: 'HOME',          to: '/'             },
+  { icon: 'event',            label: 'ALL EVENTS',    to: '/events'       },
+  { icon: 'sports_esports',   label: 'COMPETITIONS',  to: '/competitions' },
+  { icon: 'school',           label: 'WORKSHOPS',     to: '/workshops'    },
+  { icon: 'mic',              label: 'LECTURES',      to: '/lectures'     },
+  { icon: 'precision_manufacturing', label: 'EXHIBITIONS', to: '/exhibitions' },
+  { icon: 'smart_toy',        label: 'ROBOWARS',      to: '/robowars'     },
+  { icon: 'hotel',            label: 'ACCOMMODATION', to: '/accommodation'},
+  { icon: 'handshake',        label: 'SPONSORS',      to: '/sponsors'     },
+  { icon: 'shopping_bag',     label: 'STORE',         to: '/store'        },
+  { icon: 'info',             label: 'ABOUT',         to: '/about'        },
+  { icon: 'contact_support',  label: 'CONTACT',       to: '/contact'      },
+];
+
 const pageVariants = {
   initial: { opacity: 0, y: 12, filter: 'blur(4px)' },
   animate: { opacity: 1, y: 0,  filter: 'blur(0px)' },
@@ -34,8 +59,37 @@ const pageVariants = {
 
 export default function PageLayout() {
   const [soundEnabled, setSoundEnabled] = useState(false);
+  const [drawerOpen, setDrawerOpen]     = useState(false);
   const location  = useLocation();
   const navigate  = useNavigate();
+
+  // Close drawer on route change
+  useEffect(() => {
+    setDrawerOpen(false);
+  }, [location.pathname]);
+
+  // Prevent body scroll when drawer is open
+  useEffect(() => {
+    if (drawerOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [drawerOpen]);
+
+  const handleMobileNavItem = (item) => {
+    if (item.to === null) {
+      setDrawerOpen(true);
+    } else {
+      navigate(item.to);
+    }
+  };
+
+  const isActive = (to) => {
+    if (to === '/') return location.pathname === '/';
+    return location.pathname.startsWith(to);
+  };
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--base)', position: 'relative' }}>
@@ -51,7 +105,7 @@ export default function PageLayout() {
         setSoundEnabled={setSoundEnabled}
       />
 
-      {/* ── LEFT SIDEBAR ──────────────────────────── */}
+      {/* ── LEFT SIDEBAR (desktop 1024px+) ─────────── */}
       <aside
         className="left-sidebar"
         style={{
@@ -83,9 +137,7 @@ export default function PageLayout() {
         {/* Icons */}
         <nav style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1 }}>
           {LEFT_NAV.map(({ icon, label, to }) => {
-            const isActive = to === '/'
-              ? location.pathname === '/'
-              : location.pathname.startsWith(to);
+            const active = isActive(to);
             return (
               <button
                 key={to}
@@ -98,21 +150,22 @@ export default function PageLayout() {
                   alignItems: 'center',
                   gap: '4px',
                   padding: '10px 6px',
+                  minHeight: '52px',
                   width: '100%',
-                  color: isActive ? 'var(--sky)' : 'rgba(189,200,209,0.7)',
-                  background: isActive ? 'rgba(56,189,248,0.06)' : 'transparent',
-                  borderRight: isActive ? '2px solid var(--sky)' : '2px solid transparent',
+                  color: active ? 'var(--sky)' : 'rgba(189,200,209,0.7)',
+                  background: active ? 'rgba(56,189,248,0.06)' : 'transparent',
+                  borderRight: active ? '2px solid var(--sky)' : '2px solid transparent',
                   transition: 'all 0.25s',
-                  cursor: 'none',
+                  border: 'none',
                 }}
                 onMouseEnter={e => {
-                  if (!isActive) {
+                  if (!active) {
                     e.currentTarget.style.color = 'var(--sky)';
                     e.currentTarget.style.background = 'rgba(56,189,248,0.04)';
                   }
                 }}
                 onMouseLeave={e => {
-                  if (!isActive) {
+                  if (!active) {
                     e.currentTarget.style.color = 'rgba(189,200,209,0.7)';
                     e.currentTarget.style.background = 'transparent';
                   }
@@ -122,8 +175,7 @@ export default function PageLayout() {
                   className="material-symbols-outlined"
                   style={{
                     fontSize: '20px',
-                    fontVariationSettings: isActive ? "'FILL' 1" : "'FILL' 0",
-                    filter: isActive ? '0 0 6px rgba(56,189,248,0.5)' : 'none',
+                    fontVariationSettings: active ? "'FILL' 1" : "'FILL' 0",
                   }}
                 >
                   {icon}
@@ -137,8 +189,8 @@ export default function PageLayout() {
                   {label}
                 </span>
 
-                {/* Active indicator dot */}
-                {isActive && (
+                {/* Active indicator */}
+                {active && (
                   <div style={{
                     position: 'absolute',
                     right: 0,
@@ -164,7 +216,7 @@ export default function PageLayout() {
         }} />
       </aside>
 
-      {/* ── RIGHT SIDEBAR (SOCIALS) ────────────────── */}
+      {/* ── RIGHT SIDEBAR (SOCIALS — desktop 1024px+) ── */}
       <aside
         className="right-sidebar"
         style={{
@@ -174,7 +226,6 @@ export default function PageLayout() {
           bottom: 'var(--footer-h)',
           width: 'var(--sidebar-w)',
           zIndex: 50,
-          display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
@@ -205,7 +256,9 @@ export default function PageLayout() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              padding: '6px',
+              padding: '8px',
+              minWidth: '36px',
+              minHeight: '36px',
             }}
             onMouseEnter={e => {
               e.currentTarget.style.color = 'var(--sky)';
@@ -241,6 +294,7 @@ export default function PageLayout() {
           animate="animate"
           exit="exit"
           transition={{ duration: 0.35, ease: 'easeInOut' }}
+          className="main-content"
           style={{
             position: 'relative',
             zIndex: 10,
@@ -255,23 +309,25 @@ export default function PageLayout() {
         </motion.main>
       </AnimatePresence>
 
-      {/* ── BOTTOM STATUS BAR ─────────────────────── */}
-      <footer style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: 'var(--footer-h)',
-        zIndex: 50,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 40px',
-        background: 'rgba(5, 5, 8, 0.9)',
-        backdropFilter: 'blur(20px)',
-        borderTop: '1px solid rgba(56, 189, 248, 0.12)',
-        boxShadow: '0 -4px 20px rgba(0,0,0,0.5)',
-      }}>
+      {/* ── BOTTOM STATUS BAR (desktop 1024px+) ───── */}
+      <footer
+        className="status-bar"
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: 'var(--footer-h)',
+          zIndex: 50,
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '0 40px',
+          background: 'rgba(5, 5, 8, 0.9)',
+          backdropFilter: 'blur(20px)',
+          borderTop: '1px solid rgba(56, 189, 248, 0.12)',
+          boxShadow: '0 -4px 20px rgba(0,0,0,0.5)',
+        }}
+      >
         {/* Left */}
         <span style={{
           fontFamily: 'var(--font-mono)',
@@ -284,15 +340,18 @@ export default function PageLayout() {
         </span>
 
         {/* Center telemetry */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '16px',
-          fontFamily: 'var(--font-mono)',
-          fontSize: '9px',
-          letterSpacing: '0.12em',
-          color: 'rgba(189,200,209,0.65)',
-        }} className="hidden-mobile-telemetry">
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '16px',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '9px',
+            letterSpacing: '0.12em',
+            color: 'rgba(189,200,209,0.65)',
+          }}
+          className="hidden-mobile-telemetry"
+        >
           <span>LATENCY: <span id="footer-latency" style={{ color: 'var(--green)', textShadow: '0 0 6px rgba(34,197,94,0.4)' }}>36MS</span></span>
           <span style={{ color: 'rgba(189,200,209,0.15)' }}>|</span>
           <span>UPTIME: 99.9%</span>
@@ -316,6 +375,182 @@ export default function PageLayout() {
           </span>
         </div>
       </footer>
+
+      {/* ── MOBILE BOTTOM NAV (< 1024px) ──────────── */}
+      <nav
+        className="mobile-bottom-nav"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+        aria-label="Mobile navigation"
+      >
+        {MOBILE_NAV.map((item) => {
+          const active = item.to ? isActive(item.to) : drawerOpen;
+          return (
+            <button
+              key={item.label}
+              onClick={() => handleMobileNavItem(item)}
+              className={`mobile-bottom-nav-item${active ? ' active' : ''}`}
+              aria-label={item.label}
+              aria-current={active ? 'page' : undefined}
+            >
+              <span className="material-symbols-outlined nav-icon"
+                style={{ fontVariationSettings: active ? "'FILL' 1" : "'FILL' 0" }}
+              >
+                {item.icon}
+              </span>
+              <span className="nav-label">{item.label}</span>
+            </button>
+          );
+        })}
+      </nav>
+
+      {/* ── FULL DRAWER (mobile "MORE" menu) ─────── */}
+      <AnimatePresence>
+        {drawerOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setDrawerOpen(false)}
+              style={{
+                position: 'fixed',
+                inset: 0,
+                background: 'rgba(5,5,8,0.7)',
+                backdropFilter: 'blur(4px)',
+                zIndex: 190,
+              }}
+            />
+            {/* Drawer panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'tween', duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+              style={{
+                position: 'fixed',
+                top: 0,
+                right: 0,
+                bottom: 0,
+                width: 'min(320px, 85vw)',
+                background: 'rgba(10, 10, 14, 0.98)',
+                backdropFilter: 'blur(32px)',
+                borderLeft: '1px solid rgba(56, 189, 248, 0.15)',
+                zIndex: 195,
+                display: 'flex',
+                flexDirection: 'column',
+                overflowY: 'auto',
+                WebkitOverflowScrolling: 'touch',
+              }}
+            >
+              {/* Drawer header */}
+              <div style={{
+                padding: '20px 20px 12px',
+                borderBottom: '1px solid rgba(56,189,248,0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexShrink: 0,
+              }}>
+                <div>
+                  <div style={{ fontFamily: 'var(--font-display)', fontSize: '16px', fontWeight: 800, color: '#fff' }}>
+                    TECHFEST <span style={{ color: 'var(--sky)' }}>2026</span>
+                  </div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(189,200,209,0.5)', letterSpacing: '0.2em', marginTop: '3px' }}>
+                    IIT BOMBAY // NAVIGATE
+                  </div>
+                </div>
+                <button
+                  onClick={() => setDrawerOpen(false)}
+                  style={{
+                    width: '44px',
+                    height: '44px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '1px solid rgba(56,189,248,0.2)',
+                    color: 'var(--sky)',
+                    background: 'transparent',
+                    fontSize: '20px',
+                  }}
+                  aria-label="Close menu"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Drawer nav links */}
+              <div style={{ flex: 1, overflowY: 'auto' }}>
+                {DRAWER_NAV.map((item) => {
+                  const active = isActive(item.to);
+                  return (
+                    <button
+                      key={item.to}
+                      onClick={() => navigate(item.to)}
+                      className={`mobile-drawer-link${active ? ' active' : ''}`}
+                      style={{ width: '100%', textAlign: 'left', border: 'none', background: 'transparent' }}
+                    >
+                      <span
+                        className="material-symbols-outlined"
+                        style={{
+                          fontSize: '20px',
+                          color: active ? 'var(--sky)' : 'rgba(189,200,209,0.5)',
+                          fontVariationSettings: active ? "'FILL' 1" : "'FILL' 0",
+                          flexShrink: 0,
+                        }}
+                      >
+                        {item.icon}
+                      </span>
+                      {item.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Social icons at bottom */}
+              <div style={{
+                padding: '16px 20px',
+                borderTop: '1px solid rgba(255,255,255,0.06)',
+                display: 'flex',
+                gap: '12px',
+                flexWrap: 'wrap',
+                paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))',
+              }}>
+                {SOCIALS.map(({ Icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={label}
+                    style={{
+                      color: 'rgba(189,200,209,0.4)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '44px',
+                      height: '44px',
+                      border: '1px solid rgba(255,255,255,0.06)',
+                      transition: 'all 0.2s',
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.color = 'var(--sky)';
+                      e.currentTarget.style.borderColor = 'rgba(56,189,248,0.3)';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.color = 'rgba(189,200,209,0.4)';
+                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)';
+                    }}
+                  >
+                    <Icon />
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Latency telemetry script */}
       <LatencyUpdater />
