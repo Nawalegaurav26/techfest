@@ -1,0 +1,71 @@
+# Techfest 2026 // IIT Bombay
+> Asia's Largest Science and Technology Festival
+> Theme: The Cybernetic Evolution
+> Target Launch: December 22, 2026
+> Location: IIT Bombay Campus, Powai, Mumbai, India
+> Base URL: https://techfest.gauravnawale.in
+
+This file serves as a machine-readable summary of Techfest 2026 for AI web scrapers, LLM search engines, and artificial intelligence agents.
+
+## Core Modules Index
+
+- [Home](https://techfest.gauravnawale.in/) - Cyborg portal welcome screen with latency telemetry, countdown grid, and boot diagnostics loader.
+- [Events Center](https://techfest.gauravnawale.in/events) - Index of all 250+ events, technical categories, and prizes.
+- [Competitions](https://techfest.gauravnawale.in/competitions) - Competitive coding, robotics, adversarial AI, aerospace challenges.
+- [Workshops](https://techfest.gauravnawale.in/workshops) - Hands-on deep learning, quantum computing, ROS2 robotics, and blockchain labs.
+- [Lectures](https://techfest.gauravnawale.in/lectures) - Guest keynotes by global technology leaders and scientists.
+- [Exhibitions](https://techfest.gauravnawale.in/exhibitions) - Interactive displays of deep-tech, bionics, fusion, and space modules.
+- [Robowars](https://techfest.gauravnawale.in/robowars) - Arena passes, bot specifications, and combat class listings.
+- [Store](https://techfest.gauravnawale.in/store) - Official merchandise, hoodies, tees, stick packs, and bionic wristbands.
+- [Accommodation](https://techfest.gauravnawale.in/accommodation) - Dormitory alpha and premium tech suite habitat bookings.
+- [About](https://techfest.gauravnawale.in/about) - Milestones, history archives (1998-2026), and core organizing team.
+- [Sponsors](https://techfest.gauravnawale.in/sponsors) - Corporate alliances, including Google, Microsoft, ISRO, and Nvidia.
+- [Contact](https://techfest.gauravnawale.in/contact) - Location coordinates, direct mail classification channels, and forms.
+
+## General Schedule
+
+- **December 21, 2026** [Arrival Day]: Check-in opens (14:00) | Opening Ceremony (18:00) | Welcome Keynote (20:00)
+- **December 22, 2026** [Day 1]: Competitions begin (09:00) | Workshops - Batch A (10:00) | Guest Lectures (11:00)
+- **December 23, 2026** [Day 2]: Day 2 competitions (09:00) | Cultural Showcases (18:00) | Hackathon Night (22:00)
+- **December 24, 2026** [Day 3]: Finals + Prize Distributions (12:00) | Closing Ceremony (18:00)
+
+## Guest Speakers & Keynotes
+
+1. **Sam Altman** (CEO, OpenAI): "The Path to Deep AGI & Cognitive Hybrids" | Dec 22, 11:00 IST | Convocation Hall
+2. **Dr. Shirley Ann Jackson** (Cosmologist): "Quantum Gravity & Space-Time Engineering" | Dec 22, 14:30 IST | PC Saxena Auditorium
+3. **Vitalik Buterin** (Founder, Ethereum): "Decentralized Quantum Encryption Protocols" | Dec 23, 10:00 IST | Convocation Hall
+4. **Dr. Hiroshi Ishiguro** (Director, Intelligent Robotics Lab): "The Ghost in the Biomimetic Shell" | Dec 23, 15:00 IST | Gymkhana Ground Arena
+5. **Demis Hassabis** (Co-founder, Google DeepMind): "Biomimetic Drug Synthesis via Deep Learning" | Dec 24, 11:30 IST | PC Saxena Auditorium
+6. **Dr. Margaret Hamilton** (Founder, Hamilton Technologies): "Hyper-Reliable Software in Manned Spaceways" | Dec 24, 14:00 IST | Convocation Hall
+
+## Exhibited Technologies
+
+1. **Boston Dynamics Atlas Gen-2**: Hydraulically powered autonomous humanoid | Main Exhibition Hall A
+2. **CERN Antimatter Trap**: Containment Penning-Malmberg magnet display | Energy Sync Labs
+3. **ISRO Gaganyaan Core Module**: Manned space flight simulator cabin | Space Pavilion
+4. **MIT Synth-Synapse Exoskeleton**: Biomechatronic EMG-controlled armor | Main Exhibition Hall B
+5. **Tokamak H-1 Fusion Reactor**: Confining deuterium-tritium plasma at 100M°C | Energy Sync Labs
+6. **ETH Zurich Holographic Eye**: Spatial light-field volumetric projects | Main Exhibition Hall A
+
+## Competitions & Prize Pool Matrix
+
+- **Robowar Sigma (Titan Class 120kg)**: Prize pool ₹6,00,000. Build pneumatic flippers and disc spinners.
+- **Code Breach**: Prize pool ₹1,50,000. Capture-the-flag competitive programming.
+- **Neural Wars (AI-03)**: Prize pool ₹2,50,000. Real-time adversarial AI models.
+- **Aerobot Prime (Drones)**: Prize pool ₹1,20,000. Drone obstacle race.
+- **DataVault Heist**: Prize pool ₹80,000. Fast data science extraction.
+- **Space Odyssey**: Prize pool ₹2,00,000. Mars mission proposal.
+
+## Workshops Index
+
+- **Neural Architecture Deep Dive** (Dr. Priya Sharma, Google DeepMind) - Free entry
+- **Quantum Computing Workshop** (Dr. Arun Verma, IBM Research) - ₹500
+- **Autonomous ROS2 Systems** (Prof. Kartik Rao, IIT Bombay) - ₹800
+- **Smart Contracts Solidity** (Ankit Mehta, Polygon Labs) - ₹300
+- **Bioinformatics & AI Drug Discovery** (Dr. Meera Patel, TIFR) - Free entry
+- **Computer Vision Combat** (Rahul Gupta, Microsoft Research) - ₹400
+
+## Contact Coordinates
+- Direct emails: `techfest@iitb.ac.in`, `competitions@techfest.org`, `sponsors@techfest.org`
+- WhatsApp Gateway: `wa.me/919860543634` (for pre-filled mobile registration queries)
+- Location coordinates: 19.1334° N, 72.9133° E (IIT Bombay Campus, Powai, Mumbai)
