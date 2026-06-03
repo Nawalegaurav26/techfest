@@ -111,9 +111,9 @@ function CategoryCard({ icon, title, desc, to, index, navigate }) {
       whileTap={{ scale: 0.97 }}
       style={{
         position: 'relative',
-        padding: 'clamp(18px, 3vw, 28px) clamp(16px, 2.5vw, 24px)',
+        padding: 'clamp(20px, 3vw, 28px) clamp(16px, 2.5vw, 24px)',
         textAlign: 'left',
-        background: hovered ? 'rgba(56,189,248,0.04)' : 'rgba(255,255,255,0.03)',
+        background: hovered ? 'rgba(56,189,248,0.06)' : 'rgba(255,255,255,0.03)',
         backdropFilter: 'blur(16px)',
         border: hovered ? '1px solid rgba(56,189,248,0.35)' : '1px solid rgba(255,255,255,0.07)',
         boxShadow: hovered ? '0 0 25px rgba(56,189,248,0.1)' : 'none',
@@ -121,73 +121,59 @@ function CategoryCard({ icon, title, desc, to, index, navigate }) {
         transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
         width: '100%',
         display: 'block',
-        border: 'none',
-        background: 'none',
+        color: '#fff',
       }}
     >
+      <div className="bracket-tl" style={{ borderColor: hovered ? 'var(--sky)' : 'rgba(56,189,248,0.3)' }} />
+      <div className="bracket-br" style={{ borderColor: hovered ? 'var(--sky)' : 'rgba(56,189,248,0.3)' }} />
+
+      {/* Top tag */}
       <div style={{
-        position: 'relative',
-        padding: 'clamp(18px, 3vw, 28px) clamp(16px, 2.5vw, 24px)',
-        background: hovered ? 'rgba(56,189,248,0.04)' : 'rgba(255,255,255,0.03)',
-        backdropFilter: 'blur(16px)',
-        border: hovered ? '1px solid rgba(56,189,248,0.35)' : '1px solid rgba(255,255,255,0.07)',
-        boxShadow: hovered ? '0 0 25px rgba(56,189,248,0.1)' : 'none',
-        transition: 'all 0.3s ease',
-        transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
-        textAlign: 'left',
-        height: '100%',
+        position: 'absolute',
+        top: '10px',
+        right: '12px',
+        fontFamily: 'var(--font-mono)',
+        fontSize: '8px',
+        color: hovered ? 'rgba(56,189,248,0.6)' : 'rgba(56,189,248,0.25)',
+        letterSpacing: '0.15em',
+        transition: 'color 0.3s',
       }}>
-        <div className="bracket-tl" style={{ borderColor: hovered ? 'var(--sky)' : 'rgba(56,189,248,0.3)' }} />
-        <div className="bracket-br" style={{ borderColor: hovered ? 'var(--sky)' : 'rgba(56,189,248,0.3)' }} />
+        TX-2026
+      </div>
 
-        {/* Top tag */}
-        <div style={{
-          position: 'absolute',
-          top: '10px',
-          right: '12px',
-          fontFamily: 'var(--font-mono)',
-          fontSize: '8px',
-          color: hovered ? 'rgba(56,189,248,0.6)' : 'rgba(56,189,248,0.25)',
-          letterSpacing: '0.15em',
-          transition: 'color 0.3s',
-        }}>
-          TX-2026
-        </div>
-
-        <div style={{ fontSize: 'clamp(20px, 3vw, 24px)', marginBottom: '12px' }}>{icon}</div>
-        <div style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'clamp(10px, 1.5vw, 11px)',
-          fontWeight: 700,
-          letterSpacing: '0.18em',
-          color: hovered ? '#fff' : 'var(--on-surface)',
-          marginBottom: '8px',
-          transition: 'color 0.3s',
-        }}>
-          {title}
-        </div>
-        <div style={{
-          fontFamily: 'var(--font-body)',
-          fontSize: 'clamp(11px, 1.5vw, 12px)',
-          color: 'rgba(189,200,209,0.5)',
-          lineHeight: 1.6,
-        }}>
-          {desc}
-        </div>
-        <div style={{
-          marginTop: '14px',
-          fontFamily: 'var(--font-mono)',
-          fontSize: '10px',
-          color: hovered ? 'var(--sky)' : 'rgba(56,189,248,0.3)',
-          letterSpacing: '0.1em',
-          transition: 'color 0.3s',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px',
-        }}>
-          ENTER MODULE
-          <span style={{ transform: hovered ? 'translateX(4px)' : 'translateX(0)', transition: 'transform 0.3s' }}>→</span>
-        </div>
+      <div style={{ fontSize: 'clamp(20px, 3vw, 24px)', marginBottom: '12px' }}>{icon}</div>
+      <div style={{
+        fontFamily: 'var(--font-mono)',
+        fontSize: 'clamp(10px, 1.5vw, 11px)',
+        fontWeight: 700,
+        letterSpacing: '0.18em',
+        color: hovered ? '#fff' : 'var(--on-surface)',
+        marginBottom: '8px',
+        transition: 'color 0.3s',
+      }}>
+        {title}
+      </div>
+      <div style={{
+        fontFamily: 'var(--font-body)',
+        fontSize: 'clamp(11px, 1.5vw, 12px)',
+        color: 'rgba(189,200,209,0.5)',
+        lineHeight: 1.6,
+      }}>
+        {desc}
+      </div>
+      <div style={{
+        marginTop: '14px',
+        fontFamily: 'var(--font-mono)',
+        fontSize: '10px',
+        color: hovered ? 'var(--sky)' : 'rgba(56,189,248,0.3)',
+        letterSpacing: '0.1em',
+        transition: 'color 0.3s',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '6px',
+      }}>
+        ENTER MODULE
+        <span style={{ transform: hovered ? 'translateX(4px)' : 'translateX(0)', transition: 'transform 0.3s' }}>→</span>
       </div>
     </motion.button>
   );
