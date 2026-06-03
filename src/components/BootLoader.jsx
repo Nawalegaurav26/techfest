@@ -24,7 +24,8 @@ export default function BootLoader({ onComplete }) {
     let lineIdx = 0;
     const interval = setInterval(() => {
       if (lineIdx < DIAGNOSTICS.length) {
-        setLines(prev => [...prev, DIAGNOSTICS[lineIdx]]);
+        const currentLine = DIAGNOSTICS[lineIdx];
+        setLines(prev => [...prev, currentLine]);
         lineIdx++;
         try { soundEffects.playTypewriter?.(); } catch {}
       } else {
@@ -83,7 +84,7 @@ export default function BootLoader({ onComplete }) {
       <div style={{
         position: 'absolute',
         inset: 0,
-        backgroundImage: 'linear-gradient(to right, rgba(56, 189, 248, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(56, 189, 248, 0.03) 1px, transparent 1px)',
+        backgroundImage: 'linear-gradient(to right, rgba(34, 197, 94, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(34, 197, 94, 0.03) 1px, transparent 1px)',
         backgroundSize: '30px 30px',
         pointerEvents: 'none'
       }} />
@@ -94,34 +95,34 @@ export default function BootLoader({ onComplete }) {
         width: '100%',
         maxWidth: '750px',
         minHeight: '480px',
-        background: 'rgba(14, 14, 18, 0.85)',
+        background: 'rgba(8, 14, 10, 0.9)',
         backdropFilter: 'blur(30px)',
-        border: '1px solid rgba(56, 189, 248, 0.25)',
-        boxShadow: '0 0 50px rgba(56, 189, 248, 0.08)',
+        border: '1px solid rgba(34, 197, 94, 0.3)',
+        boxShadow: '0 0 50px rgba(34, 197, 94, 0.12)',
         padding: '40px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between'
       }}>
         {/* L-Accents */}
-        <div className="bracket-tl" style={{ borderColor: 'var(--sky)', width: '20px', height: '20px' }} />
-        <div className="bracket-tr" style={{ borderColor: 'var(--sky)', width: '20px', height: '20px', position: 'absolute', top: -1, right: -1, borderTop: '2px solid var(--sky)', borderRight: '2px solid var(--sky)' }} />
-        <div className="bracket-bl" style={{ borderColor: 'var(--sky)', width: '20px', height: '20px', position: 'absolute', bottom: -1, left: -1, borderBottom: '2px solid var(--sky)', borderLeft: '2px solid var(--sky)' }} />
-        <div className="bracket-br" style={{ borderColor: 'var(--sky)', width: '20px', height: '20px' }} />
+        <div className="bracket-tl" style={{ borderColor: 'var(--green)', width: '20px', height: '20px' }} />
+        <div className="bracket-tr" style={{ borderColor: 'var(--green)', width: '20px', height: '20px', position: 'absolute', top: -1, right: -1, borderTop: '2px solid var(--green)', borderRight: '2px solid var(--green)' }} />
+        <div className="bracket-bl" style={{ borderColor: 'var(--green)', width: '20px', height: '20px', position: 'absolute', bottom: -1, left: -1, borderBottom: '2px solid var(--green)', borderLeft: '2px solid var(--green)' }} />
+        <div className="bracket-br" style={{ borderColor: 'var(--green)', width: '20px', height: '20px' }} />
 
         {/* Top Header info */}
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
-          borderBottom: '1px solid rgba(56, 189, 248, 0.15)',
+          borderBottom: '1px solid rgba(34, 197, 94, 0.2)',
           paddingBottom: '16px',
           fontSize: '10px',
-          color: 'var(--sky-dim)',
+          color: 'rgba(34, 197, 94, 0.65)',
           fontWeight: 700,
           letterSpacing: '0.15em'
         }}>
           <div>IIT BOMBAY // SYSTEM DIAGNOSTICS</div>
-          <div style={{ color: 'var(--plasma-dim)' }}>SECURE SECTOR // ACTIVE</div>
+          <div style={{ color: 'var(--green)', textShadow: '0 0 8px rgba(34, 197, 94, 0.4)' }}>SECURE SECTOR // ACTIVE</div>
         </div>
 
         {/* Terminal Logs area */}
@@ -129,29 +130,33 @@ export default function BootLoader({ onComplete }) {
           flex: 1,
           margin: '24px 0',
           padding: '16px 20px',
-          background: 'rgba(5, 5, 8, 0.6)',
-          border: '1px dashed rgba(56, 189, 248, 0.1)',
+          background: 'rgba(4, 7, 5, 0.75)',
+          border: '1px dashed rgba(34, 197, 94, 0.25)',
           overflowY: 'auto',
           fontSize: '11px',
           lineHeight: '1.8',
-          color: 'rgba(189, 200, 209, 0.85)',
+          color: 'rgba(34, 197, 94, 0.85)',
           textAlign: 'left'
         }}>
-          {lines.map((line, idx) => (
-            <div key={idx} style={{ display: 'flex', gap: '8px' }}>
-              <span style={{ color: line.includes('OK') || line.includes('SECURE') ? 'var(--green)' : 'var(--sky)' }}>&gt;&gt;</span>
-              <span>{line}</span>
-            </div>
-          ))}
+          {lines.map((line, idx) => {
+            if (!line) return null;
+            return (
+              <div key={idx} style={{ display: 'flex', gap: '8px' }}>
+                <span style={{ color: 'var(--green)', textShadow: '0 0 5px rgba(34, 197, 94, 0.4)' }}>&gt;&gt;</span>
+                <span>{line}</span>
+              </div>
+            );
+          })}
           {lines.length < DIAGNOSTICS.length && (
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-              <span style={{ color: 'var(--sky)' }}>&gt;&gt;</span>
+              <span style={{ color: 'var(--green)' }}>&gt;&gt;</span>
               <span style={{
                 width: '6px',
                 height: '11px',
-                background: 'var(--sky)',
+                background: 'var(--green)',
                 display: 'inline-block',
-                animation: 'blink 0.8s steps(2, start) infinite'
+                animation: 'blink 0.8s steps(2, start) infinite',
+                boxShadow: '0 0 6px var(--green)'
               }} />
             </div>
           )}
@@ -163,9 +168,9 @@ export default function BootLoader({ onComplete }) {
           <div style={{
             position: 'relative',
             height: '24px',
-            border: '1px solid rgba(56, 189, 248, 0.3)',
+            border: '1px solid rgba(34, 197, 94, 0.4)',
             padding: '2px',
-            background: 'rgba(5, 5, 8, 0.5)',
+            background: 'rgba(4, 7, 5, 0.5)',
             marginBottom: '10px',
             overflow: 'hidden'
           }}>
@@ -173,9 +178,9 @@ export default function BootLoader({ onComplete }) {
             <motion.div
               style={{
                 height: '100%',
-                background: 'linear-gradient(to right, var(--sky), var(--plasma))',
+                background: 'linear-gradient(to right, rgba(16, 185, 129, 0.8), var(--green))',
                 width: `${progress}%`,
-                boxShadow: '0 0 15px rgba(56, 189, 248, 0.5)'
+                boxShadow: '0 0 15px rgba(34, 197, 94, 0.6)'
               }}
               layout
             />
@@ -185,7 +190,7 @@ export default function BootLoader({ onComplete }) {
               top: 0,
               bottom: 0,
               width: '120px',
-              background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.25), transparent)',
+              background: 'linear-gradient(to right, transparent, rgba(34, 197, 94, 0.35), transparent)',
               animation: 'sweep 1.5s linear infinite'
             }} />
           </div>
@@ -194,7 +199,7 @@ export default function BootLoader({ onComplete }) {
             display: 'flex',
             justifyContent: 'space-between',
             fontSize: '10px',
-            color: 'rgba(189, 200, 209, 0.5)',
+            color: 'rgba(34, 197, 94, 0.55)',
             fontWeight: 700,
             letterSpacing: '0.1em'
           }}>
@@ -212,7 +217,7 @@ export default function BootLoader({ onComplete }) {
               exit={{ opacity: 0, y: -15 }}
               style={{
                 marginTop: '32px',
-                borderTop: '1px solid rgba(56, 189, 248, 0.15)',
+                borderTop: '1px solid rgba(34, 197, 94, 0.2)',
                 paddingTop: '28px',
                 display: 'flex',
                 flexDirection: 'column',
@@ -223,47 +228,82 @@ export default function BootLoader({ onComplete }) {
               <h3 style={{
                 fontFamily: 'var(--font-display)',
                 fontSize: '16px',
-                color: '#fff',
+                color: 'var(--green)',
                 fontWeight: 700,
                 letterSpacing: '0.05em',
-                textShadow: '0 0 15px rgba(255,255,255,0.2)'
+                textShadow: '0 0 15px rgba(34, 197, 94, 0.4)'
               }}>
                 NEURAL INTEGRATION PROTOCOL DETECTED
               </h3>
               <p style={{
                 fontSize: '11px',
-                color: 'rgba(189,200,209,0.5)',
+                color: 'rgba(34, 197, 94, 0.6)',
                 maxWidth: '480px',
                 lineHeight: '1.5',
                 textAlign: 'center',
                 marginBottom: '10px'
               }}>
-                Choose connection audio configuration to establish neural telemetry. Backgound environment audio is recommended.
+                Choose connection audio configuration to establish neural telemetry. Background environment audio is recommended.
               </p>
 
               <div style={{ display: 'flex', gap: '16px', width: '100%', maxWidth: '420px' }}>
                 <button
                   onClick={() => handleStartBoot(true)}
-                  className="btn-primary"
                   style={{
                     flex: 1,
                     padding: '14px 0',
                     fontSize: '10px',
-                    boxShadow: '0 0 20px rgba(255, 45, 85, 0.5)'
+                    fontFamily: 'var(--font-mono)',
+                    fontWeight: 700,
+                    letterSpacing: '0.15em',
+                    textTransform: 'uppercase',
+                    background: 'var(--green)',
+                    color: '#050508',
+                    border: 'none',
+                    position: 'relative',
+                    boxShadow: '0 0 20px rgba(34, 197, 94, 0.4)',
+                    cursor: 'none'
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.boxShadow = '0 0 40px rgba(34, 197, 94, 0.8)';
+                    e.currentTarget.style.transform = 'translateY(-1px)';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.boxShadow = '0 0 20px rgba(34, 197, 94, 0.4)';
+                    e.currentTarget.style.transform = 'none';
                   }}
                 >
-                  <span className="btn-tl" />
-                  <span className="btn-br" />
+                  <span style={{ position: 'absolute', top: 0, left: 0, width: '8px', height: '8px', borderTop: '2px solid #050508', borderLeft: '2px solid #050508' }} />
+                  <span style={{ position: 'absolute', bottom: 0, right: 0, width: '8px', height: '8px', borderBottom: '2px solid #050508', borderRight: '2px solid #050508' }} />
                   SYNC WITH AUDIO
                 </button>
                 <button
                   onClick={() => handleStartBoot(false)}
-                  className="btn-ghost"
                   style={{
                     flex: 1,
                     padding: '14px 0',
                     fontSize: '10px',
-                    borderColor: 'rgba(56,189,248,0.5)'
+                    fontFamily: 'var(--font-mono)',
+                    fontWeight: 700,
+                    letterSpacing: '0.15em',
+                    textTransform: 'uppercase',
+                    background: 'rgba(34, 197, 94, 0.05)',
+                    color: 'var(--green)',
+                    border: '1px solid rgba(34, 197, 94, 0.5)',
+                    transition: 'all 0.3s ease',
+                    cursor: 'none'
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.background = 'rgba(34, 197, 94, 0.15)';
+                    e.currentTarget.style.borderColor = 'var(--green)';
+                    e.currentTarget.style.boxShadow = '0 0 25px rgba(34, 197, 94, 0.35)';
+                    e.currentTarget.style.color = '#fff';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.background = 'rgba(34, 197, 94, 0.05)';
+                    e.currentTarget.style.borderColor = 'rgba(34, 197, 94, 0.5)';
+                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.color = 'var(--green)';
                   }}
                 >
                   SILENT SYNC
@@ -279,11 +319,11 @@ export default function BootLoader({ onComplete }) {
               style={{
                 marginTop: '32px',
                 textAlign: 'center',
-                color: 'var(--plasma)',
+                color: 'var(--green)',
                 fontSize: '12px',
                 fontWeight: 700,
                 letterSpacing: '0.25em',
-                textShadow: '0 0 10px rgba(255,45,85,0.4)',
+                textShadow: '0 0 10px rgba(34,197,94,0.6)',
                 animation: 'glitchPulse 0.5s infinite'
               }}
             >
