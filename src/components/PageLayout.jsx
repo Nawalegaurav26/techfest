@@ -87,7 +87,35 @@ export default function PageLayout() {
   // Close drawer and scroll to top on route change
   useEffect(() => {
     setDrawerOpen(false);
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
+    // Disable browser's native automatic scroll restoration
+    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    // Direct instant scroll helper
+    const scrollInstantToTop = () => {
+      const docEl = document.documentElement;
+      const originalSmooth = docEl.style.scrollBehavior;
+      docEl.style.scrollBehavior = 'auto';
+      window.scrollTo(0, 0);
+      document.body.scrollTo(0, 0);
+      docEl.style.scrollBehavior = originalSmooth;
+    };
+
+    // Scroll immediately
+    scrollInstantToTop();
+
+    // Re-trigger at key frames during Framer Motion outlet transition
+    const t1 = setTimeout(scrollInstantToTop, 50);
+    const t2 = setTimeout(scrollInstantToTop, 150);
+    const t3 = setTimeout(scrollInstantToTop, 350);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
   }, [location.pathname]);
 
   // Prevent body scroll when drawer is open
