@@ -100,7 +100,7 @@ export default function Competitions() {
         className="glass-panel"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
           gap: '12px',
           margin: '24px 0',
           padding: 'clamp(16px, 3vw, 20px) clamp(16px, 3vw, 24px)',
