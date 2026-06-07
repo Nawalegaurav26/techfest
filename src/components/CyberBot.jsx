@@ -1,4 +1,4 @@
-import { useRef, useMemo, useEffect } from 'react';
+import { useRef, useMemo, useEffect, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Points, PointMaterial, Html } from '@react-three/drei';
 import * as THREE from 'three';
@@ -48,9 +48,19 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
   const scanningConeRef = useRef();
   const thrusterFlameRef = useRef();
   const particlesRef = useRef();
+  const logoMeshRef = useRef();
 
   const scrollProgress = useRef(0);
   const tiltRef = useRef({ x: 0, y: 0 });
+  const [logoTex, setLogoTex] = useState(null);
+
+  // Load transparent logo texture asynchronously
+  useEffect(() => {
+    const loader = new THREE.TextureLoader();
+    loader.load('/central_logo_home-screen_big_logo_transparent.png', (texture) => {
+      setLogoTex(texture);
+    });
+  }, []);
 
   // Listen to mobile device tilt (gyroscope)
   useEffect(() => {
@@ -336,6 +346,53 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
       particlesRef.current.geometry.attributes.position.needsUpdate = true;
       particlesRef.current.rotation.y += delta * 0.2;
     }
+
+    // 3D Motion Sensory and Parallax Logo backplate animation
+    if (logoMeshRef.current) {
+      // 3D parameters linked to scroll position
+      let logoScale = 1.35;
+      let logoPosY = 0.1;
+      let logoPosZ = -1.1;
+      let logoRotY = 0;
+
+      if (p < 0.33) {
+        logoScale = THREE.MathUtils.lerp(1.35, 0.9, p / 0.33);
+        logoPosY = THREE.MathUtils.lerp(0.1, -0.2, p / 0.33);
+        logoPosZ = THREE.MathUtils.lerp(-1.1, -1.8, p / 0.33);
+      } else if (p < 0.66) {
+        const tLocal = (p - 0.33) / 0.33;
+        logoScale = THREE.MathUtils.lerp(0.9, 1.45, tLocal);
+        logoPosY = THREE.MathUtils.lerp(-0.2, 0.4, tLocal);
+        logoPosZ = THREE.MathUtils.lerp(-1.8, -0.7, tLocal);
+        logoRotY = Math.sin(elapsed * 0.8) * 0.15; // slow drift during scan
+      } else {
+        const tLocal = (p - 0.66) / 0.34;
+        logoScale = THREE.MathUtils.lerp(1.45, 1.85, tLocal);
+        logoPosY = THREE.MathUtils.lerp(0.4, 0.65, tLocal);
+        logoPosZ = THREE.MathUtils.lerp(-0.7, -0.9, tLocal);
+        logoRotY = Math.sin(elapsed * 6.0) * 0.04; // jitter rotation during overload
+      }
+
+      // Parallax offsets (opposite rotation of the robot to create deep 3D separation)
+      const parallaxX = robotGroup.current?._interactiveTilt?.y || 0;
+      const parallaxY = robotGroup.current?._interactiveTilt?.x || 0;
+
+      logoMeshRef.current.position.set(parallaxX * 0.45, logoPosY + parallaxY * 0.35, logoPosZ);
+      logoMeshRef.current.scale.setScalar(logoScale);
+      logoMeshRef.current.rotation.set(-parallaxY * 0.25, logoRotY + parallaxX * 0.3, 0);
+
+      // Color blending (matching robot's visor state)
+      if (logoMeshRef.current.material) {
+        const blendedCol = new THREE.Color().lerpColors(current.visorColor, next.visorColor, t);
+        logoMeshRef.current.material.color.copy(blendedCol);
+        
+        // Pulse opacity based on time and scroll depth
+        const baseOpacity = p > 0.8 
+          ? (0.18 + Math.random() * 0.08) // high frequency static flash during overload
+          : (0.15 + Math.sin(elapsed * 2.0) * 0.05); // slow breathing default
+        logoMeshRef.current.material.opacity = baseOpacity;
+      }
+    }
   });
 
   // Theme colors
@@ -344,7 +401,22 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
   const darkerGray = '#2e3a47';
 
   return (
-    <group ref={robotGroup}>
+    <group>
+      {/* ─── HOLOGRAPHIC LOGO BACKPLATE ─── */}
+      {logoTex && (
+        <mesh ref={logoMeshRef}>
+          <planeGeometry args={[1.5, 1.5]} />
+          <meshBasicMaterial
+            map={logoTex}
+            transparent={true}
+            opacity={0.15}
+            depthWrite={false}
+            blending={THREE.AdditiveBlending}
+          />
+        </mesh>
+      )}
+
+      <group ref={robotGroup}>
       {/* ─── HEAD ASSEMBLY ─── */}
       <group ref={headGroup} position={[0, 0.72, 0]}>
         {/* Main Dome Helmet */}
@@ -601,6 +673,7 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
           </div>
         </Html>
       </group>
+    </group>
     </group>
   );
 }
