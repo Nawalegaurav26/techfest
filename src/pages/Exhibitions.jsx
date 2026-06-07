@@ -363,7 +363,7 @@ export default function Exhibitions() {
                       fontSize: '9px',
                       fontWeight: 700,
                       letterSpacing: '0.12em',
-                      cursor: exhibit.tokenRate === 'FULL' ? 'not-allowed' : 'none',
+                      cursor: exhibit.tokenRate === 'FULL' ? 'not-allowed' : 'pointer',
                       transition: 'all 0.3s ease',
                       boxShadow: hasToken ? '0 0 15px rgba(34,197,94,0.1)' : 'none'
                     }}
