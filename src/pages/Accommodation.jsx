@@ -249,7 +249,6 @@ export default function Accommodation() {
                       fontSize: '9px',
                       fontWeight: 700,
                       letterSpacing: '0.12em',
-                      cursor: 'none',
                       transition: 'all 0.3s ease',
                       boxShadow: isBooked ? '0 0 15px rgba(34,197,94,0.1)' : 'none'
                     }}
@@ -311,7 +310,6 @@ export default function Accommodation() {
                   fontSize: '11px',
                   letterSpacing: '0.05em',
                   color: isOpen ? 'var(--sky)' : 'rgba(189,200,209,0.7)',
-                  cursor: 'none',
                   fontWeight: 700,
                   transition: 'color 0.3s',
                 }}
