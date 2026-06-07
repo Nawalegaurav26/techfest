@@ -11,6 +11,7 @@ import { loginWithGoogle, logoutUser } from '../utils/firebaseAuth';
 const LEFT_NAV = [
   { icon: 'home',            label: 'HOME',     to: '/' },
   { icon: 'event',           label: 'EVENTS',   to: '/events' },
+  { icon: 'psychology',      label: 'ROBOLAB',  to: '/robolab' },
   { icon: 'contact_support', label: 'CONTACT',  to: '/contact' },
   { icon: 'info',            label: 'ABOUT',    to: '/about' },
   { icon: 'handshake',       label: 'SPONSORS', to: '/sponsors' },
@@ -46,12 +47,14 @@ const DRAWER_NAV = [
   { icon: 'mic',              label: 'LECTURES',      to: '/lectures'     },
   { icon: 'precision_manufacturing', label: 'EXHIBITIONS', to: '/exhibitions' },
   { icon: 'smart_toy',        label: 'ROBOWARS',      to: '/robowars'     },
+  { icon: 'psychology',       label: 'ROBOLAB (3D)',  to: '/robolab'      },
   { icon: 'hotel',            label: 'ACCOMMODATION', to: '/accommodation'},
   { icon: 'handshake',        label: 'SPONSORS',      to: '/sponsors'     },
   { icon: 'shopping_bag',     label: 'STORE',         to: '/store'        },
   { icon: 'info',             label: 'ABOUT',         to: '/about'        },
   { icon: 'contact_support',  label: 'CONTACT',       to: '/contact'      },
 ];
+
 
 const pageVariants = {
   initial: { opacity: 0, y: 12, filter: 'blur(4px)' },
