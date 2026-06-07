@@ -57,16 +57,38 @@ export default function RoboLab() {
     '[SYNC] Cybernetic interface synced.'
   ]);
 
-  // Track window scroll
+  const [scrollVelocity, setScrollVelocity] = useState(0);
+  const lastScrollTime = useRef(Date.now());
+  const lastScrollRatio = useRef(0);
+
+  // Track window scroll & calculate velocity
   useEffect(() => {
     const handleScroll = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (totalHeight > 0) {
-        setScrollRatio(window.scrollY / totalHeight);
+        const currentRatio = window.scrollY / totalHeight;
+        const now = Date.now();
+        const dt = Math.max((now - lastScrollTime.current) / 1000, 0.001);
+        const velocity = (currentRatio - lastScrollRatio.current) / dt;
+
+        lastScrollRatio.current = currentRatio;
+        lastScrollTime.current = now;
+
+        setScrollRatio(currentRatio);
+        setScrollVelocity(prev => prev + (velocity - prev) * 0.18); // smooth LERP
       }
     };
+
+    // Periodically decay velocity when no scrolling happens
+    const interval = setInterval(() => {
+      setScrollVelocity(prev => prev * 0.82); // decay towards 0
+    }, 50);
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearInterval(interval);
+    };
   }, []);
 
   // Determine active stance index: 0 = Hover, 1 = Flight, 2 = Scan, 3 = Overload
@@ -130,6 +152,21 @@ export default function RoboLab() {
         return {};
     }
   }, [activeStance]);
+
+  // Calculate dynamic flight physics for HUD telemetry
+  const displayPitch = useMemo(() => {
+    const pitchDegrees = Math.round(scrollVelocity * 48);
+    const clampedDegrees = Math.max(-25, Math.min(25, pitchDegrees));
+    if (clampedDegrees === 0) return '0.0° NOMINAL';
+    return `${clampedDegrees > 0 ? '-' : '+'}${Math.abs(clampedDegrees)}.0° ${clampedDegrees > 0 ? 'PITCH_FWD' : 'PITCH_BKWD'}`;
+  }, [scrollVelocity]);
+
+  const displayTurbulence = useMemo(() => {
+    const baseTurbulence = 0.08 + Math.abs(Math.sin(Date.now() / 1200)) * 0.12;
+    const velocityTurbulence = Math.abs(scrollVelocity) * 1.62;
+    const totalG = (1.0 + baseTurbulence + velocityTurbulence).toFixed(3);
+    return `${totalG} G`;
+  }, [scrollVelocity]);
 
   // Telemetry logs update loop
   useEffect(() => {
@@ -699,6 +736,20 @@ export default function RoboLab() {
           <div className="readout-row">
             <span className="readout-label">SPEED VECTOR</span>
             <span className="readout-val">{stanceInfo.speed}</span>
+          </div>
+
+          <div className="readout-row">
+            <span className="readout-label">INERTIAL PITCH</span>
+            <span className="readout-val" style={{ color: Math.abs(scrollVelocity) > 0.05 ? 'var(--sky-bright)' : '#fff' }}>
+              {displayPitch}
+            </span>
+          </div>
+
+          <div className="readout-row">
+            <span className="readout-label">TURBULENCE G</span>
+            <span className="readout-val" style={{ color: Math.abs(scrollVelocity) > 0.3 ? 'var(--plasma)' : '#fff' }}>
+              {displayTurbulence}
+            </span>
           </div>
 
           <div className="readout-row">
