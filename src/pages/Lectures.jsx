@@ -417,8 +417,12 @@ export default function Lectures() {
                     right: '20px',
                     fontFamily: 'var(--font-mono)',
                     fontSize: '11px',
-                    color: 'rgba(189,200,209,0.5)'
+                    color: 'rgba(189,200,209,0.5)',
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer'
                   }}
+                  aria-label="Close speaker details"
                 >
                   [ ESCAPE ]
                 </button>
