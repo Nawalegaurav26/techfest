@@ -353,7 +353,7 @@ export default function Store() {
           animate={{ y: 0, opacity: 1 }}
           className="glass-panel"
           style={{
-            position: 'fixed', bottom: 44, left: '50%', transform: 'translateX(-50%)',
+            position: 'fixed', bottom: 'var(--cart-summary-bottom, 44px)', left: '50%', transform: 'translateX(-50%)',
             zIndex: 200,
             display: 'flex', alignItems: 'center', gap: '20px',
             padding: '14px 28px',
