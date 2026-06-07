@@ -17,6 +17,7 @@ import TerminalPage from './pages/TerminalPage';
 import Lectures from './pages/Lectures';
 import Exhibitions from './pages/Exhibitions';
 import Robowars from './pages/Robowars';
+import RoboLab from './pages/RoboLab';
 
 export default function App() {
   const [booted, setBooted] = useState(() => {
@@ -59,9 +60,11 @@ export default function App() {
             <Route path="lectures"     element={<Lectures />} />
             <Route path="exhibitions"  element={<Exhibitions />} />
             <Route path="robowars"     element={<Robowars />} />
+            <Route path="robolab"      element={<RoboLab />} />
           </Route>
         </Routes>
       )}
     </>
   );
 }
+
