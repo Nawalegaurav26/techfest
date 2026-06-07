@@ -326,7 +326,7 @@ export default function TerminalPage() {
               style={{
                 flex: 1, background: 'transparent', border: 'none', outline: 'none',
                 fontFamily: 'Share Tech Mono, monospace', fontSize: 'clamp(10px, 3.2vw, 13px)',
-                color: '#fff', letterSpacing: '0.05em', cursor: 'none',
+                color: '#fff', letterSpacing: '0.05em',
               }}
             />
             <motion.div
