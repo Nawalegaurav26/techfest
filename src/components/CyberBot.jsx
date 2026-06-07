@@ -51,6 +51,8 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
   const logoMeshRef = useRef();
 
   const scrollProgress = useRef(0);
+  const prevScroll = useRef(0);
+  const scrollVelocity = useRef(0);
   const tiltRef = useRef({ x: 0, y: 0 });
   const [logoTex, setLogoTex] = useState(null);
 
@@ -128,6 +130,15 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
     // Smooth out scroll transitions
     scrollProgress.current = THREE.MathUtils.lerp(scrollProgress.current, targetScroll, delta * 3.5);
     const p = Math.min(Math.max(scrollProgress.current, 0), 1);
+
+    // Calculate Scroll Velocity & Inertia
+    const currentProgress = scrollProgress.current;
+    const timeDelta = Math.max(delta, 0.001);
+    const rawVelocity = (currentProgress - prevScroll.current) / timeDelta;
+    prevScroll.current = currentProgress;
+
+    // Smooth scroll velocity using LERP
+    scrollVelocity.current = THREE.MathUtils.lerp(scrollVelocity.current, rawVelocity, delta * 5.0);
 
     // 2. Define Multi-Stage Interpolation Targets
     // Stage 0: Standby Hover (p = 0.0)
@@ -237,6 +248,18 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
     const flameWidth = THREE.MathUtils.lerp(current.flameWidth, next.flameWidth, t);
     const shakeIntensity = THREE.MathUtils.lerp(current.shakeIntensity, next.shakeIntensity, t);
 
+    // 3D Organic float displacements & rotations (hover drone stabilization physics)
+    const turbulenceSpeed = 1.0 + p * 1.5; // faster drifts under velocity
+    const turbulenceAmp = 1.0 - p * 0.35;   // slightly smaller drifts when in high speed flight
+
+    const floatX = (Math.sin(elapsed * 1.2 * turbulenceSpeed) * 0.03 + Math.cos(elapsed * 0.7 * turbulenceSpeed) * 0.015) * turbulenceAmp;
+    const floatY = (Math.cos(elapsed * 1.5 * turbulenceSpeed) * 0.045 + Math.sin(elapsed * 0.9 * turbulenceSpeed) * 0.02) * turbulenceAmp;
+    const floatZ = (Math.sin(elapsed * 1.0 * turbulenceSpeed) * 0.02) * turbulenceAmp;
+
+    const floatRotX = Math.sin(elapsed * 0.8 * turbulenceSpeed) * 0.02 * turbulenceAmp;
+    const floatRotY = Math.cos(elapsed * 1.1 * turbulenceSpeed) * 0.025 * turbulenceAmp;
+    const floatRotZ = Math.sin(elapsed * 1.3 * turbulenceSpeed) * 0.02 * turbulenceAmp;
+
     // Apply basic idle bobbing
     const idleBob = Math.sin(elapsed * 2.0) * 0.12 * (1 - p * 0.5); // reduced bobbing when scrolling/flying
     const shakeX = (Math.random() - 0.5) * shakeIntensity;
@@ -268,10 +291,23 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
     robotGroup.current._interactiveTilt.x = THREE.MathUtils.lerp(robotGroup.current._interactiveTilt.x, targetTiltX, delta * 4.0);
     robotGroup.current._interactiveTilt.y = THREE.MathUtils.lerp(robotGroup.current._interactiveTilt.y, targetTiltY, delta * 4.0);
 
+    // Calculate Stance Transition Inertia (tilt forward on scroll down, backward on scroll up)
+    // raw scroll velocity maps to pitch tilt (X axis) and bank banking tilt (Z axis)
+    const inertialTiltX = Math.max(-0.4, Math.min(0.4, scrollVelocity.current * 0.65));
+    const inertialTiltZ = Math.max(-0.12, Math.min(0.12, -scrollVelocity.current * 0.22));
+
     // Apply translations and blended rotations
     if (robotGroup.current) {
-      robotGroup.current.position.set(posX + shakeX, posY + idleBob + shakeY, posZ + shakeZ);
-      robotGroup.current.rotation.set(rotX + robotGroup.current._interactiveTilt.x, rotY + robotGroup.current._interactiveTilt.y, rotZ);
+      robotGroup.current.position.set(
+        posX + floatX + shakeX, 
+        posY + floatY + idleBob + shakeY, 
+        posZ + floatZ + shakeZ
+      );
+      robotGroup.current.rotation.set(
+        rotX + floatRotX + robotGroup.current._interactiveTilt.x + inertialTiltX, 
+        rotY + floatRotY + robotGroup.current._interactiveTilt.y, 
+        rotZ + floatRotZ + inertialTiltZ
+      );
     }
 
     if (headGroup.current) {
@@ -286,13 +322,24 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
       rightArmGroup.current.rotation.set(rArmRotX, rArmRotY, rArmRotZ);
     }
 
-    // Spin Tokamak Core
+    // Spin & Pulse Tokamak Core
     if (innerCoreRef.current) {
       innerCoreRef.current.rotation.y += delta * reactorSpeed * 2;
+      const coreMesh = innerCoreRef.current.children[0];
+      if (coreMesh && coreMesh.material) {
+        // High frequency glow pulsing relative to reactor speed
+        const corePulse = 0.85 + Math.sin(elapsed * 4.0 * reactorSpeed) * 0.35;
+        coreMesh.material.emissiveIntensity = Math.max(0.3, corePulse);
+      }
     }
     if (outerCoreRef.current) {
       outerCoreRef.current.rotation.x += delta * reactorSpeed;
       outerCoreRef.current.rotation.y += delta * reactorSpeed * 1.5;
+      const outerCoreMesh = outerCoreRef.current.children[0];
+      if (outerCoreMesh && outerCoreMesh.material) {
+        const outerPulse = 0.35 + Math.cos(elapsed * 3.0 * reactorSpeed) * 0.15;
+        outerCoreMesh.material.emissiveIntensity = Math.max(0.1, outerPulse);
+      }
     }
 
     // Visor material color blending
@@ -301,8 +348,9 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
       const visorCol = new THREE.Color().lerpColors(current.visorColor, next.visorColor, t);
       visorMat.color.copy(visorCol);
       visorMat.emissive.copy(visorCol);
-      // High emission intensity on overload
-      visorMat.emissiveIntensity = stage === 2 ? 1.5 : 0.8;
+      // High emission intensity on overload, blended with tiny continuous flicker
+      const visorFlicker = 1.0 + Math.sin(elapsed * 12.0) * 0.05;
+      visorMat.emissiveIntensity = (stage === 2 ? 1.6 : 0.85) * visorFlicker;
     }
 
     // Animate scanning cone
@@ -313,10 +361,18 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
       scanningConeRef.current.scale.set(scanScale, 1.0, scanScale);
     }
 
-    // Animate Jet Exhaust Flame cone
+    // Animate Jet Exhaust Flame cone (flicker and turbulent noise)
     if (thrusterFlameRef.current) {
-      thrusterFlameRef.current.scale.set(flameWidth, flameScaleY * (1 + Math.sin(elapsed * 30) * 0.08), flameWidth);
-      thrusterFlameRef.current.material.opacity = showParticles ? (0.4 + Math.sin(elapsed * 25) * 0.1) : 0;
+      const flameNoise = 1.0 + Math.sin(elapsed * 45.0) * 0.12 + Math.cos(elapsed * 72.0) * 0.08;
+      thrusterFlameRef.current.scale.set(
+        flameWidth * (0.92 + Math.sin(elapsed * 18.0) * 0.04),
+        flameScaleY * flameNoise,
+        flameWidth * (0.92 + Math.cos(elapsed * 18.0) * 0.04)
+      );
+      const flameOpacity = showParticles 
+        ? (0.38 + Math.sin(elapsed * 38.0) * 0.12) 
+        : 0;
+      thrusterFlameRef.current.material.opacity = Math.max(0.0, Math.min(1.0, flameOpacity));
     }
 
     // Animate particle flow
@@ -328,6 +384,12 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
         // Move downwards
         pos[idx + 1] -= delta * flameData.speeds[i] * speedMult;
         
+        // Add side-to-side turbulent wind field drift (curling hot exhaust)
+        const windX = Math.sin(elapsed * 4.0 + pos[idx + 1] * 3.0) * 0.04;
+        const windZ = Math.cos(elapsed * 3.2 + pos[idx + 1] * 3.0) * 0.04;
+        pos[idx] += windX * delta;
+        pos[idx + 2] += windZ * delta;
+
         // Slightly spread out
         const angle = Math.atan2(pos[idx + 2], pos[idx]);
         const spreadSpeed = delta * flameData.spreads[i] * speedMult * 0.15;
