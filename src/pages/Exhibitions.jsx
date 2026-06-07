@@ -194,8 +194,7 @@ export default function Exhibitions() {
                 background: isActive ? 'rgba(56,189,248,0.1)' : 'transparent',
                 border: isActive ? '1px solid var(--sky)' : '1px solid rgba(255,255,255,0.06)',
                 boxShadow: isActive ? '0 0 15px rgba(56,189,248,0.2)' : 'none',
-                transition: 'all 0.3s ease',
-                cursor: 'none'
+                transition: 'all 0.3s ease'
               }}
               onMouseEnter={e => {
                 if (!isActive) {
@@ -220,7 +219,7 @@ export default function Exhibitions() {
       {/* Exhibits Grid */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 340px), 1fr))',
         gap: '20px'
       }}>
         {filteredExhibits.map((exhibit, i) => {
@@ -444,8 +443,7 @@ export default function Exhibitions() {
                     right: '20px',
                     fontFamily: 'var(--font-mono)',
                     fontSize: '11px',
-                    color: 'rgba(189,200,209,0.5)',
-                    cursor: 'none'
+                    color: 'rgba(189,200,209,0.5)'
                   }}
                 >
                   [ ESCAPE ]
@@ -616,8 +614,7 @@ export default function Exhibitions() {
                   right: '20px',
                   fontFamily: 'var(--font-mono)',
                   fontSize: '11px',
-                  color: 'rgba(189,200,209,0.5)',
-                  cursor: 'none'
+                  color: 'rgba(189,200,209,0.5)'
                 }}
               >
                 [ CLOSE TELEMETRY ]
