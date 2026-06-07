@@ -159,7 +159,7 @@ export default function Sponsors() {
             {/* Sponsor cards */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: `repeat(auto-fill, minmax(${tier.name === 'TITLE SPONSOR' ? '400px' : '200px'}, 1fr))`,
+              gridTemplateColumns: `repeat(auto-fill, minmax(min(100%, ${tier.name === 'TITLE SPONSOR' ? '400px' : '200px'}), 1fr))`,
               gap: '20px',
             }}>
               {tier.sponsors.map((sp, si) => (
@@ -178,7 +178,6 @@ export default function Sponsors() {
                     alignItems: 'center',
                     gap: '12px',
                     transition: 'all 0.3s',
-                    cursor: 'none',
                     textAlign: 'center',
                     position: 'relative'
                   }}
