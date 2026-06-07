@@ -261,8 +261,7 @@ export default function BootLoader({ onComplete }) {
                     color: '#050508',
                     border: 'none',
                     position: 'relative',
-                    boxShadow: '0 0 20px rgba(34, 197, 94, 0.4)',
-                    cursor: 'none'
+                    boxShadow: '0 0 20px rgba(34, 197, 94, 0.4)'
                   }}
                   onMouseEnter={e => {
                     e.currentTarget.style.boxShadow = '0 0 40px rgba(34, 197, 94, 0.8)';
@@ -290,8 +289,7 @@ export default function BootLoader({ onComplete }) {
                     background: 'rgba(34, 197, 94, 0.05)',
                     color: 'var(--green)',
                     border: '1px solid rgba(34, 197, 94, 0.5)',
-                    transition: 'all 0.3s ease',
-                    cursor: 'none'
+                    transition: 'all 0.3s ease'
                   }}
                   onMouseEnter={e => {
                     e.currentTarget.style.background = 'rgba(34, 197, 94, 0.15)';
