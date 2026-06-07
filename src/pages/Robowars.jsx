@@ -277,7 +277,7 @@ export default function Robowars() {
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(420px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 420px), 1fr))',
         gap: '20px'
       }}>
         {classBots.map((bot, i) => {
@@ -291,11 +291,13 @@ export default function Robowars() {
               transition={{ delay: i * 0.08, duration: 0.5 }}
               className="glass-panel"
               style={{
-                padding: '24px',
+                padding: 'clamp(16px, 3vw, 24px)',
                 border: isSelected ? '1px solid var(--plasma)' : '1px solid rgba(56,189,248,0.15)',
                 background: 'rgba(255,255,255,0.02)',
                 transition: 'all 0.3s ease',
                 display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
                 gap: '20px',
                 position: 'relative'
               }}

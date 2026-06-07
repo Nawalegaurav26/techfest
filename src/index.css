@@ -1244,8 +1244,9 @@ img { display: block; max-width: 100%; }
     grid-template-columns: 1fr !important;
   }
   /* 2-col grids that need stacking */
-  div[style*="1fr 1.3fr"], div[style*="1fr 1fr"], div[style*="1fr 2fr"], div[style*="2fr 1fr"] {
+  div[style*="1fr 1.3fr"], div[style*="1fr 1fr"], div[style*="1fr 2fr"], div[style*="2fr 1fr"], div[style*="2fr 1fr 1fr"] {
     grid-template-columns: 1fr !important;
+    gap: 16px !important;
   }
 }
 

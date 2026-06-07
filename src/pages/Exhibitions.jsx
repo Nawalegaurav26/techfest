@@ -423,7 +423,7 @@ export default function Exhibitions() {
                   position: 'relative',
                   width: '100%',
                   maxWidth: '550px',
-                  padding: '40px',
+                  padding: 'clamp(16px, 5vw, 40px)',
                   border: '1px solid rgba(56,189,248,0.3)',
                   boxShadow: '0 0 50px rgba(56,189,248,0.15)'
                 }}
@@ -594,7 +594,7 @@ export default function Exhibitions() {
                 position: 'relative',
                 width: '100%',
                 maxWidth: '700px',
-                padding: '40px',
+                padding: 'clamp(16px, 5vw, 40px)',
                 border: '1px solid var(--sky)',
                 boxShadow: '0 0 50px rgba(56,189,248,0.2)',
                 perspective: '1000px'

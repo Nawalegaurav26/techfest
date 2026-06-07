@@ -269,10 +269,10 @@ export default function TerminalPage() {
         {/* Output area */}
         <div style={{
           flex: 1, overflowY: 'auto',
-          padding: '20px',
+          padding: 'clamp(10px, 4vw, 20px)',
           fontFamily: 'Share Tech Mono, monospace',
-          fontSize: '12px',
-          lineHeight: 1.8,
+          fontSize: 'clamp(9px, 3.2vw, 13px)',
+          lineHeight: 1.6,
         }}>
           <AnimatePresence>
             {lines.map((line, i) => (
@@ -305,12 +305,12 @@ export default function TerminalPage() {
             onSubmit={handleSubmit}
             style={{
               borderTop: '1px solid rgba(0,242,255,0.1)',
-              padding: '12px 20px',
+              padding: '12px clamp(10px, 4vw, 20px)',
               display: 'flex', alignItems: 'center', gap: '10px',
               background: 'rgba(0,242,255,0.03)',
             }}
           >
-            <span style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: '12px', color: '#00f2ff', whiteSpace: 'nowrap' }}>
+            <span style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: 'clamp(10px, 3.2vw, 13px)', color: '#00f2ff', whiteSpace: 'nowrap' }}>
               TF26@AI:~$
             </span>
             <input
@@ -325,7 +325,7 @@ export default function TerminalPage() {
               spellCheck={false}
               style={{
                 flex: 1, background: 'transparent', border: 'none', outline: 'none',
-                fontFamily: 'Share Tech Mono, monospace', fontSize: '12px',
+                fontFamily: 'Share Tech Mono, monospace', fontSize: 'clamp(10px, 3.2vw, 13px)',
                 color: '#fff', letterSpacing: '0.05em', cursor: 'none',
               }}
             />
