@@ -69,15 +69,23 @@ export default function HolographicNav({
       }}
     >
       {/* ── LEFT: LOGO ─────────────────────────────── */}
-      <div
-        onClick={() => navigate('/')}
+      <button
+        onClick={() => {
+          soundEffects.playClick?.();
+          navigate('/');
+        }}
         style={{
           display: 'flex',
           alignItems: 'center',
           flexShrink: 0,
           minWidth: '44px',
           minHeight: '44px',
+          background: 'transparent',
+          border: 'none',
+          padding: 0,
+          cursor: 'pointer',
         }}
+        aria-label="Techfest Home"
       >
         <img
           src="/techfest-logo-white.png"
@@ -99,7 +107,7 @@ export default function HolographicNav({
           <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(14px, 3vw, 18px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.01em', lineHeight: 1 }}>TECHFEST</div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(189,200,209,0.6)', letterSpacing: '0.25em', marginTop: '2px' }}>IIT BOMBAY</div>
         </div>
-      </div>
+      </button>
 
       {/* ── CENTER: NAV LINKS (desktop) ──────────── */}
       <nav style={{
