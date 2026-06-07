@@ -1559,3 +1559,14 @@ main, .page-section, [style*="overflowY: 'auto'"] {
     display: none !important;
   }
 }
+
+/* ── 31. CUSTOM CARGO / CART SUMMARY POSITIONING ──────── */
+:root {
+  --cart-summary-bottom: 44px;
+}
+@media (max-width: 1023px) {
+  :root {
+    --cart-summary-bottom: calc(var(--mobile-nav-h) + env(safe-area-inset-bottom, 0px) + 16px);
+  }
+}
+
