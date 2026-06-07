@@ -323,6 +323,7 @@ export default function TerminalPage() {
               autoCorrect="off"
               autoCapitalize="off"
               spellCheck={false}
+              aria-label="Terminal command input"
               style={{
                 flex: 1, background: 'transparent', border: 'none', outline: 'none',
                 fontFamily: 'Share Tech Mono, monospace', fontSize: 'clamp(10px, 3.2vw, 13px)',
