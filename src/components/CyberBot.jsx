@@ -38,7 +38,7 @@ function BotPart({ geometry, color, emissiveIntensity = 0.1, renderMode }) {
   );
 }
 
-export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0, showParticles = true, stanceOverride = null }) {
+export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0, showParticles = true, stanceOverride = null, setGyroActive = () => {} }) {
   const robotGroup = useRef();
   const headGroup = useRef();
   const leftArmGroup = useRef();
@@ -50,6 +50,33 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
   const particlesRef = useRef();
 
   const scrollProgress = useRef(0);
+  const tiltRef = useRef({ x: 0, y: 0 });
+
+  // Listen to mobile device tilt (gyroscope)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handleOrientation = (e) => {
+      if (e.beta === null || e.gamma === null) return;
+      
+      // Mark gyro active in HUD telemetry
+      setGyroActive(true);
+      
+      // Assuming average holding angle of 60deg pitch in portrait
+      // Map tilting of phone to rotation offsets in radians
+      const targetX = (e.beta - 60) * (Math.PI / 180) * 0.45; // pitch
+      const targetY = e.gamma * (Math.PI / 180) * 0.45;        // roll
+      
+      // Clamp to prevent visual glitches (max ~20 degrees)
+      tiltRef.current.x = Math.max(-0.35, Math.min(0.35, targetX));
+      tiltRef.current.y = Math.max(-0.35, Math.min(0.35, targetY));
+    };
+
+    window.addEventListener('deviceorientation', handleOrientation);
+    return () => {
+      window.removeEventListener('deviceorientation', handleOrientation);
+    };
+  }, [setGyroActive]);
 
   // Setup flame particles
   const particleCount = 250;
@@ -206,10 +233,35 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
     const shakeY = (Math.random() - 0.5) * shakeIntensity;
     const shakeZ = (Math.random() - 0.5) * shakeIntensity;
 
-    // Apply translations
+    // Calculate interactive motion sensory offsets
+    let targetTiltX = 0;
+    let targetTiltY = 0;
+
+    // Detect if gyroscope orientation feeds data
+    const hasGyroData = Math.abs(tiltRef.current.x) > 0.001 || Math.abs(tiltRef.current.y) > 0.001;
+
+    if (hasGyroData) {
+      targetTiltX = tiltRef.current.x;
+      targetTiltY = tiltRef.current.y;
+    } else {
+      // Fallback pointer tracking (handles desktop hover parallax and mobile touch drag)
+      targetTiltX = -state.pointer.y * 0.22;
+      targetTiltY = state.pointer.x * 0.32;
+    }
+
+    // Initialize/retrieve interactive tilt state on mesh group
+    if (!robotGroup.current._interactiveTilt) {
+      robotGroup.current._interactiveTilt = { x: 0, y: 0 };
+    }
+    
+    // Smoothly LERP translation values to prevent visual snaps
+    robotGroup.current._interactiveTilt.x = THREE.MathUtils.lerp(robotGroup.current._interactiveTilt.x, targetTiltX, delta * 4.0);
+    robotGroup.current._interactiveTilt.y = THREE.MathUtils.lerp(robotGroup.current._interactiveTilt.y, targetTiltY, delta * 4.0);
+
+    // Apply translations and blended rotations
     if (robotGroup.current) {
       robotGroup.current.position.set(posX + shakeX, posY + idleBob + shakeY, posZ + shakeZ);
-      robotGroup.current.rotation.set(rotX, rotY, rotZ);
+      robotGroup.current.rotation.set(rotX + robotGroup.current._interactiveTilt.x, rotY + robotGroup.current._interactiveTilt.y, rotZ);
     }
 
     if (headGroup.current) {
