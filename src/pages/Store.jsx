@@ -151,8 +151,7 @@ export default function Store() {
                 background: isActive ? 'rgba(56,189,248,0.1)' : 'transparent',
                 border: isActive ? '1px solid var(--sky)' : '1px solid rgba(255,255,255,0.06)',
                 boxShadow: isActive ? '0 0 15px rgba(56,189,248,0.2)' : 'none',
-                transition: 'all 0.3s ease',
-                cursor: 'none'
+                transition: 'all 0.3s ease'
               }}
               onMouseEnter={e => {
                 if (!isActive) {
@@ -326,7 +325,6 @@ export default function Store() {
                     fontSize: '9px',
                     fontWeight: 700,
                     letterSpacing: '0.1em',
-                    cursor: 'none',
                     transition: 'all 0.3s ease'
                   }}
                   onMouseEnter={e => {
