@@ -143,7 +143,7 @@ export default function Robowars() {
       {/* Class Switcher Panels */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
         gap: '12px',
         margin: '40px 0 24px'
       }}>
@@ -164,7 +164,6 @@ export default function Robowars() {
                 background: isActive ? 'rgba(255, 45, 85, 0.05)' : 'rgba(255,255,255,0.02)',
                 boxShadow: isActive ? '0 0 15px rgba(255,45,85,0.15)' : 'none',
                 transition: 'all 0.3s ease',
-                cursor: 'none',
                 position: 'relative'
               }}
               onMouseEnter={e => {
@@ -406,7 +405,6 @@ export default function Robowars() {
                       fontFamily: 'var(--font-mono)',
                       fontSize: '8.5px',
                       fontWeight: 700,
-                      cursor: 'none',
                       transition: 'all 0.3s ease'
                     }}
                     onMouseEnter={e => {
