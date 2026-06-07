@@ -13,6 +13,43 @@ export default function RoboLab() {
   // Custom manual flash/pulse state
   const [plasmaBurst, setPlasmaBurst] = useState(false);
 
+  // Motion Sensor Tracking states
+  const [gyroActive, setGyroActive] = useState(false);
+  const [showGyroButton, setShowGyroButton] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' &&
+        typeof DeviceOrientationEvent !== 'undefined' &&
+        typeof DeviceOrientationEvent.requestPermission === 'function') {
+      // iOS 13+ requires explicit user interaction to request permission
+      // We start in a pending state until permission is requested
+      setShowGyroButton(true);
+    }
+  }, []);
+
+  const requestGyroPermission = () => {
+    soundEffects.playClick?.();
+    if (typeof DeviceOrientationEvent !== 'undefined' &&
+        typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission()
+        .then(permissionState => {
+          if (permissionState === 'granted') {
+            setShowGyroButton(false);
+            setGyroActive(true);
+            const timeStr = new Date().toLocaleTimeString().split(' ')[0];
+            setLogs(prev => {
+              const next = [...prev, `[${timeStr}] [INFO] GYRO CALIBRATION COMMITTED.`];
+              if (next.length > 8) next.shift();
+              return next;
+            });
+          }
+        })
+        .catch(err => {
+          console.warn("Gyro permission failed:", err);
+        });
+    }
+  };
+
   // Diagnostics scrolling terminal logs
   const [logs, setLogs] = useState([
     '[INIT] Telemetry uplink connection online...',
@@ -497,6 +534,7 @@ export default function RoboLab() {
             coreRotationSpeed={coreRotationSpeed}
             showParticles={showParticles}
             stanceOverride={manualStance}
+            setGyroActive={setGyroActive}
           />
         </Canvas>
       </div>
@@ -612,6 +650,21 @@ export default function RoboLab() {
               {showParticles ? 'ONLINE' : 'OFFLINE'}
             </span>
           </button>
+
+          {showGyroButton && (
+            <button
+              className="hud-btn mt-2"
+              onClick={requestGyroPermission}
+              style={{
+                borderColor: 'rgba(56, 189, 248, 0.4)',
+                background: 'rgba(56, 189, 248, 0.05)',
+                color: 'var(--sky)',
+              }}
+            >
+              <span>CONNECT MOTION GYRO</span>
+              <span>🛰️</span>
+            </button>
+          )}
         </div>
 
         {/* RIGHT PANEL: TELEMETRY AND CONSOLE LOGS */}
@@ -646,6 +699,13 @@ export default function RoboLab() {
           <div className="readout-row">
             <span className="readout-label">SPEED VECTOR</span>
             <span className="readout-val">{stanceInfo.speed}</span>
+          </div>
+
+          <div className="readout-row">
+            <span className="readout-label">MOTION CONTROLS</span>
+            <span className="readout-val" style={{ color: gyroActive ? 'var(--green)' : 'var(--sky)' }}>
+              {gyroActive ? 'GYRO ONLINE' : 'POINTER/DRAG'}
+            </span>
           </div>
 
           <div className="readout-row">
