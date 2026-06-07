@@ -338,7 +338,6 @@ export default function Lectures() {
                       fontSize: '9px',
                       fontWeight: 700,
                       letterSpacing: '0.12em',
-                      cursor: 'none',
                       transition: 'all 0.3s ease',
                       boxShadow: isSynced ? '0 0 15px rgba(34,197,94,0.1)' : 'none'
                     }}
@@ -418,8 +417,7 @@ export default function Lectures() {
                     right: '20px',
                     fontFamily: 'var(--font-mono)',
                     fontSize: '11px',
-                    color: 'rgba(189,200,209,0.5)',
-                    cursor: 'none'
+                    color: 'rgba(189,200,209,0.5)'
                   }}
                 >
                   [ ESCAPE ]
