@@ -349,11 +349,11 @@ export default function Store() {
       {/* Cart summary fixed bottom (when items added) */}
       {cart.length > 0 && (
         <motion.div
-          initial={{ y: 60, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ x: '-50%', y: 60, opacity: 0 }}
+          animate={{ x: '-50%', y: 0, opacity: 1 }}
           className="glass-panel"
           style={{
-            position: 'fixed', bottom: 'var(--cart-summary-bottom, 44px)', left: '50%', transform: 'translateX(-50%)',
+            position: 'fixed', bottom: 'var(--cart-summary-bottom, 44px)', left: '50%',
             zIndex: 200,
             display: 'flex', alignItems: 'center', gap: '20px',
             padding: '14px 28px',
