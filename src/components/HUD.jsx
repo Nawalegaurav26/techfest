@@ -17,7 +17,7 @@ import About from '../pages/About';
 import Sponsors from '../pages/Sponsors';
 import Contact from '../pages/Contact';
 import TerminalPage from '../pages/TerminalPage';
-import { loginWithGoogle, logoutUser } from '../utils/firebaseAuth';
+import { loginWithGoogle, logoutUser } from '../utils/supabaseAuth';
 
 export default function HUD({ activeSection, setActiveSection, soundEnabled, setSoundEnabled }) {
   const [cart, setCart] = useState([]);
