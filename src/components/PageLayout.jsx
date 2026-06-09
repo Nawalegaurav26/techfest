@@ -233,9 +233,10 @@ export default function PageLayout() {
                   width: '100%',
                   color: active ? 'var(--sky)' : 'rgba(189,200,209,0.7)',
                   background: active ? 'rgba(56,189,248,0.06)' : 'transparent',
-                  borderRight: active ? '2px solid var(--sky)' : '2px solid transparent',
+                  borderStyle: 'solid',
+                  borderWidth: '0px 2px 0px 0px',
+                  borderColor: active ? 'var(--sky)' : 'transparent',
                   transition: 'all 0.25s',
-                  border: 'none',
                 }}
                 onMouseEnter={e => {
                   if (!active) {
@@ -594,6 +595,7 @@ export default function PageLayout() {
                       onClick={() => {
                         soundEffects.playClick?.();
                         navigate(item.to);
+                        setDrawerOpen(false);
                       }}
                       className={`mobile-drawer-link${active ? ' active' : ''}`}
                       style={{
