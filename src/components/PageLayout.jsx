@@ -6,7 +6,7 @@ import BackgroundLayers from './BackgroundLayers';
 import FloatingDrone from './FloatingDrone';
 import { SocialIcons } from '../utils/socialIcons';
 import { soundEffects } from '../utils/soundEffects';
-import { loginWithGoogle, logoutUser } from '../utils/firebaseAuth';
+import { loginWithGoogle, logoutUser, subscribeToAuthChanges } from '../utils/supabaseAuth';
 
 // Left sidebar nav items (desktop only)
 const LEFT_NAV = [
@@ -84,6 +84,14 @@ export default function PageLayout() {
       setSoundEnabled(synced);
     }
   }, []); // run once on mount
+
+  // Listen to Supabase auth state transitions
+  useEffect(() => {
+    const unsubscribe = subscribeToAuthChanges((currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
 
   // Close drawer and scroll to top on route change
   useEffect(() => {
