@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Volume2, VolumeX } from 'lucide-react';
-import { loginWithGoogle, logoutUser } from '../utils/firebaseAuth';
+import { loginWithGoogle, logoutUser } from '../utils/supabaseAuth';
 import { soundEffects } from '../utils/soundEffects';
 
 const NAV_LINKS = [
