@@ -3,6 +3,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import HolographicNav from './HolographicNav';
 import BackgroundLayers from './BackgroundLayers';
+import FloatingDrone from './FloatingDrone';
 import { SocialIcons } from '../utils/socialIcons';
 import { soundEffects } from '../utils/soundEffects';
 import { loginWithGoogle, logoutUser } from '../utils/firebaseAuth';
@@ -169,6 +170,7 @@ export default function PageLayout() {
       <div className="bg-grid" />
       <div className="vignette" />
       <BackgroundLayers />
+      <FloatingDrone />
 
       {/* ── TOP NAVBAR ────────────────────────────── */}
       <HolographicNav
