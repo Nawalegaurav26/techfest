@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { soundEffects } from '../utils/soundEffects';
+import CyborgHero from '../components/CyborgHero';
 
 /* ── COUNTDOWN ─────────────────────────────────────── */
 const TARGET = new Date('2026-12-22T09:00:00').getTime();
@@ -385,28 +386,8 @@ export default function Home() {
               </svg>
             </motion.div>
 
-            {/* Central Logo Image */}
-            <motion.img
-              src="/central_logo_home-screen_big_logo_transparent.png"
-              alt="Techfest 2026 Central Logo"
-              initial={{ opacity: 0, scale: 0.92, y: 15 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              whileHover={{
-                scale: 1.05,
-                filter: 'drop-shadow(0 0 25px rgba(56,189,248,0.55))',
-              }}
-              whileTap={{ scale: 0.97 }}
-              style={{
-                width: '100%',
-                maxWidth: 'clamp(200px, 40vw, 460px)',
-                height: 'auto',
-                objectFit: 'contain',
-                filter: 'drop-shadow(0 0 15px rgba(56,189,248,0.25))',
-                zIndex: 2,
-                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-              }}
-            />
+            {/* Cyborg Hero Face (Interactive 2.5D graphics) */}
+            <CyborgHero />
           </div>
 
         </div>

@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import ShaderBackground from './ShaderBackground';
 
 // Layer 1: Neural network animated canvas
 function NeuralNetCanvas() {
@@ -176,6 +177,7 @@ function Vignette() {
 export default function BackgroundLayers() {
   return (
     <>
+      <ShaderBackground />
       <GradientBackground />
       <NeuralNetCanvas />
       <DigitalRainCanvas />
