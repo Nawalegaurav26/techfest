@@ -71,6 +71,7 @@ export default function TerminalConsole({ fullScreen = false }) {
         { type: 'bot', text: '  - events           List event categories & tracks' },
         { type: 'bot', text: '  - register         Initiate terminal-based event registration' },
         { type: 'bot', text: '  - matrix           Unlock experimental matrix grid simulation' },
+        { type: 'bot', text: '  - evolution        Trigger Cybernetic Protocol sequence' },
         { type: 'bot', text: '  - clear            Flush console log history' }
       ]);
       return;
@@ -101,6 +102,17 @@ export default function TerminalConsole({ fullScreen = false }) {
         { type: 'bot', text: '  [03] AEROSPACE: Boeing Aeromodelling, Drone Showdown' },
         { type: 'bot', text: '  [04] BIOTECH: BioSyn, NeuroGenesis' },
         { type: 'bot', text: 'Enter "register" to sign up for any event.' }
+      ]);
+      return;
+    }
+
+    if (cleanCmd === 'evolution') {
+      soundEffects.playSuccess();
+      setHistory(prev => [
+        ...prev,
+        { type: 'system', text: 'SYNCING NEURAL LINK...' },
+        { type: 'bot', text: 'THE CYBERNETIC EVOLUTION IS ACTIVE.' },
+        { type: 'bot', text: '"Man and machine, unified in a seamless digital matrix. Humanity enters the next epoch."' }
       ]);
       return;
     }

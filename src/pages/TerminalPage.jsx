@@ -24,6 +24,7 @@ const COMMAND_RESPONSES = {
   │  prizes       → Prize pool details      │
   │  register     → Registration info       │
   │  contact      → Contact details         │
+  │  evolution    → Cybernetic protocol     │
   │  clear        → Clear terminal          │
   │  matrix       → ???                     │
   └─────────────────────────────────────────┘`,
@@ -57,23 +58,23 @@ const COMMAND_RESPONSES = {
   schedule: `TECHFEST 2026 SCHEDULE:
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   DEC 21 [ARRIVAL DAY]
-    14:00 → Check-in opens
-    18:00 → Opening ceremony
-    20:00 → Welcome keynote
+  	14:00 → Check-in opens
+  	18:00 → Opening ceremony
+  	20:00 → Welcome keynote
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   DEC 22 [DAY 1]
-    09:00 → Competitions begin
-    10:00 → Workshops — Batch A
-    18:00 → Tech talks
+  	09:00 → Competitions begin
+  	10:00 → Workshops — Batch A
+  	18:00 → Tech talks
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   DEC 23 [DAY 2]
-    09:00 → Day 2 competitions
-    18:00 → Cultural showcase
-    22:00 → Hackathon night
+  	09:00 → Day 2 competitions
+  	18:00 → Cultural showcase
+  	22:00 → Hackathon night
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   DEC 24 [DAY 3 — FINALE]
-    12:00 → Finals + prize distribution
-    18:00 → Closing ceremony`,
+  	12:00 → Finals + prize distribution
+  	18:00 → Closing ceremony`,
 
   venue: `LOCATION DATA:
   INSTITUTE  : IIT Bombay
@@ -81,7 +82,7 @@ const COMMAND_RESPONSES = {
   COORDINATES: 19.1334° N, 72.9133° E
   ─────────────────────────────────────────
   NEAREST AIRPORT: CSIA (Chhatrapati Shivaji)
-                   ~12 km · 25 min by taxi
+  				 ~12 km · 25 min by taxi
   NEAREST METRO  : Powai (Line 6) · 3 min walk
   NEAREST TRAIN  : LTT / Kurla Terminus · 8 km`,
 
@@ -116,6 +117,11 @@ const COMMAND_RESPONSES = {
   ⬡  accommodation@techfest.org [HOTEL]
   ☎  +91 98765 43210            [HELPLINE]`,
 
+  evolution: `[EVOLUTION PROTOCOL PROTO-01]
+  "The boundary between carbon and silicon is dissolving.
+  Welcome to Techfest 2026. The neural network is fully synced."
+  Type "matrix" to witness the digital rain stream.`,
+
   matrix: `
   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
   ⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀⠀⠀
@@ -138,6 +144,9 @@ function processCommand(input) {
   const cmd = input.toLowerCase().trim();
   if (cmd === 'clear') return null;
   if (COMMAND_RESPONSES[cmd]) return COMMAND_RESPONSES[cmd];
+
+  // Natural language hints
+  if (cmd.includes('evolution')) return COMMAND_RESPONSES.evolution;
 
   // Natural language hints
   if (cmd.includes('event')) return COMMAND_RESPONSES.events;
