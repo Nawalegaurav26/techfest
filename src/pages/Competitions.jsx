@@ -10,6 +10,12 @@ const COMPETITIONS = [
     desc: 'Build battle-ready autonomous weapons. Steel vs steel. Algorithm vs algorithm. Only one survives.',
     domains: ['ROBOTICS', 'EMBEDDED', 'AI'],
     deadline: 'DEC 10',
+    specs: [
+      'WEIGHT CLASS: 30 lbs / 60 lbs combat limits.',
+      'WEAPONS: Active spinners, lifters, or flippers allowed. No combustion/projectiles.',
+      'CONTROLS: 2.4GHz failsafe R/C. Autonomous targeting scripts permitted.',
+      'ARENA: 30x30ft steel enclosure with floor spikes and active side flippers.'
+    ]
   },
   {
     id: 'c2', code: 'CC-02',
@@ -18,6 +24,12 @@ const COMPETITIONS = [
     desc: 'Capture-the-flag style competitive programming. Break their code. Protect yours.',
     domains: ['ALGORITHMS', 'SECURITY', 'PYTHON', 'C++'],
     deadline: 'DEC 12',
+    specs: [
+      'FORMAT: 24-hour jeopardy-style Cyber-CTF.',
+      'CATEGORIES: Reverse engineering, cryptography, pwn, web exploitation, forensics.',
+      'TEAMS: 1 to 4 cyber-operators per terminal.',
+      'RESTRICTIONS: Zero external network usage. DDoS against infra triggers ban.'
+    ]
   },
   {
     id: 'c3', code: 'AI-03',
@@ -26,6 +38,12 @@ const COMPETITIONS = [
     desc: 'Train and deploy AI models that compete in real-time adversarial environments.',
     domains: ['DEEP LEARNING', 'RL', 'PYTORCH'],
     deadline: 'DEC 08',
+    specs: [
+      'MODELS: Reinforcement Learning agent scripts written in Python/PyTorch.',
+      'ARENA: Virtual 2D/3D grids with resource gathering and path blocking.',
+      'COMPUTING: Maximum 0.5 CPU core and 2GB RAM execution footprint.',
+      'LATENCY: Max 15ms inference latency per frame before timeout.'
+    ]
   },
   {
     id: 'c4', code: 'AE-04',
@@ -34,6 +52,12 @@ const COMPETITIONS = [
     desc: 'Autonomous aerial drone racing with obstacle avoidance and precision landing.',
     domains: ['DRONES', 'CONTROL', 'COMPUTER VISION'],
     deadline: 'DEC 15',
+    specs: [
+      'VEHICLE: Quadcopter design, maximum frame size 330mm, max weight 1.5kg.',
+      'NAVIGATION: Onboard Computer Vision only. No GPS telemetry permitted.',
+      'TRACK: 8 glowing LED rings. Visual recognition required for pathing.',
+      'AUTO-LAND: Must detect QR-encoded target pad and perform stable landing.'
+    ]
   },
   {
     id: 'c5', code: 'DS-05',
@@ -42,6 +66,12 @@ const COMPETITIONS = [
     desc: 'Extract insights from massive datasets. The fastest and most accurate analysis wins.',
     domains: ['DATA SCIENCE', 'STATISTICS', 'ML'],
     deadline: 'DEC 14',
+    specs: [
+      'DATASETS: 45GB compressed CSV/Parquet telemetry streams.',
+      'CHALLENGE: Predict quantum system decoherence events in high-dimensional noise.',
+      'TIME LIMIT: 10 minutes total inference execution window.',
+      'METRICS: F1-score optimization + model complexity penalties.'
+    ]
   },
   {
     id: 'c6', code: 'ST-06',
@@ -50,6 +80,12 @@ const COMPETITIONS = [
     desc: 'Design a complete mission to Mars. Propulsion, payload, landing. Present to ISRO scientists.',
     domains: ['AEROSPACE', 'PHYSICS', 'CAD'],
     deadline: 'DEC 06',
+    specs: [
+      'PAYLOAD: Detailed rover design with CAD/SolidWorks structural profiles.',
+      'MISSION: Orbital trajectory planning using GMAT or MATLAB orbital toolkits.',
+      'PRESENTATION: Live pitch defense before ISRO space engineers.',
+      'REQUIREMENT: Thermal shield calculations for Martian atmosphere insertion.'
+    ]
   },
 ];
 
@@ -219,6 +255,49 @@ export default function Competitions() {
                     </span>
                   ))}
                 </div>
+                {/* Expanding spec sheets (Framer Motion details drawer) */}
+                <AnimatePresence>
+                  {isSelected && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.25, ease: 'easeOut' }}
+                      style={{
+                        marginTop: '16px',
+                        paddingTop: '16px',
+                        borderTop: '1px dashed rgba(56, 189, 248, 0.2)',
+                        overflow: 'hidden'
+                      }}
+                    >
+                      <div style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '9px',
+                        color: DIFF_COLORS[comp.difficulty],
+                        fontWeight: 700,
+                        letterSpacing: '0.12em',
+                        marginBottom: '8px'
+                      }}>
+                        SEC_ARENA_SPECS // FEED_LINK_OK
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                        {comp.specs.map((spec, sIdx) => (
+                          <div key={sIdx} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+                            <span style={{ color: 'var(--sky)', fontFamily: 'var(--font-mono)', fontSize: '10px' }}>▶</span>
+                            <span style={{
+                              fontFamily: 'var(--font-mono)',
+                              fontSize: '10px',
+                              color: 'rgba(189, 200, 209, 0.75)',
+                              lineHeight: '1.4'
+                            }}>
+                              {spec}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               <div>
