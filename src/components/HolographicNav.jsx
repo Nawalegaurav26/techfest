@@ -152,9 +152,18 @@ export default function HolographicNav({
           title="Toggle Audio"
           aria-label={soundEnabled ? 'Disable audio' : 'Enable audio'}
         >
-          {soundEnabled
-            ? <Volume2 size={16} />
-            : <VolumeX size={16} />}
+          {soundEnabled ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+              <Volume2 size={16} />
+              <div style={{ display: 'flex', alignItems: 'flex-end', gap: '1.5px', height: '10px' }}>
+                <span className="sound-bar bar1" />
+                <span className="sound-bar bar2" />
+                <span className="sound-bar bar3" />
+              </div>
+            </div>
+          ) : (
+            <VolumeX size={16} />
+          )}
         </button>
 
         {/* Auth — only show on desktop when space permits */}

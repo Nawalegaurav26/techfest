@@ -182,3 +182,18 @@
     border-right-color: var(--border);
   }
 }
+
+/* Sound visualizer animation */
+@keyframes bounceSound {
+  0%, 100% { height: 3px; }
+  50% { height: 10px; }
+}
+.sound-bar {
+  display: inline-block;
+  width: 2px;
+  background-color: var(--sky);
+  animation: bounceSound 0.8s ease-in-out infinite;
+}
+.sound-bar.bar1 { animation-delay: 0.1s; }
+.sound-bar.bar2 { animation-delay: 0.3s; }
+.sound-bar.bar3 { animation-delay: 0.5s; }
