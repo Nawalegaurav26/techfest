@@ -18,6 +18,13 @@ const MILESTONES = [
   { year: '2026', event: 'THE EVOLUTION', note: 'Cyborg era begins. Man and machine, unified.' },
 ];
 
+const STATS = [
+  { value: '150K+', label: 'FOOTFALL TELEMETRY', desc: 'Direct on-campus and virtual attendees' },
+  { value: '45+',   label: 'GLOBAL NATIONS',     desc: 'International teams & key delegations' },
+  { value: '150+',  label: 'TECH SPEAKERS',      desc: 'Industry titans & leading scientists' },
+  { value: '₹30L+', label: 'PRIZE MATRIX',       desc: 'Total prize pool allocations' },
+];
+
 export default function About() {
   return (
     <div className="page-section" style={{ paddingBottom: '80px' }}>
@@ -68,6 +75,72 @@ export default function About() {
         }}>
           2026 marks our most ambitious edition yet — <em style={{ color: 'var(--sky)', fontStyle: 'normal', fontWeight: 600 }}>The Cybernetic Evolution</em>. A three-day exploration of what happens when human ingenuity and artificial intelligence finally become one.
         </p>
+      </motion.div>
+
+      {/* Stats Matrix Grid */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '16px',
+          marginBottom: '48px'
+        }}
+      >
+        {STATS.map((stat) => (
+          <div
+            key={stat.label}
+            className="glass-panel"
+            style={{
+              padding: '24px',
+              border: '1px solid rgba(56, 189, 248, 0.15)',
+              position: 'relative',
+              transition: 'all 0.3s'
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = 'rgba(56, 189, 248, 0.4)';
+              e.currentTarget.style.boxShadow = '0 0 20px rgba(56, 189, 248, 0.08)';
+              soundEffects.playHover?.();
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = 'rgba(56, 189, 248, 0.15)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            <div className="bracket-tl" />
+            <div className="bracket-br" />
+            <div style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(28px, 4vw, 36px)',
+              fontWeight: 800,
+              color: 'var(--sky)',
+              textShadow: 'var(--glow-sky-sm)'
+            }}>
+              {stat.value}
+            </div>
+            <div style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '9px',
+              color: '#fff',
+              letterSpacing: '0.15em',
+              fontWeight: 700,
+              marginTop: '6px',
+              marginBottom: '4px'
+            }}>
+              {stat.label}
+            </div>
+            <div style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '11px',
+              color: 'rgba(189, 200, 209, 0.45)',
+              lineHeight: '1.4'
+            }}>
+              {stat.desc}
+            </div>
+          </div>
+        ))}
       </motion.div>
 
       {/* Timeline */}
