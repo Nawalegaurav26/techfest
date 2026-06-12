@@ -45,7 +45,8 @@ export default function Accommodation() {
   const handleBook = (id) => {
     if (booked[id]) return;
     soundEffects.playSuccess?.();
-    setBooked(prev => ({ ...prev, [id]: true }));
+    const ticketNum = `TF26-${id.toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    setBooked(prev => ({ ...prev, [id]: ticketNum }));
   };
 
   return (
@@ -269,6 +270,32 @@ export default function Accommodation() {
                     {isBooked ? '✓ ALLOCATED' : 'SECURE SUITE'}
                   </button>
                 </div>
+
+                <AnimatePresence>
+                  {isBooked && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.25 }}
+                      style={{
+                        borderTop: '1px dashed rgba(34,197,94,0.3)',
+                        paddingTop: '12px',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '8.5px',
+                        color: 'var(--green)',
+                        overflow: 'hidden'
+                      }}
+                    >
+                      <div style={{ fontWeight: 700, marginBottom: '4px', letterSpacing: '0.05em' }}>ALLOCATION PASS GENERATED //</div>
+                      <div>PASS_ID: {isBooked}</div>
+                      <div>GATEWAY: SECURE // PATROL ACTIVE</div>
+                      <div style={{ letterSpacing: '2px', marginTop: '6px', fontSize: '10px', opacity: 0.75 }}>
+                        ||||| | |||| || ||| | |||
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </motion.div>
           );
