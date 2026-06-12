@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { isMock } from '../utils/supabaseAuth';
 
 const BOOT_SEQUENCE = [
   '> INITIALIZING TECHFEST AI CORE v2.6.0...',
@@ -154,11 +155,24 @@ const AI_RESPONSES = {
 function processCommand(input) {
   const cmd = input.toLowerCase().trim();
   if (cmd === 'clear') return null;
+
+  if (cmd.includes('telemetry') || cmd.includes('status') || cmd.includes('health')) {
+    const dbStatus = isMock ? 'MOCK [SIMULATED TELEMETRY]' : 'OK [SUPABASE LIVE CONNECTION]';
+    return `SYSTEM TELEMETRY REPORT:
+  =============================
+  CORE TEMPERATURE    →  34.5°C
+  QUANTUM SYNC RATIO  →  98.74%
+  ACTIVE NODES        │  4,096
+  RESPONSE LATENCY    │  2.14ms
+  DATABASE STATUS     │  ${dbStatus}
+  FIREWALL SECURITY   │  ACTIVE [MAX SHIELD]
+  =============================`;
+  }
+
   if (COMMAND_RESPONSES[cmd]) return COMMAND_RESPONSES[cmd];
 
   // Natural language hints
   if (cmd.includes('evolution')) return COMMAND_RESPONSES.evolution;
-  if (cmd.includes('telemetry') || cmd.includes('status') || cmd.includes('health')) return COMMAND_RESPONSES.telemetry;
 
   // Natural language hints
   if (cmd.includes('event')) return COMMAND_RESPONSES.events;

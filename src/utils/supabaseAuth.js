@@ -3,14 +3,21 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-export const supabase = (supabaseUrl && supabaseAnonKey)
+// Check if credentials are valid and the key matches the JWT format
+const isValidSupabase = () => {
+  if (!supabaseUrl || !supabaseAnonKey) return false;
+  // Supabase anon keys are always JWTs (3 dot-separated base64 parts)
+  return supabaseAnonKey.includes('.') && supabaseAnonKey.split('.').length === 3;
+};
+
+export const supabase = isValidSupabase()
   ? createClient(supabaseUrl, supabaseAnonKey)
   : null;
 
 export const isMock = !supabase;
 
 if (isMock) {
-  console.warn("Supabase credentials missing (VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY). Running in simulated Supabase Auth mode.");
+  console.warn("Running in simulated Supabase Auth mode (Supabase credentials missing or invalid placeholder keys detected).");
 }
 
 // Normalizes Supabase user metadata structure to match the existing UI interface
