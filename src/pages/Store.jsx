@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { soundEffects } from '../utils/soundEffects';
 
 const MERCH = [
@@ -64,6 +64,8 @@ export default function Store() {
   const [cart, setCart] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('ALL');
   const [hovered, setHovered] = useState(null);
+  const [checkoutActive, setCheckoutActive] = useState(false);
+  const [checkoutConfirmed, setCheckoutConfirmed] = useState(false);
 
   const categories = ['ALL', ...new Set(MERCH.map(m => m.category))];
   const filtered = selectedCategory === 'ALL' ? MERCH : MERCH.filter(m => m.category === selectedCategory);
@@ -373,13 +375,163 @@ export default function Store() {
             style={{ fontSize: '9px', padding: '8px 20px' }}
             onClick={() => {
               soundEffects.playClick?.();
-              alert("Routing cargo transaction to gateway...");
+              setCheckoutActive(true);
             }}
           >
             DEPART TO CHECKOUT →
           </button>
         </motion.div>
       )}
+
+      {/* Checkout Modal Overlay */}
+      <AnimatePresence>
+        {checkoutActive && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => {
+              if (!checkoutConfirmed) setCheckoutActive(false);
+            }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(5,5,8,0.92)',
+              backdropFilter: 'blur(16px)',
+              zIndex: 300,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '20px'
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={e => e.stopPropagation()}
+              className="glass-panel"
+              style={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: '480px',
+                padding: 'clamp(20px, 5vw, 40px)',
+                border: '1px solid var(--sky)',
+                boxShadow: '0 0 40px rgba(56,189,248,0.2)'
+              }}
+            >
+              <div className="bracket-tl" style={{ borderColor: 'var(--sky)' }} />
+              <div className="bracket-tr" style={{ borderColor: 'var(--sky)' }} />
+              <div className="bracket-bl" style={{ borderColor: 'var(--sky)' }} />
+              <div className="bracket-br" style={{ borderColor: 'var(--sky)' }} />
+
+              {!checkoutConfirmed ? (
+                <>
+                  <button
+                    onClick={() => {
+                      soundEffects.playClick?.();
+                      setCheckoutActive(false);
+                    }}
+                    style={{
+                      position: 'absolute',
+                      top: '20px',
+                      right: '20px',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '11px',
+                      color: 'rgba(189,200,209,0.5)',
+                      background: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    [ ESCAPE ]
+                  </button>
+
+                  <h2 style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '22px',
+                    fontWeight: 800,
+                    color: '#fff',
+                    marginBottom: '16px'
+                  }}>
+                    CARGO ACQUISITION
+                  </h2>
+
+                  <div style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '11px',
+                    color: 'rgba(189,200,209,0.6)',
+                    marginBottom: '24px',
+                    maxHeight: '120px',
+                    overflowY: 'auto',
+                    borderTop: '1px solid rgba(255,255,255,0.06)',
+                    borderBottom: '1px solid rgba(255,255,255,0.06)',
+                    padding: '12px 0'
+                  }}>
+                    {cart.map((itemId, idx) => {
+                      const item = MERCH.find(m => m.id === itemId);
+                      return (
+                        <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                          <span>{item?.name}</span>
+                          <span style={{ color: 'var(--sky)' }}>{item?.price}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <button
+                    className="btn-primary"
+                    onClick={() => {
+                      soundEffects.playSuccess?.();
+                      setCheckoutConfirmed(true);
+                      setTimeout(() => {
+                        setCart([]);
+                        setCheckoutActive(false);
+                        setCheckoutConfirmed(false);
+                      }, 2500);
+                    }}
+                    style={{ width: '100%', padding: '12px 0' }}
+                  >
+                    <span className="btn-tl" style={{ borderColor: '#fff' }} />
+                    <span className="btn-br" style={{ borderColor: '#fff' }} />
+                    CONFIRM CARGO AUTHORIZATION
+                  </button>
+                </>
+              ) : (
+                <div style={{ textAlign: 'center', padding: '20px 0' }}>
+                  <div style={{
+                    width: '48px', height: '48px', borderRadius: '50%',
+                    border: '2px solid var(--green)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    margin: '0 auto 16px',
+                    fontSize: '20px', color: 'var(--green)',
+                    boxShadow: '0 0 20px rgba(34,197,94,0.3)'
+                  }}>
+                    ✓
+                  </div>
+                  <h2 style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '20px',
+                    fontWeight: 800,
+                    color: '#fff',
+                    marginBottom: '8px'
+                  }}>
+                    TRANSACTION CONFIRMED
+                  </h2>
+                  <p style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '10px',
+                    color: 'var(--green)',
+                    letterSpacing: '0.1em'
+                  }}>
+                    CARGO SHIPMENT ENROUTE // DISPATCHING NOW...
+                  </p>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
