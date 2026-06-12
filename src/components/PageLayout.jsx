@@ -6,7 +6,14 @@ import BackgroundLayers from './BackgroundLayers';
 import FloatingDrone from './FloatingDrone';
 import { SocialIcons } from '../utils/socialIcons';
 import { soundEffects } from '../utils/soundEffects';
-import { loginWithGoogle, logoutUser, subscribeToAuthChanges } from '../utils/supabaseAuth';
+import {
+  loginWithGoogle,
+  loginWithGithub,
+  loginWithEmailPassword,
+  loginWithMagicLink,
+  logoutUser,
+  subscribeToAuthChanges
+} from '../utils/supabaseAuth';
 
 // Left sidebar nav items (desktop only)
 const LEFT_NAV = [
@@ -74,6 +81,7 @@ export default function PageLayout() {
   const [drawerOpen, setDrawerOpen]     = useState(false);
   const [user, setUser]                 = useState(null);
   const [authLoading, setAuthLoading]   = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
   const location  = useLocation();
   const navigate  = useNavigate();
 
@@ -137,18 +145,9 @@ export default function PageLayout() {
     return () => { document.body.style.overflow = ''; };
   }, [drawerOpen]);
 
-  const handleSignIn = async () => {
+  const handleSignIn = () => {
     soundEffects.playClick?.();
-    setAuthLoading(true);
-    try {
-      const u = await loginWithGoogle();
-      setUser(u);
-      soundEffects.playSuccess?.();
-    } catch {
-      soundEffects.playError?.();
-    } finally {
-      setAuthLoading(false);
-    }
+    setAuthModalOpen(true);
   };
 
   const handleSignOut = async () => {
@@ -827,6 +826,106 @@ export default function PageLayout() {
         )}
       </AnimatePresence>
 
+      {/* ── AUTHENTICATION MODAL ────────────────── */}
+      <AnimatePresence>
+        {authModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => {
+              if (!authLoading) setAuthModalOpen(false);
+            }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(5, 5, 8, 0.93)',
+              backdropFilter: 'blur(16px)',
+              zIndex: 300,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '20px'
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 30 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 30 }}
+              onClick={e => e.stopPropagation()}
+              className="glass-panel"
+              style={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: '440px',
+                padding: 'clamp(20px, 6vw, 36px)',
+                border: '1px solid rgba(56, 189, 248, 0.3)',
+                boxShadow: '0 0 40px rgba(56, 189, 248, 0.15)',
+                background: 'rgba(10, 10, 15, 0.95)'
+              }}
+            >
+              {/* Brackets */}
+              <div className="bracket-tl" style={{ borderColor: 'var(--sky)' }} />
+              <div className="bracket-tr" style={{ borderColor: 'var(--sky)' }} />
+              <div className="bracket-bl" style={{ borderColor: 'var(--sky)' }} />
+              <div className="bracket-br" style={{ borderColor: 'var(--sky)' }} />
+
+              {/* Close Button */}
+              <button
+                onClick={() => {
+                  soundEffects.playClick?.();
+                  setAuthModalOpen(false);
+                }}
+                disabled={authLoading}
+                style={{
+                  position: 'absolute',
+                  top: '20px',
+                  right: '20px',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '10px',
+                  color: 'rgba(189,200,209,0.5)',
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer'
+                }}
+              >
+                [ ESCAPE ]
+              </button>
+
+              <div style={{ marginBottom: '24px' }}>
+                <div style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '9px',
+                  color: 'var(--plasma)',
+                  letterSpacing: '0.15em',
+                  fontWeight: 700
+                }}>
+                  AUTHORIZE IDENTITY // LEVEL_01_SEC
+                </div>
+                <h2 style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '24px',
+                  fontWeight: 800,
+                  color: '#fff',
+                  lineHeight: 1.1,
+                  marginTop: '4px'
+                }}>
+                  ACCESS PORTAL
+                </h2>
+              </div>
+
+              {/* Auth choice form */}
+              <AuthForm 
+                authLoading={authLoading}
+                setAuthLoading={setAuthLoading}
+                setUser={setUser}
+                onClose={() => setAuthModalOpen(false)}
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Latency telemetry script */}
       <LatencyUpdater />
     </div>
@@ -845,4 +944,258 @@ function LatencyUpdater() {
     return () => clearInterval(interval);
   }, []);
   return null;
+}
+
+function AuthForm({ authLoading, setAuthLoading, setUser, onClose }) {
+  const [activeTab, setActiveTab] = useState('password'); // 'password' or 'magic'
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const resetMessages = () => {
+    setErrorMessage('');
+    setSuccessMessage('');
+  };
+
+  const handleOAuth = async (provider) => {
+    resetMessages();
+    setAuthLoading(true);
+    soundEffects.playClick?.();
+    try {
+      let u;
+      if (provider === 'google') {
+        u = await loginWithGoogle();
+      } else if (provider === 'github') {
+        u = await loginWithGithub();
+      }
+      if (u) {
+        setUser(u);
+        soundEffects.playSuccess?.();
+        onClose();
+      }
+    } catch (err) {
+      setErrorMessage(err.message || "OAuth Authentication failed.");
+      soundEffects.playError?.();
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    resetMessages();
+    if (!email) {
+      setErrorMessage("Email field required.");
+      soundEffects.playError?.();
+      return;
+    }
+
+    setAuthLoading(true);
+    soundEffects.playClick?.();
+
+    try {
+      if (activeTab === 'magic') {
+        const res = await loginWithMagicLink(email);
+        setSuccessMessage(res.message || "Magic Link dispatched!");
+        soundEffects.playSuccess?.();
+      } else {
+        if (!password) {
+          setErrorMessage("Password field required.");
+          soundEffects.playError?.();
+          setAuthLoading(false);
+          return;
+        }
+        const u = await loginWithEmailPassword(email, password, isSignUp);
+        if (u) {
+          setUser(u);
+          soundEffects.playSuccess?.();
+          onClose();
+        }
+      }
+    } catch (err) {
+      setErrorMessage(err.message || "Authentication failed.");
+      soundEffects.playError?.();
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      {/* Tabs */}
+      <div style={{ display: 'flex', gap: '12px', marginBottom: '20px', borderBottom: '1px solid rgba(255, 255, 255, 0.06)', paddingBottom: '12px' }}>
+        <button
+          type="button"
+          onClick={() => { soundEffects.playClick?.(); setActiveTab('password'); resetMessages(); }}
+          style={{
+            background: 'transparent', border: 'none', cursor: 'pointer',
+            fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700,
+            color: activeTab === 'password' ? 'var(--sky)' : 'rgba(189,200,209,0.4)',
+            letterSpacing: '0.1em'
+          }}
+        >
+          CREDENTIALS
+        </button>
+        <span style={{ color: 'rgba(255,255,255,0.1)' }}>|</span>
+        <button
+          type="button"
+          onClick={() => { soundEffects.playClick?.(); setActiveTab('magic'); resetMessages(); }}
+          style={{
+            background: 'transparent', border: 'none', cursor: 'pointer',
+            fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700,
+            color: activeTab === 'magic' ? 'var(--sky)' : 'rgba(189,200,209,0.4)',
+            letterSpacing: '0.1em'
+          }}
+        >
+          MAGIC LINK
+        </button>
+      </div>
+
+      {errorMessage && (
+        <div style={{
+          padding: '10px 14px', marginBottom: '16px', background: 'rgba(255, 45, 85, 0.1)',
+          borderLeft: '2px solid var(--plasma)', fontFamily: 'var(--font-mono)', fontSize: '9.5px',
+          color: 'var(--plasma)', lineHeight: '1.4'
+        }}>
+          ERROR // {errorMessage}
+        </div>
+      )}
+
+      {successMessage && (
+        <div style={{
+          padding: '10px 14px', marginBottom: '16px', background: 'rgba(34, 197, 94, 0.1)',
+          borderLeft: '2px solid var(--green)', fontFamily: 'var(--font-mono)', fontSize: '9.5px',
+          color: 'var(--green)', lineHeight: '1.4'
+        }}>
+          SUCCESS // {successMessage}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <div>
+          <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '8.5px', color: 'rgba(189,200,209,0.4)', marginBottom: '4px', letterSpacing: '0.1em' }}>
+            EMAIL_ADDRESS //
+          </label>
+          <input
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            disabled={authLoading}
+            placeholder="operator@techfest.in"
+            style={{
+              width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(56, 189, 248, 0.15)', color: '#fff',
+              fontFamily: 'var(--font-mono)', fontSize: '12px', outline: 'none',
+              transition: 'border-color 0.3s'
+            }}
+            onFocus={e => e.target.style.borderColor = 'var(--sky)'}
+            onBlur={e => e.target.style.borderColor = 'rgba(56, 189, 248, 0.15)'}
+          />
+        </div>
+
+        {activeTab === 'password' && (
+          <div>
+            <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '8.5px', color: 'rgba(189,200,209,0.4)', marginBottom: '4px', letterSpacing: '0.1em' }}>
+              ACCESS_KEY_HASH //
+            </label>
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              disabled={authLoading}
+              placeholder="••••••••"
+              style={{
+                width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(56, 189, 248, 0.15)', color: '#fff',
+                fontFamily: 'var(--font-mono)', fontSize: '12px', outline: 'none',
+                transition: 'border-color 0.3s'
+              }}
+              onFocus={e => e.target.style.borderColor = 'var(--sky)'}
+              onBlur={e => e.target.style.borderColor = 'rgba(56, 189, 248, 0.15)'}
+            />
+          </div>
+        )}
+
+        <button
+          type="submit"
+          disabled={authLoading}
+          className="btn-primary"
+          style={{ width: '100%', padding: '12px 0', marginTop: '8px' }}
+        >
+          <span className="btn-tl" />
+          <span className="btn-br" />
+          {authLoading ? 'AUTHORIZING...' : (activeTab === 'magic' ? 'REQUEST MAGIC TELEPORT' : (isSignUp ? 'REGISTER CREDENTIALS' : 'ESTABLISH SESSION'))}
+        </button>
+
+        {activeTab === 'password' && (
+          <button
+            type="button"
+            disabled={authLoading}
+            onClick={() => { soundEffects.playClick?.(); setIsSignUp(!isSignUp); resetMessages(); }}
+            style={{
+              background: 'transparent', border: 'none', cursor: 'pointer',
+              fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(189,200,209,0.4)',
+              textAlign: 'center', marginTop: '4px', textDecoration: 'underline'
+            }}
+          >
+            {isSignUp ? 'Already authenticated? Establish session' : 'No credentials? Register new identity'}
+          </button>
+        )}
+      </form>
+
+      <div style={{ margin: '20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.06)' }} />
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.3)', letterSpacing: '0.15em' }}>OR CONNECT VIA</span>
+        <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.06)' }} />
+      </div>
+
+      <div style={{ display: 'flex', gap: '10px' }}>
+        <button
+          onClick={() => handleOAuth('google')}
+          disabled={authLoading}
+          style={{
+            flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+            padding: '10px 0', border: '1px solid rgba(255, 45, 85, 0.3)',
+            background: 'rgba(255, 45, 85, 0.05)', color: '#fff',
+            fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700,
+            cursor: 'pointer', transition: 'all 0.3s'
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.background = 'rgba(255, 45, 85, 0.15)';
+            e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 45, 85, 0.2)';
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.background = 'rgba(255, 45, 85, 0.05)';
+            e.currentTarget.style.boxShadow = 'none';
+          }}
+        >
+          GOOGLE SYNC
+        </button>
+
+        <button
+          onClick={() => handleOAuth('github')}
+          disabled={authLoading}
+          style={{
+            flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+            padding: '10px 0', border: '1px solid rgba(56, 189, 248, 0.3)',
+            background: 'rgba(56, 189, 248, 0.05)', color: '#fff',
+            fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700,
+            cursor: 'pointer', transition: 'all 0.3s'
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.background = 'rgba(56, 189, 248, 0.15)';
+            e.currentTarget.style.boxShadow = '0 0 15px rgba(56, 189, 248, 0.2)';
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.background = 'rgba(56, 189, 248, 0.05)';
+            e.currentTarget.style.boxShadow = 'none';
+          }}
+        >
+          GITHUB SYNC
+        </button>
+      </div>
+    </div>
+  );
 }
