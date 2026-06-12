@@ -24,6 +24,7 @@ const COMMAND_RESPONSES = {
   │  prizes       → Prize pool details      │
   │  register     → Registration info       │
   │  contact      → Contact details         │
+  │  telemetry    → System health check     │
   │  evolution    → Cybernetic protocol     │
   │  clear        → Clear terminal          │
   │  matrix       → ???                     │
@@ -122,6 +123,16 @@ const COMMAND_RESPONSES = {
   Welcome to Techfest 2026. The neural network is fully synced."
   Type "matrix" to witness the digital rain stream.`,
 
+  telemetry: `SYSTEM TELEMETRY REPORT:
+  =============================
+  CORE TEMPERATURE    →  34.5°C
+  QUANTUM SYNC RATIO  →  98.74%
+  ACTIVE NODES        │  4,096
+  RESPONSE LATENCY    │  2.14ms
+  DATABASE STATUS     │  OK [SUPABASE CONNECTED]
+  FIREWALL SECURITY   │  ACTIVE [MAX SHIELD]
+  =============================`,
+
   matrix: `
   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
   ⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀⠀⠀
@@ -147,6 +158,7 @@ function processCommand(input) {
 
   // Natural language hints
   if (cmd.includes('evolution')) return COMMAND_RESPONSES.evolution;
+  if (cmd.includes('telemetry') || cmd.includes('status') || cmd.includes('health')) return COMMAND_RESPONSES.telemetry;
 
   // Natural language hints
   if (cmd.includes('event')) return COMMAND_RESPONSES.events;
