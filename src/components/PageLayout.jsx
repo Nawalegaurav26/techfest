@@ -82,8 +82,15 @@ export default function PageLayout() {
   const [user, setUser]                 = useState(null);
   const [authLoading, setAuthLoading]   = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const location  = useLocation();
   const navigate  = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => setShowScrollTop(window.scrollY > 300);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Sync state if window.__soundEnabled changes outside React (e.g. BootLoader)
   useEffect(() => {
@@ -923,6 +930,50 @@ export default function PageLayout() {
               />
             </motion.div>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Scroll to Top bionic button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            onClick={() => {
+              soundEffects.playClick?.();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            style={{
+              position: 'fixed',
+              bottom: 'clamp(60px, 10vh, 100px)',
+              right: '30px',
+              width: '40px',
+              height: '40px',
+              background: 'rgba(5, 5, 8, 0.85)',
+              border: '1px solid var(--sky)',
+              color: 'var(--sky)',
+              cursor: 'pointer',
+              zIndex: 150,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 0 15px rgba(56,189,248,0.25)',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '14px',
+              fontWeight: 700
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = 'rgba(56,189,248,0.1)';
+              e.currentTarget.style.boxShadow = '0 0 25px rgba(56,189,248,0.5)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = 'rgba(5, 5, 8, 0.85)';
+              e.currentTarget.style.boxShadow = '0 0 15px rgba(56,189,248,0.25)';
+            }}
+          >
+            ▲
+          </motion.button>
         )}
       </AnimatePresence>
 
