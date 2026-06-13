@@ -446,7 +446,7 @@ export default function PageLayout() {
           }}
           className="hidden-mobile-telemetry"
         >
-          <span>LATENCY: <span id="footer-latency" style={{ color: 'var(--green)', textShadow: '0 0 6px rgba(34,197,94,0.4)' }}>36MS</span></span>
+          <span>LATENCY: <span id="footer-latency" style={{ color: 'var(--green)', textShadow: '0 0 6px rgba(0, 245, 196, 0.35)' }}>36MS</span></span>
           <span style={{ color: 'rgba(189,200,209,0.15)' }}>|</span>
           <span>UPTIME: 99.9%</span>
           <span style={{ color: 'rgba(189,200,209,0.15)' }}>|</span>
@@ -1116,7 +1116,7 @@ function AuthForm({ authLoading, setAuthLoading, setUser, onClose }) {
 
       {successMessage && (
         <div style={{
-          padding: '10px 14px', marginBottom: '16px', background: 'rgba(34, 197, 94, 0.1)',
+          padding: '10px 14px', marginBottom: '16px', background: 'rgba(0, 245, 196, 0.08)',
           borderLeft: '2px solid var(--green)', fontFamily: 'var(--font-mono)', fontSize: '9.5px',
           color: 'var(--green)', lineHeight: '1.4'
         }}>

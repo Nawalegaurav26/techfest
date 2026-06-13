@@ -347,15 +347,15 @@ export default function Competitions() {
                       flex: 1.2,
                       padding: '12px 0',
                       minHeight: '48px',
-                      background: isReg ? 'rgba(34,197,94,0.08)' : 'rgba(255,45,85,0.05)',
-                      border: `1px solid ${isReg ? 'rgba(34,197,94,0.4)' : 'rgba(255,45,85,0.4)'}`,
+                      background: isReg ? 'rgba(0, 245, 196, 0.08)' : 'rgba(255,45,85,0.05)',
+                      border: `1px solid ${isReg ? 'rgba(0, 245, 196, 0.4)' : 'rgba(255,45,85,0.4)'}`,
                       color: isReg ? 'var(--green)' : 'var(--plasma)',
                       fontFamily: 'var(--font-mono)',
                       fontSize: '10px',
                       fontWeight: 700,
                       letterSpacing: '0.1em',
                       transition: 'all 0.25s ease',
-                      boxShadow: isReg ? '0 0 15px rgba(34,197,94,0.1)' : 'none'
+                      boxShadow: isReg ? '0 0 15px rgba(0, 245, 196, 0.1)' : 'none'
                     }}
                     onMouseEnter={e => {
                       if (!isReg) {

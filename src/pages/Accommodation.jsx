@@ -243,15 +243,15 @@ export default function Accommodation() {
                     }}
                     style={{
                       padding: '8px 20px',
-                      background: isBooked ? 'rgba(34,197,94,0.08)' : 'rgba(255,45,85,0.05)',
-                      border: `1px solid ${isBooked ? 'rgba(34,197,94,0.4)' : 'rgba(255,45,85,0.4)'}`,
+                      background: isBooked ? 'rgba(0, 245, 196, 0.08)' : 'rgba(255,45,85,0.05)',
+                      border: `1px solid ${isBooked ? 'rgba(0, 245, 196, 0.4)' : 'rgba(255,45,85,0.4)'}`,
                       color: isBooked ? 'var(--green)' : 'var(--plasma)',
                       fontFamily: 'var(--font-mono)',
                       fontSize: '9px',
                       fontWeight: 700,
                       letterSpacing: '0.12em',
                       transition: 'all 0.3s ease',
-                      boxShadow: isBooked ? '0 0 15px rgba(34,197,94,0.1)' : 'none'
+                      boxShadow: isBooked ? '0 0 15px rgba(0, 245, 196, 0.1)' : 'none'
                     }}
                     onMouseEnter={e => {
                       if (!isBooked) {
@@ -279,7 +279,7 @@ export default function Accommodation() {
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.25 }}
                       style={{
-                        borderTop: '1px dashed rgba(34,197,94,0.3)',
+                        borderTop: '1px dashed rgba(0, 245, 196, 0.3)',
                         paddingTop: '12px',
                         fontFamily: 'var(--font-mono)',
                         fontSize: '8.5px',

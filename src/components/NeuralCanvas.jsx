@@ -83,7 +83,7 @@ function ReactorCore({ activeSection }) {
       case 'about':
         return '#ff00ff'; // Neon Magenta
       case 'workshops':
-        return '#00ff41'; // Terminal Green
+        return '#00f5c4'; // Cyber Mint
       case 'store':
       case 'accommodation':
         return '#ff00ff';

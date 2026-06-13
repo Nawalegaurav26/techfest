@@ -356,8 +356,8 @@ export default function Exhibitions() {
                     style={{
                       flex: 1.2,
                       padding: '10px 0',
-                      background: hasToken ? 'rgba(34,197,94,0.08)' : (exhibit.tokenRate === 'FULL' ? 'transparent' : 'rgba(255,45,85,0.05)'),
-                      border: `1px solid ${hasToken ? 'rgba(34,197,94,0.4)' : (exhibit.tokenRate === 'FULL' ? 'rgba(255,255,255,0.08)' : 'rgba(255,45,85,0.4)')}`,
+                      background: hasToken ? 'rgba(0, 245, 196, 0.08)' : (exhibit.tokenRate === 'FULL' ? 'transparent' : 'rgba(255,45,85,0.05)'),
+                      border: `1px solid ${hasToken ? 'rgba(0, 245, 196, 0.4)' : (exhibit.tokenRate === 'FULL' ? 'rgba(255,255,255,0.08)' : 'rgba(255,45,85,0.4)')}`,
                       color: hasToken ? 'var(--green)' : (exhibit.tokenRate === 'FULL' ? 'rgba(189,200,209,0.3)' : 'var(--plasma)'),
                       fontFamily: 'var(--font-mono)',
                       fontSize: '9px',
@@ -365,7 +365,7 @@ export default function Exhibitions() {
                       letterSpacing: '0.12em',
                       cursor: exhibit.tokenRate === 'FULL' ? 'not-allowed' : 'pointer',
                       transition: 'all 0.3s ease',
-                      boxShadow: hasToken ? '0 0 15px rgba(34,197,94,0.1)' : 'none'
+                      boxShadow: hasToken ? '0 0 15px rgba(0, 245, 196, 0.1)' : 'none'
                     }}
                     onMouseEnter={e => {
                       if (!hasToken && exhibit.tokenRate !== 'FULL') {

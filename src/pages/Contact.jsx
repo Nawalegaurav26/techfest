@@ -194,8 +194,8 @@ export default function Contact() {
               style={{
                 padding: '48px',
                 textAlign: 'center',
-                background: 'rgba(34,197,94,0.05)',
-                border: '1px solid rgba(34,197,94,0.4)',
+                background: 'rgba(0, 245, 196, 0.05)',
+                border: '1px solid rgba(0, 245, 196, 0.4)',
                 backdropFilter: 'var(--glass-blur)',
                 position: 'relative'
               }}
@@ -227,7 +227,7 @@ export default function Contact() {
                 marginTop: '24px',
                 padding: '12px 16px',
                 background: 'rgba(0,4,8,0.9)',
-                border: '1px dashed rgba(34,197,94,0.3)',
+                border: '1px dashed rgba(0, 245, 196, 0.3)',
                 fontFamily: 'var(--font-mono)',
                 fontSize: '9.0px',
                 color: 'var(--green)',

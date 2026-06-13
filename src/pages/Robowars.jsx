@@ -128,7 +128,7 @@ export default function Robowars() {
           disabled={ticketBooked}
           style={{
             padding: '14px 28px',
-            background: ticketBooked ? 'rgba(34,197,94,0.1)' : 'var(--plasma)',
+            background: ticketBooked ? 'rgba(0, 245, 196, 0.1)' : 'var(--plasma)',
             borderColor: ticketBooked ? 'var(--green)' : 'transparent',
             color: ticketBooked ? 'var(--green)' : '#fff',
             boxShadow: ticketBooked ? 'none' : '0 0 20px rgba(255, 45, 85, 0.4)'

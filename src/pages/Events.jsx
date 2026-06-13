@@ -49,8 +49,8 @@ const EVENTS = [
   },
 ];
 
-const TIER_COLORS = { ELITE: 'var(--plasma)', PRIME: 'var(--sky)', STANDARD: '#22c55e' };
-const TIER_GLOWS = { ELITE: 'rgba(255,45,85,0.25)', PRIME: 'rgba(56,189,248,0.2)', STANDARD: 'rgba(34,197,94,0.15)' };
+const TIER_COLORS = { ELITE: 'var(--plasma)', PRIME: 'var(--sky)', STANDARD: 'var(--green)' };
+const TIER_GLOWS = { ELITE: 'rgba(255,45,85,0.25)', PRIME: 'rgba(56,189,248,0.2)', STANDARD: 'rgba(0, 245, 196, 0.15)' };
 
 export default function Events() {
   const [active, setActive] = useState('ALL');
@@ -284,15 +284,15 @@ export default function Events() {
                     width: '100%',
                     padding: '12px 0',
                     minHeight: '48px',
-                    background: isReg ? 'rgba(34,197,94,0.08)' : 'rgba(255,45,85,0.05)',
-                    border: `1px solid ${isReg ? 'rgba(34,197,94,0.4)' : 'rgba(255,45,85,0.4)'}`,
+                    background: isReg ? 'rgba(0, 245, 196, 0.08)' : 'rgba(255,45,85,0.05)',
+                    border: `1px solid ${isReg ? 'rgba(0, 245, 196, 0.4)' : 'rgba(255,45,85,0.4)'}`,
                     color: isReg ? 'var(--green)' : 'var(--plasma)',
                     fontFamily: 'var(--font-mono)',
                     fontSize: '11px',
                     fontWeight: 700,
                     letterSpacing: '0.1em',
                     transition: 'all 0.25s ease',
-                    boxShadow: isReg ? '0 0 15px rgba(34,197,94,0.1)' : 'none'
+                    boxShadow: isReg ? '0 0 15px rgba(0, 245, 196, 0.1)' : 'none'
                   }}
                   onMouseEnter={e => {
                     if (!isReg) {

@@ -291,7 +291,7 @@ export default function FloatingDrone() {
   const activeColor = useMemo(() => {
     const path = location.pathname.toLowerCase();
     if (path.includes('robowars')) return '#ff2d55'; // Plasma Red
-    if (path.includes('workshops')) return '#22c55e'; // Green
+    if (path.includes('workshops')) return '#00f5c4'; // Cyber Mint
     if (path.includes('about')) return '#ff8c00'; // Orange
     return '#38bdf8'; // Electric Sky Blue default
   }, [location.pathname]);

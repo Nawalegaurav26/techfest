@@ -101,8 +101,8 @@ const WORKSHOPS = [
   },
 ];
 
-const LEVEL_COLORS = { ADVANCED: 'var(--plasma)', INTERMEDIATE: 'var(--sky)', BEGINNER: '#22c55e' };
-const LEVEL_GLOWS = { ADVANCED: 'rgba(255,45,85,0.25)', INTERMEDIATE: 'rgba(56,189,248,0.2)', BEGINNER: 'rgba(34,197,94,0.15)' };
+const LEVEL_COLORS = { ADVANCED: 'var(--plasma)', INTERMEDIATE: 'var(--sky)', BEGINNER: 'var(--green)' };
+const LEVEL_GLOWS = { ADVANCED: 'rgba(255,45,85,0.25)', INTERMEDIATE: 'rgba(56,189,248,0.2)', BEGINNER: 'rgba(0, 245, 196, 0.15)' };
 
 export default function Workshops() {
   const [registered, setRegistered] = useState({});
@@ -390,15 +390,15 @@ export default function Workshops() {
                       flex: 1.2,
                       padding: '10px 0',
                       minHeight: '40px',
-                      background: isReg ? 'rgba(34,197,94,0.08)' : 'rgba(255,45,85,0.05)',
-                      border: `1px solid ${isReg ? 'rgba(34,197,94,0.4)' : 'rgba(255,45,85,0.4)'}`,
+                      background: isReg ? 'rgba(0, 245, 196, 0.08)' : 'rgba(255,45,85,0.05)',
+                      border: `1px solid ${isReg ? 'rgba(0, 245, 196, 0.4)' : 'rgba(255,45,85,0.4)'}`,
                       color: isReg ? 'var(--green)' : 'var(--plasma)',
                       fontFamily: 'var(--font-mono)',
                       fontSize: '9px',
                       fontWeight: 700,
                       letterSpacing: '0.12em',
                       transition: 'all 0.3s ease',
-                      boxShadow: isReg ? '0 0 15px rgba(34,197,94,0.1)' : 'none'
+                      boxShadow: isReg ? '0 0 15px rgba(0, 245, 196, 0.1)' : 'none'
                     }}
                     onMouseEnter={e => {
                       if (!isReg) {

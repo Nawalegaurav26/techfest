@@ -505,7 +505,7 @@ export default function Store() {
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     margin: '0 auto 16px',
                     fontSize: '20px', color: 'var(--green)',
-                    boxShadow: '0 0 20px rgba(34,197,94,0.3)'
+                    boxShadow: '0 0 20px rgba(0, 245, 196, 0.3)'
                   }}>
                     ✓
                   </div>

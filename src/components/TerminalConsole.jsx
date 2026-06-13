@@ -236,9 +236,9 @@ export default function TerminalConsole({ fullScreen = false }) {
       {/* Terminal Title Bar */}
       <div className="flex justify-between items-center bg-primary/10 px-4 py-2 border-b border-primary/20 select-none">
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-          <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-          <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+          <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: 'var(--plasma)', opacity: 0.8 }} />
+          <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }} />
+          <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: 'var(--sky)', opacity: 0.8 }} />
           <span className="text-[10px] tracking-widest text-primary font-bold ml-2">ATHENA_CLI_CORE_V1.0</span>
         </div>
         <div className="text-[8px] text-primary/50">SECURE_LINK // AES-256</div>
