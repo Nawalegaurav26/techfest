@@ -1,3 +1,4 @@
+/* Techfest 2026 - Telemetry Log 13 */
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { isMock } from '../utils/supabaseAuth';
