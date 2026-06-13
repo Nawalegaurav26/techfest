@@ -1,3 +1,4 @@
+/* Techfest 2026 - Telemetry Log 0 */
 import { motion } from 'framer-motion';
 import { soundEffects } from '../utils/soundEffects';
 
