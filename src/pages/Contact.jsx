@@ -14,11 +14,27 @@ export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [logs, setLogs] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+    setLogs([]);
     soundEffects.playClick?.();
+
+    const messages = [
+      'RESOLVING COMM_RELAY NODE...',
+      'ENCRYPTING MESSAGE PAYLOAD [AES-256]...',
+      'INJECTING DATA PACKET TO GATEWAY...',
+      'COMMUNICATION TRACE COMMITTED.'
+    ];
+
+    messages.forEach((msg, idx) => {
+      setTimeout(() => {
+        setLogs(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${msg}`]);
+      }, (idx + 1) * 450);
+    });
+
     setTimeout(() => {
       setLoading(false);
       setSent(true);
@@ -206,6 +222,24 @@ export default function Contact() {
               }}>
                 CONNECTION SECURE. UPLOAD LOGGED.
               </div>
+
+              <div style={{
+                marginTop: '24px',
+                padding: '12px 16px',
+                background: 'rgba(0,4,8,0.9)',
+                border: '1px dashed rgba(34,197,94,0.3)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '9.0px',
+                color: 'var(--green)',
+                textAlign: 'left',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px'
+              }}>
+                {logs.map((log, lIdx) => (
+                  <div key={lIdx}>{log}</div>
+                ))}
+              </div>
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -383,6 +417,32 @@ export default function Contact() {
                 <span className="btn-br" />
                 {loading ? 'TRANSMITTING DATA...' : 'TRANSMIT COMM ENVELOPE'}
               </button>
+
+              {loading && (
+                <div style={{
+                  marginTop: '16px',
+                  padding: '12px 16px',
+                  background: 'rgba(0,4,8,0.9)',
+                  border: '1px solid rgba(56,189,248,0.3)',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '9px',
+                  color: 'var(--sky)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '4px',
+                  minHeight: '80px',
+                  textAlign: 'left'
+                }}>
+                  {logs.map((log, lIdx) => (
+                    <div key={lIdx}>{log}</div>
+                  ))}
+                  <motion.div
+                    animate={{ opacity: [1, 0, 1] }}
+                    transition={{ duration: 0.8, repeat: Infinity }}
+                    style={{ width: '6px', height: '10px', background: 'var(--sky)' }}
+                  />
+                </div>
+              )}
             </form>
           )}
         </motion.div>
