@@ -1,3 +1,4 @@
+/* Techfest 2026 - Telemetry Log 15 */
 import { useRef, useEffect } from 'react';
 import ShaderBackground from './ShaderBackground';
 
