@@ -1,3 +1,4 @@
+/* Techfest 2026 - Telemetry Log 19 */
 import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useLocation } from 'react-router-dom';
