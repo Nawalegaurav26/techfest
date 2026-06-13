@@ -1,3 +1,4 @@
+/* Techfest 2026 - Telemetry Log 17 */
 import { useRef, useMemo, useEffect, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Points, PointMaterial, Html } from '@react-three/drei';
