@@ -1,3 +1,4 @@
+/* Techfest 2026 - Telemetry Log 9 */
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import CyberBot from '../components/CyberBot';
