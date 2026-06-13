@@ -1,8 +1,22 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 export default function ComingSoon({ title = 'MODULE', subtitle = 'Under Construction' }) {
   const navigate = useNavigate();
+  const [percent, setPercent] = useState(64.28);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPercent(prev => {
+        const delta = Math.random() * 0.04;
+        const next = prev + delta;
+        return next > 99.99 ? 64.28 : parseFloat(next.toFixed(2));
+      });
+    }, 600);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="page-section" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh', textAlign: 'center' }}>
       <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7 }}>
@@ -14,7 +28,20 @@ export default function ComingSoon({ title = 'MODULE', subtitle = 'Under Constru
         </div>
         <div className="section-overline" style={{ justifyContent: 'center', marginBottom: '16px' }}>{title}</div>
         <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(32px,5vw,64px)', fontWeight: 800, color: '#fff', letterSpacing: '-0.03em', marginBottom: '16px' }}>{subtitle}</h1>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'rgba(189,200,209,0.5)', marginBottom: '40px' }}>This module is currently being assembled. Stand by.</p>
+        
+        <div style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: '16px',
+          color: 'var(--sky)',
+          textShadow: 'var(--glow-sky-sm)',
+          marginBottom: '20px',
+          letterSpacing: '0.15em',
+          fontWeight: 700
+        }}>
+          ASSEMBLY_PROGRESS // {percent}%
+        </div>
+
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'rgba(189,200,209,0.5)', marginBottom: '40px' }}>This module is currently being assembled in our robotic bays. Stand by.</p>
         <button className="btn-ghost" onClick={() => navigate('/')}>← RETURN TO BASE</button>
       </motion.div>
       <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
