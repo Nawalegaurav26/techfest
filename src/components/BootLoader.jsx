@@ -51,7 +51,7 @@ export default function BootLoader({ onComplete }) {
     return () => clearInterval(timer);
   }, []);
 
-  // HTML5 Canvas Interactive Particle Mesh
+  // HTML5 Canvas Interactive Fluid Swarm Particle Mesh
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -74,8 +74,8 @@ export default function BootLoader({ onComplete }) {
       particles.push({
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.8,
-        vy: (Math.random() - 0.5) * 0.8,
+        vx: (Math.random() - 0.5) * 1.2,
+        vy: (Math.random() - 0.5) * 1.2,
         radius: Math.random() * 2 + 1,
         color: Math.random() > 0.3 ? 'rgba(0, 242, 255, 0.4)' : 'rgba(255, 45, 85, 0.4)'
       });
@@ -86,23 +86,34 @@ export default function BootLoader({ onComplete }) {
       
       // Update & Draw particles
       particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        // Bounce boundaries
-        if (p.x < 0 || p.x > w) p.vx *= -1;
-        if (p.y < 0 || p.y > h) p.vy *= -1;
-
-        // Mouse attraction
+        // Mouse attraction using smooth acceleration (force-field physics)
         if (mouseRef.current.x !== null) {
           const dx = mouseRef.current.x - p.x;
           const dy = mouseRef.current.y - p.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 150) {
-            p.x += (dx / dist) * 0.4;
-            p.y += (dy / dist) * 0.4;
+          if (dist < 180) {
+            const force = (180 - dist) / 180;
+            p.vx += (dx / dist) * force * 0.18;
+            p.vy += (dy / dist) * force * 0.18;
           }
         }
+
+        // Apply friction/drag to make motion feel liquid and controlled
+        p.vx *= 0.94;
+        p.vy *= 0.94;
+
+        // Apply a gentle random walk/drift so particles remain lively
+        p.vx += (Math.random() - 0.5) * 0.05;
+        p.vy += (Math.random() - 0.5) * 0.05;
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Soft bounce boundaries
+        if (p.x < 0) { p.x = 0; p.vx *= -1; }
+        if (p.x > w) { p.x = w; p.vx *= -1; }
+        if (p.y < 0) { p.y = 0; p.vy *= -1; }
+        if (p.y > h) { p.y = h; p.vy *= -1; }
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
@@ -260,8 +271,22 @@ export default function BootLoader({ onComplete }) {
         padding: '30px',
         display: 'flex',
         flexDirection: 'column',
-        borderRadius: '4px'
+        borderRadius: '4px',
+        overflow: 'hidden'
       }}>
+        {/* CRT Scanline Beam sweep */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '100%',
+          background: 'linear-gradient(to bottom, transparent 0%, rgba(0, 242, 255, 0.04) 10%, transparent 20%)',
+          animation: 'crtSweep 6s linear infinite',
+          pointerEvents: 'none',
+          zIndex: 10
+        }} />
+
         {/* L-bracket border accents */}
         <div className="bracket-tl" style={{ borderColor: 'var(--sky)', width: '24px', height: '24px' }} />
         <div className="bracket-tr" style={{ borderColor: 'var(--sky)', width: '24px', height: '24px', position: 'absolute', top: -1, right: -1, borderTop: '2px solid var(--sky)', borderRight: '2px solid var(--sky)' }} />
@@ -359,6 +384,20 @@ export default function BootLoader({ onComplete }) {
                 strokeDasharray="4 8"
                 style={{
                   animation: 'spinCounterClockwise 8s linear infinite',
+                  transformOrigin: '50px 50px'
+                }}
+              />
+              {/* Sweeping pointer arm (radar sweep) */}
+              <line
+                x1="50"
+                y1="50"
+                x2="50"
+                y2="10"
+                stroke="rgba(0, 242, 255, 0.55)"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                style={{
+                  animation: 'spinClockwise 4s linear infinite',
                   transformOrigin: '50px 50px'
                 }}
               />
@@ -656,6 +695,10 @@ export default function BootLoader({ onComplete }) {
         @keyframes glitchPulse {
           0%, 100% { transform: translate(0); }
           50% { transform: translate(-1px, 0.5px); opacity: 0.95; }
+        }
+        @keyframes crtSweep {
+          0% { transform: translateY(-100%); }
+          100% { transform: translateY(100%); }
         }
       `}</style>
     </div>
