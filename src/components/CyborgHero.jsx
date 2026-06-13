@@ -1,3 +1,4 @@
+/* Techfest 2026 - Telemetry Log 18 */
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
