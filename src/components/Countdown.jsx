@@ -1,3 +1,4 @@
+/* Techfest 2026 - Telemetry Log 16 */
 import { useState, useEffect } from 'react';
 
 export default function Countdown({ targetDate }) {
