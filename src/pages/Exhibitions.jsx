@@ -1,3 +1,4 @@
+/* Techfest 2026 - Telemetry Log 6 */
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { soundEffects } from '../utils/soundEffects';
