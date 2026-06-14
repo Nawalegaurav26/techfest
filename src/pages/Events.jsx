@@ -48,6 +48,34 @@ const EVENTS = [
     desc: 'Design the next generation of space exploration technology and systems.',
     tags: ['SPACE', 'ENGINEERING', 'ISRO'],
   },
+  {
+    id: 'e7', category: 'TECHNICAL', tier: 'PRIME',
+    name: 'DRONE LIGHT SHOW', date: 'DEC 22', time: '19:00 IST',
+    prize: '₹1,20,000', participants: 180,
+    desc: 'Choreograph a 50-drone autonomous light show with precision swarm algorithms over the main field.',
+    tags: ['DRONES', 'SWARM AI', 'CONTROL'],
+  },
+  {
+    id: 'e8', category: 'TECHNICAL', tier: 'STANDARD',
+    name: 'AI STARTUP PITCH', date: 'DEC 24', time: '14:00 IST',
+    prize: '₹2,50,000', participants: 120,
+    desc: 'Pitch your AI startup to a panel of top VCs and win seed funding plus industry mentorship.',
+    tags: ['AI', 'STARTUP', 'PITCH'],
+  },
+  {
+    id: 'e9', category: 'ONLINE', tier: 'ELITE',
+    name: 'CYBERSECURITY CTF', date: 'DEC 21', time: '06:00 IST',
+    prize: '₹1,50,000', participants: 2000,
+    desc: '48-hour global Capture-the-Flag competition across 20 cybersecurity challenge domains.',
+    tags: ['SECURITY', 'HACKING', 'CTFOPEN'],
+  },
+  {
+    id: 'e10', category: 'TECHNICAL', tier: 'PRIME',
+    name: 'BIO-ROBOTICS DESIGN', date: 'DEC 23', time: '09:00 IST',
+    prize: '₹80,000', participants: 240,
+    desc: 'Design biomimetic robots inspired by natural organisms. Speed, agility, and adaptability scored.',
+    tags: ['ROBOTICS', 'BIO', 'DESIGN'],
+  },
 ];
 
 const TIER_COLORS = { ELITE: 'var(--plasma)', PRIME: 'var(--sky)', STANDARD: 'var(--green)' };
