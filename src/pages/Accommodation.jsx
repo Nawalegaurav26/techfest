@@ -5,6 +5,14 @@ import { soundEffects } from '../utils/soundEffects';
 
 const ACCOMMODATION_TYPES = [
   {
+    id: 'a0', type: 'SHARED CAPSULE',
+    capacity: '8 per room', price: '₹400/night',
+    amenities: ['Fans', 'WiFi', 'Locker', 'Common Bath'],
+    available: 240, status: 'AVAILABLE',
+    color: 'var(--green)',
+    glow: 'rgba(0,245,196,0.15)'
+  },
+  {
     id: 'a1', type: 'DORMITORY ALPHA',
     capacity: '4 per room', price: '₹800/night',
     amenities: ['AC', 'WiFi', 'Study Desk', 'Locker'],
@@ -37,6 +45,10 @@ const FAQS = [
   { q: 'Is food included in accommodation?', a: 'Breakfast is included for all room types. Lunch and dinner are available at the Techfest Food Court.' },
   { q: 'What documents do I need?', a: 'Valid college/institution ID and printed registration confirmation.' },
   { q: 'Can I modify my booking?', a: 'Modifications accepted up to 5 days before check-in. Contact accommodations@techfest.org.' },
+  { q: 'Is accommodation available for international participants?', a: 'Yes! International participants are welcome. Please book via the online portal and carry your passport.' },
+  { q: 'Are female-only sections available?', a: 'Yes. Separate secure wings for female participants are designated in Dormitory Alpha and Private Quarters.' },
+  { q: 'Is there 24/7 security?', a: 'Yes. All accommodation blocks have CCTV surveillance, biometric access, and 24/7 security personnel.' },
+  { q: 'Can I arrive a day early?', a: 'Early check-in from December 20 is available for an additional charge of ₹300/night. Contact us to arrange.' },
 ];
 
 export default function Accommodation() {
