@@ -660,6 +660,60 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ═══════════════════════════════════════════
+          FAQ SECTION
+      ═══════════════════════════════════════════ */}
+      <section className="page-section" style={{ position: 'relative', padding: '60px clamp(20px, 5vw, 60px)', maxWidth: '1000px', margin: '0 auto', paddingBottom: '100px' }}>
+        <div className="section-overline" style={{ marginBottom: '24px', textAlign: 'center' }}>TRANSMISSION LOGS // FAQ</div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '24px',
+        }}>
+          {[
+            { q: 'Who can participate in Techfest?', a: 'Techfest is open to all students, professionals, and tech enthusiasts worldwide. Some specific competitions may require valid student IDs.' },
+            { q: 'How do I access accommodation?', a: 'Navigate to the ACCOMMODATION module from the sidebar. You can book dormitories, capsules, or private quarters using your secure portal access.' },
+            { q: 'Is there a registration fee?', a: 'Basic festival entry is free. However, specialized workshops, pro-shows, and premium hackathons may have individual entry fees.' },
+            { q: 'Are international delegations allowed?', a: 'Yes. Techfest hosts participants from over 45 countries. International attendees can request special visa invitation letters via the CONTACT module.' },
+          ].map((faq, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              style={{
+                position: 'relative',
+                padding: '24px',
+                background: 'rgba(255,255,255,0.02)',
+                border: '1px solid rgba(56,189,248,0.1)',
+                backdropFilter: 'blur(10px)',
+              }}
+            >
+              <div className="bracket-tl" style={{ borderColor: 'rgba(56,189,248,0.3)' }} />
+              <div style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '12px',
+                fontWeight: 700,
+                color: 'var(--sky)',
+                marginBottom: '12px',
+                lineHeight: 1.4,
+              }}>
+                Q: {faq.q}
+              </div>
+              <div style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '12px',
+                color: 'rgba(189,200,209,0.6)',
+                lineHeight: 1.6,
+              }}>
+                A: {faq.a}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
     </div>
   );
 }
