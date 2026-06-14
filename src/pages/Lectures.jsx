@@ -75,6 +75,30 @@ const SPEAKERS = [
     venue: 'CONVOCATION HALL',
     status: 'FULL (RESERVE LIST)',
     image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=300&h=300'
+  },
+  {
+    id: 's7',
+    name: 'SUNDAR PICHAI',
+    title: 'CEO, GOOGLE & ALPHABET',
+    topic: 'MULTIMODAL AI: FROM LANGUAGE TO EMBODIED INTELLIGENCE',
+    desc: 'How Gemini Ultra is evolving beyond text — vision, audio, robotics, and real-time reasoning in a single integrated cognitive system.',
+    domain: 'ARTIFICIAL INTELLIGENCE',
+    time: 'DEC 22, 09:30 IST',
+    venue: 'CONVOCATION HALL',
+    status: '98% CAPACITY',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=300&h=300'
+  },
+  {
+    id: 's8',
+    name: 'DR. PRIYA NATARAJAN',
+    title: 'COSMOLOGIST, YALE UNIVERSITY',
+    topic: 'DARK MATTER MAPPING WITH GRAVITATIONAL LENSING AI',
+    desc: 'Using deep learning to resolve sub-arc-second gravitational lensing patterns from James Webb Space Telescope data to build the first high-resolution dark matter maps.',
+    domain: 'QUANTUM PHYSICS',
+    time: 'DEC 23, 11:30 IST',
+    venue: 'PC SAXENA AUDITORIUM',
+    status: '55% CAPACITY',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300&h=300'
   }
 ];
 
