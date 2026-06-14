@@ -73,6 +73,36 @@ const BOTS = [
     record: '11 WIN // 4 LOSS',
     desc: 'Designed to launch opponents 4 meters high. Features custom carbon-fiber armor panels and a sub-200ms weapon reload mechanism.',
     image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=300&h=300'
+  },
+  {
+    id: 'b5',
+    name: 'IRON NOVA',
+    team: 'IIT BOMBAY ROBOTICS (INDIA)',
+    weightClass: 'TITAN CLASS (120KG)',
+    weapon: 'Dual Counter-Rotating Steel Disc Hammers',
+    record: '16 WIN // 3 LOSS',
+    desc: 'Home-built champion from IIT Bombay. Custom brushless motor drives, hardox steel frame, and twin 40kg counter-rotating hammer discs at 7,200 RPM.',
+    image: 'https://images.unsplash.com/photo-1546776310-eef45dd6d63c?auto=format&fit=crop&q=80&w=300&h=300'
+  },
+  {
+    id: 'b6',
+    name: 'CRYO-BLADE',
+    team: 'ARCTIC STEEL (CANADA)',
+    weightClass: 'FEATHERWEIGHT (15KG)',
+    weapon: 'Liquid-Nitrogen-Cooled Undercutter Disc',
+    record: '19 WIN // 1 LOSS',
+    desc: 'The most wins in featherweight history. Ultra-low ground clearance chassis combined with a cryo-hardened titanium undercutter disc.',
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=300&h=300'
+  },
+  {
+    id: 'b7',
+    name: 'PULSE-X',
+    team: 'TOKYO MECHS (JAPAN)',
+    weightClass: 'HEAVYWEIGHT (60KG)',
+    weapon: 'Electromagnetic Pulse (EMP) Generator Array',
+    record: '8 WIN // 6 LOSS',
+    desc: 'Unconventional electrical warfare robot. Discharges a targeted 50kV EMP pulse to disable opponent electronics without physical contact.',
+    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=300&h=300'
   }
 ];
 
