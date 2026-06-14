@@ -199,7 +199,7 @@ export default function Sponsors() {
                   <div style={{
                     width: tier.name === 'TITLE SPONSOR' ? 80 : 52,
                     height: tier.name === 'TITLE SPONSOR' ? 80 : 52,
-                    borderRadius: '50%',
+                    borderRadius: '0px',
                     border: `2px solid ${tier.color}40`,
                     background: `radial-gradient(circle, ${tier.glow} 0%, transparent 70%)`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',

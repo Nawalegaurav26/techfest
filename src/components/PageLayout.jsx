@@ -591,7 +591,7 @@ export default function PageLayout() {
                     color: 'rgba(189,200,209,0.7)',
                     background: 'transparent',
                     fontSize: '18px',
-                    borderRadius: '4px',
+                    borderRadius: '0px',
                   }}
                   aria-label="Close menu"
                 >
@@ -648,7 +648,7 @@ export default function PageLayout() {
                           border: '1px solid rgba(56,189,248,0.3)',
                           padding: '2px 6px',
                           background: 'rgba(56,189,248,0.08)',
-                          borderRadius: '2px',
+                          borderRadius: '0px',
                           lineHeight: '1',
                         }}>
                           ACTIVE
@@ -708,7 +708,7 @@ export default function PageLayout() {
                   <span style={{
                     width: '36px',
                     height: '20px',
-                    borderRadius: '10px',
+                    borderRadius: '0px',
                     background: soundEnabled ? 'var(--sky)' : 'rgba(255,255,255,0.1)',
                     position: 'relative',
                     transition: 'background 0.25s',
@@ -720,7 +720,7 @@ export default function PageLayout() {
                       left: soundEnabled ? '18px' : '3px',
                       width: '14px',
                       height: '14px',
-                      borderRadius: '50%',
+                      borderRadius: '0px',
                       background: '#fff',
                       transition: 'left 0.25s',
                       boxShadow: soundEnabled ? '0 0 6px rgba(56,189,248,0.6)' : 'none',
@@ -743,7 +743,7 @@ export default function PageLayout() {
                           style={{
                             width: '28px',
                             height: '28px',
-                            borderRadius: '50%',
+                            borderRadius: '0px',
                             border: '1px solid rgba(56,189,248,0.5)',
                           }}
                         />

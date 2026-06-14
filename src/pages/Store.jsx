@@ -501,7 +501,7 @@ export default function Store() {
               ) : (
                 <div style={{ textAlign: 'center', padding: '20px 0' }}>
                   <div style={{
-                    width: '48px', height: '48px', borderRadius: '50%',
+                    width: '48px', height: '48px', borderRadius: '0px',
                     border: '2px solid var(--green)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     margin: '0 auto 16px',

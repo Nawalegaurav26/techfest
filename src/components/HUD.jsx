@@ -212,7 +212,7 @@ export default function HUD({ activeSection, setActiveSection, soundEnabled, set
               <img 
                 src={user.photoURL} 
                 alt="Avatar" 
-                className="w-7 h-7 rounded-full border border-primary/40 shadow-[0_0_6px_rgba(0,242,255,0.2)]" 
+                className="w-7 h-7 rounded-none border border-primary/40 shadow-[0_0_6px_rgba(0,242,255,0.2)]" 
               />
               <button 
                 onClick={handleSignOut}
@@ -237,7 +237,12 @@ export default function HUD({ activeSection, setActiveSection, soundEnabled, set
       <div className="flex-1 relative flex items-center justify-between w-full px-8 overflow-hidden">
         
         {/* Left Sidebar (Navigation) - responsive floating bottom bar on mobile */}
-        <div className="flex flex-row md:flex-col gap-3 md:gap-6 pointer-events-auto bg-black/80 md:bg-black/30 p-3 md:p-4 rounded-full md:rounded-xl border border-white/5 backdrop-blur-md md:backdrop-blur-sm relative z-20 fixed bottom-4 left-1/2 -translate-x-1/2 md:translate-x-0 md:static md:bottom-auto md:left-auto">
+        <div className="flex flex-row md:flex-col gap-3 md:gap-6 pointer-events-auto bg-black/80 md:bg-black/30 p-3 md:p-4 rounded-none border border-white/5 backdrop-blur-md md:backdrop-blur-sm relative z-20 fixed bottom-4 left-1/2 -translate-x-1/2 md:translate-x-0 md:static md:bottom-auto md:left-auto">
+          {/* HUD Corner Brackets */}
+          <div className="bracket-tl" />
+          <div className="bracket-tr" />
+          <div className="bracket-bl" />
+          <div className="bracket-br" />
           {[
             { icon: <HomeIcon size={18} />, label: 'HOME', id: 'home' },
             { icon: <Calendar size={18} />, label: 'EVENTS', id: 'events' },
@@ -253,14 +258,14 @@ export default function HUD({ activeSection, setActiveSection, soundEnabled, set
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              className={`group flex items-center gap-4 p-2 transition-all duration-300 rounded border ${
+              className={`group flex items-center gap-4 p-2 transition-all duration-300 rounded-none border ${
                 activeSection === item.id
                   ? 'border-primary/40 text-primary bg-primary/5'
                   : 'border-transparent text-text-secondary hover:text-white hover:bg-white/5'
               }`}
             >
               <div className="w-5 flex justify-center">{item.icon}</div>
-              <span className="text-[10px] font-mono tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-14 whitespace-nowrap bg-black/85 border border-white/10 px-3 py-1 rounded backdrop-blur-md">
+              <span className="text-[10px] font-mono tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute left-14 whitespace-nowrap bg-black/85 border border-white/10 px-3 py-1 rounded-none backdrop-blur-md">
                 {item.label}
               </span>
             </motion.button>
@@ -275,7 +280,12 @@ export default function HUD({ activeSection, setActiveSection, soundEnabled, set
         </div>
 
         {/* Right Sidebar (Socials) - hidden on mobile */}
-        <div className="hidden md:flex flex-col gap-6 pointer-events-auto bg-black/30 p-4 rounded-xl border border-white/5 backdrop-blur-sm relative z-20">
+        <div className="hidden md:flex flex-col gap-6 pointer-events-auto bg-black/30 p-4 rounded-none border border-white/5 backdrop-blur-sm relative z-20">
+          {/* HUD Corner Brackets */}
+          <div className="bracket-tl" />
+          <div className="bracket-tr" />
+          <div className="bracket-bl" />
+          <div className="bracket-br" />
           {[
             { icon: <div className="text-[9px] font-bold text-center">IG</div>, href: 'https://instagram.com/techfest_iitbombay' },
             { icon: <div className="text-[9px] font-bold text-center">LN</div>, href: 'https://linkedin.com/company/techfest-iit-bombay' },

@@ -271,7 +271,7 @@ export default function BootLoader({ onComplete }) {
         padding: '30px',
         display: 'flex',
         flexDirection: 'column',
-        borderRadius: '4px',
+        borderRadius: '0px',
         overflow: 'hidden'
       }}>
         {/* CRT Scanline Beam sweep */}
@@ -330,7 +330,7 @@ export default function BootLoader({ onComplete }) {
             background: 'rgba(5, 5, 8, 0.5)',
             border: '1px solid rgba(0, 242, 255, 0.1)',
             padding: '20px',
-            borderRadius: '4px',
+            borderRadius: '0px',
             position: 'relative'
           }}>
             <svg width="140" height="140" viewBox="0 0 100 100">
@@ -437,7 +437,7 @@ export default function BootLoader({ onComplete }) {
             background: 'rgba(4, 4, 6, 0.95)',
             border: '1px solid rgba(0, 242, 255, 0.1)',
             padding: '16px 20px',
-            borderRadius: '4px',
+            borderRadius: '0px',
             position: 'relative'
           }}>
             {/* Real-time stats ticker bar */}
@@ -510,7 +510,7 @@ export default function BootLoader({ onComplete }) {
             background: 'rgba(5, 5, 8, 0.7)',
             marginBottom: '8px',
             overflow: 'hidden',
-            borderRadius: '2px'
+            borderRadius: '0px'
           }}>
             {/* Inner fill */}
             <motion.div
@@ -603,7 +603,7 @@ export default function BootLoader({ onComplete }) {
                     boxShadow: '0 0 20px rgba(255, 45, 85, 0.35)',
                     cursor: 'pointer',
                     transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-                    borderRadius: '2px'
+                    borderRadius: '0px'
                   }}
                   onMouseEnter={e => {
                     e.currentTarget.style.boxShadow = '0 0 30px rgba(255, 45, 85, 0.6)';
@@ -633,7 +633,7 @@ export default function BootLoader({ onComplete }) {
                     border: '1px solid rgba(0, 242, 255, 0.25)',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease',
-                    borderRadius: '2px'
+                    borderRadius: '0px'
                   }}
                   onMouseEnter={e => {
                     e.currentTarget.style.background = 'rgba(0, 242, 255, 0.1)';

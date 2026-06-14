@@ -236,7 +236,7 @@ export default function About() {
               <div className="bracket-br" />
 
               <div style={{
-                width: 48, height: 48, borderRadius: '50%',
+                width: 48, height: 48, borderRadius: '0px',
                 background: 'radial-gradient(circle, rgba(56,189,248,0.2) 0%, rgba(5,5,8,0.5) 100%)',
                 border: '1px solid rgba(56,189,248,0.3)',
                 marginBottom: '12px',

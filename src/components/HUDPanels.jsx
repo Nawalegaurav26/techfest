@@ -83,9 +83,9 @@ export function HUDPanel({ children, title, subtitle, className = '', animate = 
 // Cyberpunk interactive button
 export function FuturisticButton({ children, onClick, active = false, className = '', variant = 'primary' }) {
   const isPrimary = variant === 'primary';
-  const accentColor = isPrimary ? 'var(--primary)' : 'var(--secondary)';
-  const hoverBg = isPrimary ? 'rgba(0, 242, 255, 0.08)' : 'rgba(255, 0, 255, 0.08)';
-  const borderColor = active ? accentColor : `rgba(${isPrimary ? '0, 242, 255' : '255, 0, 255'}, 0.35)`;
+  const accentColor = isPrimary ? 'var(--sky)' : 'var(--plasma)';
+  const hoverBg = isPrimary ? 'rgba(56, 189, 248, 0.08)' : 'rgba(255, 45, 85, 0.08)';
+  const borderColor = active ? accentColor : `rgba(${isPrimary ? '56, 189, 248' : '255, 45, 85'}, 0.35)`;
 
   const handleMouseEnter = () => {
     soundEffects.playHover();
@@ -104,7 +104,7 @@ export function FuturisticButton({ children, onClick, active = false, className 
       onClick={handleClick}
       style={{
         borderColor: borderColor,
-        boxShadow: active ? `0 0 12px ${isPrimary ? 'rgba(0, 242, 255, 0.2)' : 'rgba(255, 0, 255, 0.2)'}` : 'none'
+        boxShadow: active ? `0 0 12px ${isPrimary ? 'rgba(56, 189, 248, 0.2)' : 'rgba(255, 45, 85, 0.2)'}` : 'none'
       }}
       className={`px-4 py-2 border text-xs font-mono tracking-widest relative group overflow-hidden transition-all duration-300 ${
         active 
@@ -133,7 +133,7 @@ export function CyberBadge({ status = 'online', text = 'ACTIVE' }) {
     switch (status) {
       case 'online':
       case 'success':
-        return { bg: 'bg-[#00ff41]/10', text: 'text-[#00ff41]', border: 'border-[#00ff41]/30', dot: 'bg-[#00ff41]' };
+        return { bg: 'rgba(0, 245, 196, 0.1)', text: 'text-[var(--green)]', border: 'border-[var(--green)]/30', dot: 'bg-[var(--green)]' };
       case 'warning':
         return { bg: 'bg-yellow-500/10', text: 'text-yellow-400', border: 'border-yellow-500/30', dot: 'bg-yellow-500' };
       case 'danger':
@@ -141,7 +141,7 @@ export function CyberBadge({ status = 'online', text = 'ACTIVE' }) {
         return { bg: 'bg-red-500/10', text: 'text-red-400', border: 'border-red-500/30', dot: 'bg-red-500' };
       case 'info':
       default:
-        return { bg: 'bg-primary/10', text: 'text-primary', border: 'border-primary/30', dot: 'bg-primary' };
+        return { bg: 'rgba(56, 189, 248, 0.1)', text: 'text-[var(--sky)]', border: 'border-[var(--sky)]/30', dot: 'bg-[var(--sky)]' };
     }
   };
 
