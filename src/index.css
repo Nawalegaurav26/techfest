@@ -124,7 +124,18 @@ img { display: block; max-width: 100%; }
 
 /* ── SELECTION ─────────────────────────────────────── */
 ::selection {
-  background: rgba(56, 189, 248, 0.2);
+  background: rgba(56, 189, 248, 0.3);
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.8);
+}
+.glow-plasma::selection,
+.text-plasma::selection {
+  background: rgba(255, 45, 85, 0.3);
+  color: #fff;
+}
+.glow-green::selection,
+.text-green::selection {
+  background: rgba(0, 245, 196, 0.3);
   color: #fff;
 }
 
