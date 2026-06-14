@@ -35,6 +35,34 @@ const STATS = [
   { value: '72 Hrs',  label: 'NON-STOP ACTION', tag: 'SYS.04' },
 ];
 
+/* ── HIGHLIGHTS ─────────────────────────────────────── */
+const HIGHLIGHTS = [
+  {
+    tag: 'KEYNOTE',
+    color: 'var(--plasma)',
+    title: 'SAM ALTMAN',
+    sub: 'CEO, OpenAI',
+    detail: 'Dec 22 · Convocation Hall',
+    to: '/lectures',
+  },
+  {
+    tag: 'FLAGSHIP EVENT',
+    color: 'var(--sky)',
+    title: 'ROBOWAR SIGMA',
+    sub: '₹3,00,000 Prize Pool',
+    detail: 'Dec 10 Deadline · 64 Slots',
+    to: '/competitions',
+  },
+  {
+    tag: 'EXHIBITION',
+    color: '#22c55e',
+    title: 'ISRO GAGANYAAN',
+    sub: 'Live Orbital Module Demo',
+    detail: 'Space Pavilion · Ongoing',
+    to: '/exhibitions',
+  },
+];
+
 /* ── CATEGORIES ────────────────────────────────────── */
 const CATEGORIES = [
   { icon: '⚔',  title: 'COMPETITIONS',  desc: 'Evolution trials. Survival of the most advanced.',   to: '/competitions' },
@@ -535,6 +563,102 @@ export default function Home() {
               index={i}
               navigate={navigate}
             />
+          ))}
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          FEATURED HIGHLIGHTS STRIP
+      ═══════════════════════════════════════════ */}
+      <section style={{ padding: '0 clamp(16px, 4vw, 80px) clamp(60px, 8vw, 120px)' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          style={{ marginBottom: 'clamp(20px, 3vw, 36px)' }}
+        >
+          <div className="section-overline" style={{ marginBottom: '14px' }}>
+            FEATURED THIS YEAR
+          </div>
+          <h2 style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(22px, 3.5vw, 40px)',
+            fontWeight: 800,
+            color: '#fff',
+            letterSpacing: '-0.02em',
+            lineHeight: 1.1,
+          }}>
+            Don&apos;t Miss These
+          </h2>
+        </motion.div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))',
+          gap: 'clamp(12px, 2vw, 20px)',
+        }}>
+          {HIGHLIGHTS.map((h, i) => (
+            <motion.button
+              key={h.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              onClick={() => { soundEffects.playClick?.(); navigate(h.to); }}
+              onMouseEnter={() => soundEffects.playHover?.()}
+              whileTap={{ scale: 0.97 }}
+              style={{
+                position: 'relative',
+                padding: 'clamp(18px, 2.5vw, 24px)',
+                textAlign: 'left',
+                background: 'rgba(255,255,255,0.02)',
+                backdropFilter: 'blur(16px)',
+                border: `1px solid rgba(255,255,255,0.08)`,
+                color: '#fff',
+                width: '100%',
+                display: 'block',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              <div className="bracket-tl" style={{ borderColor: h.color }} />
+              <div className="bracket-br" style={{ borderColor: h.color }} />
+              <div style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '9px',
+                fontWeight: 700,
+                letterSpacing: '0.2em',
+                color: h.color,
+                marginBottom: '10px',
+              }}>
+                {h.tag}
+              </div>
+              <div style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(14px, 2vw, 18px)',
+                fontWeight: 700,
+                color: '#fff',
+                lineHeight: 1.2,
+                marginBottom: '4px',
+              }}>
+                {h.title}
+              </div>
+              <div style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'clamp(10px, 1.3vw, 11px)',
+                color: 'rgba(189,200,209,0.6)',
+                marginBottom: '10px',
+              }}>
+                {h.sub}
+              </div>
+              <div style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '9px',
+                color: 'rgba(189,200,209,0.35)',
+                letterSpacing: '0.1em',
+              }}>
+                {h.detail}
+              </div>
+            </motion.button>
           ))}
         </div>
       </section>
