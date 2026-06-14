@@ -249,9 +249,11 @@ img { display: block; max-width: 100%; }
 /* ────────────────────────────────────────────────────
    GLOW TEXT
 ────────────────────────────────────────────────────── */
-.glow-sky   { text-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 40px rgba(56, 189, 248, 0.25); }
-.glow-plasma{ text-shadow: 0 0 15px rgba(255, 45, 85, 0.6),  0 0 40px rgba(255, 45, 85, 0.25); }
-.glow-white { text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+.glow-sky    { text-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 40px rgba(56, 189, 248, 0.25); }
+.glow-plasma { text-shadow: 0 0 15px rgba(255, 45, 85, 0.6),  0 0 40px rgba(255, 45, 85, 0.25); }
+.glow-white  { text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+.glow-green  { text-shadow: 0 0 15px rgba(0, 245, 196, 0.6), 0 0 40px rgba(0, 245, 196, 0.2); }
+.glow-gold   { text-shadow: 0 0 15px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 215, 0, 0.2); }
 
 /* ────────────────────────────────────────────────────
    BUTTONS — Mobile-first touch targets
