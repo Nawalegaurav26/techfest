@@ -110,14 +110,19 @@ export default function HolographicNav({
       </button>
 
       {/* ── CENTER: NAV LINKS (desktop) ──────────── */}
-      <nav style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 'clamp(16px, 2.5vw, 32px)',
-        position: 'absolute',
-        left: '50%',
-        transform: 'translateX(-50%)',
-      }} className="hidden-mobile-nav">
+      <nav
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'clamp(16px, 2.5vw, 32px)',
+          position: 'absolute',
+          left: '50%',
+          transform: 'translateX(-50%)',
+        }}
+        className="hidden-mobile-nav"
+        aria-label="Main navigation"
+        role="navigation"
+      >
         {NAV_LINKS.map((link) => (
           <NavLink
             key={link.to}
@@ -125,6 +130,7 @@ export default function HolographicNav({
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
             onClick={() => soundEffects.playClick?.()}
             style={{ padding: '8px 4px', minHeight: '44px', display: 'flex', alignItems: 'center' }}
+            aria-label={`Navigate to ${link.label}`}
           >
             {link.label}
           </NavLink>
