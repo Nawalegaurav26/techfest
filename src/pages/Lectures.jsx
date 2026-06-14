@@ -99,10 +99,22 @@ const SPEAKERS = [
     venue: 'PC SAXENA AUDITORIUM',
     status: '55% CAPACITY',
     image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300&h=300'
+  },
+  {
+    id: 's9',
+    name: 'NERI OXMAN',
+    title: 'FOUNDER, OXMAN / FORMER MIT MEDIA LAB',
+    topic: 'MATERIAL ECOLOGY: GROWING ARCHITECTURE',
+    desc: 'At the intersection of computational design, digital fabrication, materials science, and synthetic biology. Designing structures that mimic, interact with, and grow alongside biological systems.',
+    domain: 'MATERIAL ECOLOGY',
+    time: 'DEC 24, 10:00 IST',
+    venue: 'MAIN AUDITORIUM',
+    status: '80% CAPACITY',
+    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=300&h=300'
   }
 ];
 
-const DOMAINS = ['ALL', 'ARTIFICIAL INTELLIGENCE', 'QUANTUM PHYSICS', 'CRYPTOGRAPHY', 'ROBOTICS & ANDROIDS', 'BIO-TECHNOLOGY', 'AEROSPACE SYSTEMS'];
+const DOMAINS = ['ALL', 'ARTIFICIAL INTELLIGENCE', 'QUANTUM PHYSICS', 'CRYPTOGRAPHY', 'ROBOTICS & ANDROIDS', 'BIO-TECHNOLOGY', 'AEROSPACE SYSTEMS', 'MATERIAL ECOLOGY'];
 
 export default function Lectures() {
   const [activeDomain, setActiveDomain] = useState('ALL');
