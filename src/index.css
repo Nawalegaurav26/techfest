@@ -441,7 +441,7 @@ img { display: block; max-width: 100%; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .typing-text {
-    animation: typing 2.5s steps(28, end) 0.5s both,
+    animation: typing 3.5s steps(35, end) 0.5s both,
                blinkCaret 0.75s step-end infinite;
   }
 }
