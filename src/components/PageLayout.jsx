@@ -400,6 +400,36 @@ export default function PageLayout() {
           }}
         >
           <Outlet />
+
+          {/* ── SITE FOOTER ─────────────────────────── */}
+          <footer style={{
+            marginTop: '80px',
+            paddingTop: '40px',
+            paddingBottom: '40px',
+            borderTop: '1px solid rgba(56,189,248,0.15)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '16px',
+            textAlign: 'center'
+          }}>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: '20px', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em' }}>
+              TECHFEST <span style={{ color: 'var(--sky)' }}>IIT BOMBAY</span>
+            </div>
+            <div style={{
+              display: 'flex', gap: '24px', flexWrap: 'wrap', justifyContent: 'center',
+              fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em',
+            }}>
+              <a href="#" style={{ color: 'rgba(189,200,209,0.6)', textDecoration: 'none' }}>PRIVACY POLICY</a>
+              <a href="#" style={{ color: 'rgba(189,200,209,0.6)', textDecoration: 'none' }}>TERMS OF SERVICE</a>
+              <a href="#" style={{ color: 'rgba(189,200,209,0.6)', textDecoration: 'none' }}>CODE OF CONDUCT</a>
+            </div>
+            <div style={{
+              fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(189,200,209,0.4)', marginTop: '8px'
+            }}>
+              © 2025-2026 Techfest IIT Bombay. All rights reserved.
+            </div>
+          </footer>
         </motion.main>
       </AnimatePresence>
 
