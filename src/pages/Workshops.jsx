@@ -100,6 +100,38 @@ const WORKSHOPS = [
       'HARDWARE: Standard laptop webcam feed, CPU/GPU accelerated runtime.'
     ]
   },
+  {
+    id: 'w7', code: 'LAB-07',
+    name: 'ROCKET SIMULATION ENGINEERING',
+    instructor: 'Aditi Rao · ISRO / SpaceX Alumni',
+    duration: '6 HRS', seats: 20, price: '₹1,200',
+    level: 'ADVANCED',
+    desc: 'Simulate full orbital mission trajectories. Design and analyze multi-stage rocket propulsion with real NASA tools.',
+    tools: ['OpenRocket', 'GMAT', 'Python'],
+    date: 'DEC 22',
+    specs: [
+      'PREREQUISITES: Newtonian mechanics, thermodynamics fundamentals, Python scripting.',
+      'SYLLABUS: Tsiolkovsky equation, staging optimization, trajectory simulation, re-entry heating.',
+      'HANDS-ON: Design a 3-stage launch vehicle and simulate lunar transfer orbit.',
+      'TOOLS: OpenRocket design, GMAT FOSS tool, Python-based aero coefficient analysis.'
+    ]
+  },
+  {
+    id: 'w8', code: 'LAB-08',
+    name: 'AR/VR DEVELOPMENT BOOTCAMP',
+    instructor: 'Kabir Shah · Meta Reality Labs',
+    duration: '7 HRS', seats: 30, price: '₹600',
+    level: 'BEGINNER',
+    desc: 'Build immersive Mixed Reality experiences for Meta Quest and WebXR from scratch using Unity.',
+    tools: ['Unity', 'Meta SDK', 'WebXR'],
+    date: 'DEC 23',
+    specs: [
+      'PREREQUISITES: Basic C# or JavaScript programming experience.',
+      'SYLLABUS: Unity XR Interaction Toolkit, hand tracking, scene anchors, passthrough AR.',
+      'HANDS-ON: Build a fully interactive AR scavenger hunt deployed to Meta Quest.',
+      'HARDWARE: Meta Quest 3 headsets provided during hands-on lab sessions.'
+    ]
+  },
 ];
 
 const LEVEL_COLORS = { ADVANCED: 'var(--plasma)', INTERMEDIATE: 'var(--sky)', BEGINNER: 'var(--green)' };
