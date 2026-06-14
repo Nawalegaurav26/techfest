@@ -81,6 +81,45 @@ const EXHIBITS = [
     demotimes: 'ONGOING DEMONSTRATIONS',
     location: 'MAIN EXHIBITION HALL A',
     tokenRate: '80% ALLOCATED'
+  },
+  {
+    id: 'e7',
+    code: 'EX-G710',
+    name: 'NASA PERSEVERANCE REPLICA',
+    institution: 'NASA JPL (USA)',
+    tech: 'FULL-SCALE MARS ROVER REPLICA & LIVE TELEMETRY',
+    desc: 'A life-size replica of the Perseverance rover with live data feeds from the real rover still operating on the Martian surface. Interact with the robotic arm and spectrometer interfaces.',
+    category: 'AEROSPACE',
+    country: 'UNITED STATES',
+    demotimes: '10:00, 13:00, 16:00',
+    location: 'SPACE PAVILION',
+    tokenRate: '70% ALLOCATED'
+  },
+  {
+    id: 'e8',
+    code: 'EX-H814',
+    name: 'SORA AI VIDEO SYNTHESIS',
+    institution: 'OPENAI (USA)',
+    tech: 'DIFFUSION TRANSFORMER VIDEO GENERATION',
+    desc: 'Watch AI generate 60-second photorealistic videos from text in real time. Interactive prompt terminal lets visitors create their own synthetic cinematic sequences.',
+    category: 'DEEP TECH',
+    country: 'UNITED STATES',
+    demotimes: 'ONGOING DEMONSTRATIONS',
+    location: 'MAIN EXHIBITION HALL B',
+    tokenRate: '92% ALLOCATED'
+  },
+  {
+    id: 'e9',
+    code: 'EX-I901',
+    name: 'IIT BOMBAY HYPER-ACCEL EV',
+    institution: 'IIT BOMBAY E-RACING TEAM',
+    tech: '4WD FORMULA-STYLE ELECTRIC RACECAR',
+    desc: 'Student-built Formula-SAE electric racecar with 4-wheel torque vectoring, regenerative braking, and a custom BMS achieving 0-100 km/h in 3.2 seconds.',
+    category: 'GREEN ENERGY',
+    country: 'INDIA',
+    demotimes: '11:00, 14:00, 17:00',
+    location: 'GYMKHANA RACETRACK',
+    tokenRate: '45% ALLOCATED'
   }
 ];
 
