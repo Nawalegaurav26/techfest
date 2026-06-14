@@ -3,12 +3,18 @@ import { motion } from 'framer-motion';
 import { soundEffects } from '../utils/soundEffects';
 
 const TEAM = [
-  { name: 'ARJUN MEHTA', role: 'FESTIVAL DIRECTOR', dept: 'Aerospace Eng.' },
-  { name: 'PRIYA NAIR', role: 'TECH LEAD', dept: 'Computer Science' },
-  { name: 'RAHUL SHARMA', role: 'EVENTS HEAD', dept: 'Electrical Eng.' },
-  { name: 'SNEHA PATEL', role: 'DESIGN LEAD', dept: 'Design' },
-  { name: 'VIKRAM RAO', role: 'SPONSORSHIP', dept: 'MBA' },
-  { name: 'ANANYA SINGH', role: 'OUTREACH', dept: 'Chemical Eng.' },
+  { name: 'ARJUN MEHTA',   role: 'FESTIVAL DIRECTOR', dept: 'Aerospace Eng.',  initials: 'AM' },
+  { name: 'PRIYA NAIR',    role: 'TECH LEAD',          dept: 'Computer Science', initials: 'PN' },
+  { name: 'RAHUL SHARMA',  role: 'EVENTS HEAD',        dept: 'Electrical Eng.',  initials: 'RS' },
+  { name: 'SNEHA PATEL',   role: 'DESIGN LEAD',        dept: 'Design',           initials: 'SP' },
+  { name: 'VIKRAM RAO',    role: 'SPONSORSHIP',        dept: 'MBA',              initials: 'VR' },
+  { name: 'ANANYA SINGH',  role: 'OUTREACH',           dept: 'Chemical Eng.',    initials: 'AS' },
+  { name: 'KARAN IYER',    role: 'OPERATIONS',         dept: 'Mechanical Eng.',  initials: 'KI' },
+  { name: 'MEERA KRISHNA', role: 'MEDIA & PR',         dept: 'Communication',    initials: 'MK' },
+  { name: 'DEV BHATIA',    role: 'ROBOTICS LEAD',      dept: 'Electronics Eng.', initials: 'DB' },
+  { name: 'TANYA GUPTA',   role: 'WORKSHOPS HEAD',     dept: 'Computer Science', initials: 'TG' },
+  { name: 'SIDDHARTH K.',  role: 'FINANCE',            dept: 'MBA',              initials: 'SK' },
+  { name: 'RISHIKA JAIN',  role: 'VOLUNTEERS HEAD',    dept: 'Civil Eng.',       initials: 'RJ' },
 ];
 
 const MILESTONES = [
@@ -25,6 +31,14 @@ const STATS = [
   { value: '150+',  label: 'TECH SPEAKERS',      desc: 'Industry titans & leading scientists' },
   { value: '₹30L+', label: 'PRIZE MATRIX',       desc: 'Total prize pool allocations' },
 ];
+
+const MISSION_PILLARS = [
+  { icon: '◈', title: 'INNOVATE', desc: 'Push the boundaries of technology through open collaboration and radical problem-solving.' },
+  { icon: '⬣', title: 'CONNECT', desc: 'Bridge students, industry leaders, and global research institutions in a single ecosystem.' },
+  { icon: '⚡', title: 'EMPOWER', desc: 'Provide every participant with the tools, mentorship, and platform to shape the future.' },
+];
+
+
 
 export default function About() {
   return (
@@ -204,6 +218,51 @@ export default function About() {
         </div>
       </motion.div>
 
+      {/* Mission Pillars */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.55 }}
+        style={{ marginBottom: '48px' }}
+      >
+        <div className="section-overline" style={{ marginBottom: '20px' }}>OUR MISSION</div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 220px), 1fr))',
+          gap: '14px',
+        }}>
+          {MISSION_PILLARS.map((p, i) => (
+            <div
+              key={p.title}
+              className="glass-panel"
+              style={{
+                padding: '24px',
+                border: '1px solid rgba(56,189,248,0.15)',
+                position: 'relative',
+              }}
+            >
+              <div className="bracket-tl" />
+              <div className="bracket-br" />
+              <div style={{ fontSize: '20px', marginBottom: '12px' }}>{p.icon}</div>
+              <div style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '10px',
+                fontWeight: 700,
+                letterSpacing: '0.2em',
+                color: 'var(--plasma)',
+                marginBottom: '8px',
+              }}>{p.title}</div>
+              <div style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '12.5px',
+                color: 'rgba(189,200,209,0.55)',
+                lineHeight: 1.65,
+              }}>{p.desc}</div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
       {/* Core Team */}
       <div>
         <div className="section-overline" style={{ marginBottom: '24px' }}>CORE TEAM</div>
@@ -213,7 +272,7 @@ export default function About() {
               key={member.name}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08 + 1 }}
+              transition={{ delay: i * 0.06 + 1 }}
               className="glass-panel"
               style={{
                 padding: '24px',
@@ -236,14 +295,14 @@ export default function About() {
               <div className="bracket-br" />
 
               <div style={{
-                width: 48, height: 48, borderRadius: '0px',
+                width: 44, height: 44, borderRadius: '0px',
                 background: 'radial-gradient(circle, rgba(56,189,248,0.2) 0%, rgba(5,5,8,0.5) 100%)',
                 border: '1px solid rgba(56,189,248,0.3)',
                 marginBottom: '12px',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '14px', color: 'var(--sky)',
+                fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '12px', color: 'var(--sky)',
               }}>
-                {member.name[0]}
+                {member.initials}
               </div>
               <div style={{
                 fontFamily: 'var(--font-display)',
@@ -281,3 +340,4 @@ export default function About() {
     </div>
   );
 }
+
