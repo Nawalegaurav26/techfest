@@ -67,11 +67,9 @@ const MERCH = [
     desc: 'Premium enamel pin featuring the Techfest 2026 Cybernetic Evolution insignia. Glowing accents.',
     sizes: [],
     image: null,
-  }
-    image: null,
   },
   {
-    id: 'm8', name: 'TECH NOTEBOOK A5',
+    id: 'm9', name: 'TECH NOTEBOOK A5',
     price: '₹249', category: 'ACCESSORIES',
     badge: null, color: '#a855f7',
     desc: '192-page dot-grid notebook with cyberpunk cover art, Techfest speaker QR codes on back.',

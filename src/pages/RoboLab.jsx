@@ -18,6 +18,11 @@ export default function RoboLab() {
   const [gyroActive, setGyroActive] = useState(false);
   const [showGyroButton, setShowGyroButton] = useState(false);
 
+  // Customization Bay States
+  const [armorColor, setArmorColor] = useState('#ffffff');
+  const [coreColor, setCoreColor] = useState('#00f5c4');
+  const [equippedWeapon, setEquippedWeapon] = useState('NONE');
+
   useEffect(() => {
     if (typeof window !== 'undefined' &&
         typeof DeviceOrientationEvent !== 'undefined' &&
@@ -573,6 +578,9 @@ export default function RoboLab() {
             showParticles={showParticles}
             stanceOverride={manualStance}
             setGyroActive={setGyroActive}
+            armorColor={armorColor}
+            coreColor={coreColor}
+            equippedWeapon={equippedWeapon}
           />
         </Canvas>
       </div>
@@ -785,6 +793,69 @@ export default function RoboLab() {
                 {log}
               </div>
             ))}
+          </div>
+
+          {/* CUSTOMIZATION BAY */}
+          <div className="hud-header mt-5">
+            <span>ARMORY & CUSTOMIZATION</span>
+            <span>MOD.SYS</span>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {/* Armor Color */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#fff', width: '60px' }}>ARMOR</span>
+              <div style={{ display: 'flex', gap: '6px' }}>
+                {['#ffffff', '#00f2ff', '#ff2d55', '#ff8c00', '#222222'].map(c => (
+                  <button
+                    key={c}
+                    onClick={() => setArmorColor(c)}
+                    style={{
+                      width: '20px', height: '20px', background: c, border: `1px solid ${armorColor === c ? '#fff' : 'rgba(255,255,255,0.2)'}`,
+                      borderRadius: '0px', cursor: 'pointer', transition: 'all 0.2s',
+                      boxShadow: armorColor === c ? `0 0 10px ${c}` : 'none'
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Core Color */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#fff', width: '60px' }}>CORE</span>
+              <div style={{ display: 'flex', gap: '6px' }}>
+                {['#00f5c4', '#ff2d55', '#7b00ff', '#ff8c00', '#ffffff'].map(c => (
+                  <button
+                    key={c}
+                    onClick={() => setCoreColor(c)}
+                    style={{
+                      width: '20px', height: '20px', background: c, border: `1px solid ${coreColor === c ? '#fff' : 'rgba(255,255,255,0.2)'}`,
+                      borderRadius: '0px', cursor: 'pointer', transition: 'all 0.2s',
+                      boxShadow: coreColor === c ? `0 0 10px ${c}` : 'none'
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Weapons */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#fff', width: '60px' }}>EQUIP</span>
+              <button
+                className={`hud-btn ${equippedWeapon === 'NONE' ? 'active' : ''}`}
+                onClick={() => setEquippedWeapon('NONE')}
+                style={{ flex: 1, minHeight: '28px', padding: '0 8px' }}
+              >
+                <span>NONE</span>
+              </button>
+              <button
+                className={`hud-btn ${equippedWeapon === 'RAILGUN' ? 'active' : ''}`}
+                onClick={() => setEquippedWeapon('RAILGUN')}
+                style={{ flex: 1, minHeight: '28px', padding: '0 8px', borderColor: equippedWeapon === 'RAILGUN' ? 'var(--plasma)' : '' }}
+              >
+                <span style={{ color: equippedWeapon === 'RAILGUN' ? 'var(--plasma)' : '' }}>RAILGUN</span>
+              </button>
+            </div>
           </div>
         </div>
 

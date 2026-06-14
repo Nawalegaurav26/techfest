@@ -30,9 +30,9 @@ export default function NotFound() {
           margin: '0 auto 32px',
           lineHeight: 1.6
         }}>
-          > The telemetry node you are attempting to sync with has been purged from the mainframe or is restricted. <br/>
-          > Rebooting quantum state... <br/>
-          > Please return to the central hub.
+          &gt; The telemetry node you are attempting to sync with has been purged from the mainframe or is restricted. <br/>
+          &gt; Rebooting quantum state... <br/>
+          &gt; Please return to the central hub.
         </p>
 
         <button

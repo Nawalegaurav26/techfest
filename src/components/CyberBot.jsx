@@ -39,7 +39,16 @@ function BotPart({ geometry, color, emissiveIntensity = 0.1, renderMode }) {
   );
 }
 
-export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0, showParticles = true, stanceOverride = null, setGyroActive = () => {} }) {
+export default function CyberBot({
+  renderMode = 'SOLID',
+  coreRotationSpeed = 1.0,
+  showParticles = true,
+  stanceOverride = null,
+  setGyroActive = () => {},
+  armorColor = '#ffffff',
+  coreColor = '#00f5c4',
+  equippedWeapon = 'NONE'
+}) {
   const robotGroup = useRef();
   const headGroup = useRef();
   const leftArmGroup = useRef();
@@ -458,10 +467,11 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
     }
   });
 
-  // Theme colors
-  const cyanColor = '#00f2ff';
-  const grayColor = '#607080';
-  const darkerGray = '#2e3a47';
+  // Theme colors dynamically mapped from Customization Bay props
+  const cyanColor = coreColor || '#00f2ff';
+  // Use the armor color for the main plates, with a slightly darker variant for contrast
+  const darkerGray = armorColor || '#2e3a47';
+  const grayColor = '#607080'; // Keeping joints gray for contrast
 
   return (
     <group>
@@ -678,14 +688,43 @@ export default function CyberBot({ renderMode = 'SOLID', coreRotationSpeed = 1.0
               color={darkerGray}
               renderMode={renderMode}
             />
-            {/* Hand Claws */}
-            <group position={[0, -0.2, 0]} rotation={[0, 0, -Math.PI / 2]}>
-              <BotPart
-                geometry={<torusGeometry args={[0.07, 0.025, 4, 12, Math.PI * 1.4]} />}
-                color={grayColor}
-                renderMode={renderMode}
-              />
-            </group>
+            {/* Hand Claws or Weapon */}
+            {equippedWeapon === 'RAILGUN' ? (
+              <group position={[0, -0.3, 0.08]} rotation={[Math.PI / 2, 0, 0]}>
+                {/* Railgun main barrel */}
+                <BotPart
+                  geometry={<boxGeometry args={[0.08, 0.45, 0.1]} />}
+                  color={darkerGray}
+                  renderMode={renderMode}
+                />
+                {/* Glowing inner rails */}
+                <group position={[0, 0, 0.05]}>
+                  <BotPart
+                    geometry={<boxGeometry args={[0.02, 0.45, 0.02]} />}
+                    color={cyanColor}
+                    emissiveIntensity={1.5}
+                    renderMode={renderMode}
+                  />
+                </group>
+                {/* Muzzle flash / Glow rings */}
+                <group position={[0, 0.22, 0]} rotation={[Math.PI / 2, 0, 0]}>
+                  <BotPart
+                    geometry={<torusGeometry args={[0.06, 0.015, 4, 12]} />}
+                    color={cyanColor}
+                    emissiveIntensity={2.0}
+                    renderMode={renderMode}
+                  />
+                </group>
+              </group>
+            ) : (
+              <group position={[0, -0.2, 0]} rotation={[0, 0, -Math.PI / 2]}>
+                <BotPart
+                  geometry={<torusGeometry args={[0.07, 0.025, 4, 12, Math.PI * 1.4]} />}
+                  color={grayColor}
+                  renderMode={renderMode}
+                />
+              </group>
+            )}
           </group>
         </group>
       </group>
