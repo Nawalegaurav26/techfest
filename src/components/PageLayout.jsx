@@ -425,6 +425,7 @@ export default function PageLayout() {
               <a href="#" style={{ color: 'rgba(189,200,209,0.6)', textDecoration: 'none' }}>PRIVACY POLICY</a>
               <a href="#" style={{ color: 'rgba(189,200,209,0.6)', textDecoration: 'none' }}>TERMS OF SERVICE</a>
               <a href="#" style={{ color: 'rgba(189,200,209,0.6)', textDecoration: 'none' }}>CODE OF CONDUCT</a>
+              <a href="/contact" style={{ color: 'var(--sky)', textDecoration: 'none' }}>CONTACT PROTOCOL</a>
             </div>
             <div style={{
               fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(189,200,209,0.4)', marginTop: '8px'
