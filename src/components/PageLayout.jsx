@@ -19,6 +19,7 @@ import {
 const LEFT_NAV = [
   { icon: 'home',            label: 'HOME',     to: '/' },
   { icon: 'event',           label: 'EVENTS',   to: '/events' },
+  { icon: 'terminal',        label: 'TERMINAL', to: '/terminal' },
   { icon: 'psychology',      label: 'ROBOLAB',  to: '/robolab' },
   { icon: 'contact_support', label: 'CONTACT',  to: '/contact' },
   { icon: 'info',            label: 'ABOUT',    to: '/about' },
@@ -50,6 +51,7 @@ const SOCIALS = [
 const DRAWER_NAV = [
   { icon: 'home',             label: 'HOME',          to: '/'             },
   { icon: 'event',            label: 'ALL EVENTS',    to: '/events'       },
+  { icon: 'terminal',         label: 'TERMINAL',      to: '/terminal'     },
   { icon: 'sports_esports',   label: 'COMPETITIONS',  to: '/competitions' },
   { icon: 'school',           label: 'WORKSHOPS',     to: '/workshops'    },
   { icon: 'mic',              label: 'LECTURES',      to: '/lectures'     },

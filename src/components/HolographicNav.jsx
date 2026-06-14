@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { label: 'LECTURES',     to: '/lectures' },
   { label: 'EXHIBITIONS',  to: '/exhibitions' },
   { label: 'ROBOWARS',     to: '/robowars' },
-  { label: 'ABOUT',        to: '/about' },
+  { label: 'TERMINAL',     to: '/terminal' },
 ];
 
 export default function HolographicNav({
