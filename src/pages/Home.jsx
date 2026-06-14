@@ -387,8 +387,28 @@ export default function Home() {
               </svg>
             </motion.div>
 
-            {/* Cyborg Hero Face (Interactive 2.5D graphics) */}
-            <CyborgHero />
+            {/* Techfest Official Central Logo (Glowing & Floating) */}
+            <motion.img
+              src="/central_logo_home-screen_big_logo_transparent.png"
+              alt="Techfest 2026 Logo"
+              animate={{
+                y: [0, -12, 0],
+                filter: [
+                  'drop-shadow(0 0 35px rgba(0,242,255,0.25))',
+                  'drop-shadow(0 0 55px rgba(0,242,255,0.45))',
+                  'drop-shadow(0 0 35px rgba(0,242,255,0.25))',
+                ]
+              }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+              style={{
+                width: '100%',
+                maxWidth: '450px',
+                objectFit: 'contain',
+                display: 'block',
+                zIndex: 2,
+                position: 'relative',
+              }}
+            />
           </div>
 
         </div>
