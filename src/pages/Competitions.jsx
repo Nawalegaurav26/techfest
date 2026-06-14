@@ -88,6 +88,34 @@ const COMPETITIONS = [
       'REQUIREMENT: Thermal shield calculations for Martian atmosphere insertion.'
     ]
   },
+  {
+    id: 'c7', code: 'QC-07',
+    name: 'QUANTUM CIRCUIT DESIGN', difficulty: 'EXTREME', slots: 96,
+    prize: '₹1,80,000',
+    desc: 'Design optimal quantum circuits to solve classical NP-hard problems using IBM Qiskit.',
+    domains: ['QUANTUM COMPUTING', 'QISKIT', 'ALGORITHMS'],
+    deadline: 'DEC 11',
+    specs: [
+      'PLATFORM: IBM Quantum Experience cloud quantum backends (127-qubit Eagle processors).',
+      'TASKS: Circuit optimization for MaxCut, QAOA, and VQE molecular simulations.',
+      'CONSTRAINTS: Circuit depth < 200 gates, maximum 20 qubits per submission.',
+      'SCORING: Gate count efficiency, circuit fidelity, and solution accuracy.'
+    ]
+  },
+  {
+    id: 'c8', code: 'BH-08',
+    name: 'BIO-HACK CHALLENGE', difficulty: 'MEDIUM', slots: 150,
+    prize: '₹90,000',
+    desc: 'Build bioinformatics pipelines to diagnose genetic diseases from sequencing data.',
+    domains: ['BIOINFORMATICS', 'PYTHON', 'GENOMICS'],
+    deadline: 'DEC 13',
+    specs: [
+      'DATA: 1000-Genomes raw WGS FASTQ reads from 12 anonymized patient samples.',
+      'TASK: Identify pathogenic SNPs and structural variants using your pipeline.',
+      'TOOLS: BWA-MEM2, GATK, VarScan, PyVCF — open-source stack only.',
+      'SCORING: Sensitivity/specificity against a gold-standard clinical annotation set.'
+    ]
+  },
 ];
 
 const DIFF_COLORS = { EXTREME: 'var(--plasma)', HARD: '#ff8c00', MEDIUM: 'var(--sky)' };
@@ -146,9 +174,9 @@ export default function Competitions() {
         }}
       >
         {[
-          { v: '₹16L+', l: 'TOTAL PRIZES' },
+          { v: '₹20L+', l: 'TOTAL PRIZES' },
           { v: '10,000+', l: 'REGISTRATIONS' },
-          { v: '6',     l: 'CORE ARENAS' },
+          { v: '8',     l: 'CORE ARENAS' },
           { v: '50+',   l: 'NATIONS' },
         ].map(s => (
           <div key={s.l} style={{ textAlign: 'center' }}>
