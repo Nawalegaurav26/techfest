@@ -76,7 +76,7 @@ export default function Accommodation() {
           letterSpacing: '-0.02em',
           lineHeight: 1.1
         }}>
-          HABITAT <span className="glow-sky" style={{ color: 'var(--sky)' }}>ACCOMMODATION</span>
+          ACCOMMODATION <span className="glow-sky" style={{ color: 'var(--sky)' }}>PORTAL</span>
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
