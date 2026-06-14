@@ -1,4 +1,5 @@
 /* Techfest 2026 - Telemetry Log 11 */
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { soundEffects } from '../utils/soundEffects';
 
@@ -41,6 +42,25 @@ const TIERS = [
       { name: 'D.E. SHAW', role: 'Finance', logo: 'D' },
     ],
   },
+  {
+    name: 'BRONZE',
+    color: '#cd7f32',
+    glow: 'rgba(205,127,50,0.15)',
+    sponsors: [
+      { name: 'TCS',      role: 'IT Services',         logo: 'T' },
+      { name: 'FLIPKART', role: 'E-Commerce',          logo: 'F' },
+      { name: 'ZOMATO',   role: 'Food Tech',            logo: 'Z' },
+      { name: 'DRDO',     role: 'Defence Research',     logo: '⊗' },
+      { name: 'PAYTM',    role: 'Fintech',              logo: 'P' },
+    ],
+  },
+];
+
+const BENEFITS = [
+  { icon: '📡', title: 'BRAND REACH', desc: '150K+ high-value audience across 45+ nations' },
+  { icon: '⬣', title: 'TALENT ACCESS', desc: 'Direct pipeline to top IIT graduates and researchers' },
+  { icon: '◈', title: 'PRODUCT DEMOS', desc: 'Live showcase space in premium exhibition halls' },
+  { icon: '◉', title: 'PR COVERAGE', desc: 'Media features across 200+ tech press publications' },
 ];
 
 export default function Sponsors() {
@@ -234,6 +254,62 @@ export default function Sponsors() {
           </motion.div>
         ))}
       </div>
+
+      {/* Sponsorship Benefits */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        style={{ marginTop: '60px' }}
+      >
+        <div className="section-overline" style={{ marginBottom: '20px' }}>WHY PARTNER WITH US</div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))',
+          gap: '14px',
+        }}>
+          {BENEFITS.map((b) => (
+            <div
+              key={b.title}
+              className="glass-panel"
+              style={{
+                padding: '22px',
+                border: '1px solid rgba(255,45,85,0.15)',
+                position: 'relative',
+                transition: 'all 0.3s',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = 'rgba(255,45,85,0.4)';
+                e.currentTarget.style.boxShadow = '0 0 20px rgba(255,45,85,0.08)';
+                soundEffects.playHover?.();
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = 'rgba(255,45,85,0.15)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <div className="bracket-tl" style={{ borderColor: 'var(--plasma)' }} />
+              <div className="bracket-br" style={{ borderColor: 'var(--plasma)' }} />
+              <div style={{ fontSize: '22px', marginBottom: '10px' }}>{b.icon}</div>
+              <div style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '9px',
+                fontWeight: 700,
+                letterSpacing: '0.2em',
+                color: 'var(--plasma)',
+                marginBottom: '6px',
+              }}>{b.title}</div>
+              <div style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '12px',
+                color: 'rgba(189,200,209,0.55)',
+                lineHeight: 1.6,
+              }}>{b.desc}</div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </div>
   );
 }
