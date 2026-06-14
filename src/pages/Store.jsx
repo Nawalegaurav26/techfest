@@ -61,6 +61,16 @@ const MERCH = [
     image: null,
   },
   {
+    id: 'm8', name: 'NEURAL LINK LAPEL PIN',
+    price: '₹149', category: 'ACCESSORIES',
+    badge: 'BESTSELLER', color: 'var(--green)',
+    desc: 'Premium enamel pin featuring the Techfest 2026 Cybernetic Evolution insignia. Glowing accents.',
+    sizes: [],
+    image: null,
+  }
+    image: null,
+  },
+  {
     id: 'm8', name: 'TECH NOTEBOOK A5',
     price: '₹249', category: 'ACCESSORIES',
     badge: null, color: '#a855f7',
