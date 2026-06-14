@@ -19,6 +19,7 @@ import Exhibitions from './pages/Exhibitions';
 import Robowars from './pages/Robowars';
 import RoboLab from './pages/RoboLab';
 import ComingSoon from './pages/ComingSoon';
+import NotFound from './pages/NotFound';
 
 export default function App() {
   const [booted, setBooted] = useState(() => {
@@ -63,7 +64,7 @@ export default function App() {
             <Route path="robowars"     element={<Robowars />} />
             <Route path="robolab"      element={<RoboLab />} />
             <Route path="comingsoon"   element={<ComingSoon />} />
-            <Route path="*"            element={<ComingSoon title="404" subtitle="PAGE NOT FOUND" />} />
+            <Route path="*"            element={<NotFound />} />
           </Route>
         </Routes>
       )}
