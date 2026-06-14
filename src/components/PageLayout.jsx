@@ -429,7 +429,7 @@ export default function PageLayout() {
             <div style={{
               fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(189,200,209,0.4)', marginTop: '8px'
             }}>
-              © 2025-2026 Techfest IIT Bombay. All rights reserved.
+              © 2025-2026 Techfest IIT Bombay. ALL DIRECTIVES RESERVED.
             </div>
           </footer>
         </motion.main>
