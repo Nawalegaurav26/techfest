@@ -233,12 +233,19 @@ export default function Home() {
         <div className="hero-grid" style={{ width: '100%', zIndex: 5 }}>
 
           {/* ── LEFT COLUMN: Text Content ───────── */}
-          <div className="hero-text-col">
+          {/* ── LEFT COLUMN: Text Content ───────── */}
+          <motion.div 
+            className="hero-text-col"
+            variants={{
+              hidden: { opacity: 0 },
+              show: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } }
+            }}
+            initial="hidden"
+            animate="show"
+          >
             {/* Overline label */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              variants={{ hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0, transition: { duration: 0.6 } } }}
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -270,11 +277,7 @@ export default function Home() {
             </motion.div>
 
             {/* MAIN HEADING */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
+            <motion.div variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { duration: 0.8 } } }}>
               <h1
                 style={{
                   fontFamily: 'var(--font-display)',
@@ -296,9 +299,7 @@ export default function Home() {
 
             {/* Plasma subtitle */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
+              variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.5 } } }}
               style={{ margin: '16px 0 28px', overflow: 'hidden', maxWidth: '100%' }}
             >
               <div
@@ -318,9 +319,7 @@ export default function Home() {
 
             {/* COUNTDOWN */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.8 }}
+              variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.7 } } }}
               style={{ width: '100%' }}
             >
               <div style={{
@@ -343,9 +342,7 @@ export default function Home() {
 
             {/* CTA BUTTONS */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.1 }}
+              variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.7 } } }}
               className="cta-row"
             >
               <button
@@ -371,7 +368,7 @@ export default function Home() {
                 EXPLORE EVENTS &nbsp;→
               </button>
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* ── RIGHT COLUMN: Giant Logo ─────────── */}
           <div className="hero-logo-container" style={{
