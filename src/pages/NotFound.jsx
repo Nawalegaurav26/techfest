@@ -20,16 +20,19 @@ export default function NotFound() {
           404
         </div>
         <div className="section-overline" style={{ marginBottom: '24px', letterSpacing: '0.4em' }}>
-          ERROR // DIRECTORY NOT FOUND
+          FATAL ERROR // NEURAL LINK SEVERED
         </div>
         <p style={{
-          fontFamily: 'var(--font-body)',
-          fontSize: '16px',
-          color: 'rgba(189,200,209,0.6)',
-          maxWidth: '400px',
-          margin: '0 auto 32px'
+          fontFamily: 'var(--font-mono)',
+          fontSize: '14px',
+          color: 'rgba(189,200,209,0.8)',
+          maxWidth: '450px',
+          margin: '0 auto 32px',
+          lineHeight: 1.6
         }}>
-          The telemetry link you requested has been severed or never existed. Return to the main command sequence.
+          > The telemetry node you are attempting to sync with has been purged from the mainframe or is restricted. <br/>
+          > Rebooting quantum state... <br/>
+          > Please return to the central hub.
         </p>
 
         <button
