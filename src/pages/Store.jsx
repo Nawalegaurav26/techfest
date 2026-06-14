@@ -52,6 +52,30 @@ const MERCH = [
     sizes: [],
     image: '/merch-wristband.png',
   },
+  {
+    id: 'm7', name: 'TF26 CYBORG CAP',
+    price: '₹549', category: 'APPAREL',
+    badge: 'NEW', color: 'var(--plasma)',
+    desc: '6-panel structured cap with embroidered TF26 cyborg crest and adjustable buckle. Black/Cyan.',
+    sizes: ['S/M', 'L/XL'],
+    image: null,
+  },
+  {
+    id: 'm8', name: 'TECH NOTEBOOK A5',
+    price: '₹249', category: 'ACCESSORIES',
+    badge: null, color: '#a855f7',
+    desc: '192-page dot-grid notebook with cyberpunk cover art, Techfest speaker QR codes on back.',
+    sizes: [],
+    image: null,
+  },
+  {
+    id: 'm9', name: 'PREMIUM LANYARD SET',
+    price: '₹179', category: 'ACCESSORIES',
+    badge: 'LIMITED', color: 'var(--sky)',
+    desc: 'Braided premium-width lanyard with Techfest 2026 branding, metal clip, and card sleeve.',
+    sizes: [],
+    image: null,
+  },
 ];
 
 const BADGE_COLORS = {
