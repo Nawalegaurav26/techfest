@@ -10,6 +10,7 @@ const SPEAKERS = [
     title: 'CEO, OPENAI',
     topic: 'THE PATH TO DEEP AGI & COGNITIVE HYBRIDS',
     desc: 'Exploring the transition from LLMs to autonomous reasoning models, and the upcoming cybernetic interfaces allowing direct cognitive sync.',
+    bio: 'Sam Altman is an American entrepreneur, investor, and programmer. As CEO of OpenAI, he has steered the creation of GPT-4, Sora, and ChatGPT. He previously served as the president of Y Combinator, shaping the global startup landscape.',
     domain: 'ARTIFICIAL INTELLIGENCE',
     time: 'DEC 22, 11:00 IST',
     venue: 'CONVOCATION HALL',
@@ -22,6 +23,7 @@ const SPEAKERS = [
     title: 'COSMOLOGIST & FORMER PRESIDENT OF RPI',
     topic: 'QUANTUM GRAVITY & SPACE-TIME ENGINEERING',
     desc: 'Analyzing the physics of quantum warp bridges and the materials required to maintain stable wormhole nodes.',
+    bio: 'Dr. Shirley Ann Jackson is a theoretical physicist and leader in academic research. She was the first African-American woman to earn a doctorate from MIT, and served as Chairman of the US Nuclear Regulatory Commission under President Clinton.',
     domain: 'QUANTUM PHYSICS',
     time: 'DEC 22, 14:30 IST',
     venue: 'PC SAXENA AUDITORIUM',
@@ -34,6 +36,7 @@ const SPEAKERS = [
     title: 'FOUNDER, ETHEREUM',
     topic: 'DECENTRALIZED QUANTUM ENCRYPTION PROTOCOLS',
     desc: 'Preventing the security apocalypse in post-quantum computing environments using distributed ledger cryptography.',
+    bio: 'Vitalik Buterin is a programmer, writer, and co-founder of Ethereum. Known for his pioneering work in smart contracts and blockchain scalability, he currently leads research on decentralized cryptography and quantum security.',
     domain: 'CRYPTOGRAPHY',
     time: 'DEC 23, 10:00 IST',
     venue: 'CONVOCATION HALL',
@@ -46,6 +49,7 @@ const SPEAKERS = [
     title: 'DIRECTOR, INTELLIGENT ROBOTICS LAB',
     topic: 'THE GHOST IN THE BIOMIMETIC SHELL',
     desc: 'A look into life-like androids, human-robot interaction, and the psychological blur between biological and synthetic life.',
+    bio: 'Dr. Hiroshi Ishiguro is director of the Intelligent Robotics Laboratory at Osaka University. A pioneer in lifelike humanoid robotics, he is famous for creating the Actroid android and his own robotic twin, Geminoid.',
     domain: 'ROBOTICS & ANDROIDS',
     time: 'DEC 23, 15:00 IST',
     venue: 'GYMKHANA GROUND ARENA',
@@ -58,6 +62,7 @@ const SPEAKERS = [
     title: 'CO-FOUNDER, GOOGLE DEEPMIND',
     topic: 'BIOMIMETIC DRUG SYNTHESIS VIA DEEP LEARNING',
     desc: 'How machine learning is solving cellular biology structures and automating the engineering of targeted genetic remedies.',
+    bio: 'Sir Demis Hassabis is a British computer scientist, AI researcher, and entrepreneur. He is the CEO of Google DeepMind, which developed AlphaGo and AlphaFold, the latter earning him the 2024 Nobel Prize in Chemistry.',
     domain: 'BIO-TECHNOLOGY',
     time: 'DEC 24, 11:30 IST',
     venue: 'PC SAXENA AUDITORIUM',
@@ -70,6 +75,7 @@ const SPEAKERS = [
     title: 'FOUNDER, HAMILTON TECHNOLOGIES',
     topic: 'HYPER-RELIABLE SOFTWARE IN MANNED SPACEWAYS',
     desc: 'Lessons from Apollo guidance systems adapted for the autonomous navigation architectures of Mars colony transport.',
+    bio: 'Dr. Margaret Hamilton is a computer scientist who led the MIT Instrumentation Laboratory software team that created the Apollo Guidance Computer software. She is credited with coining the term "software engineering" as a discipline.',
     domain: 'AEROSPACE SYSTEMS',
     time: 'DEC 24, 14:00 IST',
     venue: 'CONVOCATION HALL',
@@ -82,6 +88,7 @@ const SPEAKERS = [
     title: 'CEO, GOOGLE & ALPHABET',
     topic: 'MULTIMODAL AI: FROM LANGUAGE TO EMBODIED INTELLIGENCE',
     desc: 'How Gemini Ultra is evolving beyond text — vision, audio, robotics, and real-time reasoning in a single integrated cognitive system.',
+    bio: 'Sundar Pichai is an Indian-American executive who is CEO of Google and Alphabet. Under his leadership, Google has transitioned to an AI-first company, developing major neural models like Gemini and AlphaFold.',
     domain: 'ARTIFICIAL INTELLIGENCE',
     time: 'DEC 22, 09:30 IST',
     venue: 'CONVOCATION HALL',
@@ -94,6 +101,7 @@ const SPEAKERS = [
     title: 'COSMOLOGIST, YALE UNIVERSITY',
     topic: 'DARK MATTER MAPPING WITH GRAVITATIONAL LENSING AI',
     desc: 'Using deep learning to resolve sub-arc-second gravitational lensing patterns from James Webb Space Telescope data to build the first high-resolution dark matter maps.',
+    bio: 'Dr. Priya Natarajan is a professor of Astronomy and Physics at Yale. She is recognized globally for her work in cosmology, black hole growth physics, and using gravitational lensing to map dark matter distributions.',
     domain: 'QUANTUM PHYSICS',
     time: 'DEC 23, 11:30 IST',
     venue: 'PC SAXENA AUDITORIUM',
@@ -106,6 +114,7 @@ const SPEAKERS = [
     title: 'FOUNDER, OXMAN / FORMER MIT MEDIA LAB',
     topic: 'MATERIAL ECOLOGY: GROWING ARCHITECTURE',
     desc: 'At the intersection of computational design, digital fabrication, materials science, and synthetic biology. Designing structures that mimic, interact with, and grow alongside biological systems.',
+    bio: 'Dr. Neri Oxman is a designer and professor at the MIT Media Lab, where she founded the Mediated Matter group. She pioneeringly defined "material ecology," fusing design with synthetic biology and material physics.',
     domain: 'MATERIAL ECOLOGY',
     time: 'DEC 24, 10:00 IST',
     venue: 'MAIN AUDITORIUM',
@@ -320,6 +329,44 @@ export default function Lectures() {
                 }}>
                   {speaker.desc}
                 </p>
+
+                {/* Expandable bio card */}
+                <AnimatePresence>
+                  {isSelected && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.25, ease: 'easeOut' }}
+                      style={{
+                        paddingTop: '16px',
+                        borderTop: '1px dashed rgba(255, 45, 85, 0.2)',
+                        marginBottom: '20px',
+                        overflow: 'hidden'
+                      }}
+                    >
+                      <span style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '8px',
+                        color: 'var(--plasma)',
+                        fontWeight: 700,
+                        letterSpacing: '0.15em',
+                        display: 'block',
+                        marginBottom: '6px'
+                      }}>
+                        BIOGRAPHIC DATA MATRIX //
+                      </span>
+                      <p style={{
+                        fontFamily: 'var(--font-body)',
+                        fontSize: '11.5px',
+                        color: 'rgba(189,200,209,0.5)',
+                        lineHeight: 1.65,
+                      }}>
+                        {speaker.bio}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Speaker Footer metadata */}

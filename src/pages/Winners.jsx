@@ -23,7 +23,7 @@ const WINNERS_DATA = {
     { event: 'Robowars', team: 'Steel Storm', prize: '₹4,00,000', country: '🇮🇳', rank: 1 },
     { event: 'MindSpark', team: 'ThinkTank X', prize: '₹3,50,000', country: '🇮🇳', rank: 1 },
     { event: 'Design Build Fly', team: 'AeroAviation', prize: '₹1,50,000', country: '🇺🇸', rank: 1 },
-    { event: 'Science Quiz', team: 'Bohr's Atom', prize: '₹40,000', country: '🇮🇳', rank: 1 },
+    { event: 'Science Quiz', team: "Bohr's Atom", prize: '₹40,000', country: '🇮🇳', rank: 1 },
     { event: 'App of the Year', team: 'PixelPioneers', prize: '₹60,000', country: '🇨🇦', rank: 2 },
   ],
   2021: [

@@ -55,6 +55,56 @@ export default function Schedule() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [typeFilter, setTypeFilter]       = useState('ALL');
 
+  const handleDownloadICS = (evt) => {
+    if (!evt) return;
+    soundEffects.playClick?.();
+    
+    const dayOffsets = { D1: 26, D2: 27, D3: 28, D4: 29 };
+    const dateNum = dayOffsets[evt.day] || 26;
+    const [hours, minutes] = evt.time.split(':').map(Number);
+    const durationMin = parseInt(evt.duration) || 60;
+    
+    const startYear = 2025;
+    const startMonth = 12; // Dec 2025
+    const startDate = new Date(Date.UTC(startYear, startMonth - 1, dateNum, hours, minutes));
+    const endDate = new Date(startDate.getTime() + durationMin * 60 * 1000);
+    
+    const formatDateICS = (d) => {
+      return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    };
+    
+    const startStr = formatDateICS(startDate);
+    const endStr = formatDateICS(endDate);
+    
+    const icsLines = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Techfest IIT Bombay//Event Calendar//EN',
+      'BEGIN:VEVENT',
+      `UID:${evt.id}-2026@techfest.org`,
+      `DTSTAMP:${formatDateICS(new Date())}`,
+      `DTSTART:${startStr}`,
+      `DTEND:${endStr}`,
+      `SUMMARY:Techfest 2026: ${evt.title}`,
+      `DESCRIPTION:${evt.desc.replace(/,/g, '\\,')}`,
+      `LOCATION:${evt.venue.replace(/,/g, '\\,')}`,
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ];
+    
+    const icsContent = icsLines.join('\r\n');
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `tf26_${evt.id}_${evt.title.toLowerCase().replace(/[^a-z0-9]+/g, '_')}.ics`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   const dayEvents = EVENTS.filter(e => e.day === activeDay);
   const filtered  = typeFilter === 'ALL' ? dayEvents : dayEvents.filter(e => e.type === typeFilter);
   const types     = ['ALL', ...new Set(EVENTS.map(e => e.type))];
@@ -267,6 +317,7 @@ export default function Schedule() {
 
               <button
                 className="hud-btn active"
+                onClick={() => handleDownloadICS(selectedEvent)}
                 style={{ width: '100%', borderColor: selectedEvent.color, color: selectedEvent.color }}
               >
                 <span>ADD TO CALENDAR</span>

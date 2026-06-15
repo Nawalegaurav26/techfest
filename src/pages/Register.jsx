@@ -82,6 +82,38 @@ export default function Register() {
   const [details, setDetails]         = useState({ institution: '', phone: '', city: '', referral: '' });
   const [submitted, setSubmitted]     = useState(false);
   const [loading, setLoading]         = useState(false);
+  const [refState, setRefState]       = useState('idle'); // idle, validating, success, error
+  const [refLogs, setRefLogs]         = useState([]);
+
+  const handleVerifyReferral = async () => {
+    if (!details.referral.trim()) return;
+    setRefState('validating');
+    setRefLogs([]);
+    soundEffects.playClick?.();
+
+    const logs = [
+      '[SYS] INITIALIZING CRYPTO INTERRUPT...',
+      `[SYS] CAPTURED SIGNATURE: "${details.referral.toUpperCase()}"`,
+      '[SYS] DECRYPTING ENCRYPTION HASH...',
+      '[SYS] COMPARING WITH CENTRAL DATA NODES...'
+    ];
+
+    for (let i = 0; i < logs.length; i++) {
+      setRefLogs(prev => [...prev, logs[i]]);
+      await new Promise(r => setTimeout(r, 250));
+    }
+
+    const pattern = /^TF26-[A-Z0-9]{4,6}$/i;
+    const isValid = pattern.test(details.referral.trim());
+
+    if (isValid) {
+      setRefLogs(prev => [...prev, '[SYS] STATUS: REFERRAL SIGNATURE VALIDATED', '[SYS] NOTE: 10% DISCOUNT TRACE APPLIED.']);
+      setRefState('success');
+    } else {
+      setRefLogs(prev => [...prev, '[SYS] ERROR: CRYPTO SIGNATURE INVALID', '[SYS] REASON: HASH VERIFICATION REFUSED.']);
+      setRefState('error');
+    }
+  };
 
   const categories = ['ALL', ...new Set(EVENTS_LIST.map(e => e.category))];
   const filteredEvents = catFilter === 'ALL' ? EVENTS_LIST : EVENTS_LIST.filter(e => e.category === catFilter);
@@ -108,7 +140,7 @@ export default function Register() {
 
   const canProceedStep1 = !!selectedEvent;
   const canProceedStep2 = teamName.trim().length > 2 && members.every(m => m.name && m.email);
-  const canProceedStep3 = details.institution && details.phone;
+  const canProceedStep3 = details.institution && details.phone && (details.referral.trim() === '' || refState === 'success');
 
   if (submitted) {
     return (
@@ -372,7 +404,6 @@ export default function Register() {
                 { key: 'institution', label: 'INSTITUTION / COLLEGE *', placeholder: 'IIT Bombay' },
                 { key: 'phone',       label: 'CONTACT NODE (PHONE) *',  placeholder: '+91 9876543210', type: 'tel' },
                 { key: 'city',        label: 'CITY',                    placeholder: 'Mumbai' },
-                { key: 'referral',    label: 'REFERRAL CODE',           placeholder: 'TF26-XXXX' },
               ].map(({ key, label, placeholder, type }) => (
                 <div key={key}>
                   <label style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.45)', letterSpacing: '0.15em', display: 'block', marginBottom: '6px' }}>
@@ -387,7 +418,71 @@ export default function Register() {
                   />
                 </div>
               ))}
+              <div>
+                <label style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.45)', letterSpacing: '0.15em', display: 'block', marginBottom: '6px' }}>
+                  REFERRAL CODE (OPTIONAL)
+                </label>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <input
+                    style={{ ...inputStyle, flex: 1 }}
+                    type="text"
+                    placeholder="TF26-XXXX"
+                    value={details.referral}
+                    onChange={e => {
+                      setDetails(d => ({ ...d, referral: e.target.value }));
+                      setRefState('idle');
+                      setRefLogs([]);
+                    }}
+                    onFocus={e => e.target.style.borderColor = 'var(--sky)'}
+                    onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+                  />
+                  {details.referral.trim() && (
+                    <button
+                      type="button"
+                      onClick={handleVerifyReferral}
+                      disabled={refState === 'validating'}
+                      style={{
+                        padding: '0 16px',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '9px',
+                        fontWeight: 700,
+                        letterSpacing: '0.1em',
+                        background: refState === 'success' ? 'rgba(0,245,196,0.15)' : refState === 'error' ? 'rgba(255,45,85,0.15)' : 'rgba(56,189,248,0.15)',
+                        border: `1px solid ${refState === 'success' ? 'var(--green)' : refState === 'error' ? 'var(--plasma)' : 'var(--sky)'}`,
+                        color: refState === 'success' ? 'var(--green)' : refState === 'error' ? 'var(--plasma)' : 'var(--sky)',
+                        cursor: refState === 'validating' ? 'not-allowed' : 'pointer',
+                        transition: 'all 0.25s',
+                        height: '38px',
+                        borderRadius: '0px',
+                      }}
+                    >
+                      {refState === 'validating' ? 'VERIFYING...' : refState === 'success' ? 'VERIFIED' : refState === 'error' ? 'FAILED' : 'VERIFY KEY'}
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
+
+            {refLogs.length > 0 && (
+              <div style={{
+                padding: '12px',
+                marginBottom: '16px',
+                background: 'rgba(0,0,0,0.4)',
+                border: `1px solid ${refState === 'success' ? 'rgba(0,245,196,0.25)' : refState === 'error' ? 'rgba(255,45,85,0.25)' : 'rgba(56,189,248,0.25)'}`,
+                fontFamily: 'var(--font-mono)',
+                fontSize: '9px',
+                color: refState === 'success' ? 'var(--green)' : refState === 'error' ? 'var(--plasma)' : 'var(--sky)',
+                maxHeight: '120px',
+                overflowY: 'auto',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
+              }}>
+                {refLogs.map((log, i) => (
+                  <div key={i} style={{ lineBreak: 'anywhere' }}>{log}</div>
+                ))}
+              </div>
+            )}
 
             <label style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px', cursor: 'pointer' }}>
               <div style={{ width: '16px', height: '16px', border: '1px solid rgba(56,189,248,0.4)', background: 'rgba(56,189,248,0.1)', flexShrink: 0 }} />

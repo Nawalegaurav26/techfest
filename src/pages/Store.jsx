@@ -95,6 +95,7 @@ const BADGE_COLORS = {
 
 export default function Store() {
   const [cart, setCart] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('ALL');
   const [hovered, setHovered] = useState(null);
   const [checkoutActive, setCheckoutActive] = useState(false);
@@ -106,6 +107,14 @@ export default function Store() {
   const addToCart = (item) => {
     soundEffects.playSuccess?.();
     setCart(prev => [...prev, item.id]);
+  };
+
+  const toggleWishlist = (id, e) => {
+    e.stopPropagation();
+    soundEffects.playClick?.();
+    setWishlist(prev =>
+      prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+    );
   };
 
   return (
@@ -241,6 +250,26 @@ export default function Store() {
               <div className="bracket-br" style={{ borderColor: isHovered ? 'var(--sky)' : 'rgba(56,189,248,0.3)' }} />
 
               <div>
+                {/* Wishlist Button */}
+                <button
+                  onClick={(e) => toggleWishlist(item.id, e)}
+                  style={{
+                    position: 'absolute', top: 12, left: 12,
+                    background: 'transparent', border: 'none',
+                    color: wishlist.includes(item.id) ? 'var(--plasma)' : 'rgba(255,255,255,0.25)',
+                    cursor: 'pointer', zIndex: 10,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    padding: '4px',
+                    filter: wishlist.includes(item.id) ? 'drop-shadow(0 0 4px var(--plasma))' : 'none',
+                    transition: 'color 0.2s'
+                  }}
+                  title={wishlist.includes(item.id) ? 'Remove from wishlist' : 'Add to wishlist'}
+                >
+                  <span className="material-symbols-outlined" style={{ fontSize: '18px', fontVariationSettings: wishlist.includes(item.id) ? "'FILL' 1" : "'FILL' 0" }}>
+                    favorite
+                  </span>
+                </button>
+
                 {/* Badge */}
                 {item.badge && (
                   <div style={{

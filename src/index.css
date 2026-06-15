@@ -1598,3 +1598,102 @@ main, .page-section, [style*="overflowY: 'auto'"] {
   100% { r: 5;   opacity: 0;   }
 }
 
+.map-grid {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 1024px) {
+  .map-grid.has-selection {
+    grid-template-columns: 1fr 340px !important;
+  }
+}
+
+.map-canvas {
+  aspect-ratio: 16/9;
+  min-height: 340px;
+}
+@media (max-width: 768px) {
+  .map-canvas {
+    aspect-ratio: 4/3 !important;
+    min-height: 240px !important;
+  }
+}
+
+/* ── 32. LEADERBOARD RESPONSIVE & UTILITY CLASSES ───── */
+.leaderboard-bracket {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  padding: 8px 0;
+}
+@media (min-width: 768px) {
+  .leaderboard-bracket {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-scroll-hint {
+    display: block !important;
+  }
+}
+
+.hover-scale {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+}
+.hover-scale:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+}
+
+/* ── 33. PRINT STYLES ───────────────────────────────── */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 12pt !important;
+  }
+  
+  .left-sidebar,
+  .right-sidebar,
+  .mobile-bottom-nav,
+  .cursor-outer,
+  .cursor-inner,
+  .vignette,
+  .bg-grid,
+  nav,
+  header,
+  footer,
+  button,
+  .btn-primary,
+  .btn-ghost,
+  .hud-btn {
+    display: none !important;
+  }
+  
+  .page-section {
+    padding: 0 !important;
+    min-height: auto !important;
+  }
+  
+  .glass-panel,
+  .glass-sky,
+  .event-card {
+    background: #fff !important;
+    border: 1px solid #000 !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #000 !important;
+    text-shadow: none !important;
+  }
+  
+  a {
+    color: #000 !important;
+    text-decoration: underline !important;
+  }
+}
+

@@ -207,24 +207,21 @@ export default function CampusMap() {
       </div>
 
       {/* ── MAP + DETAIL GRID ───────────────────────── */}
-      <div style={{
+      <div className={`map-grid ${selectedVenue ? 'has-selection' : ''}`} style={{
         display: 'grid',
-        gridTemplateColumns: selectedVenue ? '1fr 340px' : '1fr',
         gap: '20px',
         alignItems: 'start',
-        transition: 'grid-template-columns 0.4s ease',
       }}>
 
         {/* MAP CANVAS */}
         <motion.div
           layout
+          className="map-canvas"
           style={{
             position: 'relative',
             border: '1px solid rgba(56,189,248,0.2)',
             background: 'linear-gradient(135deg, rgba(14,14,18,0.98) 0%, rgba(8,12,20,0.99) 100%)',
             overflow: 'hidden',
-            aspectRatio: '16/9',
-            minHeight: '340px',
           }}
         >
           {/* L-bracket corners */}

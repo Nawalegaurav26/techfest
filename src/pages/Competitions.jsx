@@ -123,12 +123,27 @@ const DIFF_GLOWS = { EXTREME: 'rgba(255,45,85,0.2)', HARD: 'rgba(255,140,0,0.2)'
 
 export default function Competitions() {
   const [selected, setSelected] = useState(null);
-  const [registered, setRegistered] = useState({});
+  const [registered, setRegistered] = useState(() => {
+    try {
+      const stored = localStorage.getItem('tf_registered_events');
+      return stored ? JSON.parse(stored) : {};
+    } catch {
+      return {};
+    }
+  });
 
   const handleRegister = (id) => {
     if (registered[id]) return;
     soundEffects.playSuccess?.();
-    setRegistered(prev => ({ ...prev, [id]: true }));
+    setRegistered(prev => {
+      const next = { ...prev, [id]: true };
+      try {
+        localStorage.setItem('tf_registered_events', JSON.stringify(next));
+      } catch (e) {
+        console.error(e);
+      }
+      return next;
+    });
   };
 
   return (

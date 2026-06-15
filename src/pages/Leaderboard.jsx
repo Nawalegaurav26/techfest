@@ -163,120 +163,128 @@ export default function Leaderboard() {
             ))}
           </div>
 
-          {/* Table Header */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '40px 1fr 90px 70px 60px 70px 80px',
-            gap: '8px', padding: '8px 16px',
-            borderBottom: '1px solid rgba(56,189,248,0.2)',
-            background: 'rgba(56,189,248,0.04)',
+          {/* Scroll hint on mobile */}
+          <div className="mobile-scroll-hint" style={{
+            fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.3)',
+            marginBottom: '8px', display: 'none', letterSpacing: '0.1em'
           }}>
-            {['#', 'BOT / TEAM', 'CLASS', 'W–L', 'K/D', 'PTS', 'STATUS'].map(h => (
-              <span key={h} style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(56,189,248,0.7)', letterSpacing: '0.2em', fontWeight: 700 }}>{h}</span>
-            ))}
+            [SWIPE HORIZONTALLY TO SCAN COMPLETE SPECS]
           </div>
 
-          {/* Rows */}
-          {filtered.map((team, i) => {
-            const s = STATUS_STYLES[team.status] || STATUS_STYLES.ACTIVE;
-            const isElim = team.status === 'ELIMINATED';
-            const isHL   = highlighted === team.rank;
-            return (
-              <motion.div
-                key={team.rank}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.04 }}
-                onClick={() => { soundEffects.playClick?.(); setHighlighted(isHL ? null : team.rank); }}
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '40px 1fr 90px 70px 60px 70px 80px',
-                  gap: '8px', padding: '12px 16px',
-                  borderBottom: '1px solid rgba(255,255,255,0.05)',
-                  cursor: 'pointer',
-                  background: isHL ? 'rgba(255,45,85,0.06)' : 'transparent',
-                  opacity: isElim ? 0.45 : 1,
-                  transition: 'background 0.2s',
-                }}
-                onMouseEnter={e => !isElim && (e.currentTarget.style.background = 'rgba(255,255,255,0.03)')}
-                onMouseLeave={e => e.currentTarget.style.background = isHL ? 'rgba(255,45,85,0.06)' : 'transparent'}
-              >
-                {/* Rank */}
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <span style={{
-                    fontFamily: 'var(--font-display)', fontSize: '14px', fontWeight: 800,
-                    color: team.rank <= 3 ? ['#fbbf24', '#a0aec0', '#cd7f32'][team.rank - 1] : 'rgba(189,200,209,0.4)',
-                  }}>
-                    {team.rank <= 3 ? ['①', '②', '③'][team.rank - 1] : team.rank}
-                  </span>
-                </div>
+          {/* Scrollable table container */}
+          <div style={{ overflowX: 'auto', width: '100%', WebkitOverflowScrolling: 'touch' }}>
+            <div style={{ minWidth: '600px' }}>
+              {/* Table Header */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: '40px 1fr 90px 70px 60px 70px 80px',
+                gap: '8px', padding: '8px 16px',
+                borderBottom: '1px solid rgba(56,189,248,0.2)',
+                background: 'rgba(56,189,248,0.04)',
+              }}>
+                {['#', 'BOT / TEAM', 'CLASS', 'W–L', 'K/D', 'PTS', 'STATUS'].map(h => (
+                  <span key={h} style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(56,189,248,0.7)', letterSpacing: '0.2em', fontWeight: 700 }}>{h}</span>
+                ))}
+              </div>
 
-                {/* Bot/Team */}
-                <div>
-                  <div style={{ fontFamily: 'var(--font-display)', fontSize: '13px', fontWeight: 700, color: isElim ? 'rgba(189,200,209,0.4)' : '#fff', letterSpacing: '-0.01em' }}>
-                    {team.name}
-                  </div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.4)', marginTop: '2px' }}>
-                    {team.country} {team.team}
-                  </div>
-                </div>
+              {/* Rows */}
+              {filtered.map((team, i) => {
+                const s = STATUS_STYLES[team.status] || STATUS_STYLES.ACTIVE;
+                const isElim = team.status === 'ELIMINATED';
+                const isHL   = highlighted === team.rank;
+                return (
+                  <motion.div
+                    key={team.rank}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.04 }}
+                    onClick={() => { soundEffects.playClick?.(); setHighlighted(isHL ? null : team.rank); }}
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: '40px 1fr 90px 70px 60px 70px 80px',
+                      gap: '8px', padding: '12px 16px',
+                      borderBottom: '1px solid rgba(255,255,255,0.05)',
+                      cursor: 'pointer',
+                      background: isHL ? 'rgba(255,45,85,0.06)' : 'transparent',
+                      opacity: isElim ? 0.45 : 1,
+                      transition: 'background 0.2s',
+                    }}
+                    onMouseEnter={e => !isElim && (e.currentTarget.style.background = 'rgba(255,255,255,0.03)')}
+                    onMouseLeave={e => e.currentTarget.style.background = isHL ? 'rgba(255,45,85,0.06)' : 'transparent'}
+                  >
+                    {/* Rank */}
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <span style={{
+                        fontFamily: 'var(--font-display)', fontSize: '14px', fontWeight: 800,
+                        color: team.rank <= 3 ? ['#fbbf24', '#a0aec0', '#cd7f32'][team.rank - 1] : 'rgba(189,200,209,0.4)',
+                      }}>
+                        {team.rank <= 3 ? ['①', '②', '③'][team.rank - 1] : team.rank}
+                      </span>
+                    </div>
 
-                {/* Class */}
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <span style={{
-                    fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.1em',
-                    color: CLASS_COLOR[team.class] || '#fff',
-                    padding: '2px 6px',
-                    border: `1px solid ${CLASS_COLOR[team.class] || '#fff'}44`,
-                    background: `${CLASS_COLOR[team.class] || '#fff'}11`,
-                  }}>
-                    {team.class}
-                  </span>
-                </div>
+                    {/* Bot/Team */}
+                    <div>
+                      <div style={{ fontFamily: 'var(--font-display)', fontSize: '13px', fontWeight: 700, color: isElim ? 'rgba(189,200,209,0.4)' : '#fff', letterSpacing: '-0.01em' }}>
+                        {team.name}
+                      </div>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.4)', marginTop: '2px' }}>
+                        {team.country} {team.team}
+                      </div>
+                    </div>
 
-                {/* W–L */}
-                <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700 }}>
-                  <span style={{ color: '#00f5c4' }}>{team.wins}</span>
-                  <span style={{ color: 'rgba(189,200,209,0.3)', margin: '0 4px' }}>–</span>
-                  <span style={{ color: '#ff2d55' }}>{team.losses}</span>
-                </div>
+                    {/* Class */}
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <span style={{
+                        fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.1em',
+                        color: CLASS_COLOR[team.class] || '#fff',
+                        padding: '2px 6px',
+                        border: `1px solid ${CLASS_COLOR[team.class] || '#fff'}44`,
+                        background: `${CLASS_COLOR[team.class] || '#fff'}11`,
+                      }}>
+                        {team.class}
+                      </span>
+                    </div>
 
-                {/* K/D */}
-                <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(189,200,209,0.8)' }}>
-                  {team.kd}
-                </div>
+                    {/* W–L */}
+                    <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700 }}>
+                      <span style={{ color: '#00f5c4' }}>{team.wins}</span>
+                      <span style={{ color: 'rgba(189,200,209,0.3)', margin: '0 4px' }}>–</span>
+                      <span style={{ color: '#ff2d55' }}>{team.losses}</span>
+                    </div>
 
-                {/* PTS */}
-                <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'var(--font-display)', fontSize: '13px', fontWeight: 800, color: 'var(--sky)' }}>
-                  {team.pts.toLocaleString()}
-                </div>
+                    {/* K/D */}
+                    <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(189,200,209,0.8)' }}>
+                      {team.kd}
+                    </div>
 
-                {/* Status */}
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <span style={{
-                    fontFamily: 'var(--font-mono)', fontSize: '7px', fontWeight: 700, letterSpacing: '0.1em',
-                    color: s.color, padding: '2px 6px',
-                    border: `1px solid ${s.border}`,
-                    background: s.bg,
-                  }}>
-                    {team.status}
-                  </span>
-                </div>
-              </motion.div>
-            );
-          })}
+                    {/* PTS */}
+                    <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'var(--font-display)', fontSize: '13px', fontWeight: 800, color: 'var(--sky)' }}>
+                      {team.pts.toLocaleString()}
+                    </div>
+
+                    {/* Status */}
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <span style={{
+                        fontFamily: 'var(--font-mono)', fontSize: '7px', fontWeight: 700, letterSpacing: '0.1em',
+                        color: s.color, padding: '2px 6px',
+                        border: `1px solid ${s.border}`,
+                        background: s.bg,
+                      }}>
+                        {team.status}
+                      </span>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
         </motion.div>
       )}
 
       {/* BRACKET TAB */}
       {tab === 'BRACKET' && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '24px',
-            padding: '8px 0',
-          }}>
+          <div className="leaderboard-bracket">
             {['QF', 'SF', 'GF'].map((round, roundIdx) => {
               const roundLabel = { QF: 'QUARTER-FINALS', SF: 'SEMI-FINALS', GF: 'GRAND FINAL' }[round];
               const matches = BRACKET.filter(m => m.round === round);

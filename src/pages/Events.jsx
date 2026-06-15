@@ -84,14 +84,48 @@ const TIER_GLOWS = { ELITE: 'rgba(255,45,85,0.25)', PRIME: 'rgba(56,189,248,0.2)
 export default function Events() {
   const [active, setActive] = useState('ALL');
   const [hovered, setHovered] = useState(null);
-  const [registered, setRegistered] = useState({});
+  const [registered, setRegistered] = useState(() => {
+    try {
+      const stored = localStorage.getItem('tf_registered_events');
+      return stored ? JSON.parse(stored) : {};
+    } catch { return {}; }
+  });
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState('default');
+  const [filterTier, setFilterTier] = useState('ALL');
 
-  const filtered = active === 'ALL' ? EVENTS : EVENTS.filter(e => e.category === active);
+  const parsePrize = (prizeStr) => {
+    const clean = prizeStr.replace(/[^0-9]/g, '');
+    return parseInt(clean, 10) || 0;
+  };
+
+  const processedEvents = EVENTS
+    .filter(e => {
+      const matchCat = active === 'ALL' || e.category === active;
+      const matchTier = filterTier === 'ALL' || e.tier === filterTier;
+      const matchSearch = e.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          e.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          e.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
+      return matchCat && matchTier && matchSearch;
+    })
+    .sort((a, b) => {
+      if (sortBy === 'prize') {
+        return parsePrize(b.prize) - parsePrize(a.prize);
+      }
+      if (sortBy === 'participants') {
+        return b.participants - a.participants;
+      }
+      return 0;
+    });
 
   const handleRegister = (id) => {
     if (registered[id]) return;
     soundEffects.playSuccess?.();
-    setRegistered(prev => ({ ...prev, [id]: true }));
+    setRegistered(prev => {
+      const next = { ...prev, [id]: true };
+      localStorage.setItem('tf_registered_events', JSON.stringify(next));
+      return next;
+    });
   };
 
   return (
@@ -181,9 +215,109 @@ export default function Events() {
         })}
       </motion.div>
 
+      {/* Advanced Filters Toolbar */}
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '12px',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: '24px',
+        padding: '12px 16px',
+        border: '1px solid rgba(255, 255, 255, 0.06)',
+        background: 'rgba(255, 255, 255, 0.02)',
+      }}>
+        {/* Search Input */}
+        <div style={{ position: 'relative', flex: '1 1 250px' }}>
+          <input
+            type="text"
+            placeholder="SEARCH EVENTS..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '10px 16px 10px 36px',
+              background: 'rgba(5, 5, 8, 0.9)',
+              border: '1px solid rgba(56, 189, 248, 0.25)',
+              color: '#fff',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '11px',
+              borderRadius: '0px',
+              outline: 'none',
+              transition: 'all 0.25s',
+            }}
+          />
+          <span className="material-symbols-outlined" style={{
+            position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
+            fontSize: '16px', color: 'rgba(189,200,209,0.4)'
+          }}>search</span>
+        </div>
+
+        {/* Tier filter dropdown */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.5)', letterSpacing: '0.1em' }}>TIER:</span>
+          <select
+            value={filterTier}
+            onChange={(e) => { soundEffects.playClick?.(); setFilterTier(e.target.value); }}
+            style={{
+              padding: '8px 12px',
+              background: 'rgba(5, 5, 8, 0.9)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              color: '#fff',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '10px',
+              borderRadius: '0px',
+              outline: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            <option value="ALL">ALL TIERS</option>
+            <option value="ELITE">ELITE (PLASMA)</option>
+            <option value="PRIME">PRIME (SKY)</option>
+            <option value="STANDARD">STANDARD (GREEN)</option>
+          </select>
+        </div>
+
+        {/* Sort dropdown */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.5)', letterSpacing: '0.1em' }}>SORT:</span>
+          <select
+            value={sortBy}
+            onChange={(e) => { soundEffects.playClick?.(); setSortBy(e.target.value); }}
+            style={{
+              padding: '8px 12px',
+              background: 'rgba(5, 5, 8, 0.9)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              color: '#fff',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '10px',
+              borderRadius: '0px',
+              outline: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            <option value="default">DEFAULT ORDER</option>
+            <option value="prize">PRIZE POOL (HIGH-LOW)</option>
+            <option value="participants">PARTICIPANTS</option>
+          </select>
+        </div>
+      </div>
+
       {/* Event cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))', gap: '16px' }}>
-        {filtered.map((ev, i) => {
+        {processedEvents.length === 0 ? (
+          <div style={{
+            gridColumn: '1 / -1',
+            padding: '48px 16px',
+            textAlign: 'center',
+            border: '1px dashed rgba(255,255,255,0.08)',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '12px',
+            color: 'rgba(189,200,209,0.4)'
+          }}>
+            NO EVENTS MATCH YOUR FILTER PARAMETERS.
+          </div>
+        ) : processedEvents.map((ev, i) => {
           const isHovered = hovered === ev.id;
           const isReg = registered[ev.id];
 

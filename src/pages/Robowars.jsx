@@ -456,6 +456,160 @@ export default function Robowars() {
           );
         })}
       </div>
+
+      {/* Bot detail slide-out panel */}
+      <AnimatePresence>
+        {selectedBot && (() => {
+          const bot = BOTS.find(b => b.id === selectedBot);
+          if (!bot) return null;
+          return (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setSelectedBot(null)}
+                style={{
+                  position: 'fixed',
+                  inset: 0,
+                  background: 'rgba(5,5,8,0.75)',
+                  backdropFilter: 'blur(6px)',
+                  zIndex: 290,
+                }}
+              />
+
+              {/* Panel */}
+              <motion.div
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                style={{
+                  position: 'fixed',
+                  top: 0, right: 0, bottom: 0,
+                  width: 'min(400px, 90vw)',
+                  background: 'rgba(10, 10, 14, 0.99)',
+                  borderLeft: '1px solid var(--plasma)',
+                  boxShadow: '-10px 0 40px rgba(255, 45, 85, 0.2)',
+                  padding: '32px 24px',
+                  zIndex: 295,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  overflowY: 'auto',
+                }}
+              >
+                {/* L-bracket decoration */}
+                <div className="bracket-tl" style={{ borderColor: 'var(--plasma)', width: '20px', height: '20px' }} />
+                <div className="bracket-bl" style={{ borderColor: 'var(--plasma)', width: '20px', height: '20px' }} />
+
+                {/* Close Button */}
+                <button
+                  onClick={() => setSelectedBot(null)}
+                  style={{
+                    alignSelf: 'flex-end',
+                    background: 'transparent',
+                    border: '1px solid rgba(255,45,85,0.3)',
+                    color: 'var(--plasma)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '10px',
+                    padding: '6px 12px',
+                    cursor: 'pointer',
+                    letterSpacing: '0.15em',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,45,85,0.1)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
+                >
+                  CLOSE PANEL [X]
+                </button>
+
+                {/* Image */}
+                <div style={{
+                  width: '100%',
+                  height: '200px',
+                  border: '1px solid rgba(255,45,85,0.2)',
+                  background: `radial-gradient(circle at center, rgba(255,45,85,0.15) 0%, rgba(5,5,8,0.8) 100%)`,
+                  margin: '24px 0',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <img src={bot.image} alt={bot.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+
+                {/* Info readout */}
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.4)', letterSpacing: '0.25em' }}>
+                  {bot.team}
+                </span>
+                <h2 style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '24px',
+                  fontWeight: 900,
+                  color: '#fff',
+                  marginTop: '4px',
+                  letterSpacing: '-0.01em',
+                  textShadow: 'var(--glow-plasma)'
+                }}>
+                  {bot.name}
+                </h2>
+                
+                <div style={{
+                  margin: '20px 0',
+                  padding: '16px 0',
+                  borderTop: '1px dashed rgba(255,255,255,0.08)',
+                  borderBottom: '1px dashed rgba(255,255,255,0.08)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '12px'
+                }}>
+                  <div className="readout-row">
+                    <span className="readout-label">WEIGHT CLASS</span>
+                    <span className="readout-val" style={{ color: 'var(--plasma)' }}>{bot.weightClass}</span>
+                  </div>
+                  <div className="readout-row">
+                    <span className="readout-label">WEAPONRY</span>
+                    <span className="readout-val">{bot.weapon}</span>
+                  </div>
+                  <div className="readout-row">
+                    <span className="readout-label">RECORD</span>
+                    <span className="readout-val" style={{ color: 'var(--green)' }}>{bot.record}</span>
+                  </div>
+                </div>
+
+                <p style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '13px',
+                  color: 'rgba(189,200,209,0.7)',
+                  lineHeight: 1.7,
+                  marginBottom: '24px'
+                }}>
+                  {bot.desc}
+                </p>
+
+                {/* Subsystems stats */}
+                <div style={{ border: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.02)', padding: '16px' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'var(--plasma)', fontWeight: 700, letterSpacing: '0.15em', marginBottom: '12px' }}>
+                    SUBSYSTEMS INTEGRITY //
+                  </div>
+                  {[
+                    { name: 'ARMOR THICKNESS (Grade 5 Ti)', val: '92%' },
+                    { name: 'PNEUMATIC ACTUATION SPEED', val: '0.18s' },
+                    { name: 'MOTOR TORQUE DENSITY', val: '98%' },
+                    { name: 'TELEMETRY CONNECTION', val: '100%' }
+                  ].map(s => (
+                    <div key={s.name} style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '9px', marginBottom: '8px' }}>
+                      <span style={{ color: 'rgba(189,200,209,0.5)' }}>{s.name}</span>
+                      <span style={{ color: '#fff', fontWeight: 700 }}>{s.val}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </>
+          );
+        })()}
+      </AnimatePresence>
     </div>
   );
 }
+

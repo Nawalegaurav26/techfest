@@ -22,16 +22,23 @@ const LEFT_NAV = [
   { icon: 'app_registration', label: 'REGISTER', to: '/register' },
   { icon: 'home',             label: 'HOME',      to: '/' },
   { icon: 'event',            label: 'EVENTS',    to: '/events' },
+  { icon: 'code',             label: 'HACKATHON', to: '/hackathon' },
+  { icon: 'emoji_events',     label: 'WINNERS',   to: '/winners' },
+  { icon: 'work',             label: 'JOBS',      to: '/jobs' },
+  { icon: 'quiz',             label: 'QUIZ',      to: '/quiz' },
   { icon: 'map',              label: 'MAP',       to: '/map' },
   { icon: 'calendar_month',   label: 'SCHEDULE',  to: '/schedule' },
-  { icon: 'emoji_events',     label: 'LEADERBOARD', to: '/leaderboard' },
-  { icon: 'quiz',             label: 'FAQ',       to: '/faq' },
-  { icon: 'terminal',         label: 'TERMINAL',  to: '/terminal' },
-  { icon: 'psychology',       label: 'ROBOLAB',   to: '/robolab' },
-  { icon: 'contact_support',  label: 'CONTACT',   to: '/contact' },
+  { icon: 'leaderboard',      label: 'STATS',     to: '/leaderboard' },
+  { icon: 'photo_library',    label: 'GALLERY',   to: '/gallery' },
+  { icon: 'military_tech',    label: 'HALL OF FAME', to: '/hall-of-fame' },
+  { icon: 'shopping_bag',     label: 'STORE',     to: '/store' },
+  { icon: 'shopping_cart',    label: 'MERCH',     to: '/merch' },
+  { icon: 'timeline',         label: 'TIMELINE',  to: '/timeline' },
+  { icon: 'group',            label: 'TEAM',      to: '/team' },
   { icon: 'info',             label: 'ABOUT',     to: '/about' },
   { icon: 'handshake',        label: 'SPONSORS',  to: '/sponsors' },
-  { icon: 'shopping_bag',     label: 'STORE',     to: '/store' },
+  { icon: 'contact_support',  label: 'CONTACT',   to: '/contact' },
+  { icon: 'security',         label: 'PRIVACY',   to: '/privacy' },
 ];
 
 // Mobile bottom navigation (5 key items — most visited)
@@ -61,6 +68,7 @@ const DRAWER_NAV = [
   { icon: 'terminal',         label: 'TERMINAL',      to: '/terminal'     },
   { icon: 'sports_esports',   label: 'COMPETITIONS',  to: '/competitions' },
   { icon: 'school',           label: 'WORKSHOPS',     to: '/workshops'    },
+  { icon: 'code',             label: 'HACKATHON',     to: '/hackathon'    },
   { icon: 'mic',              label: 'LECTURES',      to: '/lectures'     },
   { icon: 'precision_manufacturing', label: 'EXHIBITIONS', to: '/exhibitions' },
   { icon: 'smart_toy',        label: 'ROBOWARS',      to: '/robowars'     },
@@ -68,14 +76,24 @@ const DRAWER_NAV = [
   { icon: 'map',              label: 'CAMPUS MAP',    to: '/map'          },
   { icon: 'app_registration', label: 'REGISTER',     to: '/register'     },
   { icon: 'calendar_month',   label: 'SCHEDULE',      to: '/schedule'     },
-  { icon: 'emoji_events',     label: 'LEADERBOARD',   to: '/leaderboard'  },
+  { icon: 'emoji_events',     label: 'WINNERS',       to: '/winners'      },
+  { icon: 'work',             label: 'JOBS',          to: '/jobs'         },
+  { icon: 'quiz',             label: 'QUIZ',          to: '/quiz'         },
+  { icon: 'leaderboard',      label: 'LEADERBOARD',   to: '/leaderboard'  },
+  { icon: 'photo_library',    label: 'MEDIA GALLERY', to: '/gallery'      },
+  { icon: 'military_tech',    label: 'HALL OF FAME',  to: '/hall-of-fame' },
   { icon: 'quiz',             label: 'ASK ARIA (FAQ)', to: '/faq'         },
   { icon: 'hotel',            label: 'ACCOMMODATION', to: '/accommodation'},
-  { icon: 'handshake',        label: 'SPONSORS',      to: '/sponsors'     },
   { icon: 'shopping_bag',     label: 'STORE',         to: '/store'        },
+  { icon: 'shopping_cart',    label: 'MERCHANDISE',   to: '/merch'        },
+  { icon: 'timeline',         label: 'HISTORY TIMELINE', to: '/timeline'  },
+  { icon: 'group',            label: 'THE TEAM',      to: '/team'         },
   { icon: 'info',             label: 'ABOUT',         to: '/about'        },
+  { icon: 'handshake',        label: 'SPONSORS',      to: '/sponsors'     },
   { icon: 'contact_support',  label: 'CONTACT',       to: '/contact'      },
+  { icon: 'security',         label: 'PRIVACY POLICY', to: '/privacy'     },
 ];
+
 
 
 const pageVariants = {
@@ -248,7 +266,7 @@ export default function PageLayout() {
         }} />
 
         {/* Icons */}
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1 }}>
+        <nav style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1, overflowY: 'auto', width: '100%', paddingRight: '2px' }}>
           {[...(user ? [{ icon: 'badge', label: 'DASHBOARD', to: '/dashboard' }] : []), ...LEFT_NAV].map(({ icon, label, to }) => {
             const active = isActive(to);
             return (

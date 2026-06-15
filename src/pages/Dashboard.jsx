@@ -3,6 +3,60 @@ import { motion } from 'framer-motion';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { soundEffects } from '../utils/soundEffects';
 
+const EVENT_NAMES = {
+  // Competitions.jsx
+  c1: 'ROBOWAR SIGMA',
+  c2: 'CODE BREACH',
+  c3: 'NEURAL WARS',
+  c4: 'AEROBOT PRIME',
+  c5: 'DATAVAULT HEIST',
+  c6: 'SPACE ODYSSEY',
+  c7: 'QUANTUM CIRCUIT DESIGN',
+
+  // Register.jsx
+  ev1: 'ROBOWAR SIGMA',
+  ev2: 'CODE BREACH',
+  ev3: 'DRONE WARS',
+  ev4: 'AI DESIGN JAM',
+  ev5: 'CIRCUIT WIZARDS',
+  ev6: 'BRIDGE BUILDER',
+  ev7: 'STOCK MARKET SIM',
+  ev8: 'QUANTUM LOCK',
+
+  // Schedule.jsx
+  e1: 'INAUGURAL CEREMONY',
+  e2: 'KEYNOTE: AI & THE FUTURE',
+  e3: 'ROBOWARS QF — TITAN CLASS',
+  e4: 'HACKATHON — PHASE 1 STARTS',
+  e5: 'CULTURAL NIGHT — OPENING',
+  e6: 'WORKSHOP: PCB MASTERY',
+  e7: 'LECTURE: DARK MATTER',
+  e8: 'ROBOWARS SF — TITAN CLASS',
+  e9: 'SCIENCE EXHIBITION OPEN',
+  e10: 'WORKSHOP: ML FOR ROBOTICS',
+  e11: 'HACKATHON FINAL PUSH',
+  e12: 'HACKATHON — PRESENTATIONS',
+  e13: 'PANEL: SPACE EXPLORATION',
+  e14: 'ROBOWARS QF — HEAVY/FEATHER',
+  e15: 'DRONE RACING FINAL HEATS',
+  e16: 'HACKATHON AWARDS',
+  e17: 'ROBOWARS GRAND FINALS',
+  e18: 'WORKSHOP: QUANTUM COMPUTING',
+  e19: 'CLOSING KEYNOTE',
+  e20: 'GRAND VALEDICTION',
+};
+
+const WORKSHOP_NAMES = {
+  w1: 'NEURAL ARCHITECTURE DEEP DIVE',
+  w2: 'QUANTUM COMPUTING WORKSHOP',
+  w3: 'AUTONOMOUS SYSTEMS',
+  w4: 'BLOCKCHAIN & WEB3',
+  w5: 'BIOINFORMATICS & AI DRUG DISCOVERY',
+  w6: 'COMPUTER VISION COMBAT',
+  w7: 'ROCKET SIMULATION ENGINEERING',
+  w8: 'AR/VR DEVELOPMENT BOOTCAMP',
+};
+
 export default function Dashboard() {
   const { user, handleSignOut } = useOutletContext() || {};
   const navigate = useNavigate();
@@ -20,6 +74,24 @@ export default function Dashboard() {
   };
 
   const tfId = `TF26-${user.uid?.substring(0, 5).toUpperCase() || 'GUEST'}-${Math.floor(Math.random() * 9000) + 1000}`;
+
+  const registeredEvents = (() => {
+    try {
+      const stored = localStorage.getItem('tf_registered_events');
+      if (!stored) return [];
+      const parsed = JSON.parse(stored);
+      return Object.keys(parsed).filter(id => parsed[id]).map(id => EVENT_NAMES[id] || id);
+    } catch { return []; }
+  })();
+
+  const registeredWorkshops = (() => {
+    try {
+      const stored = localStorage.getItem('tf_registered_workshops');
+      if (!stored) return [];
+      const parsed = JSON.parse(stored);
+      return Object.keys(parsed).filter(id => parsed[id]).map(id => WORKSHOP_NAMES[id] || id);
+    } catch { return []; }
+  })();
 
   return (
     <div className="page-section" style={{ paddingBottom: '80px', minHeight: '85vh' }}>
@@ -150,14 +222,38 @@ export default function Dashboard() {
               <span>DATA.LOG</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <div className="readout-row">
-                <span className="readout-label">EVENTS REGISTERED</span>
-                <span className="readout-val">0</span>
+              <div>
+                <div className="readout-row">
+                  <span className="readout-label">EVENTS REGISTERED</span>
+                  <span className="readout-val">{registeredEvents.length}</span>
+                </div>
+                {registeredEvents.length > 0 && (
+                  <div style={{ padding: '4px 12px', display: 'flex', flexDirection: 'column', gap: '4px', background: 'rgba(255,255,255,0.02)', borderLeft: '1px solid var(--sky)', marginTop: '4px' }}>
+                    {registeredEvents.map(name => (
+                      <div key={name} style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(189,200,209,0.7)', letterSpacing: '0.05em' }}>
+                        ▶ {name}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-              <div className="readout-row">
-                <span className="readout-label">WORKSHOPS</span>
-                <span className="readout-val">0</span>
+              
+              <div>
+                <div className="readout-row">
+                  <span className="readout-label">WORKSHOPS REGISTERED</span>
+                  <span className="readout-val">{registeredWorkshops.length}</span>
+                </div>
+                {registeredWorkshops.length > 0 && (
+                  <div style={{ padding: '4px 12px', display: 'flex', flexDirection: 'column', gap: '4px', background: 'rgba(255,255,255,0.02)', borderLeft: '1px solid var(--green)', marginTop: '4px' }}>
+                    {registeredWorkshops.map(name => (
+                      <div key={name} style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(189,200,209,0.7)', letterSpacing: '0.05em' }}>
+                        ▶ {name}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
+
               <div className="readout-row">
                 <span className="readout-label">HACKATHON TEAM</span>
                 <span className="readout-val" style={{ color: 'var(--plasma)' }}>UNASSIGNED</span>

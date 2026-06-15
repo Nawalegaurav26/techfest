@@ -213,7 +213,81 @@ export default function Home() {
   const countdown = useCountdown();
 
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
+      {/* ── NEWS TICKER ── */}
+      <div style={{
+        background: 'rgba(5, 5, 8, 0.95)',
+        borderBottom: '1px solid rgba(56, 189, 248, 0.15)',
+        height: '32px',
+        display: 'flex',
+        alignItems: 'center',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        position: 'relative',
+        zIndex: 10,
+      }}>
+        {/* Ticker label */}
+        <div style={{
+          background: 'var(--plasma)',
+          color: '#fff',
+          fontFamily: 'var(--font-mono)',
+          fontSize: '8px',
+          fontWeight: 700,
+          padding: '0 12px',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          letterSpacing: '0.15em',
+          zIndex: 11,
+          boxShadow: '4px 0 10px rgba(0,0,0,0.5)',
+          flexShrink: 0,
+        }}>
+          FEED // LIVE
+        </div>
+
+        {/* Rolling text */}
+        <div className="ticker-scroll" style={{
+          display: 'inline-flex',
+          gap: '40px',
+          animation: 'tickerScroll 35s linear infinite',
+          paddingLeft: '20px',
+        }}>
+          {[
+            '🚀 REGISTRATION OPEN: NEURAL HACKATHON 2026 — FORM TEAMS NOW',
+            '⚡ SPEAKER KEYNOTE UPDATES: OPENAI CEO SAM ALTMAN CONFIRMED',
+            '🤖 ROBOWARS: HEAVYWEIGHT WEIGHT CLASS CATEGORY REGISTRATION CAPACITY NEARLY COMPLETE',
+            '🛰️ PARTNERSHIP ANNOUNCEMENT: ISRO SPACE PAVILION EXCLUSIVES LIVE ON SITE',
+            '👾 TECHFEST MERCHANDISE CATALYST STORE NOW ONLINE — BROWSE EXCLUSIVES',
+            // Duplicated to create a seamless looping effect
+            '🚀 REGISTRATION OPEN: NEURAL HACKATHON 2026 — FORM TEAMS NOW',
+            '⚡ SPEAKER KEYNOTE UPDATES: OPENAI CEO SAM ALTMAN CONFIRMED',
+            '🤖 ROBOWARS: HEAVYWEIGHT WEIGHT CLASS CATEGORY REGISTRATION CAPACITY NEARLY COMPLETE',
+            '🛰️ PARTNERSHIP ANNOUNCEMENT: ISRO SPACE PAVILION EXCLUSIVES LIVE ON SITE',
+            '👾 TECHFEST MERCHANDISE CATALYST STORE NOW ONLINE — BROWSE EXCLUSIVES',
+          ].map((text, i) => (
+            <span key={i} style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '8.5px',
+              color: 'rgba(189, 200, 209, 0.75)',
+              letterSpacing: '0.08em',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+            }}>
+              <span style={{ width: '4px', height: '4px', background: 'var(--sky)', borderRadius: '50%', flexShrink: 0 }} />
+              {text}
+            </span>
+          ))}
+        </div>
+
+        <style>{`
+          @keyframes tickerScroll {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+          }
+        `}</style>
+      </div>
+
 
       {/* ═══════════════════════════════════════════
           HERO SECTION — mobile-first

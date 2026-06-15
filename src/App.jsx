@@ -29,7 +29,18 @@ const Leaderboard   = lazy(() => import('./pages/Leaderboard'));
 const Schedule      = lazy(() => import('./pages/Schedule'));
 const Register      = lazy(() => import('./pages/Register'));
 const FAQ           = lazy(() => import('./pages/FAQ'));
+const Hackathon     = lazy(() => import('./pages/Hackathon'));
+const Winners       = lazy(() => import('./pages/Winners'));
+const Jobs          = lazy(() => import('./pages/Jobs'));
+const Quiz          = lazy(() => import('./pages/Quiz'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const HallOfFame    = lazy(() => import('./pages/HallOfFame'));
+const Team          = lazy(() => import('./pages/Team'));
+const Timeline      = lazy(() => import('./pages/Timeline'));
+const Merch         = lazy(() => import('./pages/Merch'));
+const MediaGallery  = lazy(() => import('./pages/MediaGallery'));
 const NotFound      = lazy(() => import('./pages/NotFound'));
+
 
 // Minimal loader shown during code-split chunk fetch
 function PageLoader() {
@@ -100,7 +111,18 @@ export default function App() {
               <Route path="schedule"      element={<Schedule />} />
               <Route path="register"      element={<Register />} />
               <Route path="faq"           element={<FAQ />} />
+              <Route path="hackathon"     element={<Hackathon />} />
+              <Route path="winners"       element={<Winners />} />
+              <Route path="jobs"          element={<Jobs />} />
+              <Route path="quiz"          element={<Quiz />} />
+              <Route path="privacy"       element={<PrivacyPolicy />} />
+              <Route path="hall-of-fame"  element={<HallOfFame />} />
+              <Route path="team"          element={<Team />} />
+              <Route path="timeline"      element={<Timeline />} />
+              <Route path="merch"         element={<Merch />} />
+              <Route path="gallery"       element={<MediaGallery />} />
               <Route path="*"             element={<NotFound />} />
+
             </Route>
           </Routes>
         </Suspense>

@@ -263,6 +263,82 @@ export default function About() {
         </div>
       </motion.div>
 
+      {/* Founding Team (1998 Pioneers) */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 }}
+        style={{ marginBottom: '48px' }}
+      >
+        <div className="section-overline" style={{ marginBottom: '20px' }}>1998 FOUNDING PIONEERS</div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 250px), 1fr))',
+          gap: '14px',
+        }}>
+          {[
+            { name: 'AMIT KHANDELWAL', role: 'FOUNDING CONVENER', year: 'Class of 1999', dept: 'Chemical Engineering', initials: 'AK' },
+            { name: 'RITESH SHARMA', role: 'CO-FOUNDER (EVENTS)', year: 'Class of 2000', dept: 'Mechanical Engineering', initials: 'RS' },
+            { name: 'VARUN GROVER', role: 'CO-FOUNDER (OUTREACH)', year: 'Class of 1999', dept: 'Electrical Engineering', initials: 'VG' }
+          ].map((founder, i) => (
+            <div
+              key={founder.name}
+              className="glass-panel"
+              style={{
+                padding: '24px',
+                border: '1px solid rgba(251, 191, 36, 0.25)',
+                background: 'rgba(251, 191, 36, 0.02)',
+                position: 'relative',
+              }}
+            >
+              <div className="bracket-tl" style={{ borderColor: '#fbbf24' }} />
+              <div className="bracket-br" style={{ borderColor: '#fbbf24' }} />
+              
+              <div style={{
+                width: 44, height: 44,
+                background: 'radial-gradient(circle, rgba(251, 191, 36, 0.2) 0%, rgba(5,5,8,0.5) 100%)',
+                border: '1px solid rgba(251, 191, 36, 0.4)',
+                marginBottom: '12px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: '12px', color: '#fbbf24',
+              }}>
+                {founder.initials}
+              </div>
+
+              <div style={{
+                fontFamily: 'var(--font-display)',
+                fontWeight: 700,
+                fontSize: '13px',
+                color: '#fff',
+                marginBottom: '4px',
+                letterSpacing: '0.01em'
+              }}>
+                {founder.name}
+              </div>
+              <div style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '9px',
+                color: '#fbbf24',
+                letterSpacing: '0.15em',
+                fontWeight: 700,
+                marginBottom: '4px'
+              }}>
+                {founder.role}
+              </div>
+              <div style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '8px',
+                color: 'rgba(189,200,209,0.45)',
+                letterSpacing: '0.1em',
+                fontWeight: 600
+              }}>
+                {founder.year} · {founder.dept}
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
       {/* Core Team */}
       <div>
         <div className="section-overline" style={{ marginBottom: '24px' }}>CORE TEAM</div>

@@ -138,13 +138,39 @@ const LEVEL_COLORS = { ADVANCED: 'var(--plasma)', INTERMEDIATE: 'var(--sky)', BE
 const LEVEL_GLOWS = { ADVANCED: 'rgba(255,45,85,0.25)', INTERMEDIATE: 'rgba(56,189,248,0.2)', BEGINNER: 'rgba(0, 245, 196, 0.15)' };
 
 export default function Workshops() {
-  const [registered, setRegistered] = useState({});
+  const [registered, setRegistered] = useState(() => {
+    try {
+      const stored = localStorage.getItem('tf_registered_workshops');
+      return stored ? JSON.parse(stored) : {};
+    } catch { return {}; }
+  });
   const [selected, setSelected] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalTarget, setModalTarget] = useState(null);
 
-  const handleRegister = (id) => {
-    if (registered[id]) return;
-    soundEffects.playSuccess?.();
-    setRegistered(prev => ({ ...prev, [id]: true }));
+  const triggerRegisterModal = (id, name, isRegistered) => {
+    soundEffects.playClick?.();
+    setModalTarget({ id, name, type: isRegistered ? 'unregister' : 'register' });
+    setModalOpen(true);
+  };
+
+  const confirmModalAction = () => {
+    const { id, type } = modalTarget;
+    setRegistered(prev => {
+      const next = {
+        ...prev,
+        [id]: type === 'register'
+      };
+      localStorage.setItem('tf_registered_workshops', JSON.stringify(next));
+      return next;
+    });
+    if (type === 'register') {
+      soundEffects.playSuccess?.();
+    } else {
+      soundEffects.playClick?.();
+    }
+    setModalOpen(false);
+    setModalTarget(null);
   };
 
   return (
@@ -417,7 +443,7 @@ export default function Workshops() {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleRegister(ws.id);
+                      triggerRegisterModal(ws.id, ws.name, isReg);
                     }}
                     style={{
                       flex: 1.2,
@@ -455,6 +481,115 @@ export default function Workshops() {
           );
         })}
       </div>
+
+      {/* Registration Modal Overlay */}
+      <AnimatePresence>
+        {modalOpen && modalTarget && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setModalOpen(false)}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(5,5,8,0.9)',
+              backdropFilter: 'blur(12px)',
+              zIndex: 300,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '20px'
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={e => e.stopPropagation()}
+              className="glass-panel"
+              style={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: '440px',
+                padding: '32px 24px',
+                border: `1px solid ${modalTarget.type === 'register' ? 'var(--sky)' : 'var(--plasma)'}`,
+                background: 'rgba(10, 10, 14, 0.98)',
+                boxShadow: `0 0 30px ${modalTarget.type === 'register' ? 'rgba(56,189,248,0.15)' : 'rgba(255,45,85,0.15)'}`,
+              }}
+            >
+              {/* Brackets */}
+              <div className="bracket-tl" style={{ borderColor: modalTarget.type === 'register' ? 'var(--sky)' : 'var(--plasma)' }} />
+              <div className="bracket-br" style={{ borderColor: modalTarget.type === 'register' ? 'var(--sky)' : 'var(--plasma)' }} />
+
+              <div style={{
+                fontFamily: 'var(--font-mono)', fontSize: '8px',
+                color: modalTarget.type === 'register' ? 'var(--sky)' : 'var(--plasma)',
+                letterSpacing: '0.25em', fontWeight: 700, marginBottom: '16px'
+              }}>
+                {modalTarget.type === 'register' ? 'UPLINK PROPOSAL // INITIATE REGISTRATION' : 'DOWNLINK PROPOSAL // TERMINATE REGISTRATION'}
+              </div>
+
+              <h3 style={{
+                fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 800,
+                color: '#fff', marginBottom: '12px', lineHeight: 1.2
+              }}>
+                {modalTarget.type === 'register'
+                  ? `Register for ${modalTarget.name}?`
+                  : `Unregister from ${modalTarget.name}?`
+                }
+              </h3>
+
+              <p style={{
+                fontFamily: 'var(--font-body)', fontSize: '12.5px',
+                color: 'rgba(189,200,209,0.6)', lineHeight: 1.6, marginBottom: '24px'
+              }}>
+                {modalTarget.type === 'register'
+                  ? 'Confirming will allocate one research lab slot to your calling profile. Please ensure you attend the scheduled session.'
+                  : 'This action will release your allocated research seat back to the general registrant pool. This cannot be undone.'
+                }
+              </p>
+
+              <div style={{ display: 'flex', gap: '12px' }}>
+                <button
+                  className="btn-ghost"
+                  onClick={() => setModalOpen(false)}
+                  style={{ flex: 1, padding: '10px 0', fontSize: '9px', minHeight: '40px' }}
+                >
+                  CANCEL
+                </button>
+                <button
+                  onClick={confirmModalAction}
+                  style={{
+                    flex: 1.2,
+                    padding: '10px 0',
+                    minHeight: '40px',
+                    background: modalTarget.type === 'register' ? 'rgba(56,189,248,0.1)' : 'rgba(255,45,85,0.1)',
+                    border: `1px solid ${modalTarget.type === 'register' ? 'var(--sky)' : 'var(--plasma)'}`,
+                    color: modalTarget.type === 'register' ? 'var(--sky)' : 'var(--plasma)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '9px',
+                    fontWeight: 700,
+                    letterSpacing: '0.15em',
+                    cursor: 'pointer',
+                    transition: 'all 0.25s'
+                  }}
+                  onMouseEnter={e => {
+                    const color = modalTarget.type === 'register' ? 'var(--sky)' : 'var(--plasma)';
+                    e.currentTarget.style.background = `${color}25`;
+                  }}
+                  onMouseLeave={e => {
+                    const color = modalTarget.type === 'register' ? 'var(--sky)' : 'var(--plasma)';
+                    e.currentTarget.style.background = `${color}10`;
+                  }}
+                >
+                  {modalTarget.type === 'register' ? 'CONFIRM ENROLL' : 'TERMINATE SEAT'}
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

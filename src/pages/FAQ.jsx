@@ -274,7 +274,7 @@ export default function FAQ() {
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={handleKey}
-                placeholder="Type your query..."
+                placeholder="Type your query... (Press Enter to transmit)"
                 style={{
                   flex: 1, background: 'transparent', border: 'none', outline: 'none',
                   fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#fff',

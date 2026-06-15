@@ -5,6 +5,7 @@ import { Menu, X, Volume2, VolumeX } from 'lucide-react';
 import { loginWithGoogle, logoutUser } from '../utils/supabaseAuth';
 import { soundEffects } from '../utils/soundEffects';
 import { SearchOverlay } from './SearchOverlay';
+import NotificationBell from './NotificationBell';
 
 const NAV_LINKS = [
   { label: 'COMPETITIONS', to: '/competitions' },
@@ -12,8 +13,10 @@ const NAV_LINKS = [
   { label: 'LECTURES',     to: '/lectures' },
   { label: 'EXHIBITIONS',  to: '/exhibitions' },
   { label: 'ROBOWARS',     to: '/robowars' },
+  { label: 'HACKATHON',    to: '/hackathon' },
   { label: 'MAP',          to: '/map' },
   { label: 'SCHEDULE',     to: '/schedule' },
+  { label: 'MERCH',        to: '/merch' },
   { label: 'FAQ',          to: '/faq' },
   { label: 'TERMINAL',     to: '/terminal' },
 ];
@@ -132,7 +135,7 @@ export default function HolographicNav({
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 'clamp(16px, 2.5vw, 32px)',
+          gap: 'clamp(8px, 1.2vw, 16px)',
           position: 'absolute',
           left: '50%',
           transform: 'translateX(-50%)',
@@ -188,6 +191,10 @@ export default function HolographicNav({
         >
           <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>search</span>
         </button>
+
+        {/* Notification bell */}
+        <NotificationBell />
+
 
         {/* Audio toggle — 44x44px touch target */}
         <button
