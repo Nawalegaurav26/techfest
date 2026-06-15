@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Volume2, VolumeX } from 'lucide-react';
 import { loginWithGoogle, logoutUser } from '../utils/supabaseAuth';
 import { soundEffects } from '../utils/soundEffects';
+import { SearchOverlay } from './SearchOverlay';
 
 const NAV_LINKS = [
   { label: 'COMPETITIONS', to: '/competitions' },
@@ -28,12 +29,25 @@ export default function HolographicNav({
   drawerOpen,
 }) {
   const [scrolled, setScrolled] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Global Ctrl+K shortcut to open search
+  useEffect(() => {
+    const onKey = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchOpen(s => !s);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, []);
 
   const toggleSound = () => {
@@ -49,6 +63,7 @@ export default function HolographicNav({
   };
 
   return (
+    <>
     <header
       style={{
         position: 'fixed',
@@ -153,6 +168,26 @@ export default function HolographicNav({
 
       {/* ── RIGHT: CONTROLS ────────────────────────── */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+
+        {/* Search button */}
+        <button
+          onClick={() => setSearchOpen(true)}
+          style={{
+            width: '44px', height: '44px',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            border: '1px solid rgba(255,255,255,0.1)',
+            color: 'rgba(189,200,209,0.6)',
+            background: 'transparent',
+            transition: 'all 0.2s',
+            flexShrink: 0,
+          }}
+          title="Search (Ctrl+K)"
+          aria-label="Open search"
+          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--sky)'; e.currentTarget.style.color = 'var(--sky)'; }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'rgba(189,200,209,0.6)'; }}
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>search</span>
+        </button>
 
         {/* Audio toggle — 44x44px touch target */}
         <button
@@ -260,5 +295,9 @@ export default function HolographicNav({
         </button>
       </div>
     </header>
+
+    {/* Search overlay — portal-level */}
+    <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
+    </>
   );
 }
