@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { label: 'LECTURES',     to: '/lectures' },
   { label: 'EXHIBITIONS',  to: '/exhibitions' },
   { label: 'ROBOWARS',     to: '/robowars' },
+  { label: 'MAP',          to: '/map' },
   { label: 'TERMINAL',     to: '/terminal' },
 ];
 

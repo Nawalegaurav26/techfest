@@ -19,6 +19,7 @@ import {
 const LEFT_NAV = [
   { icon: 'home',            label: 'HOME',     to: '/' },
   { icon: 'event',           label: 'EVENTS',   to: '/events' },
+  { icon: 'map',             label: 'MAP',      to: '/map' },
   { icon: 'terminal',        label: 'TERMINAL', to: '/terminal' },
   { icon: 'psychology',      label: 'ROBOLAB',  to: '/robolab' },
   { icon: 'contact_support', label: 'CONTACT',  to: '/contact' },
@@ -58,6 +59,7 @@ const DRAWER_NAV = [
   { icon: 'precision_manufacturing', label: 'EXHIBITIONS', to: '/exhibitions' },
   { icon: 'smart_toy',        label: 'ROBOWARS',      to: '/robowars'     },
   { icon: 'psychology',       label: 'ROBOLAB (3D)',  to: '/robolab'      },
+  { icon: 'map',              label: 'CAMPUS MAP',    to: '/map'          },
   { icon: 'hotel',            label: 'ACCOMMODATION', to: '/accommodation'},
   { icon: 'handshake',        label: 'SPONSORS',      to: '/sponsors'     },
   { icon: 'shopping_bag',     label: 'STORE',         to: '/store'        },

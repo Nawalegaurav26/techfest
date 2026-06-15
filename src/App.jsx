@@ -20,6 +20,7 @@ import Robowars from './pages/Robowars';
 import RoboLab from './pages/RoboLab';
 import ComingSoon from './pages/ComingSoon';
 import Dashboard from './pages/Dashboard';
+import CampusMap from './pages/CampusMap';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -66,6 +67,7 @@ export default function App() {
             <Route path="robolab"      element={<RoboLab />} />
             <Route path="comingsoon"   element={<ComingSoon />} />
             <Route path="dashboard"    element={<Dashboard />} />
+            <Route path="map"          element={<CampusMap />} />
             <Route path="*"            element={<NotFound />} />
           </Route>
         </Routes>
