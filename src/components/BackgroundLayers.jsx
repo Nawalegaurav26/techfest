@@ -21,7 +21,7 @@ function NeuralNetCanvas() {
     window.addEventListener('resize', onResize);
 
     // Create nodes
-    const nodeCount = 80;
+    const nodeCount = 35;
     const nodes = Array.from({ length: nodeCount }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
@@ -104,7 +104,7 @@ function DigitalRainCanvas() {
     let raf;
 
     const symbols = 'ΣΨΩΔΛΘΦΠαβγδεζηθ∂∇∫∮∑∏√∞≈≠≤≥01∈∉⊂⊃∪∩→←↑↓◇○□△▽◁▷⊕⊗⊘⊙';
-    const cols = Math.floor(w / 18);
+    const cols = Math.floor(w / 36);
     const drops = Array(cols).fill(0).map(() => Math.floor(Math.random() * -50));
 
     const draw = () => {
@@ -119,13 +119,13 @@ function DigitalRainCanvas() {
 
         // Head glow
         ctx.fillStyle = `rgba(180,255,255,0.85)`;
-        ctx.fillText(sym, i * 18, y);
+        ctx.fillText(sym, i * 36, y);
 
         // Trail
-        for (let t = 1; t <= 6; t++) {
-          const trailAlpha = (1 - t / 6) * 0.2;
+        for (let t = 1; t <= 3; t++) {
+          const trailAlpha = (1 - t / 3) * 0.2;
           ctx.fillStyle = `rgba(0,242,255,${trailAlpha})`;
-          ctx.fillText(symbols[Math.floor(Math.random() * symbols.length)], i * 18, y - t * 18);
+          ctx.fillText(symbols[Math.floor(Math.random() * symbols.length)], i * 36, y - t * 18);
         }
 
         if (y > h && Math.random() > 0.975) drops[i] = 0;

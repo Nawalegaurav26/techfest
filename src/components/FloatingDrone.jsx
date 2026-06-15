@@ -309,7 +309,7 @@ export default function FloatingDrone() {
         mixBlendMode: 'screen',
       }}
     >
-      <Canvas camera={{ position: [0, 0, 3.2], fov: 60 }} shadows>
+      <Canvas camera={{ position: [0, 0, 3.2], fov: 60 }} shadows style={{ pointerEvents: 'none' }}>
         <ambientLight intensity={0.4} />
         <directionalLight position={[2, 4, 3]} intensity={1.0} color="#ffffff" castShadow />
         <pointLight position={[-3, -3, -1]} intensity={0.5} color={activeColor} />

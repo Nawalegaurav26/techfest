@@ -106,11 +106,6 @@ button, a, [role="button"] {
   touch-action: manipulation;
 }
 
-/* Remove 300ms tap delay on mobile */
-* {
-  touch-action: pan-y;
-}
-
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 

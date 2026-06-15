@@ -13,12 +13,12 @@ export default function ShaderBackground() {
       return;
     }
 
-    let w = (canvas.width = window.innerWidth);
-    let h = (canvas.height = window.innerHeight);
+    let w = (canvas.width = Math.floor(window.innerWidth / 3));
+    let h = (canvas.height = Math.floor(window.innerHeight / 3));
 
     const onResize = () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+      w = canvas.width = Math.floor(window.innerWidth / 3);
+      h = canvas.height = Math.floor(window.innerHeight / 3);
       gl.viewport(0, 0, w, h);
     };
     window.addEventListener('resize', onResize);
@@ -52,7 +52,7 @@ export default function ShaderBackground() {
         vec3 finalColor = vec3(0.0);
 
         // Scrolling particle field
-        for(float i=0.0; i<45.0; i++) {
+        for(float i=0.0; i<15.0; i++) {
           float speed = 0.15 + hash(vec2(i, 1.2)) * 0.45;
           vec2 p = vec2(
             hash(vec2(i, 2.3)) * 2.0 - 1.0,
