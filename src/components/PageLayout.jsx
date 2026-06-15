@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import HolographicNav from './HolographicNav';
 import BackgroundLayers from './BackgroundLayers';
 import FloatingDrone from './FloatingDrone';
+import ScrollToTop from './ScrollToTop';
+import AnnouncementBanner from './AnnouncementBanner';
 import { SocialIcons } from '../utils/socialIcons';
 import { soundEffects } from '../utils/soundEffects';
 import {
@@ -197,6 +199,12 @@ export default function PageLayout() {
       <div className="vignette" />
       <BackgroundLayers />
       <FloatingDrone />
+
+      {/* ── ANNOUNCEMENT BANNER (above nav) */}
+      <AnnouncementBanner />
+
+      {/* ── SCROLL TO TOP ──────────────────────────── */}
+      <ScrollToTop />
 
       {/* ── TOP NAVBAR ────────────────────────────── */}
       <HolographicNav
