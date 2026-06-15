@@ -1,314 +1,311 @@
-/* Techfest 2026 - Telemetry Log 11 */
+/* Techfest 2026 — Telemetry Log 11-ENHANCED // SPONSOR TIER SHOWCASE */
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { soundEffects } from '../utils/soundEffects';
 
 const TIERS = [
   {
+    id: 'title',
     name: 'TITLE SPONSOR',
-    color: 'var(--plasma)',
-    glow: 'rgba(255,45,85,0.25)',
+    code: 'TIER-0',
+    color: '#ff2d55',
+    glow: 'rgba(255,45,85,0.3)',
+    perks: ['Full naming rights', 'Prime stage branding', 'Opening ceremony slot', 'Exclusive hiring booth'],
     sponsors: [
-      { name: 'NEXCORE SYSTEMS', role: 'AI Infrastructure Partner', logo: '⬡' },
+      { name: 'NEXCORE SYSTEMS', role: 'AI Infrastructure Partner', abbr: 'NX', desc: 'Leading AI chip manufacturer powering the next generation of autonomous systems.' },
     ],
   },
   {
+    id: 'platinum',
     name: 'PLATINUM',
-    color: '#e8e8ff',
-    glow: 'rgba(232,232,255,0.2)',
+    code: 'TIER-1',
+    color: '#e0e0ff',
+    glow: 'rgba(200,200,255,0.25)',
+    perks: ['Main stage branding', 'Dedicated hiring day', 'Workshop slot', '500 CV database access'],
     sponsors: [
-      { name: 'GOOGLE', role: 'Cloud & AI', logo: 'G' },
-      { name: 'MICROSOFT', role: 'Azure Partner', logo: 'M' },
+      { name: 'GOOGLE',    role: 'Cloud & AI Partner',  abbr: 'G',  desc: 'Powering Techfest with Google Cloud, Gemini AI, and Maps Platform across all digital infrastructure.' },
+      { name: 'MICROSOFT', role: 'Azure Partner',        abbr: 'M',  desc: 'Providing Azure AI services, GitHub Copilot access, and ₹1L in cloud credits for all participants.' },
     ],
   },
   {
+    id: 'gold',
     name: 'GOLD',
-    color: '#ffd700',
-    glow: 'rgba(255,215,0,0.2)',
+    code: 'TIER-2',
+    color: '#fbbf24',
+    glow: 'rgba(251,191,36,0.2)',
+    perks: ['Venue branding', 'Competition sponsorship', 'Alumni network access', 'Social media features'],
     sponsors: [
-      { name: 'ISRO', role: 'Space Partner', logo: '🚀' },
-      { name: 'INTEL', role: 'Hardware Partner', logo: 'I' },
-      { name: 'QUALCOMM', role: 'Chipset Partner', logo: 'Q' },
+      { name: 'ISRO',     role: 'Space Technology Partner', abbr: '🚀', desc: 'Showcasing the Gaganyaan module and live mission data feeds at the Space Pavilion.' },
+      { name: 'INTEL',    role: 'Hardware Partner',         abbr: 'IN', desc: 'Supplying Core Ultra processors and Gaudi AI accelerators for the hackathon compute cluster.' },
+      { name: 'QUALCOMM', role: 'Chipset Partner',          abbr: 'QC', desc: 'Powering the IoT and embedded systems workshop track with Snapdragon Dev Kits.' },
     ],
   },
   {
+    id: 'silver',
     name: 'SILVER',
-    color: 'var(--sky)',
-    glow: 'rgba(56,189,248,0.15)',
+    code: 'TIER-3',
+    color: '#38bdf8',
+    glow: 'rgba(56,189,248,0.18)',
+    perks: ['Event co-branding', 'Stall in exhibition zone', 'Email to database', 'Certificate co-sign'],
     sponsors: [
-      { name: 'AWS', role: 'Cloud', logo: 'A' },
-      { name: 'NVIDIA', role: 'GPU', logo: 'N' },
-      { name: 'SAMSUNG', role: 'Mobile', logo: 'S' },
-      { name: 'D.E. SHAW', role: 'Finance', logo: 'D' },
+      { name: 'AWS',     role: 'Cloud',         abbr: 'AW', desc: 'Providing cloud infrastructure, S3 buckets, and Lambda credits for all registered teams.' },
+      { name: 'NVIDIA',  role: 'GPU Computing',  abbr: 'NV', desc: 'RTX 4090 workstation access for all ML/AI workshop participants.' },
+      { name: 'SAMSUNG', role: 'Mobile Partner', abbr: 'SM', desc: 'Galaxy S24 Ultra devices available for UI/UX demo tracks and AR workshops.' },
+      { name: 'D.E. SHAW', role: 'Finance Partner', abbr: 'DS', desc: 'Sponsoring the Quant Finance track and recruiting STEM talent directly.' },
     ],
   },
   {
+    id: 'bronze',
     name: 'BRONZE',
+    code: 'TIER-4',
     color: '#cd7f32',
     glow: 'rgba(205,127,50,0.15)',
+    perks: ['Logo on materials', 'Goody bag inserts', 'Social media mention'],
     sponsors: [
-      { name: 'TCS',      role: 'IT Services',         logo: 'T' },
-      { name: 'FLIPKART', role: 'E-Commerce',          logo: 'F' },
-      { name: 'ZOMATO',   role: 'Food Tech',            logo: 'Z' },
-      { name: 'DRDO',     role: 'Defence Research',     logo: '⊗' },
-      { name: 'PAYTM',    role: 'Fintech',              logo: 'P' },
+      { name: 'TCS',      role: 'IT Services',      abbr: 'T',  desc: 'Techfest campus placement partner for 2026 batch.' },
+      { name: 'FLIPKART', role: 'E-Commerce',        abbr: 'F',  desc: 'Sponsoring the e-commerce case study track.' },
+      { name: 'ZOMATO',   role: 'Food Tech',         abbr: 'Z',  desc: 'Providing discounted meals for all registered participants.' },
+      { name: 'DRDO',     role: 'Defence Research',  abbr: '⊗',  desc: 'Special defence tech exhibit at the Science Pavilion.' },
+      { name: 'PAYTM',    role: 'Fintech',           abbr: 'P',  desc: 'Official payments partner for all Techfest 2026 transactions.' },
     ],
   },
 ];
 
-const BENEFITS = [
-  { icon: '📡', title: 'BRAND REACH', desc: '150K+ high-value audience across 45+ nations' },
-  { icon: '⬣', title: 'TALENT ACCESS', desc: 'Direct pipeline to top IIT graduates and researchers' },
-  { icon: '◈', title: 'PRODUCT DEMOS', desc: 'Live showcase space in premium exhibition halls' },
-  { icon: '◉', title: 'PR COVERAGE', desc: 'Media features across 200+ tech press publications' },
+const STATS = [
+  { value: '150K+', label: 'ATTENDEES REACHED' },
+  { value: '45+',   label: 'NATIONS REPRESENTED' },
+  { value: '₹8CR',  label: 'SPONSORSHIP RAISED' },
+  { value: '72',    label: 'SPONSOR BRANDS' },
 ];
 
 export default function Sponsors() {
-  return (
-    <div className="page-section" style={{ paddingBottom: '80px' }}>
+  const [activeTier, setActiveTier] = useState(null);
+  const [hoveredSponsor, setHoveredSponsor] = useState(null);
 
-      {/* Header */}
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-        <div className="section-overline" style={{ marginBottom: '12px' }}>MODULE 08 // ALLIANCE NETWORK</div>
+  return (
+    <div className="page-section" style={{ paddingBottom: '80px', minHeight: '90vh' }}>
+
+      {/* HEADER */}
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+        <div className="section-overline" style={{ marginBottom: '12px' }}>MODULE 16 // STRATEGIC ALLIANCES</div>
         <h1 style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(32px, 6vw, 64px)',
-          fontWeight: 800,
-          color: '#fff',
-          letterSpacing: '-0.02em',
-          lineHeight: 1.1
+          fontFamily: 'var(--font-display)', fontSize: 'clamp(28px, 5vw, 56px)',
+          fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.1, marginBottom: '12px',
         }}>
-          ALLIANCE <span className="glow-sky" style={{ color: 'var(--sky)' }}>SPONSORS & PARTNERS</span>
+          OUR <span style={{ color: '#fbbf24', textShadow: '0 0 20px rgba(251,191,36,0.4)' }}>SPONSORS</span>
         </h1>
-        <p style={{
-          fontFamily: 'var(--font-body)',
-          fontSize: '14px',
-          color: 'rgba(189, 200, 209, 0.5)',
-          maxWidth: '480px',
-          marginTop: '12px',
-          lineHeight: 1.7
-        }}>
-          Backed by the world&apos;s leading technology corporations, space agencies, and research hubs. Together we build the future.
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(189,200,209,0.55)', maxWidth: '540px', lineHeight: 1.7 }}>
+          Techfest 2026 is powered by the world's most innovative companies. These strategic alliances make Asia's largest Science & Technology Festival possible.
         </p>
       </motion.div>
 
-      {/* Become a sponsor CTA */}
+      {/* STATS ROW */}
       <motion.div
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
-        className="glass-panel"
-        style={{
-          margin: '32px 0 40px',
-          padding: '20px 28px',
-          border: '1px solid rgba(56, 189, 248, 0.25)',
-          boxShadow: '0 0 15px rgba(56, 189, 248, 0.05)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '16px',
-          position: 'relative'
-        }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', margin: '32px 0', background: 'rgba(255,255,255,0.06)' }}
       >
-        <div className="bracket-tl" />
-        <div className="bracket-br" />
-
-        <div>
-          <div style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: '16px',
-            fontWeight: 700,
-            color: '#fff',
-            marginBottom: '6px'
-          }}>
-            BECOME A PARTNER
+        {STATS.map(s => (
+          <div key={s.label} style={{ padding: '24px 16px', background: 'var(--surface-0)', textAlign: 'center' }}>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 800, color: '#fbbf24', marginBottom: '6px' }}>{s.value}</div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.5)', letterSpacing: '0.2em' }}>{s.label}</div>
           </div>
-          <div style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '9px',
-            color: 'rgba(189,200,209,0.5)',
-            letterSpacing: '0.15em',
-            fontWeight: 600
-          }}>
-            REACH 150,000+ TECH LEADERS AND CREATIVE MINDS GLOBALLY
-          </div>
-        </div>
-        <button
-          className="btn-primary"
-          onClick={() => {
-            soundEffects.playSuccess?.();
-            window.location.href = 'mailto:partnerships@techfest.org';
-          }}
-          style={{ padding: '12px 28px' }}
-        >
-          <span className="btn-tl" />
-          <span className="btn-br" />
-          PARTNER WITH US →
-        </button>
+        ))}
       </motion.div>
 
-      {/* Tier groups */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
-        {TIERS.map((tier, ti) => (
-          <motion.div
-            key={tier.name}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: ti * 0.15 + 0.5 }}
+      {/* TIER SECTIONS */}
+      {TIERS.map((tier, ti) => (
+        <motion.div
+          key={tier.id}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ delay: ti * 0.08, duration: 0.6 }}
+          style={{ marginBottom: '40px' }}
+        >
+          {/* Tier header */}
+          <div
+            onClick={() => { soundEffects.playClick?.(); setActiveTier(activeTier === tier.id ? null : tier.id); }}
+            style={{
+              display: 'flex', alignItems: 'center', gap: '16px',
+              padding: '14px 20px', cursor: 'pointer',
+              border: `1px solid ${activeTier === tier.id ? tier.color + '88' : tier.color + '33'}`,
+              background: activeTier === tier.id ? `${tier.color}0e` : 'rgba(14,14,18,0.7)',
+              transition: 'all 0.3s',
+              position: 'relative', overflow: 'hidden',
+            }}
           >
-            {/* Tier label */}
+            {/* Glow line */}
             <div style={{
-              display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px',
+              position: 'absolute', left: 0, top: 0, bottom: 0, width: '3px',
+              background: tier.color,
+              boxShadow: `0 0 12px ${tier.glow}`,
+            }} />
+
+            <div style={{
+              fontFamily: 'var(--font-mono)', fontSize: '8px', letterSpacing: '0.2em',
+              color: tier.color, padding: '3px 8px',
+              border: `1px solid ${tier.color}55`,
+              background: `${tier.color}10`,
+              marginLeft: '8px', flexShrink: 0,
             }}>
-              <div style={{
-                width: 40, height: 1,
-                background: tier.color,
-                boxShadow: `0 0 8px ${tier.color}`,
-              }} />
-              <span style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '10px',
-                letterSpacing: '0.3em',
-                color: tier.color,
-                fontWeight: 700
-              }}>{tier.name} ACCESS</span>
-              <div style={{
-                flex: 1, height: 1,
-                background: `linear-gradient(90deg, ${tier.color}, transparent)`,
-              }} />
+              {tier.code}
             </div>
 
-            {/* Sponsor cards */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: `repeat(auto-fill, minmax(min(100%, ${tier.name === 'TITLE SPONSOR' ? '400px' : '200px'}), 1fr))`,
-              gap: '20px',
-            }}>
-              {tier.sponsors.map((sp, si) => (
-                <motion.div
-                  key={sp.name}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: ti * 0.15 + si * 0.08 + 0.6 }}
-                  className="glass-panel"
-                  style={{
-                    padding: tier.name === 'TITLE SPONSOR' ? '40px' : '28px',
-                    border: `1px solid ${tier.color}25`,
-                    backdropFilter: 'var(--glass-blur)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: '12px',
-                    transition: 'all 0.3s',
-                    textAlign: 'center',
-                    position: 'relative'
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = tier.color;
-                    e.currentTarget.style.boxShadow = `0 0 30px ${tier.glow}`;
-                    soundEffects.playHover?.();
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = `${tier.color}25`;
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                >
-                  <div className="bracket-tl" style={{ borderColor: tier.color }} />
-                  <div className="bracket-br" style={{ borderColor: tier.color }} />
-
-                  {/* Logo placeholder */}
-                  <div style={{
-                    width: tier.name === 'TITLE SPONSOR' ? 80 : 52,
-                    height: tier.name === 'TITLE SPONSOR' ? 80 : 52,
-                    borderRadius: '0px',
-                    border: `2px solid ${tier.color}40`,
-                    background: `radial-gradient(circle, ${tier.glow} 0%, transparent 70%)`,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: tier.name === 'TITLE SPONSOR' ? '32px' : '20px',
-                    color: tier.color,
-                    boxShadow: `0 0 20px ${tier.glow}`,
-                  }}>
-                    {sp.logo}
-                  </div>
-                  <div style={{
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 700,
-                    fontSize: tier.name === 'TITLE SPONSOR' ? '18px' : '14px',
-                    color: '#fff',
-                    letterSpacing: '0.05em'
-                  }}>
-                    {sp.name}
-                  </div>
-                  <div style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '9px',
-                    letterSpacing: '0.15em',
-                    color: tier.color,
-                    fontWeight: 600,
-                    opacity: 0.8
-                  }}>
-                    {sp.role}
-                  </div>
-                </motion.div>
-              ))}
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(14px, 2vw, 18px)', fontWeight: 800, color: tier.color, flex: 1 }}>
+              {tier.name}
             </div>
-          </motion.div>
-        ))}
-      </div>
 
-      {/* Sponsorship Benefits */}
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'rgba(189,200,209,0.4)' }}>
+              {tier.sponsors.length} {tier.sponsors.length === 1 ? 'PARTNER' : 'PARTNERS'}
+            </div>
+
+            <span className="material-symbols-outlined" style={{
+              fontSize: '18px', color: tier.color,
+              transform: activeTier === tier.id ? 'rotate(180deg)' : 'rotate(0deg)',
+              transition: 'transform 0.3s',
+            }}>
+              expand_more
+            </span>
+          </div>
+
+          {/* Sponsor cards */}
+          <AnimatePresence>
+            {activeTier === tier.id && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                style={{ overflow: 'hidden' }}
+              >
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: tier.id === 'title' ? '1fr' : 'repeat(auto-fill, minmax(220px, 1fr))',
+                  gap: '1px',
+                  background: 'rgba(255,255,255,0.05)',
+                  border: `1px solid ${tier.color}22`,
+                  borderTop: 'none',
+                }}>
+                  {tier.sponsors.map((sp, si) => (
+                    <motion.div
+                      key={sp.name}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: si * 0.07 }}
+                      onMouseEnter={() => { soundEffects.playHover?.(); setHoveredSponsor(sp.name); }}
+                      onMouseLeave={() => setHoveredSponsor(null)}
+                      style={{
+                        padding: '28px 24px',
+                        background: hoveredSponsor === sp.name ? `${tier.color}0c` : 'var(--surface-0)',
+                        transition: 'background 0.3s',
+                        cursor: 'default',
+                        position: 'relative',
+                      }}
+                    >
+                      {/* Logo circle */}
+                      <div style={{
+                        width: tier.id === 'title' ? '80px' : '56px',
+                        height: tier.id === 'title' ? '80px' : '56px',
+                        border: `2px solid ${tier.color}66`,
+                        background: `${tier.color}12`,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        marginBottom: '16px',
+                        boxShadow: hoveredSponsor === sp.name ? `0 0 20px ${tier.glow}` : 'none',
+                        transition: 'box-shadow 0.3s',
+                        fontFamily: 'var(--font-display)',
+                        fontSize: tier.id === 'title' ? '28px' : '20px',
+                        fontWeight: 800,
+                        color: tier.color,
+                      }}>
+                        {sp.abbr}
+                      </div>
+
+                      <div style={{ fontFamily: 'var(--font-display)', fontSize: tier.id === 'title' ? '22px' : '16px', fontWeight: 800, color: '#fff', marginBottom: '4px' }}>
+                        {sp.name}
+                      </div>
+                      <div style={{
+                        fontFamily: 'var(--font-mono)', fontSize: '9px', color: tier.color,
+                        letterSpacing: '0.15em', marginBottom: '12px',
+                      }}>
+                        {sp.role}
+                      </div>
+                      <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(189,200,209,0.65)', lineHeight: 1.7, margin: 0 }}>
+                        {sp.desc}
+                      </p>
+                    </motion.div>
+                  ))}
+
+                  {/* Tier perks panel */}
+                  <div style={{
+                    padding: '28px 24px',
+                    background: 'rgba(5,5,8,0.6)',
+                    borderLeft: `1px solid ${tier.color}22`,
+                  }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: tier.color, letterSpacing: '0.2em', marginBottom: '14px' }}>
+                      PARTNER BENEFITS
+                    </div>
+                    {tier.perks.map((p, i) => (
+                      <div key={i} style={{
+                        display: 'flex', alignItems: 'center', gap: '8px',
+                        padding: '7px 0',
+                        borderBottom: '1px solid rgba(255,255,255,0.05)',
+                        fontFamily: 'var(--font-body)', fontSize: '12px',
+                        color: 'rgba(189,200,209,0.75)',
+                      }}>
+                        <div style={{ width: '5px', height: '5px', background: tier.color, flexShrink: 0 }} />
+                        {p}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      ))}
+
+      {/* BECOME A SPONSOR CTA */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        style={{ marginTop: '60px' }}
+        style={{
+          padding: '48px 32px', textAlign: 'center',
+          border: '1px solid rgba(251,191,36,0.25)',
+          background: 'linear-gradient(135deg, rgba(251,191,36,0.06) 0%, rgba(255,45,85,0.04) 100%)',
+          position: 'relative', overflow: 'hidden',
+        }}
       >
-        <div className="section-overline" style={{ marginBottom: '20px' }}>WHY PARTNER WITH US</div>
         <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))',
-          gap: '14px',
-        }}>
-          {BENEFITS.map((b) => (
-            <div
-              key={b.title}
-              className="glass-panel"
-              style={{
-                padding: '22px',
-                border: '1px solid rgba(255,45,85,0.15)',
-                position: 'relative',
-                transition: 'all 0.3s',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = 'rgba(255,45,85,0.4)';
-                e.currentTarget.style.boxShadow = '0 0 20px rgba(255,45,85,0.08)';
-                soundEffects.playHover?.();
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = 'rgba(255,45,85,0.15)';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
-            >
-              <div className="bracket-tl" style={{ borderColor: 'var(--plasma)' }} />
-              <div className="bracket-br" style={{ borderColor: 'var(--plasma)' }} />
-              <div style={{ fontSize: '22px', marginBottom: '10px' }}>{b.icon}</div>
-              <div style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '9px',
-                fontWeight: 700,
-                letterSpacing: '0.2em',
-                color: 'var(--plasma)',
-                marginBottom: '6px',
-              }}>{b.title}</div>
-              <div style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: '12px',
-                color: 'rgba(189,200,209,0.55)',
-                lineHeight: 1.6,
-              }}>{b.desc}</div>
-            </div>
-          ))}
+          position: 'absolute', inset: 0,
+          background: 'radial-gradient(circle at 50% 0%, rgba(251,191,36,0.08) 0%, transparent 60%)',
+          pointerEvents: 'none',
+        }} />
+        <div className="bracket-tl" style={{ borderColor: '#fbbf24' }} />
+        <div className="bracket-tr" style={{ borderColor: '#fbbf24' }} />
+        <div className="bracket-bl" style={{ borderColor: '#fbbf24' }} />
+        <div className="bracket-br" style={{ borderColor: '#fbbf24' }} />
+
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#fbbf24', letterSpacing: '0.3em', marginBottom: '12px' }}>
+          OPEN FOR PARTNERSHIPS
         </div>
+        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 4vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: '12px' }}>
+          BECOME A <span style={{ color: '#fbbf24' }}>TECHFEST 2026</span> SPONSOR
+        </h2>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(189,200,209,0.6)', maxWidth: '520px', margin: '0 auto 28px', lineHeight: 1.7 }}>
+          Reach 150K+ highly engaged STEM professionals, engineers, and future innovators. Custom partnership packages available for all tiers.
+        </p>
+        <a
+          href="mailto:sponsors@techfest.org"
+          style={{ textDecoration: 'none' }}
+        >
+          <button className="btn-primary" style={{ margin: '0 auto' }}>
+            <span className="btn-tl" /><span className="btn-br" />
+            CONTACT SPONSORSHIP TEAM
+          </button>
+        </a>
       </motion.div>
     </div>
   );
