@@ -349,7 +349,7 @@ export default function Home() {
                 className="btn-primary"
                 onClick={() => {
                   soundEffects.playClick?.();
-                  navigate('/events');
+                  navigate('/register');
                 }}
                 onMouseEnter={() => soundEffects.playHover?.()}
               >
@@ -361,11 +361,11 @@ export default function Home() {
                 className="btn-ghost"
                 onClick={() => {
                   soundEffects.playClick?.();
-                  navigate('/events');
+                  navigate('/schedule');
                 }}
                 onMouseEnter={() => soundEffects.playHover?.()}
               >
-                EXPLORE EVENTS &nbsp;→
+                VIEW SCHEDULE &nbsp;→
               </button>
             </motion.div>
           </motion.div>
