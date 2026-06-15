@@ -23,6 +23,7 @@ import Dashboard from './pages/Dashboard';
 import CampusMap from './pages/CampusMap';
 import Leaderboard from './pages/Leaderboard';
 import Schedule from './pages/Schedule';
+import Register from './pages/Register';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -72,6 +73,7 @@ export default function App() {
             <Route path="map"          element={<CampusMap />} />
             <Route path="leaderboard"  element={<Leaderboard />} />
             <Route path="schedule"     element={<Schedule />} />
+            <Route path="register"     element={<Register />} />
             <Route path="*"            element={<NotFound />} />
           </Route>
         </Routes>
