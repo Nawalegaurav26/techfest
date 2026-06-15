@@ -17,15 +17,17 @@ import {
 
 // Left sidebar nav items (desktop only)
 const LEFT_NAV = [
-  { icon: 'home',            label: 'HOME',     to: '/' },
-  { icon: 'event',           label: 'EVENTS',   to: '/events' },
-  { icon: 'map',             label: 'MAP',      to: '/map' },
-  { icon: 'terminal',        label: 'TERMINAL', to: '/terminal' },
-  { icon: 'psychology',      label: 'ROBOLAB',  to: '/robolab' },
-  { icon: 'contact_support', label: 'CONTACT',  to: '/contact' },
-  { icon: 'info',            label: 'ABOUT',    to: '/about' },
-  { icon: 'handshake',       label: 'SPONSORS', to: '/sponsors' },
-  { icon: 'shopping_bag',    label: 'STORE',    to: '/store' },
+  { icon: 'home',            label: 'HOME',        to: '/' },
+  { icon: 'event',           label: 'EVENTS',      to: '/events' },
+  { icon: 'map',             label: 'MAP',         to: '/map' },
+  { icon: 'calendar_month',  label: 'SCHEDULE',    to: '/schedule' },
+  { icon: 'emoji_events',    label: 'LEADERBOARD', to: '/leaderboard' },
+  { icon: 'terminal',        label: 'TERMINAL',    to: '/terminal' },
+  { icon: 'psychology',      label: 'ROBOLAB',     to: '/robolab' },
+  { icon: 'contact_support', label: 'CONTACT',     to: '/contact' },
+  { icon: 'info',            label: 'ABOUT',       to: '/about' },
+  { icon: 'handshake',       label: 'SPONSORS',    to: '/sponsors' },
+  { icon: 'shopping_bag',    label: 'STORE',       to: '/store' },
 ];
 
 // Mobile bottom navigation (5 key items — most visited)
@@ -60,6 +62,8 @@ const DRAWER_NAV = [
   { icon: 'smart_toy',        label: 'ROBOWARS',      to: '/robowars'     },
   { icon: 'psychology',       label: 'ROBOLAB (3D)',  to: '/robolab'      },
   { icon: 'map',              label: 'CAMPUS MAP',    to: '/map'          },
+  { icon: 'calendar_month',   label: 'SCHEDULE',      to: '/schedule'     },
+  { icon: 'emoji_events',     label: 'LEADERBOARD',   to: '/leaderboard'  },
   { icon: 'hotel',            label: 'ACCOMMODATION', to: '/accommodation'},
   { icon: 'handshake',        label: 'SPONSORS',      to: '/sponsors'     },
   { icon: 'shopping_bag',     label: 'STORE',         to: '/store'        },

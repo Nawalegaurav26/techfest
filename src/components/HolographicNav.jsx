@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { label: 'EXHIBITIONS',  to: '/exhibitions' },
   { label: 'ROBOWARS',     to: '/robowars' },
   { label: 'MAP',          to: '/map' },
+  { label: 'SCHEDULE',     to: '/schedule' },
   { label: 'TERMINAL',     to: '/terminal' },
 ];
 
