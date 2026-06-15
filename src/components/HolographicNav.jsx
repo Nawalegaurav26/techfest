@@ -135,6 +135,17 @@ export default function HolographicNav({
             {link.label}
           </NavLink>
         ))}
+        {user && (
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+            onClick={() => soundEffects.playClick?.()}
+            style={{ padding: '8px 4px', minHeight: '44px', display: 'flex', alignItems: 'center', color: 'var(--sky)' }}
+            aria-label="Navigate to DASHBOARD"
+          >
+            DASHBOARD
+          </NavLink>
+        )}
       </nav>
 
       {/* ── RIGHT: CONTROLS ────────────────────────── */}

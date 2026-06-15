@@ -231,7 +231,7 @@ export default function PageLayout() {
 
         {/* Icons */}
         <nav style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1 }}>
-          {LEFT_NAV.map(({ icon, label, to }) => {
+          {[...(user ? [{ icon: 'badge', label: 'DASHBOARD', to: '/dashboard' }] : []), ...LEFT_NAV].map(({ icon, label, to }) => {
             const active = isActive(to);
             return (
               <button
@@ -401,7 +401,7 @@ export default function PageLayout() {
             minHeight: '100vh',
           }}
         >
-          <Outlet />
+          <Outlet context={{ user, handleSignOut }} />
 
           {/* ── SITE FOOTER ─────────────────────────── */}
           <footer style={{
@@ -634,7 +634,7 @@ export default function PageLayout() {
 
               {/* Drawer nav links — staggered entry */}
               <div style={{ flex: 1, overflowY: 'auto' }}>
-                {DRAWER_NAV.map((item, i) => {
+                {[...(user ? [{ icon: 'badge', label: 'DASHBOARD', to: '/dashboard' }] : []), ...DRAWER_NAV].map((item, i) => {
                   const active = isActive(item.to);
                   return (
                     <motion.button
