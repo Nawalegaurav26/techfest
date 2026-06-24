@@ -102,8 +102,8 @@ export default function Hackathon() {
 
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '15px',
-          color: 'rgba(189,200,209,0.6)',
+          fontSize: '16.5px',
+          color: '#cbd5e1',
           maxWidth: '520px',
           margin: '0 auto 32px',
           lineHeight: 1.7,
@@ -209,8 +209,8 @@ export default function Hackathon() {
 
               <p style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '13px',
-                color: 'rgba(189,200,209,0.6)',
+                fontSize: '14.5px',
+                color: '#cbd5e1',
                 lineHeight: 1.6,
               }}>{phase.desc}</p>
             </motion.div>
@@ -270,7 +270,7 @@ export default function Hackathon() {
               <div style={{
                 fontFamily: 'var(--font-display)',
                 fontSize: '13px',
-                color: 'rgba(189,200,209,0.5)',
+                color: '#cbd5e1',
                 marginBottom: '12px',
               }}>{p.label}</div>
               <div style={{
@@ -339,8 +339,8 @@ export default function Hackathon() {
                 }}>{String(i + 1).padStart(2, '0')}.</span>
                 <span style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '12px',
-                  color: 'rgba(189,200,209,0.75)',
+                  fontSize: '14px',
+                  color: '#ffffff',
                   lineHeight: 1.6,
                 }}>{rule}</span>
               </div>
@@ -401,8 +401,8 @@ export default function Hackathon() {
                 }}>{domain.name}</h3>
                 <p style={{
                   fontFamily: 'var(--font-body)',
-                  fontSize: '12px',
-                  color: 'rgba(189,200,209,0.55)',
+                  fontSize: '14px',
+                  color: '#cbd5e1',
                   lineHeight: 1.6,
                 }}>{domain.desc}</p>
               </motion.div>
