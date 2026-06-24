@@ -80,10 +80,10 @@ function WinnerCard({ winner, index }) {
       {/* Event */}
       <div style={{
         fontFamily: 'var(--font-mono)',
-        fontSize: '8px',
+        fontSize: '10px',
         fontWeight: 700,
         letterSpacing: '0.18em',
-        color: 'rgba(189,200,209,0.4)',
+        color: 'rgba(241,245,249,0.55)',
         marginBottom: '6px',
         textTransform: 'uppercase',
       }}>
@@ -91,7 +91,7 @@ function WinnerCard({ winner, index }) {
       </div>
       <h3 style={{
         fontFamily: 'var(--font-display)',
-        fontSize: '16px',
+        fontSize: '18px',
         fontWeight: 800,
         color: '#fff',
         marginBottom: '12px',
@@ -101,19 +101,19 @@ function WinnerCard({ winner, index }) {
 
       {/* Team & Country */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-        <span style={{ fontSize: '18px' }}>{winner.country}</span>
+        <span style={{ fontSize: '20px' }}>{winner.country}</span>
         <div>
           <div style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '8px',
-            color: 'rgba(189,200,209,0.35)',
+            fontSize: '10px',
+            color: 'rgba(241,245,249,0.5)',
             letterSpacing: '0.12em',
           }}>TEAM</div>
           <div style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '14px',
+            fontSize: '16px',
             fontWeight: 700,
-            color: 'rgba(189,200,209,0.85)',
+            color: 'rgba(241,245,249,0.95)',
           }}>{winner.team}</div>
         </div>
       </div>
@@ -162,8 +162,8 @@ export default function Winners() {
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '14px',
-          color: 'rgba(189,200,209,0.5)',
+          fontSize: '16px',
+          color: 'rgba(241,245,249,0.8)',
           maxWidth: '500px',
           lineHeight: 1.7,
         }}>
@@ -206,8 +206,8 @@ export default function Winners() {
             }}>{stat.val}</div>
             <div style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '9px',
-              color: 'rgba(189,200,209,0.35)',
+              fontSize: '11px',
+              color: 'rgba(241,245,249,0.6)',
               letterSpacing: '0.15em',
             }}>{stat.label.toUpperCase()}</div>
           </div>
@@ -238,7 +238,7 @@ export default function Winners() {
                 padding: '10px 24px',
                 background: isActive ? 'rgba(255,215,0,0.08)' : 'rgba(255,255,255,0.02)',
                 border: isActive ? '1px solid rgba(255,215,0,0.6)' : '1px solid rgba(255,255,255,0.08)',
-                color: isActive ? '#FFD700' : 'rgba(189,200,209,0.45)',
+                color: isActive ? '#FFD700' : 'rgba(241,245,249,0.6)',
                 boxShadow: isActive ? '0 0 16px rgba(255,215,0,0.2)' : 'none',
                 transition: 'all 0.25s ease',
                 cursor: 'pointer',
@@ -246,14 +246,14 @@ export default function Winners() {
               onMouseEnter={e => {
                 if (!isActive) {
                   e.currentTarget.style.borderColor = 'rgba(255,215,0,0.3)';
-                  e.currentTarget.style.color = 'rgba(255,215,0,0.6)';
+                  e.currentTarget.style.color = '#FFD700';
                   soundEffects.playHover?.();
                 }
               }}
               onMouseLeave={e => {
                 if (!isActive) {
                   e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
-                  e.currentTarget.style.color = 'rgba(189,200,209,0.45)';
+                  e.currentTarget.style.color = 'rgba(241,245,249,0.6)';
                 }
               }}
             >
@@ -275,10 +275,10 @@ export default function Winners() {
           {/* Year label */}
           <div style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '11px',
+            fontSize: '13px',
             fontWeight: 700,
             letterSpacing: '0.3em',
-            color: 'rgba(255,215,0,0.35)',
+            color: 'rgba(255,215,0,0.7)',
             marginBottom: '20px',
           }}>TECHFEST {activeYear} // {WINNERS_DATA[activeYear].length} CHAMPIONS</div>
 
