@@ -41,8 +41,8 @@ function MemberCard({ member, index }) {
       className="glass-panel"
       style={{
         padding: '22px 18px',
-        border: '1px solid rgba(56,189,248,0.1)',
-        background: 'rgba(255,255,255,0.015)',
+        border: '1px solid rgba(56,189,248,0.15)',
+        background: 'rgba(255,255,255,0.02)',
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
@@ -57,7 +57,7 @@ function MemberCard({ member, index }) {
         soundEffects.playHover?.();
       }}
       onMouseLeave={e => {
-        e.currentTarget.style.borderColor = 'rgba(56,189,248,0.1)';
+        e.currentTarget.style.borderColor = 'rgba(56,189,248,0.15)';
         e.currentTarget.style.boxShadow = 'none';
       }}
     >
@@ -89,7 +89,7 @@ function MemberCard({ member, index }) {
       <div>
         <h3 style={{
           fontFamily: 'var(--font-display)',
-          fontSize: '16px',
+          fontSize: '18px',
           fontWeight: 800,
           color: '#fff',
           marginBottom: '4px',
@@ -97,21 +97,21 @@ function MemberCard({ member, index }) {
         }}>{member.name}</h3>
         <div style={{
           fontFamily: 'var(--font-mono)',
-          fontSize: '10px',
+          fontSize: '12px',
           color: member.color,
           fontWeight: 700,
           letterSpacing: '0.08em',
-          opacity: 0.85,
+          opacity: 1,
         }}>{member.role}</div>
       </div>
 
       {/* Department badge */}
       <span style={{
         fontFamily: 'var(--font-mono)',
-        fontSize: '8px',
+        fontSize: '10px',
         fontWeight: 700,
         letterSpacing: '0.15em',
-        padding: '4px 12px',
+        padding: '5px 14px',
         background: dc.bg,
         border: `1px solid ${dc.border}`,
         color: dc.text,
@@ -122,18 +122,18 @@ function MemberCard({ member, index }) {
         display: 'flex',
         gap: '12px',
         width: '100%',
-        borderTop: '1px solid rgba(255,255,255,0.05)',
+        borderTop: '1px solid rgba(255,255,255,0.08)',
         paddingTop: '10px',
         justifyContent: 'center',
       }}>
         <div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '7px', color: 'rgba(189,200,209,0.3)', letterSpacing: '0.15em', marginBottom: '2px' }}>YEAR</div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'rgba(189,200,209,0.65)', fontWeight: 600 }}>{member.year}</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(241,245,249,0.5)', letterSpacing: '0.15em', marginBottom: '2px' }}>YEAR</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'rgba(241,245,249,0.9)', fontWeight: 600 }}>{member.year}</div>
         </div>
-        <div style={{ width: '1px', background: 'rgba(255,255,255,0.06)' }} />
+        <div style={{ width: '1px', background: 'rgba(255,255,255,0.08)' }} />
         <div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '7px', color: 'rgba(189,200,209,0.3)', letterSpacing: '0.15em', marginBottom: '2px' }}>DEPT</div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'rgba(189,200,209,0.65)', fontWeight: 600 }}>{member.branch}</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(241,245,249,0.5)', letterSpacing: '0.15em', marginBottom: '2px' }}>DEPT</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'rgba(241,245,249,0.9)', fontWeight: 600 }}>{member.branch}</div>
         </div>
       </div>
     </motion.div>
@@ -173,8 +173,8 @@ export default function Team() {
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '14px',
-          color: 'rgba(189,200,209,0.5)',
+          fontSize: '16px',
+          color: 'rgba(241,245,249,0.8)',
           maxWidth: '500px',
           lineHeight: 1.7,
         }}>
@@ -202,7 +202,7 @@ export default function Team() {
               }}
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '9px',
+                fontSize: '11px',
                 fontWeight: 700,
                 letterSpacing: '0.12em',
                 padding: '8px 16px',
@@ -212,7 +212,7 @@ export default function Team() {
                 border: isActive
                   ? `1px solid ${dc ? dc.border : 'rgba(56,189,248,0.4)'}`
                   : '1px solid rgba(255,255,255,0.07)',
-                color: isActive ? (dc ? dc.text : 'var(--sky)') : 'rgba(189,200,209,0.38)',
+                color: isActive ? (dc ? dc.text : 'var(--sky)') : 'rgba(241,245,249,0.6)',
                 boxShadow: isActive && dc ? `0 0 10px ${dc.border}` : 'none',
                 transition: 'all 0.22s ease',
                 cursor: 'pointer',
@@ -220,14 +220,14 @@ export default function Team() {
               onMouseEnter={e => {
                 if (!isActive) {
                   e.currentTarget.style.borderColor = 'rgba(56,189,248,0.3)';
-                  e.currentTarget.style.color = 'rgba(189,200,209,0.65)';
+                  e.currentTarget.style.color = 'rgba(241,245,249,0.85)';
                   soundEffects.playHover?.();
                 }
               }}
               onMouseLeave={e => {
                 if (!isActive) {
                   e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)';
-                  e.currentTarget.style.color = 'rgba(189,200,209,0.38)';
+                  e.currentTarget.style.color = 'rgba(241,245,249,0.6)';
                 }
               }}
             >
@@ -238,8 +238,8 @@ export default function Team() {
         <div style={{
           marginLeft: 'auto',
           fontFamily: 'var(--font-mono)',
-          fontSize: '8px',
-          color: 'rgba(189,200,209,0.25)',
+          fontSize: '11px',
+          color: 'rgba(241,245,249,0.4)',
           letterSpacing: '0.15em',
           alignSelf: 'center',
         }}>
@@ -317,9 +317,9 @@ export default function Team() {
 
         <div style={{
           fontFamily: 'var(--font-mono)',
-          fontSize: '9px',
+          fontSize: '11px',
           letterSpacing: '0.25em',
-          color: 'rgba(189,200,209,0.3)',
+          color: 'rgba(241,245,249,0.5)',
         }}>TECHFEST 2026 // APPLICATIONS OPEN</div>
 
         <h2 style={{
@@ -335,8 +335,8 @@ export default function Team() {
 
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '13px',
-          color: 'rgba(189,200,209,0.5)',
+          fontSize: '15px',
+          color: 'rgba(241,245,249,0.8)',
           lineHeight: 1.7,
           maxWidth: '440px',
         }}>
@@ -349,7 +349,7 @@ export default function Team() {
           onClick={() => soundEffects.playClick?.()}
           style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '11px',
+            fontSize: '13px',
             fontWeight: 700,
             letterSpacing: '0.15em',
             padding: '13px 36px',
