@@ -191,8 +191,8 @@ export default function Workshops() {
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '14px',
-          color: 'rgba(189, 200, 209, 0.5)',
+          fontSize: '16px',
+          color: 'rgba(241, 245, 249, 0.85)',
           maxWidth: '540px',
           marginTop: '12px',
           lineHeight: 1.7
@@ -225,9 +225,9 @@ export default function Workshops() {
             <span style={{ color: 'var(--sky)', fontSize: '14px' }}>{item.icon}</span>
             <span style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '9px',
+              fontSize: '11px',
               letterSpacing: '0.2em',
-              color: 'rgba(189,200,209,0.5)',
+              color: 'rgba(241,245,249,0.7)',
               fontWeight: 600
             }}>{item.text}</span>
           </div>
@@ -286,16 +286,16 @@ export default function Workshops() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '14px' }}>
                 <span style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '8px',
+                  fontSize: '11px',
                   letterSpacing: '0.2em',
-                  color: 'rgba(56,189,248,0.4)',
+                  color: 'rgba(56,189,248,0.7)',
                   fontWeight: 600
                 }}>
                   [{ws.code}] // {ws.date}
                 </span>
                 <span style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '8px',
+                  fontSize: '11px',
                   letterSpacing: '0.15em',
                   color: LEVEL_COLORS[ws.level],
                   border: `1px solid ${LEVEL_COLORS[ws.level]}40`,
@@ -317,7 +317,7 @@ export default function Workshops() {
                 </h3>
                 <div style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '9px',
+                  fontSize: '11px',
                   color: 'var(--plasma-dim)',
                   marginBottom: '12px',
                   fontWeight: 700
@@ -326,8 +326,8 @@ export default function Workshops() {
                 </div>
                 <p style={{
                   fontFamily: 'var(--font-body)',
-                  fontSize: '12px',
-                  color: 'rgba(189,200,209,0.5)',
+                  fontSize: '15px',
+                  color: 'rgba(241,245,249,0.85)',
                   lineHeight: 1.6,
                   marginBottom: '16px'
                 }}>
@@ -339,11 +339,11 @@ export default function Workshops() {
                   {ws.tools.map(t => (
                     <span key={t} style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '8px',
-                      color: 'var(--sky-dim)',
-                      padding: '2px 8px',
-                      border: '1px solid rgba(56,189,248,0.2)',
-                      background: 'rgba(56,189,248,0.05)'
+                      fontSize: '10px',
+                      color: 'var(--sky)',
+                      padding: '3px 10px',
+                      border: '1px solid rgba(56,189,248,0.3)',
+                      background: 'rgba(56,189,248,0.08)'
                     }}>
                       {t}
                     </span>
@@ -367,7 +367,7 @@ export default function Workshops() {
                     >
                       <div style={{
                         fontFamily: 'var(--font-mono)',
-                        fontSize: '9px',
+                        fontSize: '11px',
                         color: LEVEL_COLORS[ws.level],
                         fontWeight: 700,
                         letterSpacing: '0.12em',
@@ -377,12 +377,12 @@ export default function Workshops() {
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                         {ws.specs.map((spec, sIdx) => (
-                          <div key={sIdx} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
-                            <span style={{ color: 'var(--sky)', fontFamily: 'var(--font-mono)', fontSize: '10px' }}>▶</span>
+                           <div key={sIdx} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+                            <span style={{ color: 'var(--sky)', fontFamily: 'var(--font-mono)', fontSize: '11px' }}>▶</span>
                             <span style={{
                               fontFamily: 'var(--font-mono)',
-                              fontSize: '10px',
-                              color: 'rgba(189, 200, 209, 0.75)',
+                              fontSize: '12px',
+                              color: 'rgba(241, 245, 249, 0.9)',
                               lineHeight: '1.4'
                             }}>
                               {spec}
@@ -417,8 +417,8 @@ export default function Workshops() {
                     </div>
                     <div style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '8px',
-                      color: 'rgba(189,200,209,0.3)',
+                      fontSize: '11px',
+                      color: 'rgba(241,245,249,0.65)',
                       marginTop: '2px',
                       fontWeight: 600
                     }}>
@@ -435,7 +435,7 @@ export default function Workshops() {
                       soundEffects.playClick?.();
                       setSelected(isSelected ? null : ws.id);
                     }}
-                    style={{ flex: 1, padding: '10px 0', fontSize: '9px', minHeight: '40px' }}
+                    style={{ flex: 1, padding: '10px 0', fontSize: '11px', minHeight: '40px' }}
                   >
                     {isSelected ? 'CLOSE SPECS' : 'VIEW SPECS'}
                   </button>
@@ -453,7 +453,7 @@ export default function Workshops() {
                       border: `1px solid ${isReg ? 'rgba(0, 245, 196, 0.4)' : 'rgba(255,45,85,0.4)'}`,
                       color: isReg ? 'var(--green)' : 'var(--plasma)',
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '9px',
+                      fontSize: '11px',
                       fontWeight: 700,
                       letterSpacing: '0.12em',
                       transition: 'all 0.3s ease',
@@ -523,7 +523,7 @@ export default function Workshops() {
               <div className="bracket-br" style={{ borderColor: modalTarget.type === 'register' ? 'var(--sky)' : 'var(--plasma)' }} />
 
               <div style={{
-                fontFamily: 'var(--font-mono)', fontSize: '8px',
+                fontFamily: 'var(--font-mono)', fontSize: '11px',
                 color: modalTarget.type === 'register' ? 'var(--sky)' : 'var(--plasma)',
                 letterSpacing: '0.25em', fontWeight: 700, marginBottom: '16px'
               }}>
@@ -541,8 +541,8 @@ export default function Workshops() {
               </h3>
 
               <p style={{
-                fontFamily: 'var(--font-body)', fontSize: '12.5px',
-                color: 'rgba(189,200,209,0.6)', lineHeight: 1.6, marginBottom: '24px'
+                fontFamily: 'var(--font-body)', fontSize: '14px',
+                color: 'rgba(241,245,249,0.8)', lineHeight: 1.6, marginBottom: '24px'
               }}>
                 {modalTarget.type === 'register'
                   ? 'Confirming will allocate one research lab slot to your calling profile. Please ensure you attend the scheduled session.'
@@ -554,7 +554,7 @@ export default function Workshops() {
                 <button
                   className="btn-ghost"
                   onClick={() => setModalOpen(false)}
-                  style={{ flex: 1, padding: '10px 0', fontSize: '9px', minHeight: '40px' }}
+                  style={{ flex: 1, padding: '10px 0', fontSize: '12px', minHeight: '40px' }}
                 >
                   CANCEL
                 </button>
@@ -568,7 +568,7 @@ export default function Workshops() {
                     border: `1px solid ${modalTarget.type === 'register' ? 'var(--sky)' : 'var(--plasma)'}`,
                     color: modalTarget.type === 'register' ? 'var(--sky)' : 'var(--plasma)',
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '9px',
+                    fontSize: '12px',
                     fontWeight: 700,
                     letterSpacing: '0.15em',
                     cursor: 'pointer',
