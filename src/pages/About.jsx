@@ -75,8 +75,8 @@ export default function About() {
 
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '15px',
-          color: 'rgba(189, 200, 209, 0.65)',
+          fontSize: '17px',
+          color: '#e2e8f0',
           lineHeight: 1.8,
           marginBottom: '16px'
         }}>
@@ -84,8 +84,8 @@ export default function About() {
         </p>
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '15px',
-          color: 'rgba(189, 200, 209, 0.65)',
+          fontSize: '17px',
+          color: '#e2e8f0',
           lineHeight: 1.8
         }}>
           2026 marks our most ambitious edition yet — <em style={{ color: 'var(--sky)', fontStyle: 'normal', fontWeight: 600 }}>The Cybernetic Evolution</em>. A three-day exploration of what happens when human ingenuity and artificial intelligence finally become one.
@@ -148,8 +148,8 @@ export default function About() {
             </div>
             <div style={{
               fontFamily: 'var(--font-body)',
-              fontSize: '11px',
-              color: 'rgba(189, 200, 209, 0.45)',
+              fontSize: '13px',
+              color: '#cbd5e1',
               lineHeight: '1.4'
             }}>
               {stat.desc}
@@ -209,8 +209,8 @@ export default function About() {
                 }}>{m.event}</div>
                 <div style={{
                   fontFamily: 'var(--font-body)',
-                  fontSize: '12.5px',
-                  color: 'rgba(189,200,209,0.45)'
+                  fontSize: '13.5px',
+                  color: '#cbd5e1'
                 }}>{m.note}</div>
               </motion.div>
             ))}
@@ -254,8 +254,8 @@ export default function About() {
               }}>{p.title}</div>
               <div style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '12.5px',
-                color: 'rgba(189,200,209,0.55)',
+                fontSize: '13.5px',
+                color: '#cbd5e1',
                 lineHeight: 1.65,
               }}>{p.desc}</div>
             </div>
