@@ -140,9 +140,9 @@ export default function Robowars() {
           </h1>
           <p style={{
             fontFamily: 'var(--font-body)',
-            fontSize: '14px',
-            color: 'rgba(189, 200, 209, 0.5)',
-            maxWidth: '540px',
+            fontSize: '15px',
+            color: 'rgba(241, 245, 249, 0.9)',
+            maxWidth: '640px',
             marginTop: '12px',
             lineHeight: 1.7
           }}>
@@ -214,8 +214,8 @@ export default function Robowars() {
 
               <span style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '8px',
-                color: isActive ? 'var(--plasma-dim)' : 'rgba(189,200,209,0.3)',
+                fontSize: '11px',
+                color: isActive ? 'var(--plasma-dim)' : 'rgba(226, 232, 240, 0.65)',
                 letterSpacing: '0.15em',
                 fontWeight: 700
               }}>
@@ -223,9 +223,9 @@ export default function Robowars() {
               </span>
               <h3 style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: '16px',
+                fontSize: '18px',
                 fontWeight: 700,
-                color: isActive ? '#fff' : 'rgba(255,255,255,0.6)',
+                color: isActive ? '#fff' : '#cbd5e1',
                 marginTop: '4px',
                 transition: 'color 0.3s'
               }}>
@@ -233,7 +233,7 @@ export default function Robowars() {
               </h3>
               <p style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '11px',
+                fontSize: '13px',
                 color: 'var(--sky)',
                 fontWeight: 700,
                 marginTop: '2px'
@@ -267,26 +267,26 @@ export default function Robowars() {
           alignItems: 'center'
         }}>
           <div>
-            <h4 style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'rgba(189,200,209,0.3)', letterSpacing: '0.1em' }}>
+            <h4 style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'rgba(226, 232, 240, 0.65)', letterSpacing: '0.1em' }}>
               ARENA PROTOCOL & CATEGORY DETAILS //
             </h4>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(189,200,209,0.7)', lineHeight: 1.6, marginTop: '8px' }}>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: 'rgba(241, 245, 249, 0.9)', lineHeight: 1.6, marginTop: '8px' }}>
               {selectedClassInfo.desc}
             </p>
           </div>
           <div>
-            <h4 style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'rgba(189,200,209,0.3)', letterSpacing: '0.1em' }}>
+            <h4 style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'rgba(226, 232, 240, 0.65)', letterSpacing: '0.1em' }}>
               ARENA HAZARDS //
             </h4>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--plasma-dim)', fontWeight: 700, marginTop: '8px' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: 'var(--plasma-dim)', fontWeight: 700, marginTop: '8px' }}>
               {selectedClassInfo.hazards}
             </div>
           </div>
           <div>
-            <h4 style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'rgba(189,200,209,0.3)', letterSpacing: '0.1em' }}>
+            <h4 style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'rgba(226, 232, 240, 0.65)', letterSpacing: '0.1em' }}>
               STATUS //
             </h4>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--sky)', fontWeight: 700, marginTop: '8px' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: 'var(--sky)', fontWeight: 700, marginTop: '8px' }}>
               {selectedClassInfo.teams}
             </div>
           </div>
@@ -352,16 +352,16 @@ export default function Robowars() {
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                     <div>
-                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.4)', letterSpacing: '0.1em' }}>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(226, 232, 240, 0.7)', letterSpacing: '0.1em' }}>
                         {bot.team}
                       </span>
-                      <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 700, color: '#fff', marginTop: '2px' }}>
+                      <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '20px', fontWeight: 700, color: '#fff', marginTop: '2px' }}>
                         {bot.name}
                       </h3>
                     </div>
                     <span style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '8px',
+                      fontSize: '11px',
                       color: 'var(--plasma)',
                       fontWeight: 700,
                       border: '1px solid rgba(255,45,85,0.3)',
@@ -374,7 +374,7 @@ export default function Robowars() {
 
                   <p style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '9.5px',
+                    fontSize: '12px',
                     color: 'var(--sky)',
                     marginTop: '6px',
                     fontWeight: 600
@@ -390,8 +390,8 @@ export default function Robowars() {
                         exit={{ opacity: 0, height: 0 }}
                         style={{
                           fontFamily: 'var(--font-body)',
-                          fontSize: '12px',
-                          color: 'rgba(189,200,209,0.5)',
+                          fontSize: '14px',
+                          color: 'rgba(226, 232, 240, 0.85)',
                           lineHeight: 1.5,
                           marginTop: '8px',
                           overflow: 'hidden'
@@ -413,7 +413,7 @@ export default function Robowars() {
                     style={{
                       flex: 1,
                       padding: '8px 0',
-                      fontSize: '8.5px',
+                      fontSize: '11px',
                       borderColor: isSelected ? 'var(--plasma)' : 'rgba(56,189,248,0.3)',
                       color: isSelected ? 'var(--plasma-dim)' : 'var(--sky)'
                     }}
@@ -434,7 +434,7 @@ export default function Robowars() {
                       border: '1px solid rgba(255,45,85,0.3)',
                       color: 'var(--plasma-dim)',
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '8.5px',
+                      fontSize: '11px',
                       fontWeight: 700,
                       transition: 'all 0.3s ease'
                     }}
@@ -539,7 +539,7 @@ export default function Robowars() {
                 </div>
 
                 {/* Info readout */}
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.4)', letterSpacing: '0.25em' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(226, 232, 240, 0.75)', letterSpacing: '0.25em' }}>
                   {bot.team}
                 </span>
                 <h2 style={{
@@ -579,8 +579,8 @@ export default function Robowars() {
 
                 <p style={{
                   fontFamily: 'var(--font-body)',
-                  fontSize: '13px',
-                  color: 'rgba(189,200,209,0.7)',
+                  fontSize: '15px',
+                  color: 'rgba(241, 245, 249, 0.95)',
                   lineHeight: 1.7,
                   marginBottom: '24px'
                 }}>
@@ -589,7 +589,7 @@ export default function Robowars() {
 
                 {/* Subsystems stats */}
                 <div style={{ border: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.02)', padding: '16px' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'var(--plasma)', fontWeight: 700, letterSpacing: '0.15em', marginBottom: '12px' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--plasma)', fontWeight: 700, letterSpacing: '0.15em', marginBottom: '12px' }}>
                     SUBSYSTEMS INTEGRITY //
                   </div>
                   {[
@@ -598,8 +598,8 @@ export default function Robowars() {
                     { name: 'MOTOR TORQUE DENSITY', val: '98%' },
                     { name: 'TELEMETRY CONNECTION', val: '100%' }
                   ].map(s => (
-                    <div key={s.name} style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '9px', marginBottom: '8px' }}>
-                      <span style={{ color: 'rgba(189,200,209,0.5)' }}>{s.name}</span>
+                    <div key={s.name} style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '12px', marginBottom: '8px' }}>
+                      <span style={{ color: 'rgba(226, 232, 240, 0.75)' }}>{s.name}</span>
                       <span style={{ color: '#fff', fontWeight: 700 }}>{s.val}</span>
                     </div>
                   ))}
