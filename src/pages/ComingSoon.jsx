@@ -47,7 +47,7 @@ export default function ComingSoon({ title = 'MODULE', subtitle = 'Under Constru
           ASSEMBLY_PROGRESS // {percent}%
         </div>
 
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'rgba(189,200,209,0.5)', marginBottom: '40px', maxWidth: '400px', margin: '0 auto 40px auto' }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: '#cbd5e1', marginBottom: '40px', maxWidth: '400px', margin: '0 auto 40px auto' }}>
           This module is currently being constructed in our robotic engineering bays. Stand by for deployment.
         </p>
         <button className="btn-ghost" onClick={() => navigate('/')}>← RETURN TO BASE</button>
