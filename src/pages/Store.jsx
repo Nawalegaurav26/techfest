@@ -139,9 +139,9 @@ export default function Store() {
           </h1>
           <p style={{
             fontFamily: 'var(--font-body)',
-            fontSize: '14px',
-            color: 'rgba(189, 200, 209, 0.5)',
-            maxWidth: '480px',
+            fontSize: '15px',
+            color: 'rgba(241, 245, 249, 0.9)',
+            maxWidth: '640px',
             marginTop: '12px',
             lineHeight: 1.7
           }}>
@@ -164,9 +164,9 @@ export default function Store() {
           <div className="bracket-tl" style={{ width: '8px', height: '8px', borderColor: cart.length > 0 ? 'var(--sky)' : 'rgba(255,255,255,0.2)' }} />
           <div className="bracket-br" style={{ width: '8px', height: '8px', borderColor: cart.length > 0 ? 'var(--sky)' : 'rgba(255,255,255,0.2)' }} />
 
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', letterSpacing: '0.2em', color: 'rgba(189,200,209,0.4)', marginBottom: '4px' }}>CART TELEMETRY</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.2em', color: 'rgba(226, 232, 240, 0.75)', marginBottom: '4px' }}>CART TELEMETRY</div>
           <div style={{ fontFamily: 'var(--font-display)', fontSize: '22px', fontWeight: 800, color: cart.length > 0 ? 'var(--sky)' : '#fff' }}>
-            {cart.length} <span style={{ fontSize: '10px', color: 'rgba(189,200,209,0.5)', fontWeight: 600 }}>ITEMS</span>
+            {cart.length} <span style={{ fontSize: '12px', color: 'rgba(226, 232, 240, 0.75)', fontWeight: 600 }}>ITEMS</span>
           </div>
         </div>
       </motion.div>
@@ -187,13 +187,13 @@ export default function Store() {
               }}
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '9px',
+                fontSize: '11px',
                 fontWeight: 700,
                 letterSpacing: '0.12em',
                 padding: '8px 16px',
-                color: isActive ? '#fff' : 'rgba(189,200,209,0.4)',
+                color: isActive ? '#fff' : '#cbd5e1',
                 background: isActive ? 'rgba(56,189,248,0.1)' : 'transparent',
-                border: isActive ? '1px solid var(--sky)' : '1px solid rgba(255,255,255,0.06)',
+                border: isActive ? '1px solid var(--sky)' : '1px solid rgba(255,255,255,0.25)',
                 boxShadow: isActive ? '0 0 15px rgba(56,189,248,0.2)' : 'none',
                 transition: 'all 0.3s ease'
               }}
@@ -206,8 +206,8 @@ export default function Store() {
               }}
               onMouseLeave={e => {
                 if (!isActive) {
-                  e.currentTarget.style.color = 'rgba(189,200,209,0.4)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)';
+                  e.currentTarget.style.color = '#cbd5e1';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
                 }
               }}
             >
@@ -320,8 +320,8 @@ export default function Store() {
                 {/* Category tag */}
                 <div style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '8px',
-                  color: isHovered ? 'var(--sky)' : 'rgba(189,200,209,0.4)',
+                  fontSize: '11px',
+                  color: isHovered ? 'var(--sky)' : 'rgba(226, 232, 240, 0.75)',
                   letterSpacing: '0.2em',
                   marginBottom: '6px',
                   fontWeight: 700,
@@ -332,7 +332,7 @@ export default function Store() {
 
                 <h3 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: '14px',
+                  fontSize: '16px',
                   fontWeight: 700,
                   color: '#fff',
                   marginBottom: '8px',
@@ -342,8 +342,8 @@ export default function Store() {
                 </h3>
                 <p style={{
                   fontFamily: 'var(--font-body)',
-                  fontSize: '11px',
-                  color: 'rgba(189,200,209,0.5)',
+                  fontSize: '14px',
+                  color: 'rgba(226, 232, 240, 0.85)',
                   lineHeight: 1.6,
                   marginBottom: '14px'
                 }}>
@@ -355,9 +355,9 @@ export default function Store() {
                   <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap', marginBottom: '14px' }}>
                     {item.sizes.map(sz => (
                       <div key={sz} style={{
-                        fontFamily: 'var(--font-mono)', fontSize: '8px',
-                        color: 'rgba(189,200,209,0.4)', padding: '2px 6px',
-                        border: '1px solid rgba(255,255,255,0.08)',
+                        fontFamily: 'var(--font-mono)', fontSize: '11px',
+                        color: 'rgba(226, 232, 240, 0.75)', padding: '2px 6px',
+                        border: '1px solid rgba(255,255,255,0.15)',
                         background: 'rgba(255,255,255,0.02)',
                         fontWeight: 600
                       }}>{sz}</div>
@@ -370,7 +370,7 @@ export default function Store() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '14px', marginTop: '10px' }}>
                 <div style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: '18px',
+                  fontSize: '20px',
                   fontWeight: 800,
                   color: isHovered ? 'var(--sky)' : '#fff',
                   textShadow: isHovered ? 'var(--glow-sky-sm)' : 'none',
@@ -386,7 +386,7 @@ export default function Store() {
                     border: `1px solid ${isHovered ? 'var(--sky)' : 'rgba(255,255,255,0.08)'}`,
                     color: isHovered ? 'var(--sky)' : 'rgba(189,200,209,0.6)',
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '9px',
+                    fontSize: '11px',
                     fontWeight: 700,
                     letterSpacing: '0.1em',
                     transition: 'all 0.3s ease'
@@ -429,12 +429,12 @@ export default function Store() {
           <div className="bracket-tl" style={{ borderColor: 'var(--sky)' }} />
           <div className="bracket-br" style={{ borderColor: 'var(--sky)' }} />
 
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.2em', color: 'var(--sky)', fontWeight: 700 }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.2em', color: 'var(--sky)', fontWeight: 700 }}>
             {cart.length} ITEM{cart.length > 1 ? 'S' : ''} DETECTED IN CARGO
           </span>
           <button 
             className="btn-primary" 
-            style={{ fontSize: '9px', padding: '8px 20px' }}
+            style={{ fontSize: '11px', padding: '8px 20px' }}
             onClick={() => {
               soundEffects.playClick?.();
               setCheckoutActive(true);
@@ -499,7 +499,7 @@ export default function Store() {
                       top: '20px',
                       right: '20px',
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '11px',
+                      fontSize: '13px',
                       color: 'rgba(189,200,209,0.5)',
                       background: 'transparent',
                       border: 'none',
@@ -521,7 +521,7 @@ export default function Store() {
 
                   <div style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '11px',
+                    fontSize: '13px',
                     color: 'rgba(189,200,209,0.6)',
                     marginBottom: '24px',
                     maxHeight: '120px',
@@ -582,7 +582,7 @@ export default function Store() {
                   </h2>
                   <p style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '10px',
+                    fontSize: '12px',
                     color: 'var(--green)',
                     letterSpacing: '0.1em'
                   }}>
