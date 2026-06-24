@@ -266,8 +266,8 @@ export default function HallOfFame() {
                 <div
                   style={{
                     fontFamily: 'var(--font-body)',
-                    fontSize: '11.5px',
-                    color: 'rgba(189,200,209,0.55)',
+                    fontSize: '13.5px',
+                    color: '#cbd5e1',
                     lineHeight: 1.4,
                   }}
                 >
@@ -412,8 +412,8 @@ export default function HallOfFame() {
               <div
                 style={{
                   fontFamily: 'var(--font-body)',
-                  fontSize: '12px',
-                  color: 'rgba(189,200,209,0.55)',
+                  fontSize: '14px',
+                  color: '#cbd5e1',
                   lineHeight: 1.65,
                   borderTop: `1px solid ${GOLD}15`,
                   paddingTop: '12px',
