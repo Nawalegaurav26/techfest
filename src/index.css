@@ -30,9 +30,9 @@
   --surface-1:    #131317;
   --surface-2:    #1b1b1f;
   --surface-3:    #2a292e;
-  --on-surface:   #e5e1e7;
-  --on-muted:     #bdc8d1;
-  --outline:      #3e484f;
+  --on-surface:   #ffffff;
+  --on-muted:     #cbd5e1;
+  --outline:      #52606d;
   --green:        #00f5c4;
 
   /* Glassmorphism */
@@ -108,6 +108,13 @@ button, a, [role="button"] {
 
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
+
+/* Accessibility Focus States */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--sky) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.7) !important;
+}
 
 /* ── SCROLLBAR ─────────────────────────────────────── */
 ::-webkit-scrollbar { width: 3px; }
