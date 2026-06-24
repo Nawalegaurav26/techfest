@@ -94,7 +94,7 @@ export default function Sponsors() {
         }}>
           OUR <span style={{ color: '#fbbf24', textShadow: '0 0 20px rgba(251,191,36,0.4)' }}>SPONSORS</span>
         </h1>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(189,200,209,0.55)', maxWidth: '540px', lineHeight: 1.7 }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: 'rgba(241,245,249,0.9)', maxWidth: '640px', lineHeight: 1.7 }}>
           Techfest 2026 is powered by the world's most innovative companies. These strategic alliances make Asia's largest Science & Technology Festival possible.
         </p>
       </motion.div>
@@ -109,7 +109,7 @@ export default function Sponsors() {
         {STATS.map(s => (
           <div key={s.label} style={{ padding: '24px 16px', background: 'var(--surface-0)', textAlign: 'center' }}>
             <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 800, color: '#fbbf24', marginBottom: '6px' }}>{s.value}</div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.5)', letterSpacing: '0.2em' }}>{s.label}</div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(226,232,240,0.7)', letterSpacing: '0.2em' }}>{s.label}</div>
           </div>
         ))}
       </motion.div>
@@ -144,7 +144,7 @@ export default function Sponsors() {
             }} />
 
             <div style={{
-              fontFamily: 'var(--font-mono)', fontSize: '8px', letterSpacing: '0.2em',
+              fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.2em',
               color: tier.color, padding: '3px 8px',
               border: `1px solid ${tier.color}55`,
               background: `${tier.color}10`,
@@ -157,7 +157,7 @@ export default function Sponsors() {
               {tier.name}
             </div>
 
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'rgba(189,200,209,0.4)' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'rgba(226, 232, 240, 0.75)' }}>
               {tier.sponsors.length} {tier.sponsors.length === 1 ? 'PARTNER' : 'PARTNERS'}
             </div>
 
@@ -226,12 +226,12 @@ export default function Sponsors() {
                         {sp.name}
                       </div>
                       <div style={{
-                        fontFamily: 'var(--font-mono)', fontSize: '9px', color: tier.color,
+                        fontFamily: 'var(--font-mono)', fontSize: '12px', color: tier.color,
                         letterSpacing: '0.15em', marginBottom: '12px',
                       }}>
                         {sp.role}
                       </div>
-                      <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(189,200,209,0.65)', lineHeight: 1.7, margin: 0 }}>
+                      <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'rgba(226, 232, 240, 0.85)', lineHeight: 1.7, margin: 0 }}>
                         {sp.desc}
                       </p>
                     </motion.div>
@@ -243,7 +243,7 @@ export default function Sponsors() {
                     background: 'rgba(5,5,8,0.6)',
                     borderLeft: `1px solid ${tier.color}22`,
                   }}>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: tier.color, letterSpacing: '0.2em', marginBottom: '14px' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: tier.color, letterSpacing: '0.2em', marginBottom: '14px' }}>
                       PARTNER BENEFITS
                     </div>
                     {tier.perks.map((p, i) => (
@@ -251,8 +251,8 @@ export default function Sponsors() {
                         display: 'flex', alignItems: 'center', gap: '8px',
                         padding: '7px 0',
                         borderBottom: '1px solid rgba(255,255,255,0.05)',
-                        fontFamily: 'var(--font-body)', fontSize: '12px',
-                        color: 'rgba(189,200,209,0.75)',
+                        fontFamily: 'var(--font-body)', fontSize: '14px',
+                        color: 'rgba(241, 245, 249, 0.9)',
                       }}>
                         <div style={{ width: '5px', height: '5px', background: tier.color, flexShrink: 0 }} />
                         {p}
@@ -288,13 +288,13 @@ export default function Sponsors() {
         <div className="bracket-bl" style={{ borderColor: '#fbbf24' }} />
         <div className="bracket-br" style={{ borderColor: '#fbbf24' }} />
 
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#fbbf24', letterSpacing: '0.3em', marginBottom: '12px' }}>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#fbbf24', letterSpacing: '0.3em', marginBottom: '12px' }}>
           OPEN FOR PARTNERSHIPS
         </div>
         <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 4vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: '12px' }}>
           BECOME A <span style={{ color: '#fbbf24' }}>TECHFEST 2026</span> SPONSOR
         </h2>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(189,200,209,0.6)', maxWidth: '520px', margin: '0 auto 28px', lineHeight: 1.7 }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: 'rgba(241,245,249,0.9)', maxWidth: '640px', margin: '0 auto 28px', lineHeight: 1.7 }}>
           Reach 150K+ highly engaged STEM professionals, engineers, and future innovators. Custom partnership packages available for all tiers.
         </p>
         <a
