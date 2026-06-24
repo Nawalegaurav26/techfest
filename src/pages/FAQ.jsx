@@ -131,7 +131,7 @@ export default function FAQ() {
         }}>
           ASK <span style={{ color: 'var(--green)', textShadow: '0 0 20px rgba(0,245,196,0.4)' }}>ARIA</span>
         </h1>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(189,200,209,0.55)', maxWidth: '500px', lineHeight: 1.7 }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: '#cbd5e1', maxWidth: '500px', lineHeight: 1.7 }}>
           Autonomous Registrant Intelligence Assistant — powered by the Techfest 2026 knowledge base. Ask about events, registration, venues, prizes, or logistics.
         </p>
       </motion.div>
@@ -180,7 +180,7 @@ export default function FAQ() {
                 key={i}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(0,245,196,0.7)', lineHeight: 1.5 }}
+                style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#00f5c4', lineHeight: 1.5 }}
               >
                 {line}
               </motion.div>
@@ -218,8 +218,8 @@ export default function FAQ() {
                   border: `1px solid ${msg.role === 'user' ? 'rgba(56,189,248,0.2)' : 'rgba(0,245,196,0.2)'}`,
                   background: msg.role === 'user' ? 'rgba(56,189,248,0.06)' : 'rgba(0,245,196,0.04)',
                   fontFamily: msg.role === 'user' ? 'var(--font-mono)' : 'var(--font-body)',
-                  fontSize: '12px',
-                  color: msg.role === 'user' ? 'var(--sky)' : 'rgba(189,200,209,0.9)',
+                  fontSize: '14px',
+                  color: '#ffffff',
                   lineHeight: 1.65,
                 }}>
                   {msg.role === 'aria' && (
@@ -319,8 +319,8 @@ export default function FAQ() {
                   padding: '8px 12px', marginBottom: '6px',
                   border: '1px solid rgba(0,245,196,0.15)',
                   background: 'rgba(0,245,196,0.03)',
-                  color: booting ? 'rgba(189,200,209,0.3)' : 'rgba(189,200,209,0.7)',
-                  fontFamily: 'var(--font-body)', fontSize: '12px',
+                  color: booting ? 'rgba(189,200,209,0.3)' : '#cbd5e1',
+                  fontFamily: 'var(--font-body)', fontSize: '13.5px',
                   cursor: booting ? 'not-allowed' : 'pointer',
                   transition: 'all 0.2s',
                 }}
