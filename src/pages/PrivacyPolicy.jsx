@@ -133,8 +133,8 @@ export default function PrivacyPolicy() {
               className="readout-label"
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '9px',
-                color: 'rgba(255,255,255,0.3)',
+                fontSize: '11px',
+                color: 'rgba(226, 232, 240, 0.7)',
                 letterSpacing: '0.2em',
               }}
             >
@@ -144,7 +144,7 @@ export default function PrivacyPolicy() {
               className="readout-val"
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '11px',
+                fontSize: '13px',
                 color: 'var(--sky)',
                 letterSpacing: '0.1em',
               }}
@@ -225,8 +225,8 @@ export default function PrivacyPolicy() {
         <div
           style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '12px',
-            color: 'rgba(56,189,248,0.7)',
+            fontSize: '14px',
+            color: '#38bdf8',
             lineHeight: 1.7,
             marginBottom: '32px',
             paddingBottom: '24px',
@@ -267,7 +267,7 @@ export default function PrivacyPolicy() {
               <span
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '11px',
+                  fontSize: '13px',
                   color: 'var(--plasma)',
                   letterSpacing: '0.15em',
                   fontWeight: 700,
@@ -278,7 +278,7 @@ export default function PrivacyPolicy() {
               <span
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '13px',
+                  fontSize: '15px',
                   fontWeight: 700,
                   color: '#fff',
                   letterSpacing: '0.18em',
@@ -295,11 +295,11 @@ export default function PrivacyPolicy() {
                   key={li}
                   style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '12px',
-                    color: 'rgba(189,200,209,0.55)',
+                    fontSize: '14px',
+                    color: 'rgba(241, 245, 249, 0.9)',
                     lineHeight: 1.65,
                     paddingLeft: '24px',
-                    borderLeft: '1px solid rgba(56,189,248,0.1)',
+                    borderLeft: '1px solid rgba(56,189,248,0.2)',
                   }}
                 >
                   {line}
@@ -313,8 +313,8 @@ export default function PrivacyPolicy() {
         <div
           style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '10px',
-            color: 'rgba(255,255,255,0.2)',
+            fontSize: '12px',
+            color: 'rgba(226, 232, 240, 0.5)',
             letterSpacing: '0.15em',
             marginTop: '8px',
           }}
