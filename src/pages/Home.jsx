@@ -183,8 +183,8 @@ function CategoryCard({ icon, title, desc, to, index, navigate }) {
       </div>
       <div style={{
         fontFamily: 'var(--font-body)',
-        fontSize: 'clamp(11px, 1.5vw, 12px)',
-        color: 'rgba(189,200,209,0.5)',
+        fontSize: 'clamp(13px, 1.6vw, 14px)',
+        color: '#cbd5e1',
         lineHeight: 1.6,
       }}>
         {desc}
@@ -267,8 +267,8 @@ export default function Home() {
           ].map((text, i) => (
             <span key={i} style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '8.5px',
-              color: 'rgba(189, 200, 209, 0.75)',
+              fontSize: '10px',
+              color: '#ffffff',
               letterSpacing: '0.08em',
               display: 'flex',
               alignItems: 'center',
@@ -339,10 +339,10 @@ export default function Home() {
               }} />
               <span style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: 'clamp(8px, 2vw, 10px)',
+                fontSize: 'clamp(11px, 1.8vw, 12px)',
                 fontWeight: 700,
                 letterSpacing: '0.2em',
-                color: 'rgba(189,200,209,0.6)',
+                color: '#cbd5e1',
                 textTransform: 'uppercase',
                 textAlign: 'center',
               }}>
@@ -398,10 +398,10 @@ export default function Home() {
             >
               <div style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '8px',
+                fontSize: '11px',
                 fontWeight: 700,
                 letterSpacing: '0.25em',
-                color: 'rgba(189,200,209,0.4)',
+                color: '#94a3b8',
                 marginBottom: '12px',
               }}>
                 ── COUNTDOWN TO EVOLUTION: DEC 22, 2026 ──
@@ -567,10 +567,10 @@ export default function Home() {
               {/* Label */}
               <div style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: 'clamp(8px, 1.5vw, 10px)',
+                fontSize: 'clamp(11px, 1.6vw, 12px)',
                 fontWeight: 700,
                 letterSpacing: '0.2em',
-                color: 'rgba(189,200,209,0.5)',
+                color: '#cbd5e1',
               }}>
                 {s.label}
               </div>
@@ -614,8 +614,8 @@ export default function Home() {
           </h2>
           <p style={{
             fontFamily: 'var(--font-body)',
-            fontSize: 'clamp(13px, 1.8vw, 15px)',
-            color: 'rgba(189,200,209,0.5)',
+            fontSize: 'clamp(15px, 2vw, 16px)',
+            color: '#cbd5e1',
             marginTop: '12px',
             maxWidth: '480px',
             lineHeight: 1.7,
@@ -715,16 +715,16 @@ export default function Home() {
               </div>
               <div style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: 'clamp(10px, 1.3vw, 11px)',
-                color: 'rgba(189,200,209,0.6)',
+                fontSize: 'clamp(12px, 1.5vw, 13px)',
+                color: '#ffffff',
                 marginBottom: '10px',
               }}>
                 {h.sub}
               </div>
               <div style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '9px',
-                color: 'rgba(189,200,209,0.35)',
+                fontSize: '11px',
+                color: '#cbd5e1',
                 letterSpacing: '0.1em',
               }}>
                 {h.detail}
@@ -777,8 +777,8 @@ export default function Home() {
               </div>
               <div style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '12px',
-                color: 'rgba(189,200,209,0.6)',
+                fontSize: '14px',
+                color: '#e2e8f0',
                 lineHeight: 1.6,
               }}>
                 A: {faq.a}
