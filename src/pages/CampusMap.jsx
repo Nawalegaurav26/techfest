@@ -172,8 +172,8 @@ export default function CampusMap() {
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '13px',
-          color: 'rgba(189,200,209,0.55)',
+          fontSize: '15px',
+          color: '#cbd5e1',
           maxWidth: '520px',
           lineHeight: 1.7,
         }}>
@@ -195,7 +195,7 @@ export default function CampusMap() {
               padding: '6px 12px',
               border: `1px solid ${filter === f ? 'var(--sky)' : 'rgba(255,255,255,0.12)'}`,
               background: filter === f ? 'rgba(56,189,248,0.1)' : 'transparent',
-              color: filter === f ? 'var(--sky)' : 'rgba(189,200,209,0.6)',
+              color: filter === f ? 'var(--sky)' : '#cbd5e1',
               cursor: 'pointer',
               transition: 'all 0.2s',
               borderRadius: '0px',
@@ -250,7 +250,7 @@ export default function CampusMap() {
                 boxShadow: pulseTick === 0 ? '0 0 8px #00f5c4' : 'none',
                 transition: 'all 0.4s',
               }} />
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(189,200,209,0.5)' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#cbd5e1' }}>
                 LIVE FEED
               </span>
             </div>
@@ -378,7 +378,7 @@ export default function CampusMap() {
             borderTop: '1px solid rgba(56,189,248,0.1)',
             background: 'rgba(5,5,8,0.8)',
           }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.4)' }}>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#cbd5e1' }}>
               VENUES: {filteredVenues.length} / ACTIVE: {filteredVenues.filter(v => v.status === 'ACTIVE').length}
             </span>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(56,189,248,0.5)' }}>
@@ -466,7 +466,7 @@ export default function CampusMap() {
                 </div>
               </div>
 
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(189,200,209,0.5)', letterSpacing: '0.1em', marginBottom: '10px' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#cbd5e1', letterSpacing: '0.1em', marginBottom: '10px' }}>
                 HOSTED EVENTS
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -479,8 +479,8 @@ export default function CampusMap() {
                       background: 'rgba(255,255,255,0.03)',
                       border: '1px solid rgba(255,255,255,0.06)',
                       fontFamily: 'var(--font-body)',
-                      fontSize: '12px',
-                      color: 'rgba(189,200,209,0.85)',
+                      fontSize: '13.5px',
+                      color: '#ffffff',
                     }}
                   >
                     <span style={{ width: '4px', height: '4px', background: selectedVenue.color, display: 'inline-block', flexShrink: 0 }} />
@@ -501,7 +501,7 @@ export default function CampusMap() {
                   letterSpacing: '0.2em',
                   border: '1px solid rgba(255,255,255,0.1)',
                   background: 'transparent',
-                  color: 'rgba(189,200,209,0.5)',
+                  color: '#cbd5e1',
                   cursor: 'pointer',
                   transition: 'all 0.2s',
                 }}
@@ -534,7 +534,7 @@ export default function CampusMap() {
           background: 'rgba(14,14,18,0.6)',
         }}
       >
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.4)', letterSpacing: '0.2em', marginRight: '8px', display: 'flex', alignItems: 'center' }}>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#cbd5e1', letterSpacing: '0.2em', marginRight: '8px', display: 'flex', alignItems: 'center' }}>
           LEGEND
         </div>
         {VENUES.map(v => (
