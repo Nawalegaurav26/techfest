@@ -130,7 +130,7 @@ export default function Schedule() {
         }}>
           EVENT <span style={{ color: 'var(--green)', textShadow: '0 0 20px rgba(0,245,196,0.4)' }}>SCHEDULE</span>
         </h1>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(189,200,209,0.55)', maxWidth: '520px', lineHeight: 1.7 }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: 'rgba(241,245,249,0.9)', maxWidth: '640px', lineHeight: 1.7 }}>
           Complete 4-day Techfest timeline. Filter by event type, switch days, and tap any block for full details.
         </p>
       </motion.div>
@@ -143,15 +143,15 @@ export default function Schedule() {
             onClick={() => { soundEffects.playClick?.(); setActiveDay(d.id); setSelectedEvent(null); }}
             style={{
               flex: 1, padding: '14px 8px', border: 'none', cursor: 'pointer',
-              fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em',
+              fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 700, letterSpacing: '0.15em',
               borderBottom: `2px solid ${activeDay === d.id ? 'var(--green)' : 'rgba(255,255,255,0.1)'}`,
               background: activeDay === d.id ? 'rgba(0,245,196,0.06)' : 'rgba(255,255,255,0.02)',
-              color: activeDay === d.id ? 'var(--green)' : 'rgba(189,200,209,0.5)',
+              color: activeDay === d.id ? 'var(--green)' : '#cbd5e1',
               transition: 'all 0.25s',
             }}
           >
             <div>{d.label}</div>
-            <div style={{ fontSize: '7px', marginTop: '3px', opacity: 0.7 }}>{d.date}</div>
+            <div style={{ fontSize: '10px', marginTop: '3px', opacity: 0.7 }}>{d.date}</div>
           </button>
         ))}
       </div>
@@ -163,11 +163,11 @@ export default function Schedule() {
             key={t}
             onClick={() => { soundEffects.playClick?.(); setTypeFilter(t); }}
             style={{
-              fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.15em',
-              padding: '4px 10px', cursor: 'pointer', borderRadius: '0px',
-              border: `1px solid ${typeFilter === t ? (TYPE_COLOR[t] || 'var(--sky)') : 'rgba(255,255,255,0.08)'}`,
+              fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.15em',
+              padding: '6px 12px', cursor: 'pointer', borderRadius: '0px',
+              border: `1px solid ${typeFilter === t ? (TYPE_COLOR[t] || 'var(--sky)') : 'rgba(255,255,255,0.25)'}`,
               background: typeFilter === t ? `${TYPE_COLOR[t] || 'var(--sky)'}18` : 'transparent',
-              color: typeFilter === t ? (TYPE_COLOR[t] || 'var(--sky)') : 'rgba(189,200,209,0.45)',
+              color: typeFilter === t ? (TYPE_COLOR[t] || 'var(--sky)') : '#cbd5e1',
               transition: 'all 0.2s',
             }}
           >
@@ -225,13 +225,13 @@ export default function Schedule() {
                       overflow: 'hidden',
                     }}
                   >
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '7px', color: evt.color, letterSpacing: '0.15em', marginBottom: '3px' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: evt.color, letterSpacing: '0.15em', marginBottom: '3px' }}>
                       {evt.time} • {evt.type}
                     </div>
-                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '11px', fontWeight: 700, color: '#fff', lineHeight: 1.2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '13px', fontWeight: 700, color: '#fff', lineHeight: 1.2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {evt.title}
                     </div>
-                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '9px', color: 'rgba(189,200,209,0.5)', marginTop: '2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <div style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: '#cbd5e1', marginTop: '2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {evt.venue}
                     </div>
                   </motion.div>
@@ -280,13 +280,13 @@ export default function Schedule() {
                 border: `1px solid ${selectedEvent.color}55`,
                 background: `${selectedEvent.color}11`,
               }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: selectedEvent.color, letterSpacing: '0.2em' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: selectedEvent.color, letterSpacing: '0.2em' }}>
                   {selectedEvent.type}
                 </span>
               </div>
 
               <h3 style={{
-                fontFamily: 'var(--font-display)', fontSize: '16px', fontWeight: 800,
+                fontFamily: 'var(--font-display)', fontSize: '19px', fontWeight: 800,
                 color: '#fff', lineHeight: 1.2, marginBottom: '16px',
               }}>
                 {selectedEvent.title}
@@ -308,8 +308,8 @@ export default function Schedule() {
               </div>
 
               <p style={{
-                fontFamily: 'var(--font-body)', fontSize: '12px',
-                color: 'rgba(189,200,209,0.7)', lineHeight: 1.7,
+                fontFamily: 'var(--font-body)', fontSize: '14px',
+                color: 'rgba(241, 245, 249, 0.95)', lineHeight: 1.7,
                 marginBottom: '20px',
               }}>
                 {selectedEvent.desc}
