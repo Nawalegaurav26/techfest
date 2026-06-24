@@ -164,8 +164,8 @@ export default function Competitions() {
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '14px',
-          color: 'rgba(189, 200, 209, 0.5)',
+          fontSize: '15.5px',
+          color: '#cbd5e1',
           maxWidth: '540px',
           marginTop: '12px',
           lineHeight: 1.7
@@ -204,10 +204,10 @@ export default function Competitions() {
             }}>{s.v}</div>
             <div style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: 'clamp(7px, 1.5vw, 9px)',
+              fontSize: '11px',
               fontWeight: 700,
               letterSpacing: '0.15em',
-              color: 'rgba(189,200,209,0.4)',
+              color: '#cbd5e1',
               marginTop: '4px'
             }}>{s.l}</div>
           </div>
@@ -248,8 +248,8 @@ export default function Competitions() {
               {/* Code */}
               <div style={{
                 position: 'absolute', top: 12, left: 12,
-                fontFamily: 'var(--font-mono)', fontSize: '8px',
-                letterSpacing: '0.2em', color: 'rgba(56,189,248,0.35)',
+                fontFamily: 'var(--font-mono)', fontSize: '10px',
+                letterSpacing: '0.2em', color: '#7bd0ff',
               }}>[{comp.code}]</div>
 
               {/* Difficulty badge */}
@@ -275,8 +275,8 @@ export default function Competitions() {
                 </h3>
                 <p style={{
                   fontFamily: 'var(--font-body)',
-                  fontSize: '12px',
-                  color: 'rgba(189,200,209,0.5)',
+                  fontSize: '14px',
+                  color: '#cbd5e1',
                   lineHeight: 1.6,
                   marginBottom: '16px'
                 }}>
@@ -330,8 +330,8 @@ export default function Competitions() {
                             <span style={{ color: 'var(--sky)', fontFamily: 'var(--font-mono)', fontSize: '10px' }}>▶</span>
                             <span style={{
                               fontFamily: 'var(--font-mono)',
-                              fontSize: '10px',
-                              color: 'rgba(189, 200, 209, 0.75)',
+                              fontSize: '12px',
+                              color: '#ffffff',
                               lineHeight: '1.4'
                             }}>
                               {spec}
@@ -361,11 +361,11 @@ export default function Competitions() {
                       color: 'var(--sky)',
                       textShadow: 'var(--glow-sky-sm)'
                     }}>{comp.prize}</div>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.3)', marginTop: '2px' }}>DEADLINE: {comp.deadline}</div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#cbd5e1', marginTop: '2px' }}>DEADLINE: {comp.deadline}</div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <div style={{ fontFamily: 'var(--font-display)', fontSize: '14px', fontWeight: 700, color: '#fff' }}>{comp.slots}</div>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.3)' }}>SLOTS AVAILABLE</div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#cbd5e1' }}>SLOTS AVAILABLE</div>
                   </div>
                 </div>
 
