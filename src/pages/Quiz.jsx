@@ -127,11 +127,11 @@ export default function Quiz() {
   function getOptionStyle(idx) {
     const base = {
       fontFamily: 'var(--font-body)',
-      fontSize: '14px',
+      fontSize: '16px',
       color: '#fff',
-      padding: '14px 18px',
-      border: '1px solid rgba(56,189,248,0.15)',
-      background: 'rgba(255,255,255,0.02)',
+      padding: '16px 20px',
+      border: '1px solid rgba(56,189,248,0.3)',
+      background: 'rgba(255,255,255,0.05)',
       textAlign: 'left',
       width: '100%',
       cursor: revealed ? 'default' : 'pointer',
@@ -192,10 +192,10 @@ export default function Quiz() {
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '14px',
-          color: 'rgba(189,200,209,0.5)',
+          fontSize: '15px',
+          color: 'rgba(241, 245, 249, 0.9)',
           lineHeight: 1.7,
-          maxWidth: '480px',
+          maxWidth: '640px',
         }}>
           10 questions. Science, tech, and all things Techfest. Prove your knowledge and claim
           your grade in the neural leaderboard.
@@ -223,7 +223,7 @@ export default function Quiz() {
               }}>
                 <span style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '9px',
+                  fontSize: '12px',
                   color: 'var(--green)',
                   fontWeight: 700,
                   letterSpacing: '0.15em',
@@ -232,8 +232,8 @@ export default function Quiz() {
                 </span>
                 <span style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '9px',
-                  color: 'rgba(189,200,209,0.35)',
+                  fontSize: '12px',
+                  color: 'rgba(226, 232, 240, 0.7)',
                   letterSpacing: '0.1em',
                 }}>
                   SCORE: {score}
@@ -281,8 +281,8 @@ export default function Quiz() {
 
                 <div style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '8px',
-                  color: 'rgba(0,245,196,0.4)',
+                  fontSize: '11px',
+                  color: 'rgba(0,245,196,0.85)',
                   letterSpacing: '0.2em',
                   marginBottom: '14px',
                   fontWeight: 700,
@@ -292,7 +292,7 @@ export default function Quiz() {
 
                 <h2 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(16px, 3vw, 22px)',
+                  fontSize: 'clamp(18px, 3.5vw, 26px)',
                   fontWeight: 800,
                   color: '#fff',
                   lineHeight: 1.35,
@@ -328,11 +328,11 @@ export default function Quiz() {
                 >
                   <span style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '10px',
+                    fontSize: '13px',
                     fontWeight: 700,
                     color: revealed
-                      ? (idx === question.ans ? 'var(--green)' : idx === selected ? 'var(--plasma)' : 'rgba(189,200,209,0.3)')
-                      : 'rgba(56,189,248,0.5)',
+                      ? (idx === question.ans ? 'var(--green)' : idx === selected ? 'var(--plasma)' : '#cbd5e1')
+                      : '#38bdf8',
                     flexShrink: 0,
                     width: '20px',
                     textAlign: 'center',
@@ -362,7 +362,7 @@ export default function Quiz() {
                 >
                   <div style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '11px',
+                    fontSize: '13px',
                     fontWeight: 700,
                     color: selected === question.ans ? 'var(--green)' : 'var(--plasma)',
                     letterSpacing: '0.1em',
@@ -373,7 +373,7 @@ export default function Quiz() {
                     onClick={handleNext}
                     style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '10px',
+                      fontSize: '12px',
                       fontWeight: 700,
                       letterSpacing: '0.15em',
                       padding: '10px 24px',
@@ -457,8 +457,8 @@ export default function Quiz() {
 
               <p style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '13px',
-                color: 'rgba(189,200,209,0.5)',
+                fontSize: '15px',
+                color: 'rgba(241, 245, 249, 0.9)',
                 lineHeight: 1.6,
                 marginBottom: '36px',
               }}>
@@ -485,15 +485,15 @@ export default function Quiz() {
                   <div key={s.label} style={{ padding: '14px 8px', background: 'rgba(5,5,8,0.5)' }}>
                     <div style={{
                       fontFamily: 'var(--font-display)',
-                      fontSize: '22px',
+                      fontSize: '24px',
                       fontWeight: 800,
                       color: '#fff',
                       marginBottom: '2px',
                     }}>{s.val}</div>
                     <div style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '8px',
-                      color: 'rgba(189,200,209,0.3)',
+                      fontSize: '11px',
+                      color: 'rgba(226, 232, 240, 0.6)',
                       letterSpacing: '0.12em',
                     }}>{s.label.toUpperCase()}</div>
                   </div>
@@ -506,7 +506,7 @@ export default function Quiz() {
                   onClick={handleShare}
                   style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '10px',
+                    fontSize: '12px',
                     fontWeight: 700,
                     letterSpacing: '0.12em',
                     padding: '12px 24px',
@@ -523,7 +523,7 @@ export default function Quiz() {
                   onClick={handleRestart}
                   style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '10px',
+                    fontSize: '12px',
                     fontWeight: 700,
                     letterSpacing: '0.12em',
                     padding: '12px 24px',
