@@ -146,8 +146,8 @@ export default function Events() {
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '14px',
-          color: 'rgba(189, 200, 209, 0.5)',
+          fontSize: '15.5px',
+          color: '#cbd5e1',
           maxWidth: '480px',
           marginTop: '12px',
           lineHeight: 1.7
@@ -189,7 +189,7 @@ export default function Events() {
                 minHeight: '44px',
                 flexShrink: 0,
                 whiteSpace: 'nowrap',
-                color: isActive ? '#fff' : 'rgba(189,200,209,0.55)',
+                color: isActive ? '#fff' : '#cbd5e1',
                 background: isActive ? 'rgba(56,189,248,0.1)' : 'transparent',
                 border: isActive ? '1px solid var(--sky)' : '1px solid rgba(255,255,255,0.08)',
                 boxShadow: isActive ? '0 0 15px rgba(56,189,248,0.2)' : 'none',
@@ -204,8 +204,8 @@ export default function Events() {
               }}
               onMouseLeave={e => {
                 if (!isActive) {
-                  e.currentTarget.style.color = 'rgba(189,200,209,0.55)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                   e.currentTarget.style.color = 'rgba(226,232,240,0.9)';
+                   e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
                 }
               }}
             >
@@ -375,9 +375,9 @@ export default function Events() {
                   {[ev.date, ev.time].map(m => (
                     <span key={m} style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '9px',
+                      fontSize: '11px',
                       letterSpacing: '0.15em',
-                      color: 'rgba(56,189,248,0.6)',
+                      color: '#7bd0ff',
                       fontWeight: 600
                     }}>{m}</span>
                   ))}
@@ -385,8 +385,8 @@ export default function Events() {
 
                 <p style={{
                   fontFamily: 'var(--font-body)',
-                  fontSize: '12px',
-                  color: 'rgba(189,200,209,0.5)',
+                  fontSize: '14px',
+                  color: '#cbd5e1',
                   lineHeight: 1.6,
                   marginBottom: '16px'
                 }}>
@@ -398,11 +398,11 @@ export default function Events() {
                   {ev.tags.map(t => (
                     <span key={t} style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '8px',
-                      letterSpacing: '0.12em',
-                      color: 'rgba(189,200,209,0.4)',
-                      padding: '2px 6px',
-                      border: '1px solid rgba(255,255,255,0.06)',
+                       fontSize: '11px',
+                       letterSpacing: '0.12em',
+                       color: '#ffffff',
+                       padding: '2px 6px',
+                       border: '1px solid rgba(255,255,255,0.06)',
                       background: 'rgba(255,255,255,0.02)'
                     }}>#{t}</span>
                   ))}
@@ -430,9 +430,9 @@ export default function Events() {
                   </span>
                   <span style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '9px',
-                    color: 'rgba(189,200,209,0.4)',
-                    fontWeight: 600
+                     fontSize: '11px',
+                     color: '#cbd5e1',
+                     fontWeight: 600
                   }}>
                     {ev.participants.toLocaleString()} REGISTERED
                   </span>
