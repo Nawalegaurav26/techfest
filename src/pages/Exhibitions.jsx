@@ -167,8 +167,8 @@ export default function Exhibitions() {
           </h1>
           <p style={{
             fontFamily: 'var(--font-body)',
-            fontSize: '14px',
-            color: 'rgba(189, 200, 209, 0.5)',
+            fontSize: '15.5px',
+            color: '#cbd5e1',
             maxWidth: '540px',
             marginTop: '12px',
             lineHeight: 1.7
@@ -226,11 +226,11 @@ export default function Exhibitions() {
               }}
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '9px',
+                fontSize: '11px',
                 fontWeight: 700,
                 letterSpacing: '0.12em',
                 padding: '8px 16px',
-                color: isActive ? '#fff' : 'rgba(189,200,209,0.4)',
+                color: isActive ? '#fff' : '#cbd5e1',
                 background: isActive ? 'rgba(56,189,248,0.1)' : 'transparent',
                 border: isActive ? '1px solid var(--sky)' : '1px solid rgba(255,255,255,0.06)',
                 boxShadow: isActive ? '0 0 15px rgba(56,189,248,0.2)' : 'none',
@@ -244,10 +244,10 @@ export default function Exhibitions() {
                 }
               }}
               onMouseLeave={e => {
-                if (!isActive) {
-                  e.currentTarget.style.color = 'rgba(189,200,209,0.4)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)';
-                }
+                 if (!isActive) {
+                   e.currentTarget.style.color = '#fff';
+                   e.currentTarget.style.borderColor = 'rgba(56,189,248,0.4)';
+                 }
               }}
             >
               {category}
@@ -309,7 +309,7 @@ export default function Exhibitions() {
               <div style={{ paddingTop: '24px' }}>
                 <span style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '8px',
+                  fontSize: '11px',
                   color: 'var(--plasma-dim)',
                   letterSpacing: '0.15em',
                   fontWeight: 700
@@ -329,9 +329,9 @@ export default function Exhibitions() {
                 </h3>
                 <p style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '10px',
+                  fontSize: '12px',
                   fontWeight: 700,
-                  color: 'var(--sky)',
+                  color: '#7bd0ff',
                   lineHeight: 1.4,
                   marginBottom: '10px',
                   letterSpacing: '0.05em'
@@ -340,8 +340,8 @@ export default function Exhibitions() {
                 </p>
                 <p style={{
                   fontFamily: 'var(--font-body)',
-                  fontSize: '12px',
-                  color: 'rgba(189,200,209,0.5)',
+                  fontSize: '14px',
+                  color: '#cbd5e1',
                   lineHeight: 1.6,
                   marginBottom: '20px'
                 }}>
@@ -362,11 +362,11 @@ export default function Exhibitions() {
                   fontSize: '9px'
                 }}>
                   <div>
-                    <span style={{ color: 'rgba(189,200,209,0.3)' }}>LIVESTREAM / DEMO</span>
+                    <span style={{ color: '#cbd5e1' }}>LIVESTREAM / DEMO</span>
                     <div style={{ color: '#fff', fontWeight: 600, marginTop: '2px' }}>{exhibit.demotimes}</div>
                   </div>
                   <div>
-                    <span style={{ color: 'rgba(189,200,209,0.3)' }}>VENUE</span>
+                    <span style={{ color: '#cbd5e1' }}>VENUE</span>
                     <div style={{ color: '#fff', fontWeight: 600, marginTop: '2px' }}>{exhibit.location}</div>
                   </div>
                 </div>
@@ -552,8 +552,8 @@ export default function Exhibitions() {
 
                 <p style={{
                   fontFamily: 'var(--font-body)',
-                  fontSize: '13px',
-                  color: 'rgba(189,200,209,0.7)',
+                  fontSize: '15px',
+                  color: '#cbd5e1',
                   lineHeight: 1.7,
                   marginBottom: '24px'
                 }}>
@@ -757,8 +757,8 @@ export default function Exhibitions() {
 
               <div style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '13px',
-                color: 'rgba(189,200,209,0.6)',
+                fontSize: '15px',
+                color: '#cbd5e1',
                 lineHeight: 1.6,
                 textAlign: 'center'
               }}>
