@@ -128,8 +128,8 @@ function TimelineCard({ milestone, index }) {
             top: '34px',
             [isLeft ? 'right' : 'left']: '-40px',
             width: '38px',
-            height: '1px',
-            background: `linear-gradient(${isLeft ? 'to right' : 'to left'}, transparent, ${milestone.color}55)`,
+            height: '1.5px',
+            background: `linear-gradient(${isLeft ? 'to right' : 'to left'}, transparent, ${milestone.color}bb)`,
           }}
         />
 
@@ -150,7 +150,7 @@ function TimelineCard({ milestone, index }) {
         <div
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '15px',
+            fontSize: '18px',
             fontWeight: 700,
             color: '#fff',
             marginBottom: '8px',
@@ -162,8 +162,8 @@ function TimelineCard({ milestone, index }) {
         <div
           style={{
             fontFamily: 'var(--font-body)',
-            fontSize: '13px',
-            color: 'rgba(189,200,209,0.55)',
+            fontSize: '15px',
+            color: 'rgba(241,245,249,0.85)',
             lineHeight: 1.6,
           }}
         >
@@ -177,8 +177,9 @@ function TimelineCard({ milestone, index }) {
             top: '10px',
             right: '12px',
             fontFamily: 'var(--font-mono)',
-            fontSize: '9px',
-            color: milestone.color + '99',
+            fontSize: '11px',
+            color: milestone.color,
+            fontWeight: 'bold',
             letterSpacing: '0.15em',
           }}
         >
@@ -227,7 +228,7 @@ export default function Timeline() {
           style={{
             fontFamily: 'var(--font-mono)',
             fontSize: '13px',
-            color: 'rgba(255,255,255,0.35)',
+            color: 'rgba(241,245,249,0.6)',
             marginTop: '8px',
             letterSpacing: '0.3em',
           }}
@@ -243,8 +244,8 @@ export default function Timeline() {
         transition={{ delay: 0.4 }}
         style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '14px',
-          color: 'rgba(189,200,209,0.5)',
+          fontSize: '16px',
+          color: 'rgba(241,245,249,0.8)',
           lineHeight: 1.7,
           maxWidth: '600px',
           marginBottom: '60px',
@@ -263,10 +264,10 @@ export default function Timeline() {
             left: '50%',
             top: 0,
             bottom: 0,
-            width: '1px',
+            width: '1.5px',
             transform: 'translateX(-50%)',
             background:
-              'linear-gradient(to bottom, transparent, rgba(255,255,255,0.08) 10%, rgba(255,255,255,0.08) 90%, transparent)',
+              'linear-gradient(to bottom, transparent, rgba(255,255,255,0.2) 10%, rgba(255,255,255,0.2) 90%, transparent)',
             zIndex: 1,
           }}
         />
@@ -320,8 +321,8 @@ export default function Timeline() {
             <div
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '9px',
-                color: 'rgba(255,255,255,0.4)',
+                fontSize: '11px',
+                color: 'rgba(241,245,249,0.65)',
                 letterSpacing: '0.2em',
                 marginTop: '4px',
               }}
