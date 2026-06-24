@@ -348,8 +348,8 @@ function LightboxModal({ item, onClose }) {
           <div
             style={{
               fontFamily: 'var(--font-body)',
-              fontSize: '13px',
-              color: 'rgba(189,200,209,0.6)',
+              fontSize: '15px',
+              color: 'rgba(241, 245, 249, 0.95)',
               lineHeight: 1.7,
               marginBottom: '24px',
             }}
@@ -365,7 +365,7 @@ function LightboxModal({ item, onClose }) {
                 border: `1px solid ${color}55`,
                 color: color,
                 fontFamily: 'var(--font-mono)',
-                fontSize: '10px',
+                fontSize: '12px',
                 letterSpacing: '0.2em',
                 padding: '10px 24px',
                 cursor: 'pointer',
@@ -389,7 +389,7 @@ function LightboxModal({ item, onClose }) {
                 border: `1px solid ${color}`,
                 color: color,
                 fontFamily: 'var(--font-mono)',
-                fontSize: '10px',
+                fontSize: '12px',
                 letterSpacing: '0.2em',
                 padding: '10px 24px',
                 cursor: 'pointer',
@@ -464,11 +464,11 @@ export default function MediaGallery() {
         transition={{ delay: 0.3 }}
         style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '14px',
-          color: 'rgba(189,200,209,0.5)',
+          fontSize: '15px',
+          color: 'rgba(241, 245, 249, 0.9)',
           marginBottom: '36px',
           lineHeight: 1.6,
-          maxWidth: '500px',
+          maxWidth: '640px',
         }}
       >
         A visual archive spanning 10 editions. Explore moments from Robowars, landmark
@@ -500,12 +500,12 @@ export default function MediaGallery() {
               }}
               style={{
                 background: isActive ? color + '20' : 'transparent',
-                border: `1px solid ${isActive ? color : 'rgba(255,255,255,0.1)'}`,
-                color: isActive ? color : 'rgba(255,255,255,0.4)',
+                border: `1px solid ${isActive ? color : 'rgba(255,255,255,0.25)'}`,
+                color: isActive ? color : '#cbd5e1',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '10px',
+                fontSize: '12px',
                 letterSpacing: '0.18em',
-                padding: '8px 18px',
+                padding: '10px 20px',
                 cursor: 'pointer',
                 transition: 'all 0.25s',
                 fontWeight: isActive ? 700 : 400,
@@ -519,8 +519,8 @@ export default function MediaGallery() {
               }}
               onMouseLeave={e => {
                 if (!isActive) {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-                  e.currentTarget.style.color = 'rgba(255,255,255,0.4)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
+                  e.currentTarget.style.color = '#cbd5e1';
                 }
               }}
             >
@@ -582,8 +582,8 @@ export default function MediaGallery() {
             <span
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '10px',
-                color: 'rgba(255,255,255,0.35)',
+                fontSize: '12px',
+                color: 'rgba(226, 232, 240, 0.7)',
                 letterSpacing: '0.2em',
                 textTransform: 'uppercase',
               }}
