@@ -70,7 +70,7 @@ export default function Leaderboard() {
         }}>
           ROBOWARS <span style={{ color: 'var(--plasma)', textShadow: '0 0 20px rgba(255,45,85,0.5)' }}>LEADERBOARD</span>
         </h1>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(189,200,209,0.55)', maxWidth: '520px', lineHeight: 1.7 }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: 'rgba(241,245,249,0.9)', maxWidth: '640px', lineHeight: 1.7 }}>
           Live combat standings across all weight classes. Rankings updated after each match. Track team KD ratios, win streaks, and bracket progression.
         </p>
       </motion.div>
@@ -122,16 +122,16 @@ export default function Leaderboard() {
       </motion.div>
 
       {/* TABS */}
-      <div style={{ display: 'flex', gap: '0px', marginBottom: '24px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+      <div style={{ display: 'flex', gap: '0px', marginBottom: '24px', borderBottom: '1px solid rgba(255,255,255,0.15)' }}>
         {['RANKINGS', 'BRACKET'].map(t => (
           <button
             key={t}
             onClick={() => { soundEffects.playClick?.(); setTab(t); }}
             style={{
-              fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em',
-              padding: '12px 24px', border: 'none', background: 'transparent', cursor: 'pointer',
-              color: tab === t ? 'var(--plasma)' : 'rgba(189,200,209,0.5)',
-              borderBottom: tab === t ? '2px solid var(--plasma)' : '2px solid transparent',
+              fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 700, letterSpacing: '0.2em',
+              padding: '14px 28px', border: 'none', background: 'transparent', cursor: 'pointer',
+              color: tab === t ? 'var(--plasma)' : '#cbd5e1',
+              borderBottom: tab === t ? '3px solid var(--plasma)' : '3px solid transparent',
               transition: 'all 0.2s',
             }}
           >
@@ -150,11 +150,11 @@ export default function Leaderboard() {
                 key={c}
                 onClick={() => { soundEffects.playClick?.(); setClassFilter(c); }}
                 style={{
-                  fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.15em',
-                  padding: '5px 12px', cursor: 'pointer', borderRadius: '0px',
-                  border: `1px solid ${classFilter === c ? (CLASS_COLOR[c] || 'var(--sky)') : 'rgba(255,255,255,0.1)'}`,
-                  background: classFilter === c ? `${CLASS_COLOR[c] || 'rgba(56,189,248,1)'}18` : 'transparent',
-                  color: classFilter === c ? (CLASS_COLOR[c] || 'var(--sky)') : 'rgba(189,200,209,0.5)',
+                  fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.15em',
+                  padding: '6px 14px', cursor: 'pointer', borderRadius: '0px',
+                  border: `1px solid ${classFilter === c ? (CLASS_COLOR[c] || 'var(--sky)') : 'rgba(255,255,255,0.25)'}`,
+                  background: classFilter === c ? `${CLASS_COLOR[c] || 'rgba(56,189,248,1)'}25` : 'transparent',
+                  color: classFilter === c ? (CLASS_COLOR[c] || 'var(--sky)') : '#e2e8f0',
                   transition: 'all 0.2s',
                 }}
               >
@@ -177,13 +177,13 @@ export default function Leaderboard() {
               {/* Table Header */}
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: '40px 1fr 90px 70px 60px 70px 80px',
-                gap: '8px', padding: '8px 16px',
-                borderBottom: '1px solid rgba(56,189,248,0.2)',
-                background: 'rgba(56,189,248,0.04)',
+                gridTemplateColumns: '40px 1fr 110px 80px 70px 80px 90px',
+                gap: '8px', padding: '12px 16px',
+                borderBottom: '2px solid rgba(56,189,248,0.4)',
+                background: 'rgba(56,189,248,0.1)',
               }}>
                 {['#', 'BOT / TEAM', 'CLASS', 'W–L', 'K/D', 'PTS', 'STATUS'].map(h => (
-                  <span key={h} style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(56,189,248,0.7)', letterSpacing: '0.2em', fontWeight: 700 }}>{h}</span>
+                  <span key={h} style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#38bdf8', letterSpacing: '0.2em', fontWeight: 700 }}>{h}</span>
                 ))}
               </div>
 
@@ -201,22 +201,22 @@ export default function Leaderboard() {
                     onClick={() => { soundEffects.playClick?.(); setHighlighted(isHL ? null : team.rank); }}
                     style={{
                       display: 'grid',
-                      gridTemplateColumns: '40px 1fr 90px 70px 60px 70px 80px',
-                      gap: '8px', padding: '12px 16px',
-                      borderBottom: '1px solid rgba(255,255,255,0.05)',
+                      gridTemplateColumns: '40px 1fr 110px 80px 70px 80px 90px',
+                      gap: '8px', padding: '16px 16px',
+                      borderBottom: '1px solid rgba(255,255,255,0.1)',
                       cursor: 'pointer',
-                      background: isHL ? 'rgba(255,45,85,0.06)' : 'transparent',
-                      opacity: isElim ? 0.45 : 1,
+                      background: isHL ? 'rgba(255,45,85,0.12)' : 'transparent',
+                      opacity: isElim ? 0.65 : 1,
                       transition: 'background 0.2s',
                     }}
-                    onMouseEnter={e => !isElim && (e.currentTarget.style.background = 'rgba(255,255,255,0.03)')}
-                    onMouseLeave={e => e.currentTarget.style.background = isHL ? 'rgba(255,45,85,0.06)' : 'transparent'}
+                    onMouseEnter={e => !isElim && (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
+                    onMouseLeave={e => e.currentTarget.style.background = isHL ? 'rgba(255,45,85,0.12)' : 'transparent'}
                   >
                     {/* Rank */}
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <span style={{
-                        fontFamily: 'var(--font-display)', fontSize: '14px', fontWeight: 800,
-                        color: team.rank <= 3 ? ['#fbbf24', '#a0aec0', '#cd7f32'][team.rank - 1] : 'rgba(189,200,209,0.4)',
+                        fontFamily: 'var(--font-display)', fontSize: '16px', fontWeight: 800,
+                        color: team.rank <= 3 ? ['#fbbf24', '#e2e8f0', '#f59e0b'][team.rank - 1] : '#cbd5e1',
                       }}>
                         {team.rank <= 3 ? ['①', '②', '③'][team.rank - 1] : team.rank}
                       </span>
@@ -224,10 +224,10 @@ export default function Leaderboard() {
 
                     {/* Bot/Team */}
                     <div>
-                      <div style={{ fontFamily: 'var(--font-display)', fontSize: '13px', fontWeight: 700, color: isElim ? 'rgba(189,200,209,0.4)' : '#fff', letterSpacing: '-0.01em' }}>
+                      <div style={{ fontFamily: 'var(--font-display)', fontSize: '16px', fontWeight: 700, color: isElim ? 'rgba(226,232,240,0.6)' : '#fff', letterSpacing: '-0.01em' }}>
                         {team.name}
                       </div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.4)', marginTop: '2px' }}>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(226,232,240,0.7)', marginTop: '2px' }}>
                         {team.country} {team.team}
                       </div>
                     </div>
@@ -235,38 +235,38 @@ export default function Leaderboard() {
                     {/* Class */}
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <span style={{
-                        fontFamily: 'var(--font-mono)', fontSize: '8px', fontWeight: 700, letterSpacing: '0.1em',
+                        fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em',
                         color: CLASS_COLOR[team.class] || '#fff',
-                        padding: '2px 6px',
-                        border: `1px solid ${CLASS_COLOR[team.class] || '#fff'}44`,
-                        background: `${CLASS_COLOR[team.class] || '#fff'}11`,
+                        padding: '3px 8px',
+                        border: `1px solid ${CLASS_COLOR[team.class] || '#fff'}77`,
+                        background: `${CLASS_COLOR[team.class] || '#fff'}22`,
                       }}>
                         {team.class}
                       </span>
                     </div>
 
                     {/* W–L */}
-                    <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 700 }}>
                       <span style={{ color: '#00f5c4' }}>{team.wins}</span>
-                      <span style={{ color: 'rgba(189,200,209,0.3)', margin: '0 4px' }}>–</span>
+                      <span style={{ color: 'rgba(226,232,240,0.5)', margin: '0 4px' }}>–</span>
                       <span style={{ color: '#ff2d55' }}>{team.losses}</span>
                     </div>
 
                     {/* K/D */}
-                    <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(189,200,209,0.8)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#cbd5e1' }}>
                       {team.kd}
                     </div>
 
                     {/* PTS */}
-                    <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'var(--font-display)', fontSize: '13px', fontWeight: 800, color: 'var(--sky)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'var(--font-display)', fontSize: '15px', fontWeight: 800, color: 'var(--sky)' }}>
                       {team.pts.toLocaleString()}
                     </div>
 
                     {/* Status */}
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <span style={{
-                        fontFamily: 'var(--font-mono)', fontSize: '7px', fontWeight: 700, letterSpacing: '0.1em',
-                        color: s.color, padding: '2px 6px',
+                        fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em',
+                        color: s.color === 'rgba(189,200,209,0.35)' ? 'rgba(226,232,240,0.6)' : s.color, padding: '3px 8px',
                         border: `1px solid ${s.border}`,
                         background: s.bg,
                       }}>
@@ -291,9 +291,9 @@ export default function Leaderboard() {
               return (
                 <div key={round}>
                   <div style={{
-                    fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700,
+                    fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 700,
                     letterSpacing: '0.25em', color: 'var(--sky)', marginBottom: '16px',
-                    paddingBottom: '8px', borderBottom: '1px solid rgba(56,189,248,0.2)',
+                    paddingBottom: '8px', borderBottom: '1px solid rgba(56,189,248,0.4)',
                   }}>
                     {roundLabel}
                   </div>
@@ -304,38 +304,38 @@ export default function Leaderboard() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         style={{
-                          border: '1px solid rgba(56,189,248,0.18)',
+                          border: '1px solid rgba(56,189,248,0.3)',
                           background: 'rgba(14,14,18,0.9)',
                           position: 'relative', overflow: 'hidden',
                         }}
                       >
                         {/* Match ID chip */}
                         <div style={{
-                          padding: '4px 12px',
-                          borderBottom: '1px solid rgba(56,189,248,0.1)',
-                          background: 'rgba(56,189,248,0.04)',
-                          fontFamily: 'var(--font-mono)', fontSize: '7px',
-                          color: 'rgba(56,189,248,0.5)', letterSpacing: '0.2em',
+                          padding: '6px 14px',
+                          borderBottom: '1px solid rgba(56,189,248,0.2)',
+                          background: 'rgba(56,189,248,0.1)',
+                          fontFamily: 'var(--font-mono)', fontSize: '10px',
+                          color: 'rgba(56,189,248,0.85)', letterSpacing: '0.2em',
                         }}>
                           MATCH {match.matchId} // {match.score}
                         </div>
 
                         {/* Team A */}
                         <div style={{
-                          padding: '10px 14px',
-                          borderBottom: '1px solid rgba(255,255,255,0.06)',
+                          padding: '12px 14px',
+                          borderBottom: '1px solid rgba(255,255,255,0.1)',
                           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                          background: match.winner === match.a ? 'rgba(0,245,196,0.06)' : 'transparent',
+                          background: match.winner === match.a ? 'rgba(0,245,196,0.12)' : 'transparent',
                         }}>
                           <span style={{
-                            fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700,
-                            color: match.winner === match.a ? '#00f5c4' : 'rgba(189,200,209,0.5)',
+                            fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 700,
+                            color: match.winner === match.a ? '#00f5c4' : '#cbd5e1',
                             letterSpacing: '0.05em',
                           }}>
                             {match.a}
                           </span>
                           {match.winner === match.a && (
-                            <span className="material-symbols-outlined" style={{ fontSize: '12px', color: '#00f5c4' }}>
+                            <span className="material-symbols-outlined" style={{ fontSize: '14px', color: '#00f5c4' }}>
                               emoji_events
                             </span>
                           )}
@@ -343,28 +343,28 @@ export default function Leaderboard() {
 
                         {/* VS divider */}
                         <div style={{
-                          textAlign: 'center', padding: '2px',
-                          fontFamily: 'var(--font-mono)', fontSize: '7px',
-                          color: 'rgba(255,45,85,0.5)', letterSpacing: '0.2em',
+                          textAlign: 'center', padding: '4px',
+                          fontFamily: 'var(--font-mono)', fontSize: '10px',
+                          color: '#ff2d55', letterSpacing: '0.2em',
                         }}>
                           VS
                         </div>
 
                         {/* Team B */}
                         <div style={{
-                          padding: '10px 14px',
+                          padding: '12px 14px',
                           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                          background: match.winner === match.b ? 'rgba(0,245,196,0.06)' : 'transparent',
+                          background: match.winner === match.b ? 'rgba(0,245,196,0.12)' : 'transparent',
                         }}>
                           <span style={{
-                            fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700,
-                            color: match.winner === match.b ? '#00f5c4' : 'rgba(189,200,209,0.5)',
+                            fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 700,
+                            color: match.winner === match.b ? '#00f5c4' : '#cbd5e1',
                             letterSpacing: '0.05em',
                           }}>
                             {match.b}
                           </span>
                           {match.winner === match.b && (
-                            <span className="material-symbols-outlined" style={{ fontSize: '12px', color: '#00f5c4' }}>
+                            <span className="material-symbols-outlined" style={{ fontSize: '14px', color: '#00f5c4' }}>
                               emoji_events
                             </span>
                           )}
@@ -396,7 +396,7 @@ export default function Leaderboard() {
               position: 'relative', overflow: 'hidden',
             }}
           >
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#fbbf24', letterSpacing: '0.3em', marginBottom: '8px' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#fbbf24', letterSpacing: '0.3em', marginBottom: '8px' }}>
               ⚡ GRAND CHAMPION // TECHFEST 2026
             </div>
             <div style={{
@@ -405,7 +405,7 @@ export default function Leaderboard() {
             }}>
               MEGATRON V4
             </div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(189,200,209,0.6)', marginTop: '6px' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '14px', color: 'rgba(241,245,249,0.85)', marginTop: '6px' }}>
               TEAM BLITZ 🇮🇳 // 6W–0L // 1800 PTS
             </div>
           </motion.div>
