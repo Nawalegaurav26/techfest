@@ -61,8 +61,8 @@ export default function Contact() {
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '14px',
-          color: 'rgba(189, 200, 209, 0.5)',
+          fontSize: '15.5px',
+          color: '#cbd5e1',
           maxWidth: '480px',
           marginTop: '12px',
           lineHeight: 1.7
@@ -115,9 +115,9 @@ export default function Contact() {
                 <div>
                   <div style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '8px',
+                    fontSize: '11px',
                     letterSpacing: '0.25em',
-                    color: 'rgba(56,189,248,0.6)',
+                    color: '#7bd0ff',
                     marginBottom: '3px',
                     fontWeight: 700
                   }}>
@@ -125,7 +125,7 @@ export default function Contact() {
                   </div>
                   <div style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '10px',
+                    fontSize: '12.5px',
                     color: '#fff',
                     letterSpacing: '0.05em',
                     fontWeight: 600
@@ -163,8 +163,8 @@ export default function Contact() {
             </div>
             <div style={{
               fontFamily: 'var(--font-body)',
-              fontSize: '13px',
-              color: 'rgba(189,200,209,0.6)',
+              fontSize: '14.5px',
+              color: '#cbd5e1',
               lineHeight: 1.8
             }}>
               IIT Bombay, Powai<br />
@@ -248,9 +248,9 @@ export default function Contact() {
                 <div>
                   <label style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '8px',
+                    fontSize: '11px',
                     letterSpacing: '0.25em',
-                    color: 'rgba(56,189,248,0.7)',
+                    color: '#7bd0ff',
                     display: 'block',
                     marginBottom: '6px',
                     fontWeight: 700
@@ -287,9 +287,9 @@ export default function Contact() {
                 <div>
                   <label style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '8px',
+                    fontSize: '11px',
                     letterSpacing: '0.25em',
-                    color: 'rgba(56,189,248,0.7)',
+                    color: '#7bd0ff',
                     display: 'block',
                     marginBottom: '6px',
                     fontWeight: 700
@@ -328,9 +328,9 @@ export default function Contact() {
               <div>
                 <label style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '8px',
+                  fontSize: '11px',
                   letterSpacing: '0.25em',
-                  color: 'rgba(56,189,248,0.7)',
+                  color: '#7bd0ff',
                   display: 'block',
                   marginBottom: '6px',
                   fontWeight: 700
@@ -368,9 +368,9 @@ export default function Contact() {
               <div>
                 <label style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '8px',
+                  fontSize: '11px',
                   letterSpacing: '0.25em',
-                  color: 'rgba(56,189,248,0.7)',
+                  color: '#7bd0ff',
                   display: 'block',
                   marginBottom: '6px',
                   fontWeight: 700
