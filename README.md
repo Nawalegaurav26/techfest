@@ -1,16 +1,56 @@
-# React + Vite
+# IIT Bombay Techfest 2026 // The Cybernetic Evolution
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the official portal for **Techfest 2026**, Asia's largest Science and Technology Festival, held annually at the Indian Institute of Technology Bombay (IIT Bombay).
 
-Currently, two official plugins are available:
+Theme: **The Cybernetic Evolution**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Holographic Navigation**: Responsive navigation menu across both mobile bottom nav and desktop layout.
+- **Boot Sequence Loading**: Engaging interactive entry portal console simulating hardware booting.
+- **3D Robotics Lab (RoboLab)**: Fully interactive three-dimensional visualization of robot components.
+- **Global Search Overlay**: Keyboard-triggered global system search (`Ctrl+K`) for fast portal access.
+- **Authentication**: Secured login telemetry powered by Supabase.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack & Setup
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v18.0.0 or higher recommended)
+- [npm](https://www.npmjs.com/) (v9.0.0 or higher)
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Nawalegaurav26/techfest.git
+   cd techfest
+   ```
+2. Install all telemetry modules and dependencies:
+   ```bash
+   npm install
+   ```
+3. Boot up the local development engine:
+   ```bash
+   npm run dev
+   ```
+4. Compile production distribution bundle:
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 🌐 Production Telemetry
+The production build compiles optimized components with chunk-splitting rules for high-speed delivery.
+
+- **Vite** for zero-latency module bundling.
+- **Tailwind CSS v4** for cyber-grid glassmorphic layouts.
+- **Three.js / React Three Fiber** for real-time WebGL rendering.
+- **Framer Motion / GSAP** for physics-based micro-interactions.
+
+---
+
+*Directives logged. System Online.*
