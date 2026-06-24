@@ -284,20 +284,20 @@ export default function TerminalPage() {
       >
         {/* Window title bar */}
         <div style={{
-          padding: '10px 16px',
-          borderBottom: '1px solid rgba(0,242,255,0.1)',
+          padding: '12px 18px',
+          borderBottom: '1px solid rgba(0,242,255,0.15)',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          background: 'rgba(0,242,255,0.04)',
+          background: 'rgba(0,242,255,0.06)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             {['#ff4444', '#ffaa00', '#00ff41'].map(c => (
-              <div key={c} style={{ width: 8, height: 8, borderRadius: '50%', background: c, opacity: 0.7 }} />
+              <div key={c} style={{ width: 10, height: 10, borderRadius: '50%', background: c, opacity: 0.9 }} />
             ))}
           </div>
-          <span style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: '9px', letterSpacing: '0.25em', color: 'rgba(0,242,255,0.5)' }}>
+          <span style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: '11px', letterSpacing: '0.25em', color: 'rgba(0,242,255,0.85)' }}>
             TECHFEST AI CORE // v2.6.0
           </span>
-          <span style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: '8px', color: 'rgba(0,255,65,0.5)' }}>
+          <span style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: '10px', color: 'rgba(0,255,65,0.9)', fontWeight: 'bold' }}>
             ● CONNECTED
           </span>
         </div>
@@ -305,9 +305,9 @@ export default function TerminalPage() {
         {/* Output area */}
         <div style={{
           flex: 1, overflowY: 'auto',
-          padding: 'clamp(10px, 4vw, 20px)',
+          padding: 'clamp(14px, 4vw, 24px)',
           fontFamily: 'Share Tech Mono, monospace',
-          fontSize: 'clamp(9px, 3.2vw, 13px)',
+          fontSize: 'clamp(13px, 3.2vw, 16px)',
           lineHeight: 1.6,
         }}>
           <AnimatePresence>
@@ -323,8 +323,8 @@ export default function TerminalPage() {
                   color: line.type === 'input'
                     ? '#ffffff'
                     : line.type === 'system'
-                    ? 'rgba(0,242,255,0.7)'
-                    : 'rgba(0,255,65,0.85)',
+                    ? 'rgba(0,242,255,0.95)'
+                    : 'rgba(0,255,65,0.98)',
                   marginBottom: line.text === '' ? '8px' : '2px',
                 }}
               >
@@ -340,13 +340,13 @@ export default function TerminalPage() {
           <form
             onSubmit={handleSubmit}
             style={{
-              borderTop: '1px solid rgba(0,242,255,0.1)',
-              padding: '12px clamp(10px, 4vw, 20px)',
+              borderTop: '1px solid rgba(0,242,255,0.15)',
+              padding: '14px clamp(14px, 4vw, 24px)',
               display: 'flex', alignItems: 'center', gap: '10px',
-              background: 'rgba(0,242,255,0.03)',
+              background: 'rgba(0,242,255,0.05)',
             }}
           >
-            <span style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: 'clamp(10px, 3.2vw, 13px)', color: '#00f2ff', whiteSpace: 'nowrap' }}>
+            <span style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: 'clamp(13px, 3.2vw, 16px)', color: '#00f2ff', whiteSpace: 'nowrap', fontWeight: 'bold' }}>
               TF26@AI:~$
             </span>
             <input
@@ -362,7 +362,7 @@ export default function TerminalPage() {
               aria-label="Terminal command input"
               style={{
                 flex: 1, background: 'transparent', border: 'none', outline: 'none',
-                fontFamily: 'Share Tech Mono, monospace', fontSize: 'clamp(10px, 3.2vw, 13px)',
+                fontFamily: 'Share Tech Mono, monospace', fontSize: 'clamp(13px, 3.2vw, 16px)',
                 color: '#fff', letterSpacing: '0.05em',
               }}
             />
