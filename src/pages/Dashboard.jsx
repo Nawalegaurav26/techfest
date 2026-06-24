@@ -111,8 +111,8 @@ export default function Dashboard() {
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '14px',
-          color: 'rgba(189, 200, 209, 0.5)',
+          fontSize: '15.5px',
+          color: '#cbd5e1',
           maxWidth: '500px',
           marginTop: '12px',
           lineHeight: 1.7
@@ -202,7 +202,7 @@ export default function Dashboard() {
             opacity: 0.8,
             marginBottom: '8px'
           }} />
-          <div style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.5)', letterSpacing: '0.4em' }}>
+          <div style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', fontSize: '10.5px', color: '#cbd5e1', letterSpacing: '0.4em' }}>
             {tfId.split('').join(' ')}
           </div>
         </motion.div>
@@ -230,7 +230,7 @@ export default function Dashboard() {
                 {registeredEvents.length > 0 && (
                   <div style={{ padding: '4px 12px', display: 'flex', flexDirection: 'column', gap: '4px', background: 'rgba(255,255,255,0.02)', borderLeft: '1px solid var(--sky)', marginTop: '4px' }}>
                     {registeredEvents.map(name => (
-                      <div key={name} style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(189,200,209,0.7)', letterSpacing: '0.05em' }}>
+                      <div key={name} style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#ffffff', letterSpacing: '0.05em' }}>
                         ▶ {name}
                       </div>
                     ))}
@@ -246,7 +246,7 @@ export default function Dashboard() {
                 {registeredWorkshops.length > 0 && (
                   <div style={{ padding: '4px 12px', display: 'flex', flexDirection: 'column', gap: '4px', background: 'rgba(255,255,255,0.02)', borderLeft: '1px solid var(--green)', marginTop: '4px' }}>
                     {registeredWorkshops.map(name => (
-                      <div key={name} style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(189,200,209,0.7)', letterSpacing: '0.05em' }}>
+                      <div key={name} style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#ffffff', letterSpacing: '0.05em' }}>
                         ▶ {name}
                       </div>
                     ))}
