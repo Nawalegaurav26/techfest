@@ -30,6 +30,7 @@ export default function HolographicNav({
   onSignOut,
   onMenuClick,
   drawerOpen,
+  bannerDismissed,
 }) {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -70,7 +71,7 @@ export default function HolographicNav({
     <header
       style={{
         position: 'fixed',
-        top: 0,
+        top: bannerDismissed ? 0 : '36px',
         left: 0,
         right: 0,
         height: 'var(--nav-h)',

@@ -111,6 +111,7 @@ export default function PageLayout() {
     return false;
   });
   const [drawerOpen, setDrawerOpen]     = useState(false);
+  const [bannerDismissed, setBannerDismissed] = useState(false);
   const [user, setUser]                 = useState(null);
   const [authLoading, setAuthLoading]   = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -219,7 +220,7 @@ export default function PageLayout() {
       <FloatingDrone />
 
       {/* ── ANNOUNCEMENT BANNER (above nav) */}
-      <AnnouncementBanner />
+      <AnnouncementBanner dismissed={bannerDismissed} setDismissed={setBannerDismissed} />
 
       {/* ── SCROLL TO TOP ──────────────────────────── */}
       <ScrollToTop />
@@ -234,6 +235,7 @@ export default function PageLayout() {
         onSignOut={handleSignOut}
         onMenuClick={() => setDrawerOpen(!drawerOpen)}
         drawerOpen={drawerOpen}
+        bannerDismissed={bannerDismissed}
       />
 
       {/* ── LEFT SIDEBAR (desktop 1024px+) ─────────── */}
@@ -242,7 +244,7 @@ export default function PageLayout() {
         style={{
           position: 'fixed',
           left: 0,
-          top: 'var(--nav-h)',
+          top: bannerDismissed ? 'var(--nav-h)' : 'calc(var(--nav-h) + 36px)',
           bottom: 'var(--footer-h)',
           width: 'var(--sidebar-w)',
           zIndex: 50,
@@ -354,7 +356,7 @@ export default function PageLayout() {
         style={{
           position: 'fixed',
           right: 0,
-          top: 'var(--nav-h)',
+          top: bannerDismissed ? 'var(--nav-h)' : 'calc(var(--nav-h) + 36px)',
           bottom: 'var(--footer-h)',
           width: 'var(--sidebar-w)',
           zIndex: 50,
@@ -430,7 +432,7 @@ export default function PageLayout() {
           style={{
             position: 'relative',
             zIndex: 10,
-            paddingTop: 'var(--nav-h)',
+            paddingTop: bannerDismissed ? 'var(--nav-h)' : 'calc(var(--nav-h) + 36px)',
             paddingLeft: 'var(--sidebar-w)',
             paddingRight: 'var(--sidebar-w)',
             paddingBottom: 'var(--footer-h)',

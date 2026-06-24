@@ -10,9 +10,8 @@ const ANNOUNCEMENTS = [
   { id: 'a3', text: '🎙️ SAM ALTMAN keynote confirmed — Day 1, Convocation Hall, 11:00 IST', cta: 'VIEW SCHEDULE', to: '/schedule', color: '#a855f7' },
 ];
 
-export default function AnnouncementBanner() {
+export default function AnnouncementBanner({ dismissed, setDismissed }) {
   const [current, setCurrent] = useState(0);
-  const [dismissed, setDismissed] = useState(false);
   const navigate = useNavigate();
 
   const ann = ANNOUNCEMENTS[current];
