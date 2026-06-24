@@ -80,8 +80,8 @@ export default function Accommodation() {
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '14px',
-          color: 'rgba(189, 200, 209, 0.5)',
+          fontSize: '15px',
+          color: '#cbd5e1',
           maxWidth: '500px',
           marginTop: '12px',
           lineHeight: 1.7
@@ -114,9 +114,9 @@ export default function Accommodation() {
             <span style={{ color: 'var(--sky)' }}>{item.icon}</span>
             <span style={{
               fontFamily: 'var(--font-mono)',
-              fontSize: '9px',
+              fontSize: '11px',
               letterSpacing: '0.2em',
-              color: 'rgba(189,200,209,0.5)',
+              color: '#cbd5e1',
               fontWeight: 600
             }}>{item.text}</span>
           </div>
@@ -173,8 +173,8 @@ export default function Accommodation() {
                   </div>
                   <span style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '9px',
-                    color: 'rgba(189,200,209,0.5)',
+                    fontSize: '11px',
+                    color: '#cbd5e1',
                     fontWeight: 600
                   }}>
                     {acc.available} UNITS LEFT
@@ -192,8 +192,8 @@ export default function Accommodation() {
                 </h3>
                 <div style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '9px',
-                  color: 'rgba(189,200,209,0.4)',
+                  fontSize: '11px',
+                  color: '#94a3b8',
                   letterSpacing: '0.15em',
                   marginBottom: '16px',
                   fontWeight: 600
@@ -240,8 +240,8 @@ export default function Accommodation() {
                     </div>
                     <div style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '8px',
-                      color: 'rgba(189,200,209,0.3)',
+                      fontSize: '11px',
+                      color: '#cbd5e1',
                       marginTop: '2px',
                       fontWeight: 600
                     }}>
@@ -347,9 +347,9 @@ export default function Accommodation() {
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '11px',
+                  fontSize: '13px',
                   letterSpacing: '0.05em',
-                  color: isOpen ? 'var(--sky)' : 'rgba(189,200,209,0.7)',
+                  color: isOpen ? 'var(--sky)' : '#ffffff',
                   fontWeight: 700,
                   transition: 'color 0.3s',
                 }}
@@ -375,8 +375,8 @@ export default function Accommodation() {
                     style={{
                       padding: '0 20px 16px',
                       fontFamily: 'var(--font-body)',
-                      fontSize: '12.5px',
-                      color: 'rgba(189,200,209,0.5)',
+                      fontSize: '14.5px',
+                      color: '#cbd5e1',
                       lineHeight: 1.7,
                       overflow: 'hidden'
                     }}
