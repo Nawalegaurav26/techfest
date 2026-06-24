@@ -19,11 +19,11 @@ const STEPS = ['SELECT EVENT', 'TEAM SETUP', 'DETAILS', 'CONFIRM'];
 
 const inputStyle = {
   width: '100%',
-  padding: '10px 14px',
+  padding: '12px 14px',
   fontFamily: 'var(--font-mono)',
-  fontSize: '12px',
-  background: 'rgba(255,255,255,0.03)',
-  border: '1px solid rgba(255,255,255,0.1)',
+  fontSize: '14px',
+  background: 'rgba(255,255,255,0.06)',
+  border: '1px solid rgba(255,255,255,0.25)',
   color: '#fff',
   outline: 'none',
   borderRadius: '0px',
@@ -202,7 +202,7 @@ export default function Register() {
         }}>
           EVENT <span style={{ color: 'var(--sky)', textShadow: '0 0 20px rgba(56,189,248,0.4)' }}>REGISTRATION</span>
         </h1>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'rgba(189,200,209,0.55)', maxWidth: '500px', lineHeight: 1.7, marginBottom: '32px' }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: 'rgba(241,245,249,0.9)', maxWidth: '640px', lineHeight: 1.7, marginBottom: '32px' }}>
           Choose your event, assemble your team, and submit your enlistment. All registrations processed through the secure Techfest gateway.
         </p>
       </motion.div>
@@ -220,11 +220,11 @@ export default function Register() {
                   key={c}
                   onClick={() => { soundEffects.playClick?.(); setCatFilter(c); }}
                   style={{
-                    fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700, letterSpacing: '0.15em',
-                    padding: '5px 12px', cursor: 'pointer', borderRadius: '0px', border: 'none',
-                    border: `1px solid ${catFilter === c ? 'var(--sky)' : 'rgba(255,255,255,0.1)'}`,
+                    fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.15em',
+                    padding: '6px 14px', cursor: 'pointer', borderRadius: '0px',
+                    border: `1px solid ${catFilter === c ? 'var(--sky)' : 'rgba(255,255,255,0.25)'}`,
                     background: catFilter === c ? 'rgba(56,189,248,0.1)' : 'transparent',
-                    color: catFilter === c ? 'var(--sky)' : 'rgba(189,200,209,0.5)',
+                    color: catFilter === c ? 'var(--sky)' : '#cbd5e1',
                     transition: 'all 0.2s',
                   }}
                 >
@@ -261,11 +261,11 @@ export default function Register() {
                     <div style={{
                       display: 'inline-block', padding: '2px 8px', marginBottom: '12px',
                       border: `1px solid ${evt.color}55`, background: `${evt.color}11`,
-                      fontFamily: 'var(--font-mono)', fontSize: '8px', color: evt.color, letterSpacing: '0.2em',
+                      fontFamily: 'var(--font-mono)', fontSize: '11px', color: evt.color, letterSpacing: '0.2em',
                     }}>
                       {evt.category}
                     </div>
-                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '15px', fontWeight: 800, color: '#fff', marginBottom: '10px' }}>
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 800, color: '#fff', marginBottom: '10px' }}>
                       {evt.name}
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
@@ -307,7 +307,7 @@ export default function Register() {
             </div>
 
             <div style={{ marginBottom: '20px' }}>
-              <label style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(189,200,209,0.5)', letterSpacing: '0.2em', display: 'block', marginBottom: '8px' }}>
+              <label style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'rgba(226,232,240,0.8)', letterSpacing: '0.2em', display: 'block', marginBottom: '8px' }}>
                 TEAM DESIGNATION *
               </label>
               <input
@@ -320,7 +320,7 @@ export default function Register() {
               />
             </div>
 
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(189,200,209,0.5)', letterSpacing: '0.2em', marginBottom: '12px' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'rgba(226,232,240,0.8)', letterSpacing: '0.2em', marginBottom: '12px' }}>
               TEAM MEMBERS ({members.length}/{selectedEvent?.maxTeam})
             </div>
 
@@ -336,17 +336,17 @@ export default function Register() {
                   position: 'relative',
                 }}
               >
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(56,189,248,0.6)', letterSpacing: '0.2em', marginBottom: '12px' }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#38bdf8', letterSpacing: '0.2em', marginBottom: '12px' }}>
                   {i === 0 ? 'TEAM LEADER' : `MEMBER ${i + 1}`}
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '10px' }}>
                   <div>
-                    <label style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.4)', display: 'block', marginBottom: '6px' }}>FULL NAME *</label>
+                    <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(226,232,240,0.7)', display: 'block', marginBottom: '6px' }}>FULL NAME *</label>
                     <input style={inputStyle} placeholder="Name" value={m.name} onChange={e => updateMember(i, 'name', e.target.value)}
                       onFocus={e => e.target.style.borderColor = 'var(--sky)'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.1)'} />
                   </div>
                   <div>
-                    <label style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.4)', display: 'block', marginBottom: '6px' }}>EMAIL *</label>
+                    <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(226,232,240,0.7)', display: 'block', marginBottom: '6px' }}>EMAIL *</label>
                     <input style={inputStyle} type="email" placeholder="email@example.com" value={m.email} onChange={e => updateMember(i, 'email', e.target.value)}
                       onFocus={e => e.target.style.borderColor = 'var(--sky)'} onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.1)'} />
                   </div>
@@ -406,7 +406,7 @@ export default function Register() {
                 { key: 'city',        label: 'CITY',                    placeholder: 'Mumbai' },
               ].map(({ key, label, placeholder, type }) => (
                 <div key={key}>
-                  <label style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.45)', letterSpacing: '0.15em', display: 'block', marginBottom: '6px' }}>
+                  <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(226,232,240,0.7)', letterSpacing: '0.15em', display: 'block', marginBottom: '6px' }}>
                     {label}
                   </label>
                   <input
@@ -419,7 +419,7 @@ export default function Register() {
                 </div>
               ))}
               <div>
-                <label style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.45)', letterSpacing: '0.15em', display: 'block', marginBottom: '6px' }}>
+                <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(226,232,240,0.7)', letterSpacing: '0.15em', display: 'block', marginBottom: '6px' }}>
                   REFERRAL CODE (OPTIONAL)
                 </label>
                 <div style={{ display: 'flex', gap: '8px' }}>
@@ -486,7 +486,7 @@ export default function Register() {
 
             <label style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px', cursor: 'pointer' }}>
               <div style={{ width: '16px', height: '16px', border: '1px solid rgba(56,189,248,0.4)', background: 'rgba(56,189,248,0.1)', flexShrink: 0 }} />
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(189,200,209,0.6)', lineHeight: 1.5 }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'rgba(226,232,240,0.85)', lineHeight: 1.5 }}>
                 I agree to Techfest 2026 participation terms and code of conduct.
               </span>
             </label>
@@ -529,7 +529,7 @@ export default function Register() {
               </div>
 
               <div style={{ borderTop: '1px dashed rgba(255,255,255,0.08)', marginTop: '16px', paddingTop: '16px' }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.4)', marginBottom: '10px', letterSpacing: '0.15em' }}>TEAM ROSTER</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'rgba(226, 232, 240, 0.65)', marginBottom: '10px', letterSpacing: '0.15em' }}>TEAM ROSTER</div>
                 {members.map((m, i) => (
                   <div key={i} style={{
                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
@@ -537,11 +537,11 @@ export default function Register() {
                     background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)',
                   }}>
                     <div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#fff', fontWeight: 700 }}>{m.name}</div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'rgba(189,200,209,0.4)' }}>{m.email}</div>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#fff', fontWeight: 700 }}>{m.name}</div>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'rgba(226, 232, 240, 0.65)' }}>{m.email}</div>
                     </div>
                     <span style={{
-                      fontFamily: 'var(--font-mono)', fontSize: '8px', color: i === 0 ? 'var(--sky)' : 'rgba(189,200,209,0.4)',
+                      fontFamily: 'var(--font-mono)', fontSize: '11px', color: i === 0 ? 'var(--sky)' : '#cbd5e1',
                       padding: '2px 6px', border: `1px solid ${i === 0 ? 'rgba(56,189,248,0.3)' : 'rgba(255,255,255,0.08)'}`,
                     }}>
                       {i === 0 ? 'LEADER' : m.role || 'MEMBER'}
