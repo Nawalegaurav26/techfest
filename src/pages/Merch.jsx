@@ -104,7 +104,7 @@ function ProductCard({ product, isWishlisted, onWishlist, onBuy }) {
             border: `1px solid ${c}44`,
             color: c,
             fontFamily: 'var(--font-mono)',
-            fontSize: '8px',
+            fontSize: '11px',
             fontWeight: 700,
             letterSpacing: '0.2em',
             padding: '3px 8px',
@@ -153,7 +153,7 @@ function ProductCard({ product, isWishlisted, onWishlist, onBuy }) {
         <div
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '14px',
+            fontSize: '17px',
             fontWeight: 800,
             color: '#fff',
             lineHeight: 1.3,
@@ -168,8 +168,8 @@ function ProductCard({ product, isWishlisted, onWishlist, onBuy }) {
         <div
           style={{
             fontFamily: 'var(--font-body)',
-            fontSize: '12px',
-            color: 'rgba(189,200,209,0.5)',
+            fontSize: '14px',
+            color: 'rgba(226, 232, 240, 0.85)',
             lineHeight: 1.6,
             marginBottom: '16px',
             minHeight: '38px',
@@ -182,7 +182,7 @@ function ProductCard({ product, isWishlisted, onWishlist, onBuy }) {
         <div
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '22px',
+            fontSize: '24px',
             fontWeight: 900,
             color: '#fbbf24',
             textShadow: '0 0 16px rgba(251,191,36,0.4)',
@@ -212,9 +212,9 @@ function ProductCard({ product, isWishlisted, onWishlist, onBuy }) {
             background: 'transparent',
             border: 'none',
             borderRight: '1px solid rgba(255,255,255,0.05)',
-            color: isWishlisted ? '#ff2d55' : 'rgba(255,255,255,0.35)',
+            color: isWishlisted ? '#ff2d55' : '#cbd5e1',
             fontFamily: 'var(--font-mono)',
-            fontSize: '9px',
+            fontSize: '11px',
             letterSpacing: '0.15em',
             padding: '12px 8px',
             cursor: 'pointer',
@@ -231,7 +231,7 @@ function ProductCard({ product, isWishlisted, onWishlist, onBuy }) {
           }}
           onMouseLeave={e => {
             e.currentTarget.style.background = 'transparent';
-            e.currentTarget.style.color = isWishlisted ? '#ff2d55' : 'rgba(255,255,255,0.35)';
+            e.currentTarget.style.color = isWishlisted ? '#ff2d55' : '#cbd5e1';
           }}
         >
           {isWishlisted ? '♥' : '♡'} WISHLIST
@@ -247,7 +247,7 @@ function ProductCard({ product, isWishlisted, onWishlist, onBuy }) {
             border: 'none',
             color: c,
             fontFamily: 'var(--font-mono)',
-            fontSize: '9px',
+            fontSize: '11px',
             letterSpacing: '0.15em',
             padding: '12px 8px',
             cursor: 'pointer',
@@ -423,11 +423,11 @@ export default function Merch() {
         transition={{ delay: 0.3 }}
         style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '14px',
-          color: 'rgba(189,200,209,0.5)',
+          fontSize: '15px',
+          color: 'rgba(241, 245, 249, 0.9)',
           marginBottom: '36px',
           lineHeight: 1.6,
-          maxWidth: '500px',
+          maxWidth: '640px',
         }}
       >
         Official Techfest 2026 merchandise — from cyberpunk apparel and collectibles
@@ -459,12 +459,12 @@ export default function Merch() {
                 background: isActive
                   ? 'rgba(56,189,248,0.12)'
                   : 'transparent',
-                border: `1px solid ${isActive ? 'var(--sky)' : 'rgba(255,255,255,0.1)'}`,
-                color: isActive ? 'var(--sky)' : 'rgba(255,255,255,0.4)',
+                border: `1px solid ${isActive ? 'var(--sky)' : 'rgba(255,255,255,0.25)'}`,
+                color: isActive ? 'var(--sky)' : '#cbd5e1',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '10px',
+                fontSize: '12px',
                 letterSpacing: '0.18em',
-                padding: '8px 18px',
+                padding: '10px 20px',
                 cursor: 'pointer',
                 transition: 'all 0.25s',
                 fontWeight: isActive ? 700 : 400,
@@ -478,8 +478,8 @@ export default function Merch() {
               }}
               onMouseLeave={e => {
                 if (!isActive) {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-                  e.currentTarget.style.color = 'rgba(255,255,255,0.4)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
+                  e.currentTarget.style.color = '#cbd5e1';
                 }
               }}
             >
@@ -493,8 +493,8 @@ export default function Merch() {
           style={{
             marginLeft: 'auto',
             fontFamily: 'var(--font-mono)',
-            fontSize: '10px',
-            color: 'rgba(255,255,255,0.25)',
+            fontSize: '12px',
+            color: 'rgba(226, 232, 240, 0.65)',
             letterSpacing: '0.15em',
             display: 'flex',
             alignItems: 'center',
@@ -546,8 +546,8 @@ export default function Merch() {
         <div
           style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '11px',
-            color: 'rgba(189,200,209,0.45)',
+            fontSize: '13px',
+            color: 'rgba(226, 232, 240, 0.8)',
             lineHeight: 1.7,
             letterSpacing: '0.05em',
           }}
