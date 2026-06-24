@@ -164,9 +164,9 @@ export default function Lectures() {
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '14px',
-          color: 'rgba(189, 200, 209, 0.5)',
-          maxWidth: '540px',
+          fontSize: '15px',
+          color: 'rgba(241, 245, 249, 0.9)',
+          maxWidth: '640px',
           marginTop: '12px',
           lineHeight: 1.7
         }}>
@@ -203,7 +203,7 @@ export default function Lectures() {
                 minHeight: '44px',
                 flexShrink: 0,
                 whiteSpace: 'nowrap',
-                color: isActive ? '#fff' : 'rgba(189,200,209,0.55)',
+                color: isActive ? '#fff' : '#cbd5e1',
                 background: isActive ? 'rgba(56,189,248,0.1)' : 'transparent',
                 border: isActive ? '1px solid var(--sky)' : '1px solid rgba(255,255,255,0.08)',
                 boxShadow: isActive ? '0 0 15px rgba(56,189,248,0.2)' : 'none',
@@ -218,7 +218,7 @@ export default function Lectures() {
               }}
               onMouseLeave={e => {
                 if (!isActive) {
-                  e.currentTarget.style.color = 'rgba(189,200,209,0.55)';
+                  e.currentTarget.style.color = '#cbd5e1';
                   e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
                 }
               }}
@@ -298,8 +298,8 @@ export default function Lectures() {
                     </h3>
                     <p style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '9px',
-                      color: 'rgba(189,200,209,0.5)',
+                      fontSize: '12px',
+                      color: 'rgba(226, 232, 240, 0.75)',
                       marginTop: '2px'
                     }}>
                       {speaker.title}
@@ -310,7 +310,7 @@ export default function Lectures() {
                 {/* Speaker Topic */}
                 <h4 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '11px',
+                  fontSize: '13px',
                   fontWeight: 700,
                   color: isSelected ? 'var(--plasma)' : 'var(--sky)',
                   letterSpacing: '0.05em',
@@ -322,8 +322,8 @@ export default function Lectures() {
 
                 <p style={{
                   fontFamily: 'var(--font-body)',
-                  fontSize: '12px',
-                  color: 'rgba(189,200,209,0.6)',
+                  fontSize: '14px',
+                  color: 'rgba(226, 232, 240, 0.85)',
                   lineHeight: 1.6,
                   marginBottom: '20px'
                 }}>
@@ -358,8 +358,8 @@ export default function Lectures() {
                       </span>
                       <p style={{
                         fontFamily: 'var(--font-body)',
-                        fontSize: '11.5px',
-                        color: 'rgba(189,200,209,0.5)',
+                        fontSize: '13px',
+                        color: 'rgba(226, 232, 240, 0.75)',
                         lineHeight: 1.65,
                       }}>
                         {speaker.bio}
@@ -376,18 +376,18 @@ export default function Lectures() {
                   gridTemplateColumns: '1fr 1fr',
                   gap: '8px',
                   padding: '12px 0',
-                  borderTop: '1px solid rgba(255,255,255,0.05)',
+                  borderTop: '1px solid rgba(255,255,255,0.1)',
                   marginBottom: '16px',
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '9px'
+                  fontSize: '12px'
                 }}>
                   <div>
-                    <span style={{ color: 'rgba(189,200,209,0.3)' }}>SCHEDULE //</span>
-                    <div style={{ color: 'var(--on-surface)', fontWeight: 600, marginTop: '2px' }}>{speaker.time}</div>
+                    <span style={{ color: 'rgba(226, 232, 240, 0.65)' }}>SCHEDULE //</span>
+                    <div style={{ color: '#fff', fontWeight: 600, marginTop: '2px' }}>{speaker.time}</div>
                   </div>
                   <div>
-                    <span style={{ color: 'rgba(189,200,209,0.3)' }}>VENUE //</span>
-                    <div style={{ color: 'var(--on-surface)', fontWeight: 600, marginTop: '2px' }}>{speaker.venue}</div>
+                    <span style={{ color: 'rgba(226, 232, 240, 0.65)' }}>VENUE //</span>
+                    <div style={{ color: '#fff', fontWeight: 600, marginTop: '2px' }}>{speaker.venue}</div>
                   </div>
                 </div>
 
@@ -402,7 +402,7 @@ export default function Lectures() {
                     style={{
                       flex: 1,
                       padding: '10px 0',
-                      fontSize: '9px',
+                      fontSize: '11px',
                       borderColor: isSelected ? 'rgba(255, 45, 85, 0.4)' : 'rgba(56,189,248,0.3)',
                       color: isSelected ? 'var(--plasma)' : 'var(--sky)'
                     }}
@@ -419,7 +419,7 @@ export default function Lectures() {
                       border: `1px solid ${isSynced ? 'rgba(0, 245, 196, 0.4)' : 'rgba(255,45,85,0.4)'}`,
                       color: isSynced ? 'var(--green)' : 'var(--plasma)',
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '9px',
+                      fontSize: '11px',
                       fontWeight: 700,
                       letterSpacing: '0.12em',
                       transition: 'all 0.3s ease',
@@ -500,8 +500,8 @@ export default function Lectures() {
                     top: '20px',
                     right: '20px',
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '11px',
-                    color: 'rgba(189,200,209,0.5)',
+                    fontSize: '12px',
+                    color: '#cbd5e1',
                     background: 'transparent',
                     border: 'none',
                     cursor: 'pointer'
@@ -544,8 +544,8 @@ export default function Lectures() {
                     </h2>
                     <p style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '11px',
-                      color: 'rgba(189,200,209,0.4)',
+                      fontSize: '12px',
+                      color: 'rgba(226, 232, 240, 0.7)',
                       marginTop: '4px'
                     }}>
                       {speaker.title}
@@ -582,8 +582,8 @@ export default function Lectures() {
 
                 <p style={{
                   fontFamily: 'var(--font-body)',
-                  fontSize: '13px',
-                  color: 'rgba(189,200,209,0.7)',
+                  fontSize: '15px',
+                  color: 'rgba(241, 245, 249, 0.95)',
                   lineHeight: 1.7,
                   marginBottom: '24px'
                 }}>
@@ -598,19 +598,19 @@ export default function Lectures() {
                   background: 'rgba(255,255,255,0.02)',
                   border: '1px solid rgba(255,255,255,0.06)',
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '10px',
+                  fontSize: '12px',
                   marginBottom: '24px'
                 }}>
                   <div>
-                    <span style={{ color: 'rgba(189,200,209,0.3)' }}>DATE & TIME</span>
+                    <span style={{ color: 'rgba(226, 232, 240, 0.6)' }}>DATE & TIME</span>
                     <div style={{ color: '#fff', fontWeight: 700, marginTop: '4px' }}>{speaker.time}</div>
                   </div>
                   <div>
-                    <span style={{ color: 'rgba(189,200,209,0.3)' }}>LOCATION</span>
+                    <span style={{ color: 'rgba(226, 232, 240, 0.6)' }}>LOCATION</span>
                     <div style={{ color: '#fff', fontWeight: 700, marginTop: '4px' }}>{speaker.venue}</div>
                   </div>
                   <div>
-                    <span style={{ color: 'rgba(189,200,209,0.3)' }}>SYNC AVAIL.</span>
+                    <span style={{ color: 'rgba(226, 232, 240, 0.6)' }}>SYNC AVAIL.</span>
                     <div style={{ color: 'var(--plasma)', fontWeight: 700, marginTop: '4px' }}>{speaker.status}</div>
                   </div>
                 </div>
