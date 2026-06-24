@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beyond the Horizon — Immersive Parallax Experience</title>
+  <meta name="description" content="An immersive parallax scrolling experience that takes you beyond the digital cosmos. Deep space aesthetics, glassmorphism cards, and fluid animations."/>
+  <meta name="theme-color" content="#060612"/>
+  <meta property="og:title" content="Beyond the Horizon — Immersive Parallax"/>
+  <meta property="og:description" content="Explore the infinite reaches of the digital cosmos."/>
+  <meta property="og:type" content="website"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <a href="#hero" class="skip-link">Skip to main content</a>
+  <nav id="main-nav" class="nav" role="navigation" aria-label="Main navigation">
+    <a href="#" class="nav__logo" id="nav-logo">Beyond the Horizon</a>
+    <div class="nav__links" id="nav-links">
+      <a href="#about" class="nav__link" id="nav-about">About</a>
+      <a href="#features" class="nav__link" id="nav-features">Features</a>
+      <a href="#stats" class="nav__link" id="nav-stats">Stats</a>
+      <a href="#testimonials" class="nav__link" id="nav-testimonials">Voices</a>
+      <a href="#cta" class="nav__link" id="nav-cta-link">Launch</a>
+    </div>
+    <button class="nav__cta" id="nav-cta-btn" aria-label="Get started">Get Started</button>
+    <button class="nav__hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="dialog" aria-label="Mobile navigation">
+    <div class="mobile-menu__backdrop" id="mobile-backdrop"></div>
+    <nav class="mobile-menu__panel">
+      <button class="mobile-menu__close" id="mobile-close" aria-label="Close menu">
+        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+      </button>
+      <a href="#about" class="mobile-menu__link" id="m-nav-about">About</a>
+      <a href="#features" class="mobile-menu__link" id="m-nav-features">Features</a>
+      <a href="#stats" class="mobile-menu__link" id="m-nav-stats">Stats</a>
+      <a href="#testimonials" class="mobile-menu__link" id="m-nav-testimonials">Voices</a>
+      <a href="#cta" class="mobile-menu__link" id="m-nav-cta">Launch</a>
+      <button class="btn btn--primary mobile-menu__cta" id="m-nav-cta-btn">Get Started</button>
+    </nav>
+  </div>
+  <main id="main-content">
+    <section class="hero" id="hero" aria-label="Hero — Beyond the Horizon">
+      <canvas id="hero-canvas" class="hero__canvas" aria-hidden="true"></canvas>
+      <div class="hero__nebula hero__nebula--violet" data-parallax="0.15" aria-hidden="true"></div>
+      <div class="hero__nebula hero__nebula--pink" data-parallax="0.25" aria-hidden="true"></div>
+      <div class="hero__nebula hero__nebula--cyan" data-parallax="0.35" aria-hidden="true"></div>
+      <div class="hero__shapes" aria-hidden="true">
+        <div class="shape shape--ring" data-parallax="0.40"></div>
+        <div class="shape shape--triangle" data-parallax="0.45"></div>
+        <div class="shape shape--dot-grid" data-parallax="0.30"></div>
+      </div>
+      <div class="hero__content" data-parallax="0.6" id="hero-content">
+        <span class="hero__badge" id="hero-badge" aria-label="Digital Cosmos">✦ Digital Cosmos</span>
+        <h1 class="hero__title" id="hero-title">
+          <span class="hero__title-line">BEYOND THE</span>
+          <span class="hero__title-line hero__title-line--gradient">HORIZON</span>
+        </h1>
+        <p class="hero__subtitle" id="hero-subtitle">Explore the infinite reaches of the digital cosmos. Where technology meets imagination and boundaries dissolve into pure experience.</p>
+        <div class="hero__actions" id="hero-actions">
+          <button class="btn btn--primary" id="hero-cta-primary" aria-label="Begin your exploration">Begin Exploration</button>
+          <button class="btn btn--ghost" id="hero-cta-secondary" aria-label="Discover more about this experience">Discover More</button>
+        </div>
+      </div>
+      <div class="hero__scroll-indicator" data-parallax="0.2" id="scroll-indicator" aria-label="Scroll down to explore">
+        <span class="scroll-indicator__text">Scroll to Explore</span>
+        <svg class="scroll-indicator__arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <animateTransform attributeName="transform" type="translate" values="0 -3; 0 4; 0 -3" dur="2s" repeatCount="indefinite"/>
+          </path>
+        </svg>
+      </div>
+    </section>
+    <section class="about" id="about" aria-label="About — The Vision">
+      <div class="about__bg-nebula" data-parallax="0.25" aria-hidden="true"></div>
+      <div class="about__bg-grid" data-parallax="0.40" aria-hidden="true"></div>
+      <div class="about__container">
+        <div class="about__visual reveal" id="about-visual">
+          <div class="about__canvas-wrapper" id="threejs-container" role="img" aria-label="Interactive rotating 3D icosahedron geometric shape"></div>
+          <p class="about__visual-label" aria-hidden="true">Interactive 3D — Click &amp; Drag to Rotate</p>
+        </div>
+        <div class="about__text reveal reveal--delay-1" id="about-text">
+          <span class="section-badge">01 — Origin</span>
+          <h2 class="section-title">The <span class="text-gradient">Vision</span></h2>
+          <div class="divider" aria-hidden="true"></div>
+          <p class="section-body">We are architects of the digital frontier, crafting immersive experiences that transcend traditional boundaries. By merging cutting-edge technology with high-end aesthetic sensibilities, we build environments that not only look spectacular but feel fundamentally alive.</p>
+          <p class="section-body">Our mission is to push the envelope of web interaction, creating deep, parallax-driven journeys that engage users on a visceral level — where every scroll reveals a new layer of wonder.</p>
+          <div class="about__tags" role="list" aria-label="Technology tags">
+            <span class="tag tag--violet" role="listitem">WebGL Shaders</span>
+            <span class="tag tag--pink" role="listitem">Parallax Depth</span>
+            <span class="tag tag--cyan" role="listitem">60fps Physics</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="features" id="features" aria-label="Features — Core Capabilities">
+      <div class="features__grid-bg" data-parallax="0.5" aria-hidden="true"></div>
+      <div class="features__orb features__orb--violet" data-parallax="0.35" aria-hidden="true"></div>
+      <div class="features__orb features__orb--pink" data-parallax="0.45" aria-hidden="true"></div>
+      <div class="section__header reveal" id="features-header">
+        <span class="section-badge">02 — Capabilities</span>
+        <h2 class="section-title">Core <span class="text-gradient">Capabilities</span></h2>
+        <p class="section-subtitle">Harnessing advanced web technologies to deliver unparalleled digital experiences that push the boundaries of the browser.</p>
+      </div>
+      <div class="features__grid" role="list" aria-label="Core capabilities list">
+        <article class="feature-card feature-card--violet reveal" id="feature-card-immersive" role="listitem" tabindex="0" aria-label="Immersive — deep parallax layers">
+          <div class="feature-card__glow" aria-hidden="true"></div>
+          <div class="feature-card__icon" aria-hidden="true"><span class="material-symbols-outlined">view_in_ar</span></div>
+          <h3 class="feature-card__title">Immersive</h3>
+          <p class="feature-card__body">Deep parallax layers and spatial awareness create a true sense of depth and a living environment that responds to every scroll and gesture.</p>
+          <div class="feature-card__line" aria-hidden="true"></div>
+        </article>
+        <article class="feature-card feature-card--pink reveal reveal--delay-1" id="feature-card-adaptive" role="listitem" tabindex="0" aria-label="Adaptive — fluid responsive layouts">
+          <div class="feature-card__glow" aria-hidden="true"></div>
+          <div class="feature-card__icon" aria-hidden="true"><span class="material-symbols-outlined">auto_awesome</span></div>
+          <h3 class="feature-card__title">Adaptive</h3>
+          <p class="feature-card__body">Fluid layouts that respond intuitively to any device — from 4K displays to mobile — ensuring a flawless journey without sacrificing visual fidelity.</p>
+          <div class="feature-card__line" aria-hidden="true"></div>
+        </article>
+        <article class="feature-card feature-card--cyan reveal reveal--delay-2" id="feature-card-performant" role="listitem" tabindex="0" aria-label="Performant — 60fps optimized">
+          <div class="feature-card__glow" aria-hidden="true"></div>
+          <div class="feature-card__icon" aria-hidden="true"><span class="material-symbols-outlined">bolt</span></div>
+          <h3 class="feature-card__title">Performant</h3>
+          <p class="feature-card__body">Optimized rendering pipelines with requestAnimationFrame delivering buttery-smooth 60fps animations on any hardware, without compromise.</p>
+          <div class="feature-card__line" aria-hidden="true"></div>
+        </article>
+      </div>
+    </section>
+    <section class="stats" id="stats" aria-label="Statistics — Impact by numbers">
+      <div class="stats__bg-mesh" data-parallax="0.20" aria-hidden="true"></div>
+      <div class="stats__bg-ring" data-parallax="0.30" aria-hidden="true"></div>
+      <div class="section__header reveal" id="stats-header">
+        <span class="section-badge">03 — Impact</span>
+        <h2 class="section-title">By the <span class="text-gradient">Numbers</span></h2>
+        <p class="section-subtitle">Real metrics from real explorers pushing the boundaries of digital experience.</p>
+      </div>
+      <div class="stats__grid" role="list" aria-label="Statistics">
+        <div class="stat-item reveal" id="stat-users" role="listitem">
+          <div class="stat-item__number counter" data-target="10000" aria-live="polite" aria-atomic="true" aria-label="10,000 plus active users">0</div>
+          <div class="stat-item__suffix" aria-hidden="true">+</div>
+          <div class="stat-item__label">Active Users</div>
+          <div class="stat-item__bar stat-item__bar--violet" aria-hidden="true"></div>
+        </div>
+        <div class="stat-item reveal reveal--delay-1" id="stat-projects" role="listitem">
+          <div class="stat-item__number counter" data-target="500" aria-live="polite" aria-atomic="true" aria-label="500 plus projects launched">0</div>
+          <div class="stat-item__suffix" aria-hidden="true">+</div>
+          <div class="stat-item__label">Projects Launched</div>
+          <div class="stat-item__bar stat-item__bar--pink" aria-hidden="true"></div>
+        </div>
+        <div class="stat-item reveal reveal--delay-2" id="stat-satisfaction" role="listitem">
+          <div class="stat-item__number counter" data-target="99" aria-live="polite" aria-atomic="true" aria-label="99 percent satisfaction rate">0</div>
+          <div class="stat-item__suffix" aria-hidden="true">%</div>
+          <div class="stat-item__label">Satisfaction Rate</div>
+          <div class="stat-item__bar stat-item__bar--cyan" aria-hidden="true"></div>
+        </div>
+        <div class="stat-item reveal reveal--delay-3" id="stat-awards" role="listitem">
+          <div class="stat-item__number counter" data-target="24" aria-live="polite" aria-atomic="true" aria-label="24 industry awards">0</div>
+          <div class="stat-item__suffix" aria-hidden="true">x</div>
+          <div class="stat-item__label">Industry Awards</div>
+          <div class="stat-item__bar stat-item__bar--violet" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+    <section class="testimonials" id="testimonials" aria-label="Testimonials — Explorer voices">
+      <canvas id="stars-canvas" class="testimonials__stars" aria-hidden="true"></canvas>
+      <div class="section__header reveal" id="testimonials-header">
+        <span class="section-badge">04 — Transmissions</span>
+        <h2 class="section-title">What <span class="text-gradient">Explorers</span> Say</h2>
+        <p class="section-subtitle">Voices from the frontier — real feedback from teams who have made the journey.</p>
+      </div>
+      <div class="testimonials__track" role="list" id="testimonials-track" aria-label="Testimonials">
+        <article class="testimonial-card reveal" id="testimonial-1" role="listitem" tabindex="0" aria-label="Testimonial from Sarah Jenkins">
+          <div class="testimonial-card__quote" aria-hidden="true">&ldquo;</div>
+          <p class="testimonial-card__text">The depth and fluidity achieved here are unmatched. It feels less like navigating a website and more like floating through an interactive art piece in the cosmos.</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar testimonial-card__avatar--violet" aria-hidden="true">SJ</div>
+            <div><div class="testimonial-card__name">Sarah Jenkins</div><div class="testimonial-card__role">Creative Director, Luminary Labs</div></div>
+          </div>
+        </article>
+        <article class="testimonial-card reveal reveal--delay-1" id="testimonial-2" role="listitem" tabindex="0" aria-label="Testimonial from David Chen">
+          <div class="testimonial-card__quote" aria-hidden="true">&ldquo;</div>
+          <p class="testimonial-card__text">Technically flawless. The implementation of parallax and WebGL shaders without compromising performance is exactly what modern web development should achieve.</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar testimonial-card__avatar--pink" aria-hidden="true">DC</div>
+            <div><div class="testimonial-card__name">David Chen</div><div class="testimonial-card__role">Lead Engineer, Nebula Systems</div></div>
+          </div>
+        </article>
+        <article class="testimonial-card reveal reveal--delay-2" id="testimonial-3" role="listitem" tabindex="0" aria-label="Testimonial from Elena Rostova">
+          <div class="testimonial-card__quote" aria-hidden="true">&ldquo;</div>
+          <p class="testimonial-card__text">An absolute masterclass in visual hierarchy and atmospheric design. The subtle glows and glassmorphism elements create a truly luxurious digital space worth revisiting.</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar testimonial-card__avatar--cyan" aria-hidden="true">ER</div>
+            <div><div class="testimonial-card__name">Elena Rostova</div><div class="testimonial-card__role">UI/UX Principal, Orbit Design</div></div>
+          </div>
+        </article>
+        <article class="testimonial-card reveal reveal--delay-3" id="testimonial-4" role="listitem" tabindex="0" aria-label="Testimonial from Marcus Kim">
+          <div class="testimonial-card__quote" aria-hidden="true">&ldquo;</div>
+          <p class="testimonial-card__text">Revolutionary approach to web storytelling. Every scroll feels intentional and deeply considered. This sets a new benchmark for interactive design in the industry.</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar testimonial-card__avatar--violet" aria-hidden="true">MK</div>
+            <div><div class="testimonial-card__name">Marcus Kim</div><div class="testimonial-card__role">CTO, Stellar Ventures</div></div>
+          </div>
+        </article>
+      </div>
+      <div class="testimonials__hint" aria-hidden="true">← Scroll horizontally to read more →</div>
+    </section>
+    <section class="cta" id="cta" aria-label="Call to action — Start your journey">
+      <canvas id="particles-canvas" class="cta__particles" aria-hidden="true"></canvas>
+      <div class="cta__ring cta__ring--1" data-parallax="0.15" aria-hidden="true"></div>
+      <div class="cta__ring cta__ring--2" data-parallax="0.25" aria-hidden="true"></div>
+      <div class="cta__ring cta__ring--3" data-parallax="0.10" aria-hidden="true"></div>
+      <div class="cta__content reveal" id="cta-content">
+        <span class="section-badge">05 — Launch</span>
+        <h2 class="cta__title" id="cta-title">Start Your <span class="text-gradient">Journey</span></h2>
+        <p class="cta__subtitle" id="cta-subtitle">Join the expedition into the next generation of web experiences. Enter your coordinates below and we'll guide you through the cosmos.</p>
+        <form class="cta__form" id="cta-form" novalidate aria-label="Email newsletter signup form">
+          <div class="cta__input-wrapper">
+            <label for="cta-email" class="sr-only">Email address</label>
+            <input type="email" id="cta-email" name="email" class="cta__input" placeholder="Enter your email address" aria-label="Email address" autocomplete="email" required/>
+            <button type="submit" class="btn btn--primary cta__submit" id="cta-submit-btn" aria-label="Launch — submit your email">
+              <span>Launch</span>
+              <span class="material-symbols-outlined" aria-hidden="true">rocket_launch</span>
+            </button>
+          </div>
+          <p class="cta__disclaimer" id="cta-status" role="status">No spam, ever. Unsubscribe at any time.</p>
+        </form>
+        <div class="cta__social-proof" aria-label="10,000 plus explorers have already joined">
+          <div class="cta__avatars" aria-hidden="true">
+            <div class="cta__avatar cta__avatar--1">A</div>
+            <div class="cta__avatar cta__avatar--2">B</div>
+            <div class="cta__avatar cta__avatar--3">C</div>
+            <div class="cta__avatar cta__avatar--4">D</div>
+          </div>
+          <span class="cta__social-text">Join 10,000+ explorers already on the journey</span>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer" id="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a href="#" class="footer__logo" id="footer-logo">Beyond the Horizon</a>
+        <p class="footer__tagline">Crafting the future of digital experience, one scroll at a time.</p>
+      </div>
+      <nav class="footer__nav" aria-label="Footer navigation links">
+        <a href="#" class="footer__link" id="footer-privacy">Privacy Policy</a>
+        <a href="#" class="footer__link" id="footer-terms">Terms of Service</a>
+        <a href="#" class="footer__link" id="footer-contact">Contact</a>
+        <a href="#" class="footer__link" id="footer-sitemap">Sitemap</a>
+      </nav>
+      <p class="footer__copy">© 2024 Beyond the Horizon. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
