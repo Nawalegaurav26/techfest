@@ -169,8 +169,8 @@ function JobCard({ job, index }) {
       {/* Description */}
       <p style={{
         fontFamily: 'var(--font-body)',
-        fontSize: '12px',
-        color: 'rgba(189,200,209,0.55)',
+        fontSize: '14px',
+        color: '#cbd5e1',
         lineHeight: 1.6,
       }}>{job.desc}</p>
 
@@ -179,9 +179,9 @@ function JobCard({ job, index }) {
         {job.skills.map(skill => (
           <span key={skill} style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '8px',
+            fontSize: '9px',
             fontWeight: 700,
-            color: 'rgba(189,200,209,0.5)',
+            color: '#cbd5e1',
             padding: '3px 10px',
             border: '1px solid rgba(255,255,255,0.08)',
             background: 'rgba(255,255,255,0.03)',
@@ -207,7 +207,7 @@ function JobCard({ job, index }) {
           </div>
           <div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '7px', color: 'rgba(189,200,209,0.3)', letterSpacing: '0.15em', marginBottom: '2px' }}>DEADLINE</div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, color: 'rgba(189,200,209,0.7)' }}>{job.deadline}</div>
+             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, color: '#cbd5e1' }}>{job.deadline}</div>
           </div>
         </div>
         <button
@@ -283,8 +283,8 @@ export default function Jobs() {
         </h1>
         <p style={{
           fontFamily: 'var(--font-body)',
-          fontSize: '14px',
-          color: 'rgba(189,200,209,0.5)',
+          fontSize: '15.5px',
+          color: '#cbd5e1',
           maxWidth: '520px',
           lineHeight: 1.7,
         }}>
@@ -322,7 +322,7 @@ export default function Jobs() {
                 border: isActive
                   ? `1px solid ${tc ? tc.border : 'rgba(56,189,248,0.5)'}`
                   : '1px solid rgba(255,255,255,0.08)',
-                color: isActive ? (tc ? tc.text : 'var(--sky)') : 'rgba(189,200,209,0.4)',
+                color: isActive ? (tc ? tc.text : 'var(--sky)') : '#cbd5e1',
                 boxShadow: isActive ? `0 0 12px ${tc ? tc.border : 'rgba(56,189,248,0.2)'}` : 'none',
                 transition: 'all 0.25s ease',
                 cursor: 'pointer',
