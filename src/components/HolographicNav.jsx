@@ -135,10 +135,10 @@ export default function HolographicNav({
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 'clamp(8px, 1.2vw, 16px)',
-          position: 'absolute',
-          left: '50%',
-          transform: 'translateX(-50%)',
+          justifyContent: 'center',
+          gap: 'clamp(4px, 0.8vw, 12px)',
+          flex: 1,
+          margin: '0 clamp(8px, 2vw, 24px)',
         }}
         className="hidden-mobile-nav"
         aria-label="Main navigation"

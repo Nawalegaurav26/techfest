@@ -374,14 +374,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 ────────────────────────────────────────────────────── */
 .nav-link {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: clamp(10px, 0.85vw, 13px);
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: clamp(0.04em, 0.08vw, 0.12em);
   text-transform: uppercase;
   color: var(--on-muted);
-  padding: 6px 4px;
+  padding: 6px clamp(2px, 0.35vw, 6px);
   position: relative;
   transition: color 0.25s;
+  white-space: nowrap;
   /* Ensure min touch area via block context */
 }
 .nav-link::after {

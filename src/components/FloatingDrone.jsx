@@ -21,9 +21,11 @@ function CyborgNode({ color, nodeRef, visorRef }) {
       <mesh castShadow receiveShadow>
         <boxGeometry args={[0.08, 0.08, 0.08]} />
         <meshStandardMaterial
-          color="#1b1b1f"
-          metalness={0.9}
+          color="#f8fafc"
+          metalness={0.85}
           roughness={0.15}
+          emissive={color}
+          emissiveIntensity={0.15}
         />
       </mesh>
       {/* Cyborg Visor */}
@@ -32,14 +34,14 @@ function CyborgNode({ color, nodeRef, visorRef }) {
         <meshStandardMaterial
           color={color}
           emissive={color}
-          emissiveIntensity={0.2}
+          emissiveIntensity={0.4}
           toneMapped={false}
         />
       </mesh>
       {/* Cybernetic Neck/Antenna */}
       <mesh position={[0, 0.05, 0]}>
         <cylinderGeometry args={[0.005, 0.005, 0.05, 4]} />
-        <meshStandardMaterial color="#607080" metalness={0.8} />
+        <meshStandardMaterial color="#e2e8f0" metalness={0.8} />
       </mesh>
     </group>
   );
@@ -190,8 +192,9 @@ function DroneScene({ activeColor }) {
   });
 
   const droneColor = '#38BDF8';
-  const darkerGray = '#2e3a47';
-  const chromeColor = '#8090a0';
+  const chassisColor = '#f8fafc'; // light white/silver chassis for high contrast
+  const chromeColor = '#cbd5e1';  // metallic light gray arms
+  const rotorColor = '#e2e8f0';   // light white blades for visibility
 
   return (
     <group>
@@ -200,7 +203,13 @@ function DroneScene({ activeColor }) {
         {/* Core Sphere */}
         <mesh castShadow>
           <sphereGeometry args={[0.1, 12, 12]} />
-          <meshStandardMaterial color={darkerGray} metalness={0.9} roughness={0.1} />
+          <meshStandardMaterial 
+            color={chassisColor} 
+            metalness={0.85} 
+            roughness={0.1} 
+            emissive={activeColor}
+            emissiveIntensity={0.2}
+          />
         </mesh>
         
         {/* Glowing Lens / Front Eye */}
@@ -212,39 +221,64 @@ function DroneScene({ activeColor }) {
         {/* Left Wing / Arm */}
         <mesh position={[-0.14, 0.02, 0]} rotation={[0, 0, 0.1]}>
           <cylinderGeometry args={[0.015, 0.015, 0.12, 6]} />
-          <meshStandardMaterial color={chromeColor} metalness={0.8} />
+          <meshStandardMaterial 
+            color={chromeColor} 
+            metalness={0.8} 
+            emissive={activeColor}
+            emissiveIntensity={0.1}
+          />
         </mesh>
         {/* Left Rotor Guard */}
         <mesh position={[-0.2, 0.03, 0]}>
           <torusGeometry args={[0.045, 0.008, 4, 16]} />
-          <meshStandardMaterial color={darkerGray} metalness={0.9} />
+          <meshStandardMaterial 
+            color={chassisColor} 
+            metalness={0.85} 
+            emissive={activeColor}
+            emissiveIntensity={0.25}
+          />
         </mesh>
         {/* Left Rotor Blade */}
         <mesh ref={leftRotorRef} position={[-0.2, 0.03, 0]}>
           <boxGeometry args={[0.08, 0.002, 0.012]} />
-          <meshStandardMaterial color="#050508" metalness={0.5} />
+          <meshStandardMaterial color={rotorColor} metalness={0.6} roughness={0.1} />
         </mesh>
 
         {/* Right Wing / Arm */}
         <mesh position={[0.14, 0.02, 0]} rotation={[0, 0, -0.1]}>
           <cylinderGeometry args={[0.015, 0.015, 0.12, 6]} />
-          <meshStandardMaterial color={chromeColor} metalness={0.8} />
+          <meshStandardMaterial 
+            color={chromeColor} 
+            metalness={0.8} 
+            emissive={activeColor}
+            emissiveIntensity={0.1}
+          />
         </mesh>
         {/* Right Rotor Guard */}
         <mesh position={[0.2, 0.03, 0]}>
           <torusGeometry args={[0.045, 0.008, 4, 16]} />
-          <meshStandardMaterial color={darkerGray} metalness={0.9} />
+          <meshStandardMaterial 
+            color={chassisColor} 
+            metalness={0.85} 
+            emissive={activeColor}
+            emissiveIntensity={0.25}
+          />
         </mesh>
         {/* Right Rotor Blade */}
         <mesh ref={rightRotorRef} position={[0.2, 0.03, 0]}>
           <boxGeometry args={[0.08, 0.002, 0.012]} />
-          <meshStandardMaterial color="#050508" metalness={0.5} />
+          <meshStandardMaterial color={rotorColor} metalness={0.6} roughness={0.1} />
         </mesh>
 
         {/* Bottom spotlight casing */}
         <mesh position={[0, -0.08, 0]} rotation={[Math.PI, 0, 0]}>
           <cylinderGeometry args={[0.035, 0.02, 0.05, 8]} />
-          <meshStandardMaterial color={chromeColor} metalness={0.9} />
+          <meshStandardMaterial 
+            color={chassisColor} 
+            metalness={0.85} 
+            emissive={activeColor}
+            emissiveIntensity={0.2}
+          />
         </mesh>
 
         {/* Spotlight light source */}
