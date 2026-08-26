@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { soundEffects } from '../utils/soundEffects';
 
 /* ── COUNTDOWN ─────────────────────────────────────── */
@@ -122,7 +122,7 @@ function CategoryCard({ icon, title, desc, to, index, navigate }) {
   const [hovered, setHovered] = useState(false);
   return (
     <motion.button
-      className="stat-card"
+      className="stat-card holographic-tablet"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -138,18 +138,12 @@ function CategoryCard({ icon, title, desc, to, index, navigate }) {
       onMouseLeave={() => setHovered(false)}
       whileTap={{ scale: 0.97 }}
       style={{
-        position: 'relative',
         padding: 'clamp(20px, 3vw, 28px) clamp(16px, 2.5vw, 24px)',
         textAlign: 'left',
-        background: hovered ? 'rgba(56,189,248,0.06)' : 'rgba(255,255,255,0.03)',
-        backdropFilter: 'blur(16px)',
-        border: hovered ? '1px solid rgba(56,189,248,0.35)' : '1px solid rgba(255,255,255,0.07)',
-        boxShadow: hovered ? '0 0 25px rgba(56,189,248,0.1)' : 'none',
-        transition: 'all 0.3s ease',
-        transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
         width: '100%',
         display: 'block',
         color: '#fff',
+        zIndex: 5,
       }}
     >
       <div className="bracket-tl" style={{ borderColor: hovered ? 'var(--sky)' : 'rgba(56,189,248,0.3)' }} />
@@ -211,9 +205,41 @@ function CategoryCard({ icon, title, desc, to, index, navigate }) {
 export default function Home() {
   const navigate = useNavigate();
   const countdown = useCountdown();
+  const containerRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Parallax layers
+  const yCosmos = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const yRuins = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const yMandala = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
+  const yHero = useTransform(scrollYProgress, [0, 1], ["0%", "120%"]);
+  const opacityFade = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div ref={containerRef} style={{ position: 'relative', overflowX: 'hidden' }}>
+      
+      {/* ── AETHERIAL PARALLAX BACKGROUNDS ── */}
+      <motion.div style={{
+        position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+        background: 'radial-gradient(ellipse at bottom, #1b2735 0%, #03000a 100%)',
+        zIndex: 0, y: yCosmos
+      }} />
+      <motion.div className="ancient-silhouette" style={{
+        position: 'absolute', top: '20vh', left: 0, right: 0, height: '150vh',
+        zIndex: 1, y: yRuins, opacity: opacityFade
+      }} />
+      <motion.div style={{
+        position: 'absolute', top: '10vh', left: '50%', transform: 'translateX(-50%)',
+        width: '800px', height: '800px', zIndex: 1, y: yMandala, opacity: opacityFade
+      }}>
+        <div className="neon-mandala" style={{ width: '100%', height: '100%' }} />
+        <div className="neon-mandala-inner" />
+      </motion.div>
+
       {/* ── NEWS TICKER ── */}
       <div style={{
         background: 'rgba(5, 5, 8, 0.95)',
@@ -307,9 +333,9 @@ export default function Home() {
         <div className="hero-grid" style={{ width: '100%', zIndex: 5 }}>
 
           {/* ── LEFT COLUMN: Text Content ───────── */}
-          {/* ── LEFT COLUMN: Text Content ───────── */}
           <motion.div 
             className="hero-text-col"
+            style={{ y: yHero, opacity: opacityFade }}
             variants={{
               hidden: { opacity: 0 },
               show: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } }
@@ -332,8 +358,8 @@ export default function Home() {
               <span style={{
                 width: '6px', height: '6px',
                 borderRadius: '50%',
-                background: 'var(--plasma)',
-                boxShadow: '0 0 8px rgba(255,45,85,0.8)',
+                background: 'var(--tertiary)',
+                boxShadow: '0 0 8px rgba(255,170,0,0.8)',
                 animation: 'pulseDot 2s ease-in-out infinite',
                 flexShrink: 0,
               }} />
@@ -353,19 +379,19 @@ export default function Home() {
             {/* MAIN HEADING */}
             <motion.div variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0, transition: { duration: 0.8 } } }}>
               <h1
+                className="celestial-glow"
                 style={{
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: "'Cinzel', serif",
                   fontSize: 'clamp(42px, 10vw, 100px)',
                   fontWeight: 800,
-                  letterSpacing: '-0.04em',
+                  letterSpacing: '0.02em',
                   lineHeight: 0.9,
                   margin: 0,
                   color: '#fff',
-                  textShadow: '0 0 40px rgba(255,255,255,0.1)',
                 }}
               >
                 TECHFEST{' '}
-                <span className="glow-sky" style={{ color: 'var(--sky)' }}>
+                <span className="celestial-glow-gold" style={{ color: 'var(--tertiary)' }}>
                   2026
                 </span>
               </h1>
@@ -377,17 +403,17 @@ export default function Home() {
               style={{ margin: '16px 0 28px', overflow: 'hidden', maxWidth: '100%' }}
             >
               <div
-                className="typing-text glow-plasma"
+                className="typing-text celestial-glow-gold"
                 style={{
                   fontFamily: 'var(--font-mono)',
                   fontSize: 'clamp(10px, 2.5vw, 16px)',
                   fontWeight: 700,
                   letterSpacing: '0.3em',
-                  color: 'var(--plasma)',
+                  color: 'var(--tertiary)',
                   textTransform: 'uppercase',
                 }}
               >
-                THE CYBERNETIC EVOLUTION
+                AN AETHERIAL RENAISSANCE
               </div>
             </motion.div>
 
@@ -404,7 +430,7 @@ export default function Home() {
                 color: '#94a3b8',
                 marginBottom: '12px',
               }}>
-                ── COUNTDOWN TO EVOLUTION: DEC 22, 2026 ──
+                ── COUNTDOWN TO REBIRTH: DEC 22, 2026 ──
               </div>
               <div className="countdown-row">
                 <CountdownCard value={countdown.days}    label="DAYS" />
@@ -426,10 +452,11 @@ export default function Home() {
                   navigate('/register');
                 }}
                 onMouseEnter={() => soundEffects.playHover?.()}
+                style={{ background: 'var(--tertiary)', color: '#000', textShadow: 'none', borderColor: 'var(--tertiary)' }}
               >
-                <span className="btn-tl" />
-                <span className="btn-br" />
-                REGISTER NOW
+                <span className="btn-tl" style={{ borderColor: '#000' }} />
+                <span className="btn-br" style={{ borderColor: '#000' }} />
+                AWAKEN NOW
               </button>
               <button
                 className="btn-ghost"
@@ -438,8 +465,9 @@ export default function Home() {
                   navigate('/schedule');
                 }}
                 onMouseEnter={() => soundEffects.playHover?.()}
+                style={{ color: 'var(--primary)' }}
               >
-                VIEW SCHEDULE &nbsp;→
+                VIEW PROPHECY &nbsp;→
               </button>
             </motion.div>
           </motion.div>

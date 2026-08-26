@@ -1,0 +1,22 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Ancient Temple / Mandala Silhouette -->
+  <!-- We'll draw some stylized ancient archways and domes -->
+  <path d="M0,1080 L0,700 
+           Q100,700 150,600 T300,700 
+           L400,700 
+           L400,450 Q500,300 600,450 L600,700 
+           L700,700 
+           L700,200 Q960,0 1220,200 L1220,700
+           L1320,700 
+           L1320,450 Q1420,300 1520,450 L1520,700
+           L1620,700
+           Q1770,600 1920,700 L1920,1080 Z" 
+        fill="rgba(255, 170, 0, 0.05)" stroke="rgba(255, 170, 0, 0.2)" stroke-width="2"/>
+  
+  <path d="M750,700 L750,300 Q960,150 1170,300 L1170,700 Z" fill="transparent" stroke="rgba(0, 242, 255, 0.2)" stroke-width="2" stroke-dasharray="10 10"/>
+  
+  <!-- Star / Mandala motif -->
+  <circle cx="960" cy="500" r="150" stroke="rgba(255, 170, 0, 0.3)" stroke-width="1" stroke-dasharray="5 5" fill="none"/>
+  <circle cx="960" cy="500" r="120" stroke="rgba(0, 242, 255, 0.3)" stroke-width="2" fill="none"/>
+  <path d="M960,350 L960,650 M810,500 L1110,500" stroke="rgba(255, 170, 0, 0.2)" stroke-width="2"/>
+</svg>
